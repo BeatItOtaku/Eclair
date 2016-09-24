@@ -49,9 +49,11 @@ public class PlayerShot : MonoBehaviour {
 
 
 	public void LaunchBolt(Vector3 target){
-		Vector3 playerToTarget = target - gameObject.transform.position;
+		Vector3 playerToTarget = target - muzzle.transform.position;
+		Debug.Log (target);
+		Debug.Log (muzzle.transform.position);
 		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget));
-		go.GetComponent<LinearMovement> ().Direction = playerToTarget;
+		go.GetComponent<LinearMovement>().Direction = playerToTarget;
 	}
 			
 }

@@ -8,6 +8,7 @@ public class BoltScript : MonoBehaviour {
 	void Start () {
 
 	}
+
 	public GameObject ShotPause;
 	private GameObject shot;
 	public PlayerShot playerShot;
@@ -17,24 +18,15 @@ public class BoltScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Destroy (gameObject, 3);
-	//弾を前進させる
-		transform.position += transform.forward *Time.deltaTime * 70 ;
+		//Destroy (gameObject, 3);
+		//弾を前進させる
+		//transform.position += transform.forward *Time.deltaTime * 70 ;
+		Debug.Log(gameObject.transform.position);
 	}
 
-	public void LaunchBolt(Vector3 target){
-		Vector3 playerToTarget = target - gameObject.transform.position;
-		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget));
-		go.GetComponent<LinearMovement> ().Direction = playerToTarget;
-	}
-
-	private void OnCollisionEnter(Collision collider)
-
+	void OnTriggerEnter(Collider collider)
 	{		
-			playerShot.lastShotPause = (GameObject)Instantiate (ShotPause,transform.position,transform.rotation);
-			Instantiate (lightning, transform.position, transform.rotation);
-			Destroy (gameObject);
-	
-
-}
+		Debug.Log ("hoge");
+		gameObject.GetComponent<LinearMovement> ().Speed = 0;
+	}
 }

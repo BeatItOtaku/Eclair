@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ImputManager : MonoBehaviour {
+public class InputManager : MonoBehaviour {
 
 	public GameObject player;
 
@@ -14,7 +14,7 @@ public class ImputManager : MonoBehaviour {
 		width = Screen.width;
 		screenMiddle = new Vector3 (height / 2, width / 2, 0);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetMouseButtonDown(1)){
@@ -23,8 +23,8 @@ public class ImputManager : MonoBehaviour {
 
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)) {
-				Transform objectHit = hit.transform;
-				player.GetComponent<PlayerShot> ().LaunchBolt (objectHit.position);
+				Vector3 objectHit = hit.point;
+				player.GetComponent<PlayerShot> ().LaunchBolt (objectHit);
 			}
 
 
