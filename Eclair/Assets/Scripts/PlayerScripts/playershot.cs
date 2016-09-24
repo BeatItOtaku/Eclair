@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class playershot : MonoBehaviour {
+public class PlayerShot : MonoBehaviour {
 
 
 
@@ -27,7 +27,7 @@ public class playershot : MonoBehaviour {
 		//発射間隔を設定する
 		shotInterval += Time.deltaTime;
 
-		//弾を発射する
+		/*//弾を発射する
 		if (shotInterval > shotIntervalMax) {
 			if (ShotPause != null) {
 				if (Input.GetButton ("Fire2")) {
@@ -37,14 +37,21 @@ public class playershot : MonoBehaviour {
 				
 				}
 			}
-		}
+		}*/
 	}
 
-	void Shot (){
+	/*void Shot (){
 		if (lastShotPause != null) Destroy (lastShotPause);
 		GameObject s = (GameObject)Instantiate (shot, muzzle.transform.position,Camera.main.transform.rotation);
-		((shotprayer)s.GetComponent ("shotprayer")).playerShot = this;
+		((BoltScript)s.GetComponent ("shotprayer")).playerShot = this;
 
-		}
-			
+	}*/
+
+
+	public void LaunchBolt(Vector3 target){
+		Vector3 playerToTarget = target - gameObject.transform.position;
+		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget));
+		go.GetComponent<LinearMovement> ().Direction = playerToTarget;
 	}
+			
+}
