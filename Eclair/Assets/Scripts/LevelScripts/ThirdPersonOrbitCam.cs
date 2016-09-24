@@ -40,6 +40,26 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 	private float defaultFOV;
 	private float targetFOV;
 
+	/// <summary>
+	/// Gets or sets a value indicating whether cursor is locked.
+	/// プロパティっていうC#独自の概念を使ってるよ
+	/// これをtrueにするとカーソルが表示されなくなって、falseにすると表示されるよ
+	/// </summary>
+	/// <value><c>true</c> if cursor is locked; otherwise, <c>false</c>.</value>
+	static bool cursorIsLocked
+	{
+		get
+		{
+			return !Cursor.visible;
+		}
+		set
+		{
+			Cursor.visible = !value;
+			if (value) Cursor.lockState = CursorLockMode.Locked;
+			else Cursor.lockState = CursorLockMode.None;
+		}
+	}
+
 	void Awake()
 	{
 		cam = transform;
@@ -54,8 +74,25 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 		defaultFOV = cam.GetComponent<Camera>().fieldOfView;
 	}
 
+	void Start()
+	{
+		cursorIsLocked = true;
+	}
+
 	void LateUpdate()
 	{
+
+		if (Input.GetButtonDown("Fire1"))
+		{
+			cursorIsLocked = true;
+		}
+		else if (Input.GetKeyDown("escape"))
+		{
+			cursorIsLocked = false;
+		}
+
+		if (!cursorIsLocked) return;//カーソルが表示されてるときはカメラが動かない
+
 		angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed * Time.deltaTime;
 		angleV += Mathf.Clamp(Input.GetAxis("Mouse Y"), -1, 1) * verticalAimingSpeed * Time.deltaTime;
 
