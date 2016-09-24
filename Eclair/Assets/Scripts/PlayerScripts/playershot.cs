@@ -43,7 +43,7 @@ public class playershot : MonoBehaviour {
 	void Shot (){
 		if (lastShotPause != null) Destroy (lastShotPause);
 		GameObject s = (GameObject)Instantiate (shot, muzzle.transform.position,Camera.main.transform.rotation);
-		((shotprayer)s.GetComponent ("shotprayer")).playerShot = this;
+		((BoltScript)s.GetComponent ("BoltScript")).playerShot = this;
 
 		}
 			

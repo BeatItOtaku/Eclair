@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class shotprayer : MonoBehaviour {
+public class BoltScript : MonoBehaviour {
 	
 
 	// Use this for initialization
