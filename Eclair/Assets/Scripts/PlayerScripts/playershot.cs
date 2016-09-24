@@ -7,13 +7,16 @@ public class PlayerShot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		boltQuaternionOffset = Quaternion.Euler (boltRotationOffset);
 	}
 
 	public GameObject shot;
 	public GameObject muzzle;
 	public GameObject ShotPause;
 	public GameObject player;
+	public Vector3 boltRotationOffset;
+
+	private Quaternion boltQuaternionOffset;
 
 	float shotInterval = 0;
 	float shotIntervalMax = 1F;
@@ -52,7 +55,7 @@ public class PlayerShot : MonoBehaviour {
 		Vector3 playerToTarget = target - muzzle.transform.position;
 		Debug.Log (target);
 		Debug.Log (muzzle.transform.position);
-		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget));
+		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget) * boltQuaternionOffset);
 		go.GetComponent<LinearMovement>().Direction = playerToTarget;
 	}
 			

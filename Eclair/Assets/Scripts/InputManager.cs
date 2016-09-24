@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour {
 
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)) {
+				Debug.Log ("ahoaho");
 				Vector3 objectHit = hit.point;
 				player.GetComponent<PlayerShot> ().LaunchBolt (objectHit);
 			}
