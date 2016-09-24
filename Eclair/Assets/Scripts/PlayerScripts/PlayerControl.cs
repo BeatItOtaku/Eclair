@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControl : MonoBehaviour
-{
 
+
+public class PlayerControl : MonoBehaviour
+
+
+{
+	public void setHorizontalAngle(int angle){
+		h = angle;
+	}
 	public float walkSpeed = 0.15f;
 	public float runSpeed = 1.0f;
 	public float sprintSpeed = 2.0f;
@@ -68,8 +74,8 @@ public class PlayerControl : MonoBehaviour
 		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
 	}
 
-	void Update()
-	{
+	void Update(){
+		
 		// fly
 		if(Input.GetButtonDown ("Fly"))
 			fly = !fly;
@@ -79,9 +85,11 @@ public class PlayerControl : MonoBehaviour
 		run = Input.GetButton ("Run");
 		sprint = Input.GetButton ("Sprint");
 		isMoving = Mathf.Abs(h) > 0.1 || Mathf.Abs(v) > 0.1;
+
+
 	}
 
-	void FixedUpdate()
+		void FixedUpdate()
 	{
 		anim.SetBool (aimBool, IsAiming());
 		anim.SetFloat(hFloat, h);
