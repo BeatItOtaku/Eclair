@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour {
 	void Start () {
 		height = Screen.height;
 		width = Screen.width;
-		screenMiddle = new Vector3 (height / 2, width / 2, 0);
+		screenMiddle = new Vector3 (width / 2, height / 2, 0);
 	}
 
 	// Update is called once per frame

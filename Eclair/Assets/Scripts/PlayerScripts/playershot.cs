@@ -56,6 +56,7 @@ public class PlayerShot : MonoBehaviour {
 		Debug.Log (target);
 		Debug.Log (muzzle.transform.position);
 		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget) * boltQuaternionOffset);
+        Instantiate(player, target, new Quaternion(0,0,0,0));
 		go.GetComponent<LinearMovement>().Direction = playerToTarget;
 	}
 			
