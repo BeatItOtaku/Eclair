@@ -28,5 +28,7 @@ public class BoltScript : MonoBehaviour {
 	{		
 		Debug.Log ("hoge");
 		gameObject.GetComponent<LinearMovement> ().Speed = 0;
+		gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+
 	}
 }
