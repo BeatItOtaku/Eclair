@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ThunderEffectController : MonoBehaviour {
 
     public LineRenderer core;
-    public LineRenderer clad;
+    //public LineRenderer clad;
+	public List<LineRenderer> clads = new List<LineRenderer> ();
 
     public Vector3 startPoint,endPoint;
 
@@ -96,10 +98,19 @@ public class ThunderEffectController : MonoBehaviour {
         core.SetPositions(new Vector3[] { startPoint, endPoint_raw });
     }
 
-    private void ReloadClad()
+	/// <summary>
+	/// クラッドの頂点を更新します。引数を指定しない場合はすべてのクラッドに対して実行します。
+	/// </summary>
+	private void ReloadClad(){
+		foreach(LineRenderer lr in clads){
+			ReloadClad (lr);
+		}
+	}
+
+	private void ReloadClad(LineRenderer clad)
     {
         int size = GenerateVertexes(startPoint, endPoint_raw);
-        clad.SetVertexCount(size);
+		clad.SetVertexCount(size);
         clad.SetPositions(vertexes);
     }
 }
