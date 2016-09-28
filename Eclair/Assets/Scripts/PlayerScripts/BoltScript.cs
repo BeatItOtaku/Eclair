@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class BoltScript : MonoBehaviour {
-	
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +14,11 @@ public class BoltScript : MonoBehaviour {
 	public GameObject lightning;
 	public GameObject muzzle;
 
+	public Vector3 Target {
+		get;
+		set;
+	}
+
 
 	// Update is called once per frame
 	void Update () {
@@ -25,10 +29,17 @@ public class BoltScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collider)
-	{		
+	{	
+		if (collider.tag == "Player")
+			return;
+		
 		Debug.Log ("hoge");
-		gameObject.GetComponent<LinearMovement> ().Speed = 0;
-		gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+		try {gameObject.GetComponent<LinearMovement> ().Speed = 0;}
+		catch {
+			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+		}
+
+		gameObject.transform.position = Target;
 
 	}
 }

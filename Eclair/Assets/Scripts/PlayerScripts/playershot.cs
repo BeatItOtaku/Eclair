@@ -62,9 +62,11 @@ public class PlayerShot : MonoBehaviour {
 		//Debug.Log (target);
 		//Debug.Log (muzzle.transform.position);
 		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget) * boltQuaternionOffset);
-        Instantiate(player, target, new Quaternion(0,0,0,0));
-		if (usePhysics) go.GetComponent<Rigidbody>().AddForce(playerToTarget,ForceMode.VelocityChange);
-		else go.GetComponent<LinearMovement>().Direction = playerToTarget * force;
+        //Instantiate(player, target, new Quaternion(0,0,0,0));
+		if (usePhysics) go.GetComponent<Rigidbody>().AddForce(playerToTarget * force,ForceMode.VelocityChange);
+		else go.GetComponent<LinearMovement>().Direction = playerToTarget;
+
+		go.GetComponent<BoltScript> ().Target = target;
 	}
 			
 }

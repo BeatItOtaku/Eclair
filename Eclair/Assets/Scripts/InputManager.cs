@@ -8,6 +8,8 @@ public class InputManager : MonoBehaviour {
 	private int height,width;
 	private Vector3 screenMiddle;
 
+	const float DefaultShotDistance = 10;
+
 	// Use this for initialization
 	void Start () {
 		height = Screen.height;
@@ -20,15 +22,15 @@ public class InputManager : MonoBehaviour {
 		if(Input.GetMouseButtonDown(1)){
 			Debug.Log ("hogehoge");
 			Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
-
 			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit)) {
+			Vector3 hitPosition;
+			if (Physics.Raycast (ray, out hit)) {
 				Debug.Log ("ahoaho");
-				Vector3 objectHit = hit.point;
-				player.GetComponent<PlayerShot> ().LaunchBolt (objectHit);
+				hitPosition = hit.point;
+			} else {
+				hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
 			}
-
-
+			player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition);
 		}
 	}
 }

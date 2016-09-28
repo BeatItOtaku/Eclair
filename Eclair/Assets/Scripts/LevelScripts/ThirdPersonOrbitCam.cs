@@ -82,7 +82,7 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 	void LateUpdate()
 	{
 
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetMouseButtonDown(0))//Input.GetButtonDown("Fire1"))
 		{
 			cursorIsLocked = true;
 		}
