@@ -1048,7 +1048,7 @@ MonoBehaviour:
   boltRotationOffset: {x: 90, y: 0, z: 0}
   usePhysics: 1
   force: 8
-  lastShotPause: {fileID: 0}
+  shotIntervalMin: 0.5
 --- !u!1 &1262940844
 GameObject:
   m_ObjectHideFlags: 0
