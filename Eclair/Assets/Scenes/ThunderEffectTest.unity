@@ -315,8 +315,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 4.01, z: 0}
   m_Parameters:
-    startWidth: 0.001
-    endWidth: 0.001
+    startWidth: 0.01
+    endWidth: 0.01
     m_StartColor:
       serializedVersion: 2
       rgba: 4294967295
@@ -528,8 +528,8 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   - {x: -3.17, y: 1.42, z: 0}
   m_Parameters:
-    startWidth: 0.02
-    endWidth: 0.02
+    startWidth: 0.05
+    endWidth: 0.05
     m_StartColor:
       serializedVersion: 2
       rgba: 4294967295
@@ -584,7 +584,7 @@ MonoBehaviour:
   - {fileID: 621277719}
   startPoint: {x: 0, y: 0, z: 0}
   endPoint: {x: 0, y: 4.47, z: 16}
-  cladSpaceInterval: 0.6
+  cladSpaceInterval: 1.2
   randomWidth: 0.6
   speed: 8
   cladTimeInterval: 0.03
