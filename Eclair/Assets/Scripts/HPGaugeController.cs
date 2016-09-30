@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class HPGaugeController : MonoBehaviour {
 
@@ -10,7 +11,11 @@ public class HPGaugeController : MonoBehaviour {
     public GameObject core;//うごうごしてる部分
     public GameObject empty;//HPゲージの空の部分 見た目はcoreより後ろにありそうだけど実はcoreより前面にある
 
+    public Sprite wallHigh, wallLow;
+
+    private Animator coreAnim;
     private Vector2 emptySize;
+    private Image wallImage;
 
     private int currentHP_;//直接触らないこと
     public int currentHP
@@ -22,7 +27,7 @@ public class HPGaugeController : MonoBehaviour {
         set
         {
             currentHP_ = Mathf.Clamp(value,0,maxHP);
-            targetWidth = HPGaugeWidth * currentHP_ / maxHP;
+            OnCurrentHPChanged(currentHP_);
         }
     }
 
@@ -32,6 +37,8 @@ public class HPGaugeController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         HPGaugeWidth = core.GetComponent<RectTransform>().sizeDelta.x;
+        coreAnim = core.GetComponent<Animator>();
+        wallImage = wall.GetComponent<Image>();
         Debug.Log(HPGaugeWidth);
         currentHP = maxHP;
 	}
@@ -40,6 +47,21 @@ public class HPGaugeController : MonoBehaviour {
 	void Update () {
         setHP_raw(Mathf.Lerp(getCurrentHPWidth(), targetWidth, smoothFactor));
 	}
+
+    private void OnCurrentHPChanged(int hp)
+    {
+        targetWidth = HPGaugeWidth * hp / maxHP;
+        if(hp > 30)//HPに応じて色を変える関係
+        {
+            coreAnim.SetBool("isLow", false);
+            wallImage.sprite = wallHigh;
+        }
+        else
+        {
+            coreAnim.SetBool("isLow", true);
+            wallImage.sprite = wallLow;
+        }
+    }
 
     /// <summary>
     /// HPゲージの幅を指定します。まあ実質的にはemptyの幅を変えてるんだけど

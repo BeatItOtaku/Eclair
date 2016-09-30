@@ -580,6 +580,8 @@ MonoBehaviour:
   wall: {fileID: 1807683699}
   core: {fileID: 1000600338}
   empty: {fileID: 1479828820}
+  wallHigh: {fileID: 21300000, guid: 41dcece0f6fcd460c8294662857966d5, type: 3}
+  wallLow: {fileID: 21300000, guid: 35d905a08218246cf87ccea1eb3005fa, type: 3}
 --- !u!1 &1479828820
 GameObject:
   m_ObjectHideFlags: 0
