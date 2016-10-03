@@ -260,10 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595358fcc755c4ca691ca6f517249d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShotPause: {fileID: 0}
-  playerShot: {fileID: 0}
-  lightning: {fileID: 0}
-  muzzle: {fileID: 0}
+  scaleWhenCollided: 1.5
 --- !u!136 &136000011951035898
 CapsuleCollider:
   m_ObjectHideFlags: 1
