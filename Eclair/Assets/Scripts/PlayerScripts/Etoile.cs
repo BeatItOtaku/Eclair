@@ -10,7 +10,7 @@ public class Etoile : MonoBehaviour {
 	GameObject FindClosestBolt(){
 
 		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag ("NoMoveBolt");
+		gos = GameObject.FindGameObjectsWithTag ("Bolt");
 		GameObject closest = null;
 		float distance = Mathf.Infinity;
 		Vector3 position = transform.position;
@@ -42,17 +42,14 @@ public class Etoile : MonoBehaviour {
 		
 			if (target != null) {
 				transform.LookAt (target.transform);
-				transform.position += transform.forward * Time.deltaTime * 50;
-				PlayerControl.fly = true;		
+				transform.position += transform.forward * Time.deltaTime * 50;		
 			}
 	}
 	
 		private void OnCollisionEnter(Collision collider){			
-			if (collider.gameObject.tag == "NoMoveBolt") {
+		if (/*collider.gameObject.tag == "NoMoveBolt" ||*/collider.gameObject.tag =="Bolt") {
 			Instantiate (lightning, transform.position, transform.rotation);
-			PlayerControl.fly = false;
 				Destroy (target);
-
 			}
 		}
 	}

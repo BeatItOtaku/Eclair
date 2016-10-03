@@ -23,8 +23,8 @@ public class BoltScript : MonoBehaviour {
 		Debug.Log(gameObject.transform.position);
 	}
 
-	void OnTriggerEnter(Collider collider)
-	{	
+	void OnCollisionEnter(Collider collider)
+	{	Debug.Log (collider.tag);
 		if (collider.tag == "Player")
 			return;
 		
