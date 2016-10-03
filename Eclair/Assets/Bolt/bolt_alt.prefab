@@ -39,7 +39,7 @@ GameObject:
   - 54: {fileID: 54000011442552130}
   m_Layer: 0
   m_Name: bolt_alt
-  m_TagString: Untagged
+  m_TagString: Bolt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
