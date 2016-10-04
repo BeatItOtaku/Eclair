@@ -68,6 +68,7 @@ public class InputManager : MonoBehaviour {
 			}
 			else {
 				player.GetComponent<LockOn> ().startLockOn ();//ロックオン状態でなければロックオンを開始
+				playerState_ = PlayerStates.LockOn;
 			}
 			test.transform.position = player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
 		}

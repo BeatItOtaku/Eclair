@@ -20,7 +20,7 @@ public class BoltScript : MonoBehaviour {
 		//Destroy (gameObject, 3);
 		//弾を前進させる
 		//transform.position += transform.forward *Time.deltaTime * 70 ;
-		Debug.Log(gameObject.transform.position);
+		//Debug.Log(gameObject.transform.position);
 	}
 
 	void OnTriggerEnter(Collider collider)

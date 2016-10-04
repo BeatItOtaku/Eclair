@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 /// <summary>
 /// ロックオン対象のGameObjectを取得するだけです。
-/// GUIへの描画などは別のスクリプトで行います。
+/// キー取得やGUI描画などは別のスクリプトで行います。
 /// </summary>
 public class LockOn : MonoBehaviour {
 
@@ -54,6 +54,6 @@ public class LockOn : MonoBehaviour {
 	static int CompareKeyValuePair(KeyValuePair<float, GameObject> x, KeyValuePair<float, GameObject> y)
 	{
 		// Keyで比較した結果を返す
-		return (int)(Mathf.Min(x.Key, y.Key) * 10);
+		return (int)((x.Key - y.Key) * 100);
 	}
 }
