@@ -35,21 +35,24 @@ public class Etoile : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {		
+	void Update () {
 		if (Input.GetButtonDown ("Etoile")) {
 			target = FindClosestBolt ();
 		}
-		
-			if (target != null) {
+		if (target != null) {
+			if (target.gameObject.GetComponent<Rigidbody> ().isKinematic == true) {
 				transform.LookAt (target.transform);
 				transform.position += transform.forward * Time.deltaTime * 50;		
 			}
+		}
 	}
 	
-		private void OnCollisionEnter(Collision collider){			
-		if (/*collider.gameObject.tag == "NoMoveBolt" ||*/collider.gameObject.tag =="Bolt") {
-			Instantiate (lightning, transform.position, transform.rotation);
-				Destroy (target);
+		private void OnCollisionEnter(Collision collider){
+		if (target != null) {
+				if (collider.gameObject.tag == "Bolt") {
+					Instantiate (lightning, transform.position, transform.rotation);
+					Destroy (target);
+				}			
 			}
 		}
 	}
