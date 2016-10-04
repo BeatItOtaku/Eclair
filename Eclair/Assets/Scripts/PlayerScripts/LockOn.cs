@@ -23,6 +23,13 @@ public class LockOn : MonoBehaviour {
 	
 	}
 
+	public GameObject getCurrentTarget(){
+		if (cursor == -1)
+			return null;
+		else
+			return targetList [cursor].Value;
+	}
+
 	public GameObject startLockOn(){
 		foreach(GameObject go in GameObject.FindGameObjectsWithTag ("Bolt")){
 			float distance = Vector3.Distance (player.transform.position, go.transform.position);
@@ -33,6 +40,7 @@ public class LockOn : MonoBehaviour {
 		return targetList [cursor].Value;
 	}
 	public void endLockOn(){
+		cursor = -1;
 		return;
 	}
 
@@ -46,6 +54,6 @@ public class LockOn : MonoBehaviour {
 	static int CompareKeyValuePair(KeyValuePair<float, GameObject> x, KeyValuePair<float, GameObject> y)
 	{
 		// Keyで比較した結果を返す
-		return Mathf.Min(x.Key, y.Key);
+		return (int)(Mathf.Min(x.Key, y.Key) * 10);
 	}
 }
