@@ -1,26 +1,23 @@
 fileFormatVersion: 2
 guid: 6c66b9eea0e6343d2bb6b73d2bba0548
-timeCreated: 1474997121
+timeCreated: 1475570698
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Bolt
-    100002: //RootNode
-    100004: Camera
-    100006: Lamp
-    100008: Nut
-    400000: Bolt
-    400002: //RootNode
-    400004: Camera
-    400006: Lamp
-    400008: Nut
-    2300000: Bolt
-    2300002: Nut
-    3300000: Bolt
-    3300002: Nut
-    4300000: Bolt
-    4300002: Nut
+    100000: //RootNode
+    100002: pCylinder1
+    100004: pCylinder2
+    400000: //RootNode
+    400002: pCylinder1
+    400004: pCylinder2
+    2300000: pCylinder1
+    2300002: pCylinder2
+    3300000: pCylinder1
+    3300002: pCylinder2
+    4300000: pCylinder1
+    4300002: pCylinder2
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -79,7 +76,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
