@@ -119,6 +119,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1225393392}
   test: {fileID: 1054894646}
+  crossHair: {fileID: 1072814316}
+  cam: {fileID: 261813870}
 --- !u!4 &7532279
 Transform:
   m_ObjectHideFlags: 0
@@ -324,7 +326,7 @@ MonoBehaviour:
   crosshair: {fileID: 10914, guid: 0000000000000000f000000000000000, type: 0}
   pivotOffset: {x: 0, y: 1, z: 0}
   camOffset: {x: 0, y: 0.7, z: -3}
-  smooth: 10
+  smooth: 0
   aimPivotOffset: {x: 0, y: 1.7, z: -0.3}
   aimCamOffset: {x: 0.8, y: 0, z: -1}
   horizontalAimingSpeed: 400
@@ -1065,7 +1067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd0d1ea038c94163a95c98f372b0d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 1072814315}
+  smoothFactor: 0.7
 --- !u!1 &1078120196
 GameObject:
   m_ObjectHideFlags: 0

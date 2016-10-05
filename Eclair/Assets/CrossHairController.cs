@@ -6,7 +6,6 @@ using System.Collections;
 /// </summary>
 public class CrossHairController : MonoBehaviour {
 
-	private Animator anim;
 
 	private bool isLockOn_ = false;
 	/// <summary>
@@ -23,18 +22,47 @@ public class CrossHairController : MonoBehaviour {
 		}
 	}
 
+	public float smoothFactor = 0.5f;
+
+	private Vector3 target_;
 	/// <summary>
-	/// 画面上で照準が目指して移動する位置。(0,0)が左下っぽい？
+	/// 照準が目指して移動する三次元の位置
 	/// </summary>
-	public Vector2 target;
+	public Vector3 target{
+		get{
+			return target_;
+		}
+		set{
+			target_ = value;
+			//reloadTargetOnScreen ();
+		}
+	}
+	//targetを画面上の二次元座標に変換したやつ
+	private Vector2 targetOnScreen;
+
+	private Animator anim;
+	private RectTransform rt;
+
+	private Vector2 middleScreen = new Vector2(0,0);
+
 
 	// Use this for initialization
 	void Start () {
-	
+		anim = gameObject.GetComponent<Animator> ();	
+		rt = gameObject.GetComponent<RectTransform> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (isLockOn) {
+			reloadTargetOnScreen ();
+			rt.position = Vector2.Lerp (rt.position, targetOnScreen, smoothFactor);
+		} else {
+			rt.anchoredPosition = middleScreen;
+		}
+	}
+
+	void reloadTargetOnScreen(){
+		targetOnScreen = RectTransformUtility.WorldToScreenPoint (Camera.main, target);
 	}
 }

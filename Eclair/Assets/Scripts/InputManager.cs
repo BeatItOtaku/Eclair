@@ -10,6 +10,10 @@ public class InputManager : MonoBehaviour {
 
 	public GameObject test;
 
+	public CrossHairController crossHair;
+
+	public ThirdPersonOrbitCam cam;
+
 	private int height,width;
 	private Vector3 screenMiddle;
 
@@ -63,14 +67,24 @@ public class InputManager : MonoBehaviour {
 		//Eキーでロックオン
 		//TODO: ロックオンのボタンを検討する
 		if(Input.GetKeyDown(KeyCode.E)){
+			GameObject go;
 			if (playerState_ == PlayerStates.LockOn) {
-				player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
+				go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 			}
 			else {
-				player.GetComponent<LockOn> ().startLockOn ();//ロックオン状態でなければロックオンを開始
+				go = player.GetComponent<LockOn> ().startLockOn ();//ロックオン状態でなければロックオンを開始
 				playerState_ = PlayerStates.LockOn;
 			}
-			test.transform.position = player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
+			//test.transform.position = player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
+			cam.setHorizontalAngle(getAngleWithSign(Vector3.forward,go.transform.position));
+			crossHair.target = go.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
+			crossHair.isLockOn = true;
 		}
+	}
+
+	static float getAngleWithSign(Vector3 v1, Vector3 v2){
+		float angle = Vector3.Angle (v1, v2);
+		int sign = Vector3.Cross(v1, v2).z < 0 ? -1 : 1;
+		return angle * sign;
 	}
 }
