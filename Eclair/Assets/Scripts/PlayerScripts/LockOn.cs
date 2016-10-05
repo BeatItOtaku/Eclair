@@ -13,6 +13,8 @@ public class LockOn : MonoBehaviour {
 
 	private int cursor = 0;
 
+	public float maxDistance = 24;//24メートル以上離れてる対象にはロックオンしない
+
 	// Use this for initialization
 	void Start () {
 	
@@ -33,7 +35,8 @@ public class LockOn : MonoBehaviour {
 	public GameObject startLockOn(){
 		foreach(GameObject go in GameObject.FindGameObjectsWithTag ("Bolt")){
 			float distance = Vector3.Distance (player.transform.position, go.transform.position);
-			targetList.Add(new KeyValuePair<float, GameObject>(distance,go));
+			if (distance > maxDistance) continue;//遠すぎたらtargetListに追加することなくforの1ループをおわる
+			targetList.Add(new KeyValuePair<float, GameObject>(getAnglularDistance(go),go));
 		}
 		targetList.Sort (CompareKeyValuePair);
 		cursor = 0;
@@ -55,5 +58,15 @@ public class LockOn : MonoBehaviour {
 	{
 		// Keyで比較した結果を返す
 		return (int)((x.Key - y.Key) * 100);
+	}
+
+	private float getAnglularDistance(GameObject target){
+		Vector3 camera = Camera.main.transform.rotation * Vector3.forward;
+		Vector3 toTarget = target.transform.position - player.transform.position;
+
+		camera.y = 0;
+		toTarget.y = 0;
+
+		return Vector3.Angle (camera, toTarget);
 	}
 }
