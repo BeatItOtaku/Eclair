@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692504, g: 0.4967869, b: 0.57508504, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   player: {fileID: 1225393392}
   test: {fileID: 1054894646}
   crossHair: {fileID: 1072814316}
-  cam: {fileID: 261813870}
+  camControl: {fileID: 261813871}
 --- !u!4 &7532279
 Transform:
   m_ObjectHideFlags: 0

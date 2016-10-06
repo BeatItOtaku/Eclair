@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour {
 
 	public CrossHairController crossHair;
 
-	public ThirdPersonOrbitCam cam;
+    public CameraController camControl;
 
 	private int height,width;
 	private Vector3 screenMiddle;
@@ -51,36 +51,55 @@ public class InputManager : MonoBehaviour {
 
 		//右クリック
 		if(Input.GetMouseButtonDown(1)){
-			Debug.Log ("hogehoge");
-			Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
-			RaycastHit hit;
-			Vector3 hitPosition;
-			if (Physics.Raycast (ray, out hit)) {
-				Debug.Log ("ahoaho");
-				hitPosition = hit.point;
-			} else {
-				hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
-			}
-			player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition);
+            //Debug.Log ("MouseLeft");
+            if (playerState == PlayerStates.LockOn)//ロックオン状態の時は対象切り替え
+            {
+                GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
+                onLockOnSwitched(go);
+            }
+            else//ロックオン状態じゃないときはボルト射出
+            {
+                Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
+                RaycastHit hit;
+                Vector3 hitPosition;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    //Debug.Log ("ahoaho");
+                    hitPosition = hit.point;
+                }
+                else
+                {
+                    hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
+                }
+                player.GetComponent<PlayerShot>().LaunchBolt(hitPosition);
+            }
 		}
 
 		//Eキーでロックオン
 		//TODO: ロックオンのボタンを検討する
 		if(Input.GetKeyDown(KeyCode.E)){
 			GameObject go;
-			if (playerState_ == PlayerStates.LockOn) {
-				go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
-			}
-			else {
-				go = player.GetComponent<LockOn> ().startLockOn ();//ロックオン状態でなければロックオンを開始
+			if (playerState_ == PlayerStates.Idle) {
+				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
 				playerState_ = PlayerStates.LockOn;
+                onLockOnSwitched(go);
 			}
-			//test.transform.position = player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
-			cam.setHorizontalAngle(getAngleWithSign(Vector3.forward,go.transform.position));
-			crossHair.target = go.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
-			crossHair.isLockOn = true;
 		}
+        else if (Input.GetKeyUp(KeyCode.E))//Eキー離したらロックオンやめる
+        {
+            player.GetComponent<LockOn>().endLockOn();
+            playerState_ = PlayerStates.Idle;
+            crossHair.isLockOn = false;
+            camControl.StopLockOn();
+        }
 	}
+
+    void onLockOnSwitched(GameObject target)
+    {
+        crossHair.target = target.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
+        crossHair.isLockOn = true;
+        camControl.StartLockOn(target);
+    }
 
 	static float getAngleWithSign(Vector3 v1, Vector3 v2){
 		float angle = Vector3.Angle (v1, v2);

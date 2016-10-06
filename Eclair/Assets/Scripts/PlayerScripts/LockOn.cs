@@ -44,6 +44,7 @@ public class LockOn : MonoBehaviour {
 	}
 	public void endLockOn(){
 		cursor = -1;
+        targetList.Clear();
 		return;
 	}
 

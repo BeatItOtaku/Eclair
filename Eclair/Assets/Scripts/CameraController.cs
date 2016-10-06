@@ -16,6 +16,8 @@ public class CameraController : MonoBehaviour
 
 	public float smoothFactor = 0.5f;
 
+    public float cameraVerticalAngleOffset = 16;
+
 	private float targetY;    // カメラのY軸成分
 	private float targetAngle;
 	private float currentY;
@@ -58,7 +60,7 @@ public class CameraController : MonoBehaviour
 		cursorIsLocked = true;
 	}
 
-	// 全ての処理が終わったとにカメラの位置を調整するためにLateUpdateにする
+	// 全ての処理が終わったあとにカメラの位置を調整するためにLateUpdateにする
 	void LateUpdate()
 	{
 		//カーソル関連
@@ -72,33 +74,48 @@ public class CameraController : MonoBehaviour
 			cursorIsLocked = false;
 		}
 
-		//float scroll = Input.GetAxis("Mouse ScrollWheel");
-		//distance += scroll * 4;
-		//Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
-		if (cursorIsLocked) {
-			float deltaY = Input.GetAxis ("Mouse X") * Time.deltaTime * mouseSensitivity;
-			float deltaAngle = Input.GetAxis ("Mouse Y") * Time.deltaTime * mouseSensitivity;
-			Debug.Log (deltaY + "," + deltaAngle);
-			if(Mathf.Abs(deltaY) < 90) targetY += deltaY;
-			if(Mathf.Abs(deltaAngle) < 90) targetAngle -= deltaAngle;
+        //float scroll = Input.GetAxis("Mouse ScrollWheel");
+        //distance += scroll * 4;
+        //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
+        if (cursorIsLocked) {
+            if (isLockOn)
+            {
+                Vector2 rot = CaliculateTargetRotation(lockOnTarget);
+                targetY = rot.y;
+                targetAngle = rot.x;
+                targetAngle += cameraVerticalAngleOffset;
+                Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
+            }
+            else
+            {
+                float deltaY = Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensitivity;
+                float deltaAngle = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensitivity;
+                //Debug.Log(deltaY + "," + deltaAngle);
+                if (Mathf.Abs(deltaY) < 120) targetY += deltaY;
+                if (Mathf.Abs(deltaAngle) < 90) targetAngle -= deltaAngle;
+            }
 		}
 
-		if (isLockOn) {//
-			currentY = Mathf.Lerp (currentY, targetY, smoothFactor);
+        targetAngle = ClampAngle(targetAngle, minAngle, maxAngle);
+
+        if (isLockOn) {//ロックオン状態の時はスムーズにする処理
+			currentY = Mathf.LerpAngle (currentY, targetY, smoothFactor);
 			currentAngle = Mathf.Lerp (currentAngle, targetAngle, smoothFactor);
 		}
 		else {
 			currentY = targetY;
 			currentAngle = targetAngle;
 		}
-		setCameraPosition (currentY, currentAngle);
+
+
+        setCameraPosition (currentY, currentAngle);
 
 	}
 
 	private void setCameraPosition(float y, float angle){
 			//if (angle > maxAngle) angle = maxAngle;
 			//if (angle < minAngle) angle = minAngle;
-		angle = Mathf.Clamp (angle, minAngle, maxAngle);
+
 
 		cameraOffset = new Vector3(0, 0, -distance);
 		cameraOffset = Quaternion.Euler(angle, y, 0) * cameraOffset;
@@ -107,7 +124,7 @@ public class CameraController : MonoBehaviour
 		cameraTransform.position = lookAtTransform.position + cameraOffset;
 
 		cameraTransform.LookAt(lookAt.GetComponent<Transform>().position);
-		cameraTransform.RotateAround (cameraTransform.position, cameraTransform.right, -16);
+		cameraTransform.RotateAround (cameraTransform.position, cameraTransform.right, -cameraVerticalAngleOffset);
 	}
 
 	public void StartLockOn(GameObject target){
@@ -121,12 +138,29 @@ public class CameraController : MonoBehaviour
 		isLockOn = false;
 	}
 
-	private Quaternion CaliculateTargetRotation(GameObject go){
+	private Vector2 CaliculateTargetRotation(GameObject go){
 		return CaliculateTargetRotation (go.transform.position);
 	}
 
-	private Quaternion CaliculateTargetRotation(Vector3 target){
-		return Quaternion.LookRotation (target - transform.position);
+	private Vector2 CaliculateTargetRotation(Vector3 target){
+		Quaternion qu =  Quaternion.LookRotation (target - lookAt.transform.position);
+        float y = qu.eulerAngles.y;
+        qu *= Quaternion.Euler(0, -y, 0);
+        float x = qu.eulerAngles.x;
+        return new Vector2(x, y);
 	}
+
+    /// <summary>
+    /// 与えられた値が角度であることを考慮し-90<Angle<90の範囲で収まるようにClampします
+    /// </summary>
+    /// <param name="angle"></param>
+    /// <param name="minAngle"></param>
+    /// <param name="maxAngle"></param>
+    private float ClampAngle(float angle,float minAngle,float maxAngle)
+    {
+        while (-90 > angle) angle += 360;
+        while (angle > 90) angle -= 360;
+        return Mathf.Clamp(angle, minAngle, maxAngle);
+    }
 
 }

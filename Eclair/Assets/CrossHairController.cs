@@ -58,7 +58,7 @@ public class CrossHairController : MonoBehaviour {
 			reloadTargetOnScreen ();
 			rt.position = Vector2.Lerp (rt.position, targetOnScreen, smoothFactor);
 		} else {
-			rt.anchoredPosition = middleScreen;
+            rt.anchoredPosition = Vector2.Lerp(rt.anchoredPosition, middleScreen, smoothFactor);//CrossHairのAnchor(画面上の原点)は画面中央になってるからそこに近づく
 		}
 	}
 
