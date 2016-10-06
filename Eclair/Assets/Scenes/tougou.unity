@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5443399, g: 0.507487, b: 0.52359366, a: 1}
+  m_IndirectSpecularColor: {r: 0.54476595, g: 0.50749, b: 0.5238219, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -188,6 +188,7 @@ GameObject:
   - 124: {fileID: 446296773}
   - 81: {fileID: 446296772}
   - 114: {fileID: 446296777}
+  - 114: {fileID: 446296778}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -245,7 +246,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -288,6 +289,23 @@ MonoBehaviour:
   minVerticalAngle: -60
   mouseSensitivity: 0.3
   sprintFOV: 100
+--- !u!114 &446296778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 446296771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  threshold: 0.9
+  intensity: 0.65
+  blurSize: 0.25
+  blurIterations: 4
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!1 &482444802
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,49 +424,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: endPoint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: endPoint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000014196793120, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000014196793120, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000011347283588, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000010966414646, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000010966414646, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000011972494722, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 120000011972494722, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].z
+    - target: {fileID: 1000011444720294, guid: d63e8c9400e104dc581759a1c5c0fb2d, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
@@ -711,6 +688,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1637312641}
   thunderEffect: {fileID: 376930922}
+  test: {fileID: 0}
+  crossHair: {fileID: 0}
+  camControl: {fileID: 0}
 --- !u!114 &1637312649
 MonoBehaviour:
   m_ObjectHideFlags: 0
