@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// カメラを操作します。
+/// 外から触るメソッドはStartLockOn、SwitchTarget、StopLockOnだけで十分なはずです。
+/// </summary>
 public class CameraController : MonoBehaviour
 {
 	public GameObject lookAt;
@@ -17,6 +21,8 @@ public class CameraController : MonoBehaviour
 	public float smoothFactor = 0.5f;
 
     public float cameraVerticalAngleOffset = 16;
+
+    public float lockOnFOV = 50;
 
 	private float targetY;    // カメラのY軸成分
 	private float targetAngle;
@@ -84,7 +90,7 @@ public class CameraController : MonoBehaviour
                 targetY = rot.y;
                 targetAngle = rot.x;
                 targetAngle += cameraVerticalAngleOffset;
-                Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
+                //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
             }
             else
             {
@@ -138,6 +144,11 @@ public class CameraController : MonoBehaviour
 		isLockOn = false;
 	}
 
+    /// <summary>
+    /// とある方向をカメラが向くためのYとAngleの値を算出します。
+    /// </summary>
+    /// <param name="go">対象のGameObject</param>
+    /// <returns>XがAngle、YがY。</returns>
 	private Vector2 CaliculateTargetRotation(GameObject go){
 		return CaliculateTargetRotation (go.transform.position);
 	}
@@ -151,7 +162,7 @@ public class CameraController : MonoBehaviour
 	}
 
     /// <summary>
-    /// 与えられた値が角度であることを考慮し-90<Angle<90の範囲で収まるようにClampします
+    /// 与えられた値が角度であることを考慮し-90から90の範囲で収まるようにClampします
     /// </summary>
     /// <param name="angle"></param>
     /// <param name="minAngle"></param>
