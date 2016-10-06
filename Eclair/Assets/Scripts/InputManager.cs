@@ -4,6 +4,7 @@ using System.Collections;
 public class InputManager : MonoBehaviour {
 
 	public GameObject player;
+	public ThunderEffectController thunderEffect;
 
 	private int height,width;
 	private Vector3 screenMiddle;
@@ -31,6 +32,13 @@ public class InputManager : MonoBehaviour {
 				hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
 			}
 			player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition);
+		}
+
+		if (Input.GetButtonDown ("Fire1")) {
+			Debug.Log ("Fire1Pressed");
+			thunderEffect.StartEffect (player.transform.position, new Vector3 (10, 4, 10));
+		} else if (Input.GetButtonUp ("Fire1")) {
+			thunderEffect.StopEffect ();
 		}
 	}
 }

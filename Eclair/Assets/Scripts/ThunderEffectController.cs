@@ -32,7 +32,7 @@ public class ThunderEffectController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
         if (length > cursor)
         {
             cursor += speed * Time.deltaTime;
@@ -91,7 +91,13 @@ public class ThunderEffectController : MonoBehaviour {
     {
         length = (endPoint - startPoint).magnitude;
         cursor = 0;
+		gameObject.SetActive(true);
     }
+
+	public void StopEffect(){
+		gameObject.SetActive(false);
+		cursor = 0;//念のためここでリセットしとく
+	}
 
     public void ReloadCore()
     {
