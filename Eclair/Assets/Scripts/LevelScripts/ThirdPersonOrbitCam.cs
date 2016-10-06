@@ -60,6 +60,10 @@ public class ThirdPersonOrbitCam : MonoBehaviour
 		}
 	}
 
+	public void setHorizontalAngle(float angle){
+		angleH = angle;
+	}
+
 	void Awake()
 	{
 		cam = transform;
