@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
 
 	private float targetY;    // カメラのY軸成分
 	private float targetAngle;
+	private float currentY;
+	private float currentAngle;
 	private float distance;
 	private Vector3 cameraOffset;
 
@@ -40,8 +42,8 @@ public class CameraController : MonoBehaviour
 
 	public void ResetCamera()
 	{
-		targetY = 0;
-		targetAngle = 0;
+		targetY = defaultY;
+		targetAngle = defaultAngle;
 	}
 
 	void Start()
@@ -70,24 +72,36 @@ public class CameraController : MonoBehaviour
 			cursorIsLocked = false;
 		}
 
-		float scroll = Input.GetAxis("Mouse ScrollWheel");
-		distance += scroll * 4;
-
+		//float scroll = Input.GetAxis("Mouse ScrollWheel");
+		//distance += scroll * 4;
+		//Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
 		if (cursorIsLocked) {
-			targetY += Input.GetAxis ("Mouse X") * Time.deltaTime * mouseSensitivity;
-			targetAngle -= Input.GetAxis ("Mouse Y") * Time.deltaTime * mouseSensitivity;
+			float deltaY = Input.GetAxis ("Mouse X") * Time.deltaTime * mouseSensitivity;
+			float deltaAngle = Input.GetAxis ("Mouse Y") * Time.deltaTime * mouseSensitivity;
+			Debug.Log (deltaY + "," + deltaAngle);
+			if(Mathf.Abs(deltaY) < 90) targetY += deltaY;
+			if(Mathf.Abs(deltaAngle) < 90) targetAngle -= deltaAngle;
 		}
 
-		setCameraPosition (targetY, targetAngle);
+		if (isLockOn) {//
+			currentY = Mathf.Lerp (currentY, targetY, smoothFactor);
+			currentAngle = Mathf.Lerp (currentAngle, targetAngle, smoothFactor);
+		}
+		else {
+			currentY = targetY;
+			currentAngle = targetAngle;
+		}
+		setCameraPosition (currentY, currentAngle);
 
 	}
 
 	private void setCameraPosition(float y, float angle){
-			if (angle > maxAngle) angle = maxAngle;
-			if (angle < minAngle) angle = minAngle;
+			//if (angle > maxAngle) angle = maxAngle;
+			//if (angle < minAngle) angle = minAngle;
+		angle = Mathf.Clamp (angle, minAngle, maxAngle);
 
-			cameraOffset = new Vector3(0, 0, -distance);
-			cameraOffset = Quaternion.Euler(angle, y, 0) * cameraOffset;
+		cameraOffset = new Vector3(0, 0, -distance);
+		cameraOffset = Quaternion.Euler(angle, y, 0) * cameraOffset;
 
 		Transform lookAtTransform = lookAt.GetComponent<Transform>();
 		cameraTransform.position = lookAtTransform.position + cameraOffset;
