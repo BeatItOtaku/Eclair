@@ -4,6 +4,7 @@ using System.Collections;
 public class BoltScript : MonoBehaviour {
 
     public float scaleWhenCollided = 1.0f;
+    public Vector3 collidedRotateOffset;
 	
 	// Use this for initialization
 	void Start () {
@@ -14,6 +15,8 @@ public class BoltScript : MonoBehaviour {
 		get;
 		set;
 	}
+
+    public Quaternion TargetQuaternion { get; set; }
 
 	// Update is called once per frame
 	void Update () {
@@ -34,7 +37,12 @@ public class BoltScript : MonoBehaviour {
 			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 		}
 
+        if (Target == null) return;
+
 		gameObject.transform.position = Target;
+        Debug.Log(TargetQuaternion.eulerAngles);
+        TargetQuaternion *= Quaternion.Euler(collidedRotateOffset);
+        if(TargetQuaternion != Quaternion.Euler(0,0,0)) gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.8f);
         gameObject.transform.localScale *= scaleWhenCollided;
 
 	}

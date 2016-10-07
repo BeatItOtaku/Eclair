@@ -43,6 +43,7 @@ public class InputManager : MonoBehaviour {
 		player.GetComponent<LockOn> ().endLockOn ();
         crossHair.isLockOn = false;
         camControl.StopLockOn();
+        PlayerControl.fly = false;
 	}
 
 	// Use this for initialization
@@ -68,16 +69,18 @@ public class InputManager : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
+                Quaternion hitQuaternion = Quaternion.Euler(0,0,0);
                 if (Physics.Raycast(ray, out hit))
                 {
                     //Debug.Log ("ahoaho");
                     hitPosition = hit.point;
+                    hitQuaternion = Quaternion.LookRotation(hit.normal);
                 }
                 else
                 {
                     hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
                 }
-                player.GetComponent<PlayerShot>().LaunchBolt(hitPosition);
+                player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion);
             }
 		}
 
