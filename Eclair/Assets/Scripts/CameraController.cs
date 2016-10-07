@@ -84,7 +84,7 @@ public class CameraController : MonoBehaviour
         //distance += scroll * 4;
         //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
         if (cursorIsLocked) {
-            if (isLockOn)
+			if (isLockOn && lockOnTarget != null)
             {
                 Vector2 rot = CaliculateTargetRotation(lockOnTarget);
                 targetY = rot.y;

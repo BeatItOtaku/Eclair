@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour {
 
     public CameraController camControl;
 
+	public LockOn lockOn;
+
 	private int height,width;
 	private Vector3 screenMiddle;
 
@@ -38,6 +40,7 @@ public class InputManager : MonoBehaviour {
 	/// </summary>
 	public void Idle(){
 		playerState_ = PlayerStates.Idle;
+		player.GetComponent<LockOn> ().endLockOn ();
 	}
 
 	// Use this for initialization
@@ -94,20 +97,34 @@ public class InputManager : MonoBehaviour {
             camControl.StopLockOn();
         }
 
+		//左クリック
 		if (Input.GetButtonDown ("Fire1")) {
 			Debug.Log ("Fire1Pressed");
-			thunderEffect.StartEffect (player.transform.position, new Vector3 (10, 4, 10));
+			GameObject satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+			if (satou != null) {
+				thunderEffect.StartEffect (player.transform.position, satou.transform.position);
+			}
 		} else if (Input.GetButtonUp ("Fire1")) {
 			thunderEffect.StopEffect ();
+		}
+
+		//エトワールボタン
+		if (Input.GetButtonDown ("Etoile")) {
+			if (playerState_ == PlayerStates.LockOn){
+				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());
+				playerState_ = PlayerStates.Etoile;
+			}
 		}
 	}
 
     void onLockOnSwitched(GameObject target)
     {
+		if(target != null){
         crossHair.target = target.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
         crossHair.isLockOn = true;
         camControl.StartLockOn(target);
     }
+	}
 
 	static float getAngleWithSign(Vector3 v1, Vector3 v2){
 		float angle = Vector3.Angle (v1, v2);

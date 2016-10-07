@@ -33,10 +33,13 @@ public class LockOn : MonoBehaviour {
 	}
 
 	public GameObject startLockOn(){
-		foreach(GameObject go in GameObject.FindGameObjectsWithTag ("Bolt")){
-			float distance = Vector3.Distance (player.transform.position, go.transform.position);
-			if (distance > maxDistance) continue;//遠すぎたらtargetListに追加することなくforの1ループをおわる
-			targetList.Add(new KeyValuePair<float, GameObject>(getAnglularDistance(go),go));
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag ("Bolt")) {
+			if (go != null) {
+				float distance = Vector3.Distance (player.transform.position, go.transform.position);
+				if (distance > maxDistance)
+					continue;//遠すぎたらtargetListに追加することなくforの1ループをおわる
+				targetList.Add (new KeyValuePair<float, GameObject> (getAnglularDistance (go), go));
+			}
 		}
 		targetList.Sort (CompareKeyValuePair);
 		cursor = 0;
