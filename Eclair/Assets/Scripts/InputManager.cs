@@ -41,6 +41,8 @@ public class InputManager : MonoBehaviour {
 	public void Idle(){
 		playerState_ = PlayerStates.Idle;
 		player.GetComponent<LockOn> ().endLockOn ();
+        crossHair.isLockOn = false;
+        camControl.StopLockOn();
 	}
 
 	// Use this for initialization
@@ -95,9 +97,7 @@ public class InputManager : MonoBehaviour {
         else if (Input.GetKeyUp(KeyCode.E))//Eキー離したらロックオンやめる
         {
             player.GetComponent<LockOn>().endLockOn();
-            playerState_ = PlayerStates.Idle;
-            crossHair.isLockOn = false;
-            camControl.StopLockOn();
+            Idle();
         }
 
 		//左クリック
