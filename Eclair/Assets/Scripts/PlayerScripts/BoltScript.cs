@@ -28,7 +28,7 @@ public class BoltScript : MonoBehaviour {
 		if (collider.gameObject.tag == "Player")
 			return;
 		
-		Debug.Log ("hoge");
+		//Debug.Log ("hoge");
 		try {gameObject.GetComponent<LinearMovement> ().Speed = 0;}
 		catch {
 			gameObject.GetComponent<Rigidbody> ().isKinematic = true;

@@ -85,8 +85,11 @@ public class InputManager : MonoBehaviour {
 			GameObject go;
 			if (playerState_ == PlayerStates.Idle) {
 				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
-				playerState_ = PlayerStates.LockOn;
-                onLockOnSwitched(go);
+                if (go != null)
+                {
+                    playerState_ = PlayerStates.LockOn;
+                    onLockOnSwitched(go);
+                }
 			}
 		}
         else if (Input.GetKeyUp(KeyCode.E))//Eキー離したらロックオンやめる
@@ -131,4 +134,13 @@ public class InputManager : MonoBehaviour {
 		int sign = Vector3.Cross(v1, v2).z < 0 ? -1 : 1;
 		return angle * sign;
 	}
+
+    public string getDebugString()
+    {
+        string st = "";
+
+        st += "PlayerState : " + playerState_.ToString();
+
+        return st;
+    }
 }
