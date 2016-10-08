@@ -142,7 +142,10 @@ public class InputManager : MonoBehaviour {
     {
         string st = "";
 
-        st += "PlayerState : " + playerState_.ToString();
+        st += "PlayerState : " + playerState_.ToString() + "\n";
+        st += "CameraY : " + camControl.cameraY + "\n";
+        st += "CameraAngle : " + camControl.cameraAngle + "\n";
+
 
         return st;
     }
