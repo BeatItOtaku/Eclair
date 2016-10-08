@@ -530,7 +530,7 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 330206604}
-  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
+  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
   m_LocalPosition: {x: 0.000022271464, y: -0.00006150465, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -899,7 +899,7 @@ MonoBehaviour:
   defaultY: 0
   maxAngle: 80
   minAngle: -30
-  smoothFactor: 0.5
+  smoothFactor: 0.3
   cameraVerticalAngleOffset: 16
   lockOnFOV: 50
 --- !u!1 &457631622
@@ -3034,6 +3034,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011741997438, guid: 28d8841057b824d9ca9f9acadc6a18a9,
+        type: 2}
+      propertyPath: smoothFactor
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28d8841057b824d9ca9f9acadc6a18a9, type: 2}
