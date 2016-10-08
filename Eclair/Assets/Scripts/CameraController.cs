@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour
 	public float smoothFactor = 0.5f;
 
     public float cameraVerticalAngleOffset = 16;
+    public float cameraVerticalAngleOffsetWhenLockOn = 45;
 
     public float lockOnFOV = 50;
 
@@ -99,7 +100,7 @@ public class CameraController : MonoBehaviour
                 Vector2 rot = CaliculateTargetRotation(lockOnTarget);
                 targetY = rot.y;
                 targetAngle = rot.x;
-                targetAngle += cameraVerticalAngleOffset;
+                targetAngle += cameraVerticalAngleOffsetWhenLockOn;
                 //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
             }
             else
