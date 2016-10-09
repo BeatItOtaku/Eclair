@@ -39,10 +39,11 @@ public class BoltScript : MonoBehaviour {
 
         if (Target == null) return;
 
-		gameObject.transform.position = Target;
+		//gameObject.transform.position = Target;
         //Debug.Log(TargetQuaternion.eulerAngles);
+		TargetQuaternion = Quaternion.LookRotation(collider.contacts[0].normal);
         TargetQuaternion *= Quaternion.Euler(collidedRotateOffset);
-        if(TargetQuaternion != Quaternion.Euler(0,0,0)) gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.8f);
+        gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.8f);
         gameObject.transform.localScale *= scaleWhenCollided;
 
 	}
