@@ -47,6 +47,7 @@ public class PlayerShot : MonoBehaviour {
         if (lastShot != null) Destroy(lastShot);//直前のShotを消す(ShotPauseを使わない仕組みに変わったからこういうことができる)
 
         Vector3 playerToTarget = target - muzzle.transform.position;
+		playerToTarget.Normalize ();
 		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget) * boltQuaternionOffset);
 		if (usePhysics) go.GetComponent<Rigidbody>().AddForce(playerToTarget * force,ForceMode.VelocityChange);
 		else go.GetComponent<LinearMovement>().Direction = playerToTarget;

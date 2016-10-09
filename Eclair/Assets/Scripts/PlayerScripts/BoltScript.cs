@@ -26,9 +26,20 @@ public class BoltScript : MonoBehaviour {
 		//Debug.Log(gameObject.transform.position);
 	}
 
+	void OnTriggerEnter(Collider collider){
+		if (collider.gameObject.tag == "Player") {
+
+		} else if(collider.gameObject.tag != "Bolt") {
+		}
+		GetComponent<CapsuleCollider> ().isTrigger = false;
+
+	}
+
 	void OnCollisionEnter(Collision collider)
 	{	
 		if (collider.gameObject.tag == "Player")
+			return;
+		if (collider.gameObject.tag == "Bolt")
 			return;
 		
 		//Debug.Log ("hoge");
@@ -43,7 +54,7 @@ public class BoltScript : MonoBehaviour {
         //Debug.Log(TargetQuaternion.eulerAngles);
 		TargetQuaternion = Quaternion.LookRotation(collider.contacts[0].normal);
         TargetQuaternion *= Quaternion.Euler(collidedRotateOffset);
-        gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.8f);
+        gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.2f);
         gameObject.transform.localScale *= scaleWhenCollided;
 
 	}
