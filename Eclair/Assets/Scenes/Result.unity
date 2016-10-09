@@ -1131,6 +1131,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69627d9bacdc841a7b20c48d055e67d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &776779865 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+    type: 2}
+  m_PrefabInternal: {fileID: 276055830}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &832444407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,6 +1879,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed2113c0cf724268b166abb758d9fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usedTime: 0
+  beatedEnemy: 0
+  launchedBolt: 0
+  optiTime: 600
+  timeScoreFactor: 100
+  enemyScoreFactor: 100
+  boltScoreFactor: 10
+  timeRankThreshold: 2c010000e001000094020000
+  enemyRankThreshold: 280000001e00000014000000
+  boltRankThreshold: 1e0000003c0000005a000000
+  totalRankThreshold: d0070000b80b0000a00f0000
+  timeText: {fileID: 294952863}
+  timeRank: {fileID: 832444412}
+  timeScore: {fileID: 902219376}
+  enemyText: {fileID: 700824945}
+  enemyRank: {fileID: 1644647398}
+  enemyScore: {fileID: 332653013}
+  boltText: {fileID: 25125773}
+  boltRank: {fileID: 465453657}
+  boltScore: {fileID: 1183149012}
+  totalScore: {fileID: 169288146}
+  totalRank: {fileID: 331757662}
+  nextButton: {fileID: 776779865}
 --- !u!111 &1251208038
 Animation:
   m_ObjectHideFlags: 0
