@@ -7,7 +7,9 @@ public class Etoile : MonoBehaviour {
 	public GameObject player;
 	GameObject target = null;
 
-	GameObject FindClosestBolt(){
+	public InputManager im;
+
+	/*GameObject FindClosestBolt(){
 
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag ("Bolt");
@@ -26,7 +28,7 @@ public class Etoile : MonoBehaviour {
 			}
 		}
 		return closest;
-	}					
+	}*/					
 
 
 	// Use this for initialization
@@ -35,25 +37,30 @@ public class Etoile : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
-		if (Input.GetButtonDown ("Etoile")) {
-			target = FindClosestBolt ();
-		}
+	void Update ()
+	{
 		if (target != null) {
 			if (target.gameObject.GetComponent<Rigidbody> ().isKinematic == true) {
 				transform.LookAt (target.transform);
-				transform.position += transform.forward * Time.deltaTime * 50;		
+				transform.position += transform.forward * Time.deltaTime * 50;
 			}
 		}
 	}
-	
-		private void OnCollisionEnter(Collision collider){
+
+	public void startEtoile(GameObject go){
+		target = go;
+	}
+
+	private void OnCollisionEnter (Collision collider)
+	{
 		if (target != null) {
-				if (collider.gameObject.tag == "Bolt") {
-					Instantiate (lightning, transform.position, transform.rotation);
-					Destroy (target);
-				}			
-			}
+			if (collider.gameObject.tag == "Bolt") {
+				Instantiate (lightning, transform.position, transform.rotation);
+				im.Idle ();
+				Destroy (target);
+
+			}			
 		}
 	}
+}
 	

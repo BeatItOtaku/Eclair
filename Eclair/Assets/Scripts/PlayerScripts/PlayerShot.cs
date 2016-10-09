@@ -33,8 +33,13 @@ public class PlayerShot : MonoBehaviour {
 		shotInterval += Time.deltaTime;
 	}
 
+    public void LaunchBolt(Vector3 target)
+    {
+        LaunchBolt(target, Quaternion.Euler(0,0,0));
+    }
+
     //InputManagerから呼び出す
-	public void LaunchBolt(Vector3 target){
+	public void LaunchBolt(Vector3 target, Quaternion targetQuaternion){
 
         if (shotInterval < shotIntervalMin) return;//前回のLaunchBoltからあんまり時間経ってない時は何もしない
         else shotInterval = 0;
@@ -47,6 +52,7 @@ public class PlayerShot : MonoBehaviour {
 		else go.GetComponent<LinearMovement>().Direction = playerToTarget;
 
 		go.GetComponent<BoltScript> ().Target = target;
+        go.GetComponent<BoltScript>().TargetQuaternion = targetQuaternion;
 
         lastShot = go;//直前のShotとして指定
 	}
