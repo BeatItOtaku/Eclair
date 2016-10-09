@@ -3026,15 +3026,7 @@ Prefab:
     - target: {fileID: 224000010151426624, guid: 28d8841057b824d9ca9f9acadc6a18a9,
         type: 2}
       propertyPath: m_RootOrder
-<<<<<<< HEAD
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000011444720294, guid: d63e8c9400e104dc581759a1c5c0fb2d, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-=======
       value: 1
->>>>>>> warabi-tougou2fix
       objectReference: {fileID: 0}
     - target: {fileID: 224000010151426624, guid: 28d8841057b824d9ca9f9acadc6a18a9,
         type: 2}
@@ -3121,18 +3113,11 @@ Transform:
   m_LocalPosition: {x: 0.0002228482, y: 0.025879227, z: -0.0103851855}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
---- !u!1 &1529198007
-=======
   m_Children:
   - {fileID: 457631623}
   m_Father: {fileID: 1079665071}
   m_RootOrder: 0
 --- !u!1 &1721519789
->>>>>>> warabi-tougou2fix
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 1000010715332074, guid: aca10181c0427493095617863ca8f053,
