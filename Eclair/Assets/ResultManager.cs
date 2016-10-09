@@ -1,11 +1,8 @@
-﻿using UnityEngine;
+﻿ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ResultManager : MonoBehaviour {
-
-	public GameObject frame;
-	public GameObject title;
 
 	private float time = 0;
 	private int cursor = 0;
@@ -23,7 +20,8 @@ public class ResultManager : MonoBehaviour {
 		new KeyValuePair<float,string>(0.5f,"BoltLabel"),
 		new KeyValuePair<float,string>(0.5f,"BoltText"),
 		new KeyValuePair<float,string>(0.5f,"BoltScore"),
-		new KeyValuePair<float,string>(0.5f,"TotalLabel"),
+		new KeyValuePair<float,string>(1.0f,"Horizon"),
+		new KeyValuePair<float,string>(0.3f,"TotalLabel"),
 		new KeyValuePair<float,string>(0.5f,"TotalText"),
 	};
 
