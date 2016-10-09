@@ -3,36 +3,31 @@ using System.Collections;
 
 public class FootSwitchScript : MonoBehaviour {
 
-	public GameObject floor;
+	private Animator animator;
+	public static int switchState;
+	public static bool startSwitch = false;
 
-	private bool t = false;
-	private bool s = false;
+	//switchStateは感圧スイッチの状態。0が基本、1が押した状態、2が押していない状態
 
 	// Use this for initialization
 	void Start () {
-	
+		switchState = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (t == true) {
-			//gameObject.transform.position += new Vector3 (0, -0.01f, 0);
-		}
-		if (s == true) {
-			//gameObject.GetComponent<Rigidbody> ().isKinematic = true;
-		}
+		
 	}
 
-	private void OnCollisonEnter(Collision collider){
+	private void OnTriggerEnter(Collider collider){
 		if (collider.gameObject.tag == "Player") {
-			Debug.Log ("hi");
-			//t = true;
-		}
-		/*if (collider.gameObject.name == "FootSwitchCollider") {
-			s = true;
-		}*/
+			switchState = 1;
+			startSwitch = true;
+}
 	}
-	//void OnCollisionExit(Collision collider){
-		//t = false;
-	//}
+	private void OnTriggerExit(Collider collider){
+		if (startSwitch == true) {
+			switchState = 2;
+		}
+	}
 }
