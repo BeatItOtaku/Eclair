@@ -43,7 +43,12 @@ public class LockOn : MonoBehaviour {
 		}
 		targetList.Sort (CompareKeyValuePair);
 		cursor = 0;
-		return targetList [cursor].Value;
+        if (targetList.Count == 0)
+        {
+            endLockOn();
+            return null;
+        }
+        else return targetList[cursor].Value;
 	}
 	public void endLockOn(){
 		cursor = -1;

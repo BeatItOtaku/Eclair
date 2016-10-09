@@ -41,6 +41,9 @@ public class InputManager : MonoBehaviour {
 	public void Idle(){
 		playerState_ = PlayerStates.Idle;
 		player.GetComponent<LockOn> ().endLockOn ();
+        crossHair.isLockOn = false;
+        camControl.StopLockOn();
+        PlayerControl.fly = false;
 	}
 
 	// Use this for initialization
@@ -66,16 +69,18 @@ public class InputManager : MonoBehaviour {
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
+                Quaternion hitQuaternion = Quaternion.Euler(0,0,0);
                 if (Physics.Raycast(ray, out hit))
                 {
                     //Debug.Log ("ahoaho");
                     hitPosition = hit.point;
+                    hitQuaternion = Quaternion.LookRotation(hit.normal);
                 }
                 else
                 {
                     hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
                 }
-                player.GetComponent<PlayerShot>().LaunchBolt(hitPosition);
+                player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion);
             }
 		}
 
@@ -85,16 +90,17 @@ public class InputManager : MonoBehaviour {
 			GameObject go;
 			if (playerState_ == PlayerStates.Idle) {
 				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
-				playerState_ = PlayerStates.LockOn;
-                onLockOnSwitched(go);
+                if (go != null)
+                {
+                    playerState_ = PlayerStates.LockOn;
+                    onLockOnSwitched(go);
+                }
 			}
 		}
         else if (Input.GetKeyUp(KeyCode.E))//Eキー離したらロックオンやめる
         {
             player.GetComponent<LockOn>().endLockOn();
-            playerState_ = PlayerStates.Idle;
-            crossHair.isLockOn = false;
-            camControl.StopLockOn();
+            Idle();
         }
 
 		//左クリック
@@ -131,4 +137,16 @@ public class InputManager : MonoBehaviour {
 		int sign = Vector3.Cross(v1, v2).z < 0 ? -1 : 1;
 		return angle * sign;
 	}
+
+    public string getDebugString()
+    {
+        string st = "";
+
+        st += "PlayerState : " + playerState_.ToString() + "\n";
+        st += "CameraY : " + camControl.cameraY + "\n";
+        st += "CameraAngle : " + camControl.cameraAngle + "\n";
+
+
+        return st;
+    }
 }
