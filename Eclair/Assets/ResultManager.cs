@@ -13,16 +13,20 @@ public class ResultManager : MonoBehaviour {
 		new KeyValuePair<float,string>(0.4f,"Title"),
 		new KeyValuePair<float,string>(0.5f,"TimeLabel"),
 		new KeyValuePair<float,string>(0.5f,"TimeText"),
-		new KeyValuePair<float,string>(0.5f,"TimeScore"),
+		new KeyValuePair<float,string>(0.5f,"TimeRank"),
+		new KeyValuePair<float,string>(0.2f,"TimeScore"),
 		new KeyValuePair<float,string>(0.5f,"EnemyLabel"),
 		new KeyValuePair<float,string>(0.5f,"EnemyText"),
-		new KeyValuePair<float,string>(0.5f,"EnemyScore"),
+		new KeyValuePair<float,string>(0.5f,"EnemyRank"),
+		new KeyValuePair<float,string>(0.2f,"EnemyScore"),
 		new KeyValuePair<float,string>(0.5f,"BoltLabel"),
 		new KeyValuePair<float,string>(0.5f,"BoltText"),
-		new KeyValuePair<float,string>(0.5f,"BoltScore"),
+		new KeyValuePair<float,string>(0.5f,"BoltRank"),
+		new KeyValuePair<float,string>(0.2f,"BoltScore"),
 		new KeyValuePair<float,string>(1.0f,"Horizon"),
 		new KeyValuePair<float,string>(0.3f,"TotalLabel"),
 		new KeyValuePair<float,string>(0.5f,"TotalText"),
+		new KeyValuePair<float,string>(1.6f,"TotalRank"),
 	};
 
 	// Use this for initialization
