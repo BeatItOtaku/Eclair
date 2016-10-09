@@ -7,6 +7,7 @@ TagManager:
   - Bolt
   - Objects
   - NoMoveBolt
+  - ThunderSwitch
   layers:
   - Default
   - TransparentFX
