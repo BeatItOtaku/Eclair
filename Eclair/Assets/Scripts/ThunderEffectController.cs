@@ -15,7 +15,7 @@ public class ThunderEffectController : MonoBehaviour {
     public float speed = 10.0f;//電撃が進むスピード
     public float cladTimeInterval = 0.1f;
 
-    private Vector3[] vertexes;
+    private List<Vector3> vertexes = new List<Vector3>();
     private const int MaxVertexSize = 128;
 
     //アニメーション関連
@@ -27,7 +27,7 @@ public class ThunderEffectController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        vertexes = new Vector3[MaxVertexSize];
+        //vertexes = new Vector3[MaxVertexSize];
         StartEffect();
 	}
 	
@@ -40,7 +40,7 @@ public class ThunderEffectController : MonoBehaviour {
         else cursor = length;
 
         endPoint_raw = Vector3.Lerp(startPoint, endPoint, cursor / length);
-        Debug.Log(cursor);
+        //Debug.Log(cursor);
 
         ReloadCore();
 
@@ -60,11 +60,13 @@ public class ThunderEffectController : MonoBehaviour {
     {
         float len = (end - start).magnitude;
         int size = (int)(Mathf.Min(len/cladSpaceInterval,MaxVertexSize) + 0.5);//切り捨てではなく四捨五入にするために0.5を足す
+        vertexes.Clear();
         
         for(int i = 0; i < size; i++)
         {
-            vertexes[i] = Vector3.Lerp(start, end, (float)i / size);//int同士の割り算を防ぐためわざわざfloatにキャスト
-            vertexes[i] += new Vector3(myRandom(), myRandom(), myRandom());
+            Vector3 vec = Vector3.Lerp(start, end, (float)i / size);//int同士の割り算を防ぐためわざわざfloatにキャスト
+            vec += new Vector3(myRandom(), myRandom(), myRandom());
+            vertexes.Add(vec);
         }
 
         return size;
@@ -117,6 +119,7 @@ public class ThunderEffectController : MonoBehaviour {
     {
         int size = GenerateVertexes(startPoint, endPoint_raw);
 		clad.SetVertexCount(size);
-        clad.SetPositions(vertexes);
+        //clad.SetPositions(vertexes);
+        clad.SetPositions(vertexes.ToArray());
     }
 }

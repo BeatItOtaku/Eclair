@@ -42,7 +42,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1000011786558914
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,8 +176,8 @@ MonoBehaviour:
   - {fileID: 120000014196793120}
   - {fileID: 120000011347283588}
   - {fileID: 120000010966414646}
-  startPoint: {x: 0, y: 0, z: 0}
-  endPoint: {x: 0, y: 4.47, z: 16}
+  startPoint: {x: -6.222372e-12, y: 0.49999988, z: 7.859166e-14}
+  endPoint: {x: 10, y: 4, z: 10}
   cladSpaceInterval: 1.2
   randomWidth: 0.6
   speed: 8
@@ -297,7 +297,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 2.67, z: 2.94}
+  - {x: NaN, y: NaN, z: NaN}
   m_Parameters:
     startWidth: 1
     endWidth: 1
