@@ -26,7 +26,8 @@ public class ResultManager : MonoBehaviour {
 		new KeyValuePair<float,string>(1.0f,"Horizon"),
 		new KeyValuePair<float,string>(0.3f,"TotalLabel"),
 		new KeyValuePair<float,string>(0.5f,"TotalText"),
-		new KeyValuePair<float,string>(1.6f,"TotalRank"),
+		new KeyValuePair<float,string>(1.8f,"TotalRank"),
+		new KeyValuePair<float,string>(1.0f,"NextButton"),
 	};
 
 	// Use this for initialization
