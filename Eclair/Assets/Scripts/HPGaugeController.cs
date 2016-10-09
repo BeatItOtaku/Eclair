@@ -39,7 +39,7 @@ public class HPGaugeController : MonoBehaviour {
         HPGaugeWidth = core.GetComponent<RectTransform>().sizeDelta.x;
         coreAnim = core.GetComponent<Animator>();
         wallImage = wall.GetComponent<Image>();
-        //Debug.Log(HPGaugeWidth);
+        Debug.Log(HPGaugeWidth);
         currentHP = maxHP;
 	}
 	

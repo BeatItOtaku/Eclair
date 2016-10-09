@@ -21,19 +21,8 @@ public class CameraController : MonoBehaviour
 	public float smoothFactor = 0.5f;
 
     public float cameraVerticalAngleOffset = 16;
-    public float cameraVerticalAngleOffsetWhenLockOn = 45;
 
     public float lockOnFOV = 50;
-
-    //読み取り専用プロパティ群
-    /// <summary>
-    /// (Read Only)カメラのグローバルY軸方向の回転を取得します。
-    /// </summary>
-    public float cameraY { get { return currentY; } }
-    /// <summary>
-    /// (Read Only)カメラの仰角を取得します。
-    /// </summary>
-    public float cameraAngle {  get { return currentAngle; } }
 
 	private float targetY;    // カメラのY軸成分
 	private float targetAngle;
@@ -95,12 +84,12 @@ public class CameraController : MonoBehaviour
         //distance += scroll * 4;
         //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
         if (cursorIsLocked) {
-			if (isLockOn && lockOnTarget != null)
+            if (isLockOn)
             {
                 Vector2 rot = CaliculateTargetRotation(lockOnTarget);
                 targetY = rot.y;
                 targetAngle = rot.x;
-                targetAngle += cameraVerticalAngleOffsetWhenLockOn;
+                targetAngle += cameraVerticalAngleOffset;
                 //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
             }
             else
@@ -113,7 +102,6 @@ public class CameraController : MonoBehaviour
             }
 		}
 
-        //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
         targetAngle = ClampAngle(targetAngle, minAngle, maxAngle);
 
         if (isLockOn) {//ロックオン状態の時はスムーズにする処理
@@ -168,32 +156,22 @@ public class CameraController : MonoBehaviour
 	private Vector2 CaliculateTargetRotation(Vector3 target){
 		Quaternion qu =  Quaternion.LookRotation (target - lookAt.transform.position);
         float y = qu.eulerAngles.y;
-        //Debug.Log(qu.eulerAngles);
-        //qu *= Quaternion.Euler(0, -y, 0);
-        //qu *= Quaternion.Euler(0, 0, -qu.eulerAngles.z);
-        //Debug.Log(qu.eulerAngles);
-        float x = qu.eulerAngles.x;//getAngleWithSign(new Vector3(0, 0, 1), qu.eulerAngles);//qu.eulerAngles.x;
+        qu *= Quaternion.Euler(0, -y, 0);
+        float x = qu.eulerAngles.x;
         return new Vector2(x, y);
 	}
 
     /// <summary>
-    /// 与えられた値が角度であることを考慮し-180から180の範囲で収まるようにしてからClampします
+    /// 与えられた値が角度であることを考慮し-90から90の範囲で収まるようにClampします
     /// </summary>
     /// <param name="angle"></param>
     /// <param name="minAngle"></param>
     /// <param name="maxAngle"></param>
     private float ClampAngle(float angle,float minAngle,float maxAngle)
     {
-        while (-180 > angle) angle += 360;
-        while (angle > 180) angle -= 360;
+        while (-90 > angle) angle += 360;
+        while (angle > 90) angle -= 360;
         return Mathf.Clamp(angle, minAngle, maxAngle);
-    }
-
-    static float getAngleWithSign(Vector3 v1, Vector3 v2)
-    {
-        float angle = Vector3.Angle(v1, v2);
-        int sign = Vector3.Cross(v1, v2).z < 0 ? -1 : 1;
-        return angle * sign;
     }
 
 }
