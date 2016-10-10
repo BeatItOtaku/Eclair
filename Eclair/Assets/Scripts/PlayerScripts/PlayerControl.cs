@@ -78,7 +78,7 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	bool IsGrounded() {
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 1.0f);
 	}
 
 	void Update(){
@@ -170,7 +170,7 @@ public class PlayerControl : MonoBehaviour
 				speed = walkSpeed;
 			//transform.position += transform.forward * Time.deltaTime * 3;
 			//}
-
+			Debug.Log(speed);
 			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
 		}
 		if(horizontal == 0 && vertical == 0){
