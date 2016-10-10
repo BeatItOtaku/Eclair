@@ -7,10 +7,6 @@ public class PlayerControl : MonoBehaviour
 
 
 {
-	public float eclairSpeed =5F;
-	public GameObject muzzle;
-	private  Vector3 moveDirection;
-	public GameObject player;
 
 
 	public void setHorizontalAngle(int angle){
@@ -82,14 +78,6 @@ public class PlayerControl : MonoBehaviour
 
 	void Update(){
 
-		/*CharacterController controller = GetComponent<CharacterController> ();
-
-		if (controller.isGrounded) {
-			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-			moveDirection = transform.TransformDirection (moveDirection);
-			moveDirection *= eclairSpeed;
-		}
-		controller.Move (moveDirection * Time.deltaTime);*/
 		
 		// fly
 		if(Input.GetButtonDown ("Fly"))
@@ -152,11 +140,13 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
+		CharacterController controller = GetComponent<CharacterController> ();
 		Rotating(horizontal, vertical);
 
 		if(isMoving == true)
 		{
-			/*if(sprinting)
+			if (controller.isGrounded) {
+				/*if(sprinting)
 			{
 				speed = sprintSpeed;
 			}
@@ -165,9 +155,11 @@ public class PlayerControl : MonoBehaviour
 				speed = runSpeed;
 			}
 			else*/
-			{
+
 				speed = walkSpeed;
-			transform.position += transform.forward * Time.deltaTime*2;
+				transform.position += transform.forward * Time.deltaTime * 2;
+			} else {
+				speed = 0f;
 			}
 
 			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
