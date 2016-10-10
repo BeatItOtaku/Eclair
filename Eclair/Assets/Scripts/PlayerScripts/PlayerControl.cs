@@ -168,7 +168,7 @@ public class PlayerControl : MonoBehaviour
 			else
 			{*/
 				speed = walkSpeed;
-			transform.position += transform.forward * Time.deltaTime * 3;
+			//transform.position += transform.forward * Time.deltaTime * 3;
 			//}
 
 			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
