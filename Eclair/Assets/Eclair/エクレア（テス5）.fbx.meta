@@ -1476,7 +1476,7 @@ ModelImporter:
     4300036: Boot_L
     4300038: polySurface80
     4300040: gun_2:polySurface16
-    7400000: ShotZero
+    7400000: Idle
     7400002: ShotUp
     7400004: ShotDown
     7400006: SBTzero
@@ -1531,10 +1531,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: ShotZero
+      name: Idle
       takeName: Take 001
-      firstFrame: 401
-      lastFrame: 430
+      firstFrame: 41
+      lastFrame: 400
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

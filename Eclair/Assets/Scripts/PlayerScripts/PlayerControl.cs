@@ -4,14 +4,17 @@ using System.Collections;
 
 
 public class PlayerControl : MonoBehaviour
-
-
 {
 
 
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
+	public GameObject muzzle;
+	public GameObject shirt;
+
+	public float angle;
+
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
 	public float sprintSpeed = 2.0f;
@@ -177,6 +180,21 @@ public class PlayerControl : MonoBehaviour
 		GetComponent<Rigidbody>().AddForce(Vector3.forward);
 	}
 
+	void ShotManagament()
+	{
+		Vector3 shotLine = muzzle.transform.position- shirt.transform.position ;
+		float shotAngle = Vector3.Angle (CrossHairController.target_, shotLine);
+		if(shotAngle >= 30){
+			Debug.Log ("eiei");
+			anim.SetFloat ("Angle", 1f);
+	}
+		else if(shotAngle >= -15){
+			anim.SetFloat ("Angle", 0.5f);
+		}
+		else{
+			anim.SetFloat ("Angle", 0f);
+		}
+	}
 	Vector3 Rotating(float horizontal, float vertical)
 	{
 		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);

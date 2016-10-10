@@ -24,7 +24,7 @@ public class CrossHairController : MonoBehaviour {
 
 	public float smoothFactor = 0.5f;
 
-	private Vector3 target_;
+	public static Vector3 target_;
 	/// <summary>
 	/// 照準が目指して移動する三次元の位置
 	/// </summary>
