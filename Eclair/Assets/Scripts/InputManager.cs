@@ -106,7 +106,8 @@ public class InputManager : MonoBehaviour {
 		//左クリック
 		if (Input.GetButtonDown ("Fire1")) {
 			Debug.Log ("Fire1Pressed");
-			GameObject satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+			GameObject satou = null;
+			if(playerState_ == PlayerStates.LockOn) satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
 			if (satou != null) {
 				thunderEffect.StartEffect (player.transform.position, satou.transform.position);
 			}

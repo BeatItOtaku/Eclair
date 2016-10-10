@@ -7,6 +7,13 @@ public class PlayerControl : MonoBehaviour
 
 
 {
+	public float eclairSpeed =5F;
+	public GameObject muzzle;
+	private  Vector3 moveDirection;
+	public GameObject player;
+	private float time = 0;
+
+
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
@@ -46,7 +53,7 @@ public class PlayerControl : MonoBehaviour
 	private bool run;
 	private bool sprint;
 
-	private bool isMoving;
+	private bool isMoving = false;
 
 	// fly
 	public static bool fly = false;
@@ -75,6 +82,15 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	void Update(){
+
+		CharacterController controller = GetComponent<CharacterController> ();
+
+		if (controller.isGrounded) {
+			//moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+			//moveDirection = transform.TransformDirection (moveDirection);
+			moveDirection *= eclairSpeed;
+		}
+		controller.Move (moveDirection * Time.deltaTime);
 		
 		// fly
 		if(Input.GetButtonDown ("Fly"))
@@ -139,9 +155,9 @@ public class PlayerControl : MonoBehaviour
 	{
 		Rotating(horizontal, vertical);
 
-		if(isMoving)
+		if(isMoving == true)
 		{
-			if(sprinting)
+			/*if(sprinting)
 			{
 				speed = sprintSpeed;
 			}
@@ -150,18 +166,24 @@ public class PlayerControl : MonoBehaviour
 				speed = runSpeed;
 			}
 			else
-			{
+			{*/
 				speed = walkSpeed;
-			}
+			transform.position += transform.forward * Time.deltaTime * 3;
+			//}
 
 			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
 		}
-		else
+		if(horizontal == 0 && vertical == 0){
+			speed = 0f;
+			anim.SetFloat(speedFloat, 0f);
+			transform.position += transform.forward * Time.deltaTime * 0;
+		}
+		/*else
 		{
 			speed = 0f;
 			anim.SetFloat(speedFloat, 0f);
-		}
-		GetComponent<Rigidbody>().AddForce(Vector3.forward*speed);
+		}*/
+		//GetComponent<Rigidbody>().AddForce(Vector3.forward);
 	}
 
 	Vector3 Rotating(float horizontal, float vertical)

@@ -14,6 +14,6 @@ public class DebugMode : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        textBox.text = inputManager.getDebugString();
+       // textBox.text = inputManager.getDebugString();
 	}
 }
