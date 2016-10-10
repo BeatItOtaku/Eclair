@@ -11,13 +11,12 @@ public class PlayerControl : MonoBehaviour
 	public GameObject muzzle;
 	private  Vector3 moveDirection;
 	public GameObject player;
-	private float time = 0;
 
 
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
-	public float walkSpeed = 0.15f;
+	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
 	public float sprintSpeed = 2.0f;
 	public float flySpeed = 4.0f;
@@ -83,14 +82,14 @@ public class PlayerControl : MonoBehaviour
 
 	void Update(){
 
-		CharacterController controller = GetComponent<CharacterController> ();
+		/*CharacterController controller = GetComponent<CharacterController> ();
 
 		if (controller.isGrounded) {
-			//moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-			//moveDirection = transform.TransformDirection (moveDirection);
+			moveDirection = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+			moveDirection = transform.TransformDirection (moveDirection);
 			moveDirection *= eclairSpeed;
 		}
-		controller.Move (moveDirection * Time.deltaTime);
+		controller.Move (moveDirection * Time.deltaTime);*/
 		
 		// fly
 		if(Input.GetButtonDown ("Fly"))
@@ -165,25 +164,25 @@ public class PlayerControl : MonoBehaviour
 			{
 				speed = runSpeed;
 			}
-			else
-			{*/
+			else*/
+			{
 				speed = walkSpeed;
-			transform.position += transform.forward * Time.deltaTime * 3;
-			//}
+			transform.position += transform.forward * Time.deltaTime*2;
+			}
 
 			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
 		}
-		if(horizontal == 0 && vertical == 0){
+		/*if(horizontal <= 0.5f && vertical <= 0.5f){
 			speed = 0f;
 			anim.SetFloat(speedFloat, 0f);
 			transform.position += transform.forward * Time.deltaTime * 0;
-		}
-		/*else
+		}*/
+		else
 		{
 			speed = 0f;
 			anim.SetFloat(speedFloat, 0f);
-		}*/
-		//GetComponent<Rigidbody>().AddForce(Vector3.forward);
+		}
+		GetComponent<Rigidbody>().AddForce(Vector3.forward);
 	}
 
 	Vector3 Rotating(float horizontal, float vertical)
