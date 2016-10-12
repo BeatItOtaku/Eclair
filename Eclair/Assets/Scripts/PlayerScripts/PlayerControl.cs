@@ -5,15 +5,20 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour
 {
+	
 
 
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
-	public GameObject muzzle;
-	public GameObject shirt;
+	//public GameObject muzzle;
+	//public GameObject shirt;
 
-	public float angle;
+	private float angleUsing;
+	private int angleId;
+
+	public CameraController tutumin;
+
 
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
@@ -60,6 +65,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Awake()
 	{
+
 		anim = GetComponent<Animator> ();
 		cameraTransform = Camera.main.transform;
 
@@ -73,6 +79,7 @@ public class PlayerControl : MonoBehaviour
 		groundedBool = Animator.StringToHash("Grounded");
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		sprintFactor = sprintSpeed / runSpeed;
+		angleId = Animator.StringToHash ("AngleUsing");
 	}
 
 	bool IsGrounded() {
@@ -91,6 +98,10 @@ public class PlayerControl : MonoBehaviour
 		run = Input.GetButton ("Run");
 		sprint = Input.GetButton ("Sprint");
 		isMoving = Mathf.Abs(h) > 0.1 || Mathf.Abs(v) > 0.1;
+
+		angleUsing = tutumin.getCameraAngle ().y;
+		ShotManagament ();
+		SBTManagament ();
 
 
 	}
@@ -143,58 +154,67 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		CharacterController controller = GetComponent<CharacterController> ();
 		Rotating(horizontal, vertical);
 
-		if(isMoving == true)
-		{
-			if (controller.isGrounded) {
-				/*if(sprinting)
-			{
+		if (isMoving) {
+			
+			if (sprinting) {
 				speed = sprintSpeed;
-			}
-			else if (running)
-			{
+
+			} else if (running) {
 				speed = runSpeed;
-			}
-			else*/
 
-				speed = walkSpeed;
-				transform.position += transform.forward * Time.deltaTime * 2;
 			} else {
-				speed = 0f;
-			}
+				speed = walkSpeed;
 
-			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
-		}
-		/*if(horizontal <= 0.5f && vertical <= 0.5f){
+			}
+			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
+			transform.position += transform.forward * Time.deltaTime * 5;
+		} else {
 			speed = 0f;
-			anim.SetFloat(speedFloat, 0f);
+			anim.SetFloat (speedFloat, 0f);
+			transform.position += transform.forward * Time.deltaTime*0;
+		}
+
+		/*		anim.SetBool ("Grounded", true); 
+				transform.position += transform.forward * Time.deltaTime * 5;
+			} 
+
+		}
+		if(horizontal == 0 && vertical == 0){
+			anim.SetBool ("Grounded", false);
 			transform.position += transform.forward * Time.deltaTime * 0;
 		}*/
-		else
-		{
-			speed = 0f;
-			anim.SetFloat(speedFloat, 0f);
-		}
-		GetComponent<Rigidbody>().AddForce(Vector3.forward);
+		GetComponent<Rigidbody>().AddForce(Vector3.forward*speed);
 	}
 
 	void ShotManagament()
 	{
-		Vector3 shotLine = muzzle.transform.position- shirt.transform.position ;
-		float shotAngle = Vector3.Angle (CrossHairController.target_, shotLine);
-		if(shotAngle >= 30){
-			Debug.Log ("eiei");
-			anim.SetFloat ("Angle", 1f);
-	}
-		else if(shotAngle >= -15){
-			anim.SetFloat ("Angle", 0.5f);
+		if(InputManager.boltLaunch == true){
+			anim.SetBool ("Shot", true);
+			anim.SetFloat(angleId,angleUsing);
+
 		}
-		else{
-			anim.SetFloat ("Angle", 0f);
+		if(InputManager.boltLaunch == false){
+			anim.SetBool("Shot",false);
+
 		}
 	}
+
+	void SBTManagament()
+	{
+		if(InputManager.sbt == true){
+			anim.SetBool("SBT",true);
+			anim.SetFloat (angleId, angleUsing);
+		}
+		if(InputManager.sbt == false){
+			anim.SetBool ("SBTStopToEnd", true);
+			anim.SetBool ("SBT", false);
+		}
+	}
+
+
+
 	Vector3 Rotating(float horizontal, float vertical)
 	{
 		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);

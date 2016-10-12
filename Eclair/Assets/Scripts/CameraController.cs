@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 {
 	public GameObject lookAt;
 
+
 	public Transform cameraTransform;   // 操作するカメラ
 	public float mouseSensitivity = 300.0f;  // マウス感度
 	public float defaultDistance = 3.0f;
@@ -44,6 +45,14 @@ public class CameraController : MonoBehaviour
 
 	private bool isLockOn = false;
 	private GameObject lockOnTarget;
+
+	/// <summary>
+	/// カメラのアングルを取得するよ
+	/// </summary>
+	/// <returns>xが立体Y軸方向の回転(右を向くほど大きい値)、yが仰角(上を向いてる時に負の値をとる)</returns>
+	public Vector2 getCameraAngle(){
+		return new Vector2 (targetY, targetAngle);
+	}
 
 	private bool cursorIsLocked
 	{

@@ -7,6 +7,7 @@ using System.Collections;
 public class InputManager : MonoBehaviour {
 
 	public GameObject player;
+	public GameObject eto = null;
 	public ThunderEffectController thunderEffect;
 
 	public GameObject test;
@@ -15,10 +16,17 @@ public class InputManager : MonoBehaviour {
 
     public CameraController camControl;
 
+	public static bool boltLaunch = false;
+	public static float boltTime = 0;
+
+	public static bool sbt = false;
+
 	public LockOn lockOn;
 
 	private int height,width;
 	private Vector3 screenMiddle;
+
+	private Animator anim;
 
 	const float DefaultShotDistance = 10;
 
@@ -39,15 +47,28 @@ public class InputManager : MonoBehaviour {
 	/// ロックオン、ボルト射出、SBT、エトワールが終了した時に呼ばれるメソッド
 	/// </summary>
 	public void Idle(){
+		player.SetActive (true);
 		playerState_ = PlayerStates.Idle;
 		player.GetComponent<LockOn> ().endLockOn ();
         crossHair.isLockOn = false;
         camControl.StopLockOn();
         PlayerControl.fly = false;
+		anim.SetBool ("SBTStopToEnd", false);
+
 	}
+
+	/*public void setVisible(bool status){
+		GetComponent<Renderer>().enabled = status;
+		Transform[] tr_child = gameObject.GetComponentsInChildren ();
+		foreach(Transform tr in tr_child){
+			tr.GetComponent<Renderer>().enabled =status;
+		}
+	}*/
 
 	// Use this for initialization
 	void Start () {
+		anim = GetComponent<Animator> ();
+
 		height = Screen.height;
 		width = Screen.width;
 		screenMiddle = new Vector3 (width / 2, height / 2, 0);
@@ -59,8 +80,9 @@ public class InputManager : MonoBehaviour {
 		//右クリック
 		if(Input.GetMouseButtonDown(1)){
             //Debug.Log ("MouseLeft");
+			playerState_ = PlayerStates.Bolt;
             if (playerState == PlayerStates.LockOn)//ロックオン状態の時は対象切り替え
-            {
+			{
                 GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
                 onLockOnSwitched(go);
             }
@@ -83,6 +105,17 @@ public class InputManager : MonoBehaviour {
                 player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion);
             }
 		}
+		if (playerState_ == PlayerStates.Bolt) {
+			boltLaunch = true;
+			boltTime += Time.deltaTime;
+			if (boltTime >= 1.0f) {
+				playerState_ = PlayerStates.Idle;
+				boltLaunch = false;
+			}
+		} else {
+			boltLaunch = false;
+		}
+			
 
 		//Eキーでロックオン
 		//TODO: ロックオンのボタンを検討する
@@ -107,19 +140,32 @@ public class InputManager : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire1")) {
 			Debug.Log ("Fire1Pressed");
 			GameObject satou = null;
-			if(playerState_ == PlayerStates.LockOn) satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+
+			if(playerState_ == PlayerStates.LockOn)
+				satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
 			if (satou != null) {
+				sbt = true;
+				playerState_ = PlayerStates.SBT;
 				thunderEffect.StartEffect (player.transform.position, satou.transform.position);
 			}
-		} else if (Input.GetButtonUp ("Fire1")) {
-			thunderEffect.StopEffect ();
 		}
+		else if (Input.GetButtonUp ("Fire1")) {
+			thunderEffect.StopEffect ();
+			sbt = false;
+			Idle ();
+		}
+		if (playerState_ == PlayerStates.SBT) {
+			anim.SetBool ("SBTStopToEnd", false);
+		}
+
 
 		//エトワールボタン
 		if (Input.GetButtonDown ("Etoile")) {
 			if (playerState_ == PlayerStates.LockOn){
+				GameObject eto_ = (GameObject)Instantiate (eto, transform.position, transform.rotation);
 				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());
 				playerState_ = PlayerStates.Etoile;
+			
 			}
 		}
 	}

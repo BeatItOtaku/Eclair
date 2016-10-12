@@ -17,6 +17,7 @@ public class PlayerShot : MonoBehaviour {
 	public Vector3 boltRotationOffset;
 
 	public bool usePhysics = false;
+
 	public float force = 10;
 
 	private Quaternion boltQuaternionOffset;
@@ -48,13 +49,13 @@ public class PlayerShot : MonoBehaviour {
 
         Vector3 playerToTarget = target - muzzle.transform.position;
 		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget) * boltQuaternionOffset);
+		InputManager.boltTime = 0;
 		if (usePhysics) go.GetComponent<Rigidbody>().AddForce(playerToTarget * force,ForceMode.VelocityChange);
 		else go.GetComponent<LinearMovement>().Direction = playerToTarget;
-
 		go.GetComponent<BoltScript> ().Target = target;
         go.GetComponent<BoltScript>().TargetQuaternion = targetQuaternion;
 
-        lastShot = go;//直前のShotとして指定
+        lastShot = go;//直前のShotとして指定z
 	}
 			
 }

@@ -5,6 +5,7 @@ public class Etoile : MonoBehaviour {
 
 	public GameObject lightning;
 	public GameObject player;
+
 	GameObject target = null;
 
 	public InputManager im;
@@ -58,7 +59,6 @@ public class Etoile : MonoBehaviour {
 				Instantiate (lightning, transform.position, transform.rotation);
 				im.Idle ();
 				Destroy (target);
-
 			}			
 		}
 	}
