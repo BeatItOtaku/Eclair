@@ -42,8 +42,8 @@ public class Etoile : MonoBehaviour {
 	{
 		if (target != null) {
 			if (target.gameObject.GetComponent<Rigidbody> ().isKinematic == true) {
-				transform.LookAt (target.transform);
-				transform.position += transform.forward * Time.deltaTime * 50;
+				//transform.LookAt (target.transform);
+				//transform.position += transform.forward * Time.deltaTime * 50;
 			}
 		}
 	}

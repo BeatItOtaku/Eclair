@@ -86,6 +86,18 @@ public class CameraController : MonoBehaviour
 		cursorIsLocked = true;
 	}
 
+	/*void Update()
+	{
+		if (InputManager.etoile == true) {
+			lookAt = InputManager.eto_;
+		}
+		if (InputManager.startEtoile == true) {
+			if (InputManager.etoile == false) {
+				lookAt = InputManager.player_;
+			}
+		}
+	}*/
+
 	// 全ての処理が終わったあとにカメラの位置を調整するためにLateUpdateにする
 	void LateUpdate()
 	{

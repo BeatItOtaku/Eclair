@@ -7,7 +7,12 @@ using System.Collections;
 public class InputManager : MonoBehaviour {
 
 	public GameObject player;
-	public GameObject eto = null;
+	public static GameObject player_ = null;
+	public GameObject eto;
+	public static GameObject eto_= null;
+	public static bool etoile;
+	public static bool startEtoile =false;
+
 	public ThunderEffectController thunderEffect;
 
 	public GameObject test;
@@ -68,6 +73,8 @@ public class InputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
+
+		etoile = false;
 
 		height = Screen.height;
 		width = Screen.width;
@@ -162,13 +169,19 @@ public class InputManager : MonoBehaviour {
 		//エトワールボタン
 		if (Input.GetButtonDown ("Etoile")) {
 			if (playerState_ == PlayerStates.LockOn){
-				GameObject eto_ = (GameObject)Instantiate (eto, transform.position, transform.rotation);
+				Instantiate (eto, transform.position, transform.rotation);
 				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());
 				playerState_ = PlayerStates.Etoile;
-			
+
 			}
 		}
+		if (playerState_ == PlayerStates.Etoile) {
+			startEtoile = true;
+			etoile = true;
+			//gameObject.SetActive (false);
+		}
 	}
+
 
     void onLockOnSwitched(GameObject target)
     {
