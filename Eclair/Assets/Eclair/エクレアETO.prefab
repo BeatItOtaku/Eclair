@@ -337,6 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8850ac0afe7f4e1788b1f7d59d92218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1000010085085536, guid: d41e6da60e9d84a01a6cb84c976572e4, type: 2}
   lightning: {fileID: 100006, guid: ec6e75a3654374c7f9c1007063dcd249, type: 2}
   im: {fileID: 0}

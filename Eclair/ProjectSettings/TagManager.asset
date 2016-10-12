@@ -8,6 +8,7 @@ TagManager:
   - Objects
   - NoMoveBolt
   - ThunderSwitch
+  - Plane
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,8 @@ using System.Collections;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-	public GameObject lookAt;
+	public static GameObject lookAt;
+	public GameObject player;
 
 
 	public Transform cameraTransform;   // 操作するカメラ
@@ -76,6 +77,7 @@ public class CameraController : MonoBehaviour
 
 	void Start()
 	{
+		lookAt = player;
 		targetY = defaultY;
 		targetAngle = defaultAngle;
 		distance = defaultDistance;
@@ -86,17 +88,15 @@ public class CameraController : MonoBehaviour
 		cursorIsLocked = true;
 	}
 
-	/*void Update()
+	void Update()
 	{
 		if (InputManager.etoile == true) {
 			lookAt = InputManager.eto_;
 		}
-		if (InputManager.startEtoile == true) {
 			if (InputManager.etoile == false) {
-				lookAt = InputManager.player_;
+				lookAt = player;
 			}
-		}
-	}*/
+	}
 
 	// 全ての処理が終わったあとにカメラの位置を調整するためにLateUpdateにする
 	void LateUpdate()

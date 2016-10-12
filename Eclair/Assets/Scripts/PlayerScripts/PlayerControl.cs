@@ -87,6 +87,15 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	void Update(){
+		CharacterController controller = GetComponent<CharacterController> ();
+		if (controller.isGrounded) {
+			anim.SetBool ("NewGrounded", true);
+			transform.position += Vector3.down * 0;
+		} else {
+			anim.SetBool ("NewGrounded", false);
+			transform.position += Vector3.down * Time.deltaTime*10;
+		}
+
 
 		
 		// fly
@@ -212,7 +221,6 @@ public class PlayerControl : MonoBehaviour
 			anim.SetBool ("SBT", false);
 		}
 	}
-
 
 
 	Vector3 Rotating(float horizontal, float vertical)

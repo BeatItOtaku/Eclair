@@ -15,19 +15,23 @@ public class ETO : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		target = GameObject.FindGameObjectWithTag ("Bolt");
-		transform.LookAt (target.transform);
+		if (InputManager.etoile == true) {
+			target = player.GetComponent<LockOn> ().getCurrentTarget ();
+			if (target != null) {
+				transform.LookAt (target.transform);
 				transform.position += transform.forward * Time.deltaTime * 50;
-	
+			}
+		}
 	}
 	private void OnCollisionEnter (Collision collider)
 	{
 			if (collider.gameObject.tag == "Bolt") {
+			player.transform.position = target.transform.position;
 				Instantiate (lightning, transform.position, transform.rotation);
 				im.Idle ();
 				Destroy (target);
-			//InputManager.etoile = false;
-			//InputManager.player_ =(GameObject)Instantiate (player, transform.position, transform.rotation);
+			InputManager.etoile = false;
+			Destroy (gameObject);
 			}			
 
 	}
