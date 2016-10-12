@@ -10,6 +10,7 @@ public class ETO : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		gameObject.SetActive (false);
 	
 	}
 	
@@ -25,13 +26,14 @@ public class ETO : MonoBehaviour {
 	}
 	private void OnCollisionEnter (Collision collider)
 	{
-			if (collider.gameObject.tag == "Bolt") {
+			if (collider.gameObject.tag == "Bolt") {			
 			player.transform.position = target.transform.position;
 				Instantiate (lightning, transform.position, transform.rotation);
-				im.Idle ();
 				Destroy (target);
 			InputManager.etoile = false;
-			Destroy (gameObject);
+			im.Idle ();
+			gameObject.SetActive (false);
+			Destroy (InputManager.eto_);
 			}			
 
 	}
