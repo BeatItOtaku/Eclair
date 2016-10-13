@@ -5,6 +5,7 @@ public class BoltScript : MonoBehaviour {
 
     public float scaleWhenCollided = 1.0f;
     public Vector3 collidedRotateOffset;
+    public AudioClip boltLandSound;
 	
 	// Use this for initialization
 	void Start () {
@@ -47,6 +48,8 @@ public class BoltScript : MonoBehaviour {
 		catch {
 			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 		}
+
+        GetComponent<AudioSource>().PlayOneShot(boltLandSound);
 
         if (Target == null) return;
 
