@@ -4,13 +4,25 @@ using System.Collections;
 
 
 public class PlayerControl : MonoBehaviour
-
-
 {
+	
+
+
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
-	public float walkSpeed = 0.15f;
+	//public GameObject muzzle;
+	//public GameObject shirt;
+
+	private float angleUsing;
+	private int angleId;
+
+	public GameObject setti;
+
+	public CameraController tutumin;
+
+
+	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
 	public float sprintSpeed = 2.0f;
 	public float flySpeed = 4.0f;
@@ -46,7 +58,7 @@ public class PlayerControl : MonoBehaviour
 	private bool run;
 	private bool sprint;
 
-	private bool isMoving;
+	private bool isMoving = false;
 
 	// fly
 	public static bool fly = false;
@@ -55,6 +67,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Awake()
 	{
+
 		anim = GetComponent<Animator> ();
 		cameraTransform = Camera.main.transform;
 
@@ -68,13 +81,26 @@ public class PlayerControl : MonoBehaviour
 		groundedBool = Animator.StringToHash("Grounded");
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		sprintFactor = sprintSpeed / runSpeed;
+		angleId = Animator.StringToHash ("AngleUsing");
 	}
 
 	bool IsGrounded() {
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position+ new Vector3(0,0.1f,0), -Vector3.up, distToGround + 0.5f);
 	}
 
 	void Update(){
+		//CharacterController controller = GetComponent<CharacterController> ();
+		if (IsGrounded())//controller.isGrounded) {
+		{anim.SetBool ("NewGrounded", true);
+			//transform.position += Vector3.down * 0;
+
+		} else {
+			anim.SetBool ("NewGrounded", false);
+			//transform.position += Vector3.down * Time.deltaTime*10;
+		}
+
+
+
 		
 		// fly
 		if(Input.GetButtonDown ("Fly"))
@@ -85,6 +111,10 @@ public class PlayerControl : MonoBehaviour
 		run = Input.GetButton ("Run");
 		sprint = Input.GetButton ("Sprint");
 		isMoving = Mathf.Abs(h) > 0.1 || Mathf.Abs(v) > 0.1;
+
+		angleUsing = tutumin.getCameraAngle ().y;
+		ShotManagament ();
+		SBTManagament ();
 
 
 	}
@@ -108,6 +138,18 @@ public class PlayerControl : MonoBehaviour
 			JumpManagement ();
 		}
 	}
+
+	private void OnCollisionEnter (Collision collider)
+	{
+		if(collider.gameObject.tag == "Plane")
+		{ anim.SetBool ("NewGrounded", true);
+		}
+		else{
+			anim.SetBool ("NewGrounded", false);
+		}
+	}
+
+
 
 	// fly
 	void FlyManagement(float horizontal, float vertical)
@@ -139,30 +181,63 @@ public class PlayerControl : MonoBehaviour
 	{
 		Rotating(horizontal, vertical);
 
-		if(isMoving)
-		{
-			if(sprinting)
-			{
+		if (isMoving) {
+			
+			if (sprinting) {
 				speed = sprintSpeed;
-			}
-			else if (running)
-			{
-				speed = runSpeed;
-			}
-			else
-			{
-				speed = walkSpeed;
-			}
 
-			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
-		}
-		else
-		{
+			} else if (running) {
+				speed = runSpeed;
+
+			} else {
+				speed = walkSpeed;
+
+			}
+			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
+			transform.position += transform.forward * Time.deltaTime * 5;
+		} else {
 			speed = 0f;
-			anim.SetFloat(speedFloat, 0f);
+			anim.SetFloat (speedFloat, 0f);
+			transform.position += transform.forward * Time.deltaTime*0;
 		}
+
+		/*		anim.SetBool ("Grounded", true); 
+				transform.position += transform.forward * Time.deltaTime * 5;
+			} 
+
+		}
+		if(horizontal == 0 && vertical == 0){
+			anim.SetBool ("Grounded", false);
+			transform.position += transform.forward * Time.deltaTime * 0;
+		}*/
 		GetComponent<Rigidbody>().AddForce(Vector3.forward*speed);
 	}
+
+	void ShotManagament()
+	{
+		if(InputManager.boltLaunch == true){
+			anim.SetBool ("Shot", true);
+			anim.SetFloat(angleId,angleUsing);
+
+		}
+		if(InputManager.boltLaunch == false){
+			anim.SetBool("Shot",false);
+
+		}
+	}
+
+	void SBTManagament()
+	{
+		if(InputManager.sbt == true){
+			anim.SetBool("SBT",true);
+			anim.SetFloat (angleId, angleUsing);
+		}
+		if(InputManager.sbt == false){
+			anim.SetBool ("SBTStopToEnd", true);
+			anim.SetBool ("SBT", false);
+		}
+	}
+
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{

@@ -5,6 +5,7 @@ public class Etoile : MonoBehaviour {
 
 	public GameObject lightning;
 	public GameObject player;
+
 	GameObject target = null;
 
 	public InputManager im;
@@ -41,8 +42,8 @@ public class Etoile : MonoBehaviour {
 	{
 		if (target != null) {
 			if (target.gameObject.GetComponent<Rigidbody> ().isKinematic == true) {
-				transform.LookAt (target.transform);
-				transform.position += transform.forward * Time.deltaTime * 50;
+				//transform.LookAt (target.transform);
+				//transform.position += transform.forward * Time.deltaTime * 50;
 			}
 		}
 	}
@@ -58,7 +59,6 @@ public class Etoile : MonoBehaviour {
 				Instantiate (lightning, transform.position, transform.rotation);
 				im.Idle ();
 				Destroy (target);
-
 			}			
 		}
 	}

@@ -7,7 +7,9 @@ using System.Collections;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
-	public GameObject lookAt;
+	public static GameObject lookAt;
+	public GameObject player;
+
 
 	public Transform cameraTransform;   // 操作するカメラ
 	public float mouseSensitivity = 300.0f;  // マウス感度
@@ -45,6 +47,14 @@ public class CameraController : MonoBehaviour
 	private bool isLockOn = false;
 	private GameObject lockOnTarget;
 
+	/// <summary>
+	/// カメラのアングルを取得するよ
+	/// </summary>
+	/// <returns>xが立体Y軸方向の回転(右を向くほど大きい値)、yが仰角(上を向いてる時に負の値をとる)</returns>
+	public Vector2 getCameraAngle(){
+		return new Vector2 (targetY, targetAngle);
+	}
+
 	private bool cursorIsLocked
 	{
 		get
@@ -67,6 +77,7 @@ public class CameraController : MonoBehaviour
 
 	void Start()
 	{
+		lookAt = player;
 		targetY = defaultY;
 		targetAngle = defaultAngle;
 		distance = defaultDistance;
@@ -75,6 +86,17 @@ public class CameraController : MonoBehaviour
 	void Awake()
 	{
 		cursorIsLocked = true;
+	}
+
+	void Update()
+	{
+		if (InputManager.etoile == true) {	
+			lookAt = InputManager.eto_;
+			Debug.Log ("eiei");
+		}
+			if (InputManager.etoile == false) {
+				lookAt = player;
+			}
 	}
 
 	// 全ての処理が終わったあとにカメラの位置を調整するためにLateUpdateにする
