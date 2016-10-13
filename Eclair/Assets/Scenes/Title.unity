@@ -100,6 +100,7 @@ GameObject:
   - 4: {fileID: 534411950}
   - 114: {fileID: 534411949}
   - 82: {fileID: 534411948}
+  - 114: {fileID: 534411951}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -206,6 +207,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+--- !u!114 &534411951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 534411947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf61e071d181bd46ab30c22a3b653ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intro: {fileID: 8300000, guid: 8d6a48080f661b34a9263aa1b2443a07, type: 3}
+  loop: {fileID: 8300000, guid: d90c6d099aad9c145811fe23f3667569, type: 3}
+  PlayOnAwake: 1
+  defaultVolume: 1
+  volumeSmoothFactor: 0.5
 --- !u!1 &652504557
 GameObject:
   m_ObjectHideFlags: 0
