@@ -160,8 +160,9 @@ public class InputManager : MonoBehaviour {
 
 		//エトワールボタン
 		if (Input.GetButtonDown ("Etoile")) {
-			if (playerState_ == PlayerStates.LockOn){
+			if (playerState_ == PlayerStates.LockOn){				
 				eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
+				eto_.transform.position = player.transform.position;
 				etoile = true;
 				eto.SetActive (true);
 				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());

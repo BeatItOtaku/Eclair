@@ -20,13 +20,13 @@ public class ETO : MonoBehaviour {
 			target = player.GetComponent<LockOn> ().getCurrentTarget ();
 			if (target != null) {
 				transform.LookAt (target.transform);
-				transform.position += transform.forward * Time.deltaTime * 50;
+				transform.position += transform.forward * Time.deltaTime * 30;
 			}
 		}
 	}
 	private void OnCollisionEnter (Collision collider)
 	{
-			if (collider.gameObject.tag == "Bolt") {			
+		if (collider.gameObject.tag == "Bolt" ) {			
 			player.transform.position = target.transform.position;
 				Instantiate (lightning, transform.position, transform.rotation);
 				Destroy (target);
@@ -34,6 +34,12 @@ public class ETO : MonoBehaviour {
 			im.Idle ();
 			gameObject.SetActive (false);
 			}			
-
+		if(collider.gameObject.tag == "EclairKeepOut"){
+			player.transform.position = InputManager.eto_.transform.position;
+			Destroy (target);
+			InputManager.etoile = false;
+			im.Idle ();
+			gameObject.SetActive (false);
 	}
+}
 }
