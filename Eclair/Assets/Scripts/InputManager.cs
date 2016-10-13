@@ -168,18 +168,16 @@ public class InputManager : MonoBehaviour {
 		if (Input.GetButtonDown ("Etoile")) {
 			if (playerState_ == PlayerStates.LockOn){
 				eto_ =(GameObject)Instantiate (eto, transform.position, transform.rotation);
+				etoile = true;
+				eto.SetActive (true);
 				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());
 				playerState_ = PlayerStates.Etoile;
-
+				gameObject.SetActive (false);
 			}
 		}
-		if (playerState_ == PlayerStates.Etoile) {
-			etoile = true;
-			gameObject.SetActive (false);
-		}
-		if (etoile == false) {
+		/*if (etoile == false) {
 			gameObject.SetActive (true);
-		}
+		}*/
 	}
 
 
@@ -209,6 +207,5 @@ public class InputManager : MonoBehaviour {
 
         return st;
     }
-
 
 }

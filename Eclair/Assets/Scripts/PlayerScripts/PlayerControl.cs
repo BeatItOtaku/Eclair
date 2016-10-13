@@ -135,6 +135,18 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
+	private void OnCollisionEnter (Collision collider)
+	{
+		if(collider.gameObject.tag == "Plane")
+		{ anim.SetBool ("NewGrounded", true);
+		}
+		else{
+			anim.SetBool ("NewGrounded", false);
+		}
+	}
+
+
+
 	// fly
 	void FlyManagement(float horizontal, float vertical)
 	{
