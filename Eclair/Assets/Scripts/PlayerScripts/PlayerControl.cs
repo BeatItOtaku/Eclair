@@ -17,6 +17,8 @@ public class PlayerControl : MonoBehaviour
 	private float angleUsing;
 	private int angleId;
 
+	public GameObject setti;
+
 	public CameraController tutumin;
 
 
@@ -83,18 +85,20 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	bool IsGrounded() {
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position+ new Vector3(0,0.1f,0), -Vector3.up, distToGround + 0.5f);
 	}
 
 	void Update(){
-		CharacterController controller = GetComponent<CharacterController> ();
-		if (controller.isGrounded) {
-			anim.SetBool ("NewGrounded", true);
-			transform.position += Vector3.down * 0;
+		//CharacterController controller = GetComponent<CharacterController> ();
+		if (IsGrounded())//controller.isGrounded) {
+		{anim.SetBool ("NewGrounded", true);
+			//transform.position += Vector3.down * 0;
+
 		} else {
 			anim.SetBool ("NewGrounded", false);
-			transform.position += Vector3.down * Time.deltaTime*10;
+			//transform.position += Vector3.down * Time.deltaTime*10;
 		}
+
 
 
 		

@@ -90,8 +90,9 @@ public class CameraController : MonoBehaviour
 
 	void Update()
 	{
-		if (InputManager.etoile == true) {
+		if (InputManager.etoile == true) {	
 			lookAt = InputManager.eto_;
+			Debug.Log ("eiei");
 		}
 			if (InputManager.etoile == false) {
 				lookAt = player;

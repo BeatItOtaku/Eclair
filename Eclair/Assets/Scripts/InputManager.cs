@@ -60,14 +60,6 @@ public class InputManager : MonoBehaviour {
 
 	}
 
-	/*public void setVisible(bool status){
-		GetComponent<Renderer>().enabled = status;
-		Transform[] tr_child = gameObject.GetComponentsInChildren ();
-		foreach(Transform tr in tr_child){
-			tr.GetComponent<Renderer>().enabled =status;
-		}
-	}*/
-
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -85,7 +77,7 @@ public class InputManager : MonoBehaviour {
 		//右クリック
 		if(Input.GetMouseButtonDown(1)){
             //Debug.Log ("MouseLeft");
-			playerState_ = PlayerStates.Bolt;
+
             if (playerState == PlayerStates.LockOn)//ロックオン状態の時は対象切り替え
 			{
                 GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
@@ -93,6 +85,7 @@ public class InputManager : MonoBehaviour {
             }
             else//ロックオン状態じゃないときはボルト射出
             {
+				playerState_ = PlayerStates.Bolt;
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
@@ -109,6 +102,7 @@ public class InputManager : MonoBehaviour {
                 }
                 player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion);
             }
+
 		}
 		if (playerState_ == PlayerStates.Bolt) {
 			boltLaunch = true;
@@ -167,7 +161,7 @@ public class InputManager : MonoBehaviour {
 		//エトワールボタン
 		if (Input.GetButtonDown ("Etoile")) {
 			if (playerState_ == PlayerStates.LockOn){
-				eto_ =(GameObject)Instantiate (eto, transform.position, transform.rotation);
+				eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
 				etoile = true;
 				eto.SetActive (true);
 				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());
@@ -175,9 +169,6 @@ public class InputManager : MonoBehaviour {
 				gameObject.SetActive (false);
 			}
 		}
-		/*if (etoile == false) {
-			gameObject.SetActive (true);
-		}*/
 	}
 
 

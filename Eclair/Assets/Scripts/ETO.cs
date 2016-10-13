@@ -33,7 +33,6 @@ public class ETO : MonoBehaviour {
 			InputManager.etoile = false;
 			im.Idle ();
 			gameObject.SetActive (false);
-			Destroy (InputManager.eto_);
 			}			
 
 	}
