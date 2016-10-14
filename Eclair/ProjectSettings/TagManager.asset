@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Bolt
   - Objects
-  - NoMoveBolt
   - ThunderSwitch
-  - Plane
+  - EclairKeepOut
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -22,8 +22,8 @@ TagManager:
   - Bolt
   - Objects
   - NoMoveBolt
-  - 
-  - 
+  - EclairKeepOut
+  - Boss
   - 
   - 
   - 
