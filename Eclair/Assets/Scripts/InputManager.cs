@@ -13,6 +13,8 @@ public class InputManager : MonoBehaviour {
 
 	public ThunderEffectController thunderEffect;
 
+	public ETO EtoScript;
+
 	public GameObject test;
 
 	public CrossHairController crossHair;
@@ -62,10 +64,13 @@ public class InputManager : MonoBehaviour {
 	/// </summary>
 	public void Idle(){
 		player.SetActive (true);
+		Debug.Log (playerState_.ToString ());
         if (playerState_ == PlayerStates.Etoile)
         {
             audioSource.Stop();
             audioSource.PlayOneShot(etoileEndSound);
+			CameraController.lookAt = camControl.player;
+			eto.SetActive (false);
         }
         playerState_ = PlayerStates.Idle;
 		player.GetComponent<LockOn> ().endLockOn ();
@@ -78,7 +83,8 @@ public class InputManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		anim = GetComponent<Animator> ();
+		Application.LoadLevelAdditive (2);
+		anim = player.GetComponent<Animator> ();
         //audioSource = GetComponent<AudioSource>();
 
 		etoile = false;
@@ -136,7 +142,7 @@ public class InputManager : MonoBehaviour {
 
 		//Eキーでロックオン
 		//TODO: ロックオンのボタンを検討する
-		if(Input.GetKeyDown(KeyCode.E)){
+		if(Input.GetKeyDown(KeyCode.LeftShift)){
 			GameObject go;
 			if (playerState_ == PlayerStates.Idle) {
 				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
@@ -147,10 +153,10 @@ public class InputManager : MonoBehaviour {
                 }
 			}
 		}
-        else if (Input.GetKeyUp(KeyCode.E))//Eキー離したらロックオンやめる
+		else if (Input.GetKeyUp(KeyCode.LeftShift))//Eキー離したらロックオンやめる
         {
             player.GetComponent<LockOn>().endLockOn();
-            Idle();
+			if(playerState_ == PlayerStates.LockOn) Idle();
         }
 
 		//左クリック
@@ -185,9 +191,11 @@ public class InputManager : MonoBehaviour {
 				eto_.transform.position = player.transform.position;
 				etoile = true;
 				eto.SetActive (true);
-				player.GetComponent<Etoile> ().startEtoile (lockOn.getCurrentTarget());
+				GameObject lockonTarget = lockOn.getCurrentTarget ();
+				//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
+				EtoScript.target = lockonTarget;
 				playerState_ = PlayerStates.Etoile;
-				gameObject.SetActive (false);
+				player.SetActive (false);
 			}
 		}
 	}
@@ -216,6 +224,8 @@ public class InputManager : MonoBehaviour {
         st += "PlayerState : " + playerState_.ToString() + "\n";
         st += "CameraY : " + camControl.cameraY + "\n";
         st += "CameraAngle : " + camControl.cameraAngle + "\n";
+
+		Debug.Log (playerState_.ToString ());
 
 
         return st;

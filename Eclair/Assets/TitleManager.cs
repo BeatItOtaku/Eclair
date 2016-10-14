@@ -15,7 +15,12 @@ public class TitleManager : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             GetComponent<AudioSource>().PlayOneShot(select);
+			NextLevel ();
             //TODO: シーン切り替え動作
         }
+	}
+
+	public void NextLevel(){
+		Application.LoadLevelAsync (1);
 	}
 }

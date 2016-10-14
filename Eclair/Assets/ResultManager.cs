@@ -97,6 +97,7 @@ public class ResultManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		CameraController.cursorIsLocked = false;
 	}
 	
 	// Update is called once per frame
@@ -168,5 +169,9 @@ public class ResultManager : MonoBehaviour {
 			return AnimationQueue_Rank.Ranks.B;
 		else 
 			return AnimationQueue_Rank.Ranks.C;
+	}
+
+	public void GoToTitle(){
+		Application.LoadLevel (0);
 	}
 }

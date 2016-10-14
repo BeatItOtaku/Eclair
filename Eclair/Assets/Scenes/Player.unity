@@ -136,6 +136,60 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b7af15c74effc450198fadd3a9ed97ca, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &100080968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 100080970}
+  - 114: {fileID: 100080969}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &100080969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100080968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b37b7bb2937479e91a35eaaf379208, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1088387005}
+  eto: {fileID: 795536970}
+  thunderEffect: {fileID: 376930922}
+  EtoScript: {fileID: 795536971}
+  test: {fileID: 0}
+  crossHair: {fileID: 1779815845}
+  camControl: {fileID: 446296779}
+  audioSource: {fileID: 446296780}
+  lockOn: {fileID: 1088387009}
+  boltLaunchSound: {fileID: 8300000, guid: afe45737abd92e54e81f2c4c132e1b4c, type: 3}
+  SBTSound: {fileID: 8300000, guid: 5cf221a22b26aa04795940fd2209b157, type: 3}
+  lockOnSound: {fileID: 8300000, guid: 6aa89c80313a98543a5da717b5081689, type: 3}
+  etoileSound: {fileID: 8300000, guid: f6f82f460603c1349879c683862ef991, type: 3}
+  etoileEndSound: {fileID: 8300000, guid: aabd5ac4b0946d74497d754c6e0ebd18, type: 3}
+--- !u!4 &100080970
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100080968}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -57.32962, y: 3.689499, z: -19.569687}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
 --- !u!1001 &213977210
 Prefab:
   m_ObjectHideFlags: 0
@@ -547,10 +601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 0.95
-  intensity: 0.75
-  blurSize: 1
-  blurIterations: 1
+  threshold: 0.9
+  intensity: 0.65
+  blurSize: 0.25
+  blurIterations: 4
   blurType: 0
   fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!114 &446296779
@@ -698,7 +752,17 @@ Prefab:
         type: 2}
       propertyPath: im
       value: 
-      objectReference: {fileID: 1088387011}
+      objectReference: {fileID: 100080969}
+    - target: {fileID: 135000010194689482, guid: 5efadb9870b1a44c28ca73c63e9d90ae,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 135000010194689482, guid: 5efadb9870b1a44c28ca73c63e9d90ae,
+        type: 2}
+      propertyPath: m_Center.z
+      value: -0.09
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5efadb9870b1a44c28ca73c63e9d90ae, type: 2}
   m_IsPrefabParent: 0
@@ -845,7 +909,13 @@ Prefab:
       propertyPath: camControl
       value: 
       objectReference: {fileID: 446296779}
-    m_RemovedComponents: []
+    - target: {fileID: 114000013226342134, guid: 058f5889209e04c4b92707084a5c4dfd,
+        type: 2}
+      propertyPath: maxDistance
+      value: 36
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &504206069
@@ -2662,12 +2732,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a17b15aef919a544d94eff95ef5c6bbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputManager: {fileID: 1088387011}
+  inputManager: {fileID: 100080969}
 --- !u!1 &795536970 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000010098327368, guid: 5efadb9870b1a44c28ca73c63e9d90ae,
     type: 2}
   m_PrefabInternal: {fileID: 449928620}
+--- !u!114 &795536971 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000011198720254, guid: 5efadb9870b1a44c28ca73c63e9d90ae,
+    type: 2}
+  m_PrefabInternal: {fileID: 449928620}
+  m_Script: {fileID: 11500000, guid: d8850ac0afe7f4e1788b1f7d59d92218, type: 3}
 --- !u!1001 &823314168
 Prefab:
   m_ObjectHideFlags: 0
@@ -2832,12 +2908,12 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011476000270, guid: 058f5889209e04c4b92707084a5c4dfd,
     type: 2}
   m_PrefabInternal: {fileID: 495190804}
---- !u!114 &1088387011 stripped
+--- !u!114 &1088387009 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd,
+  m_PrefabParentObject: {fileID: 114000013226342134, guid: 058f5889209e04c4b92707084a5c4dfd,
     type: 2}
   m_PrefabInternal: {fileID: 495190804}
-  m_Script: {fileID: 11500000, guid: 35b37b7bb2937479e91a35eaaf379208, type: 3}
+  m_Script: {fileID: 11500000, guid: 4198c4d8ac9f64bb1b450e3dd63812aa, type: 3}
 --- !u!1 &1416817423 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000011737277752, guid: 058f5889209e04c4b92707084a5c4dfd,

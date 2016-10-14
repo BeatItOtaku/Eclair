@@ -55,7 +55,7 @@ public class CameraController : MonoBehaviour
 		return new Vector2 (targetY, targetAngle);
 	}
 
-	private bool cursorIsLocked
+	public static bool cursorIsLocked
 	{
 		get
 		{
@@ -92,7 +92,7 @@ public class CameraController : MonoBehaviour
 	{
 		if (InputManager.etoile == true) {	
 			lookAt = InputManager.eto_;
-			Debug.Log ("eiei");
+			//Debug.Log ("eiei");
 		}
 			if (InputManager.etoile == false) {
 				lookAt = player;

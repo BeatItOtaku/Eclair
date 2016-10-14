@@ -275,6 +275,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1251208036}
     m_Modifications:
+    - target: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224000010604326022, guid: 56f24ca9608b0bc41920212ec5b4636a,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -369,6 +374,31 @@ Prefab:
         type: 2}
       propertyPath: m_Color.a
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1251208037}
+    - target: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: GoToTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014155939184, guid: 56f24ca9608b0bc41920212ec5b4636a,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 56f24ca9608b0bc41920212ec5b4636a, type: 2}
@@ -1932,7 +1962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &1272512290
 Light:
   m_ObjectHideFlags: 0
