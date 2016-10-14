@@ -1,26 +1,48 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TitleManager : MonoBehaviour {
 
     public AudioClip select;
+    public Text loadingText;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetButtonDown("Fire1"))
+    public MapLoader scene;
+
+    private bool isLoading = false;
+
+    // Use this for initialization
+    void Start () {
+        CameraController.cursorIsLocked = false;
+        scene = MapLoader.Instance;
+        //scene.startMapLoad();
+    }
+
+    // Update is called once per frame
+    void Update () {
+        if (Input.GetMouseButtonDown(0))
         {
             GetComponent<AudioSource>().PlayOneShot(select);
 			NextLevel ();
             //TODO: シーン切り替え動作
         }
-	}
+        if (isLoading && loadingText != null)
+        {
+            //loadingText.text = "Now Loading... " + (scene.MapAsync.progress * 100).ToString("F0") + "%";
+        }
+    }
 
 	public void NextLevel(){
-		Application.LoadLevelAsync (1);
+        //SceneManager.LoadSceneAsync (1);
+        LoadScene();
 	}
+
+    private void LoadScene()
+    {
+        scene.startMapLoad();
+        loadingText.enabled = true;
+        isLoading = true;
+        scene.startGame();
+    }
 }

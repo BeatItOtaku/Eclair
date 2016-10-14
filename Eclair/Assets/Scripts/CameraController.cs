@@ -103,7 +103,7 @@ public class CameraController : MonoBehaviour
 	void LateUpdate()
 	{
 		//カーソル関連
-		if (Input.GetButtonDown("Fire1"))
+		if (Input.GetButtonUp("Fire1"))
 		{
 			cursorIsLocked = true;
 		}

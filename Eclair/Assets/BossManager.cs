@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    AsyncOperation async;
+
+    // Use this for initialization
+    void Start () {
+        async = SceneManager.LoadSceneAsync(3,LoadSceneMode.Additive);
+        async.allowSceneActivation = false;    // シーン遷移をしない
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -14,7 +18,6 @@ public class BossManager : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collider){
-		
-		Application.LoadLevel(3);
-	}
+        async.allowSceneActivation = true;
+    }
 }

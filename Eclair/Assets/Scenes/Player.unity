@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5443399, g: 0.507487, b: 0.52359366, a: 1}
+  m_IndirectSpecularColor: {r: 0.54476595, g: 0.50749, b: 0.5238219, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -912,7 +912,7 @@ Prefab:
     - target: {fileID: 114000013226342134, guid: 058f5889209e04c4b92707084a5c4dfd,
         type: 2}
       propertyPath: maxDistance
-      value: 36
+      value: 42
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
@@ -2663,7 +2663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &556351550
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3242,6 +3242,11 @@ Prefab:
       propertyPath: smoothFactor
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010737844746, guid: 28d8841057b824d9ca9f9acadc6a18a9,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28d8841057b824d9ca9f9acadc6a18a9, type: 2}
   m_IsPrefabParent: 0
@@ -3543,6 +3548,21 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011243394194, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a, type: 2}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012624373660, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012646511132, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a,
+        type: 2}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000013961937932, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a,
+        type: 2}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

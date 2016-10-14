@@ -11,6 +11,8 @@ public class LockOn : MonoBehaviour {
 	List<KeyValuePair<float, GameObject>> targetList = new List<KeyValuePair<float, GameObject>>();
 	public GameObject player;
 
+    public string boltHeadName = "pCylinder2";
+
 	private int cursor = 0;
 
 	public float maxDistance = 24;//24メートル以上離れてる対象にはロックオンしない
@@ -35,10 +37,21 @@ public class LockOn : MonoBehaviour {
 	public GameObject startLockOn(){
 		foreach (GameObject go in GameObject.FindGameObjectsWithTag ("Bolt")) {
 			if (go != null) {
-				float distance = Vector3.Distance (player.transform.position, go.transform.position);
-				if (distance > maxDistance)
-					continue;//遠すぎたらtargetListに追加することなくforの1ループをおわる
-				targetList.Add (new KeyValuePair<float, GameObject> (getAnglularDistance (go), go));
+                if (go.GetComponent<BoltScript>().isLanded)
+                {
+                    //float distance = Vector3.Distance (player.transform.position, go.transform.position);
+                    /*if (distance > maxDistance)
+                        continue;//遠すぎたらtargetListに追加することなくforの1ループをおわる*/
+                    Ray toTargetRay = new Ray(Camera.main.transform.position, go.transform.Find(boltHeadName).position - Camera.main.transform.position);
+                    RaycastHit hit;
+                    if (Physics.Raycast(toTargetRay, out hit, maxDistance))
+                    {
+                        if (hit.collider.tag == "Bolt")
+                            targetList.Add(new KeyValuePair<float, GameObject>(getAnglularDistance(go), go));
+                        //else
+                        //targetList.Add(new KeyValuePair<float, GameObject>(getAnglularDistance(hit.collider.gameObject), hit.collider.gameObject));//Instantiate(//Debug.Log(hit.collider.transform.position);
+                    }
+                }
 			}
 		}
 		targetList.Sort (CompareKeyValuePair);

@@ -83,7 +83,7 @@ public class InputManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Application.LoadLevelAdditive (2);
+        //mySceneManager.MapAsync.allowSceneActivation = true;
 		anim = player.GetComponent<Animator> ();
         //audioSource = GetComponent<AudioSource>();
 
@@ -131,7 +131,7 @@ public class InputManager : MonoBehaviour {
 		if (playerState_ == PlayerStates.Bolt) {
 			boltLaunch = true;
 			boltTime += Time.deltaTime;
-			if (boltTime >= 1.0f) {
+			if (boltTime >= 0.3f) {
 				playerState_ = PlayerStates.Idle;
 				boltLaunch = false;
 			}

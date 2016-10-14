@@ -6,6 +6,8 @@ public class BoltScript : MonoBehaviour {
     public float scaleWhenCollided = 1.0f;
     public Vector3 collidedRotateOffset;
     public AudioClip boltLandSound;
+
+    public bool isLanded = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -50,6 +52,7 @@ public class BoltScript : MonoBehaviour {
 		}
 
         GetComponent<AudioSource>().PlayOneShot(boltLandSound);
+        isLanded = true;
 
         if (Target == null) return;
 
