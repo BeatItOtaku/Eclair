@@ -17,8 +17,6 @@ public class PlayerControl : MonoBehaviour
 	private float angleUsing;
 	private int angleId;
 
-	public GameObject setti;
-
 	public CameraController tutumin;
 
 
