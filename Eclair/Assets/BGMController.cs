@@ -10,23 +10,26 @@ public class BGMController : MonoBehaviour
     public bool PlayOnAwake = true;
 
     public float defaultVolume = 1;
+    public float volumeSmoothFactor = 0.5f;
 
     private float volume = 1;
     public float Volume
     {
         get
         {
-            return volume;
+            return targetVolume;
         }
         set
         {
-            volume = value;
-            foreach (AudioSource source in audioSource)
+            targetVolume = value;
+            /*foreach (AudioSource source in audioSource)
             {
                 source.volume = volume;
-            }
+            }*/
         }
     }
+
+    private float targetVolume = 1;
 
     AudioSource[] audioSource = new AudioSource[2];
 
@@ -54,6 +57,8 @@ public class BGMController : MonoBehaviour
         }
 
         Volume = defaultVolume;
+        volume = defaultVolume;
+        setVolume_raw(volume);
 
         if (PlayOnAwake) Play();
     }
@@ -61,7 +66,19 @@ public class BGMController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(targetVolume != volume)
+        {
+            volume = Mathf.Lerp(volume, targetVolume, volumeSmoothFactor);
+            setVolume_raw(volume);
+        }
+    }
 
+    private void setVolume_raw(float volume)
+    {
+        foreach (AudioSource source in audioSource)
+        {
+            source.volume = volume;
+        }
     }
 
     public void Play(AudioClip intro, AudioClip loop, float volume)

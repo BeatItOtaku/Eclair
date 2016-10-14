@@ -19,12 +19,21 @@ public class InputManager : MonoBehaviour {
 
     public CameraController camControl;
 
-	public static bool boltLaunch = false;
+    public AudioSource audioSource;
+
+
+    public static bool boltLaunch = false;
 	public static float boltTime = 0;
 
 	public static bool sbt = false;
 
 	public LockOn lockOn;
+
+    public AudioClip boltLaunchSound;
+    public AudioClip SBTSound;
+    public AudioClip lockOnSound;
+    public AudioClip etoileSound;
+    public AudioClip etoileEndSound;
 
 	private int height,width;
 	private Vector3 screenMiddle;
@@ -46,12 +55,19 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
+
+
 	/// <summary>
 	/// ロックオン、ボルト射出、SBT、エトワールが終了した時に呼ばれるメソッド
 	/// </summary>
 	public void Idle(){
 		player.SetActive (true);
-		playerState_ = PlayerStates.Idle;
+        if (playerState_ == PlayerStates.Etoile)
+        {
+            audioSource.Stop();
+            audioSource.PlayOneShot(etoileEndSound);
+        }
+        playerState_ = PlayerStates.Idle;
 		player.GetComponent<LockOn> ().endLockOn ();
         crossHair.isLockOn = false;
         camControl.StopLockOn();
@@ -63,6 +79,7 @@ public class InputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
+        //audioSource = GetComponent<AudioSource>();
 
 		etoile = false;
 
@@ -86,6 +103,7 @@ public class InputManager : MonoBehaviour {
             else//ロックオン状態じゃないときはボルト射出
             {
 				playerState_ = PlayerStates.Bolt;
+                audioSource.PlayOneShot(boltLaunchSound);
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
@@ -146,6 +164,7 @@ public class InputManager : MonoBehaviour {
 				sbt = true;
 				playerState_ = PlayerStates.SBT;
 				thunderEffect.StartEffect (player.transform.position, satou.transform.position);
+                audioSource.PlayOneShot(SBTSound);
 			}
 		}
 		else if (Input.GetButtonUp ("Fire1")) {
@@ -161,6 +180,7 @@ public class InputManager : MonoBehaviour {
 		//エトワールボタン
 		if (Input.GetButtonDown ("Etoile")) {
 			if (playerState_ == PlayerStates.LockOn){
+                audioSource.PlayOneShot(etoileSound);
 				eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
 				etoile = true;
 				eto.SetActive (true);
@@ -175,10 +195,11 @@ public class InputManager : MonoBehaviour {
     void onLockOnSwitched(GameObject target)
     {
 		if(target != null){
-        crossHair.target = target.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
-        crossHair.isLockOn = true;
-        camControl.StartLockOn(target);
-    }
+            crossHair.target = target.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
+            crossHair.isLockOn = true;
+            audioSource.PlayOneShot(lockOnSound);
+            camControl.StartLockOn(target);
+        }
 	}
 
 	static float getAngleWithSign(Vector3 v1, Vector3 v2){
