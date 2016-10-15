@@ -40,9 +40,9 @@ public class PlayerShot : MonoBehaviour {
     }
 
     //InputManagerから呼び出す
-	public void LaunchBolt(Vector3 target, Quaternion targetQuaternion){
+	public bool LaunchBolt(Vector3 target, Quaternion targetQuaternion){
 
-        if (shotInterval < shotIntervalMin) return;//前回のLaunchBoltからあんまり時間経ってない時は何もしない
+        if (lastShot != null && shotInterval < shotIntervalMin) return false;//前回のLaunchBoltからあんまり時間経ってない時は何もしない
         else shotInterval = 0;
 
         if (lastShot != null) Destroy(lastShot);//直前のShotを消す(ShotPauseを使わない仕組みに変わったからこういうことができる)
@@ -57,6 +57,7 @@ public class PlayerShot : MonoBehaviour {
         go.GetComponent<BoltScript>().TargetQuaternion = targetQuaternion;
 
         lastShot = go;//直前のShotとして指定z
+        return true;
 	}
 			
 }

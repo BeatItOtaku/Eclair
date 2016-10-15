@@ -919,6 +919,11 @@ Prefab:
       propertyPath: force
       value: 48
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010846874504, guid: 058f5889209e04c4b92707084a5c4dfd,
+        type: 2}
+      propertyPath: shotIntervalMin
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
