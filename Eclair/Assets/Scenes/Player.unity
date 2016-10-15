@@ -601,9 +601,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 0.9
-  intensity: 0.65
-  blurSize: 0.25
+  threshold: 0.74
+  intensity: 0.886
+  blurSize: 1.74
   blurIterations: 4
   blurType: 0
   fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
@@ -912,7 +912,12 @@ Prefab:
     - target: {fileID: 114000013226342134, guid: 058f5889209e04c4b92707084a5c4dfd,
         type: 2}
       propertyPath: maxDistance
-      value: 42
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010846874504, guid: 058f5889209e04c4b92707084a5c4dfd,
+        type: 2}
+      propertyPath: force
+      value: 48
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
