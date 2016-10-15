@@ -948,7 +948,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Now Loading...
+  m_Text: "Now Loading...\n(40\u79D2\u307B\u3069\u304B\u304B\u308A\u307E\u3059)"
 --- !u!222 &1931794436
 CanvasRenderer:
   m_ObjectHideFlags: 0
