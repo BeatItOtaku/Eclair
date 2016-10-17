@@ -98,7 +98,7 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 
 		//右クリック
-		if(Input.GetMouseButtonDown(1)){
+		if(Input.GetButtonDown("LaunchBolt")){
             //Debug.Log ("MouseLeft");
 
             if (playerState == PlayerStates.LockOn)//ロックオン状態の時は対象切り替え
@@ -108,8 +108,6 @@ public class InputManager : MonoBehaviour {
             }
             else//ロックオン状態じゃないときはボルト射出
             {
-				playerState_ = PlayerStates.Bolt;
-                audioSource.PlayOneShot(boltLaunchSound);
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
@@ -124,7 +122,11 @@ public class InputManager : MonoBehaviour {
                 {
                     hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
                 }
-                player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion);
+                if(player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion))
+                {
+                    audioSource.PlayOneShot(boltLaunchSound);
+                    playerState_ = PlayerStates.Bolt;
+                }
             }
 
 		}
@@ -140,9 +142,8 @@ public class InputManager : MonoBehaviour {
 		}
 			
 
-		//Eキーでロックオン
-		//TODO: ロックオンのボタンを検討する
-		if(Input.GetKeyDown(KeyCode.LeftShift)){
+		//Shiftキーでロックオン
+		if(Input.GetButtonDown("LockOn")){
 			GameObject go;
 			if (playerState_ == PlayerStates.Idle) {
 				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
@@ -153,15 +154,15 @@ public class InputManager : MonoBehaviour {
                 }
 			}
 		}
-		else if (Input.GetKeyUp(KeyCode.LeftShift))//Eキー離したらロックオンやめる
+		else if (Input.GetButtonUp("LockOn"))//Eキー離したらロックオンやめる
         {
             player.GetComponent<LockOn>().endLockOn();
 			if(playerState_ == PlayerStates.LockOn) Idle();
         }
 
 		//左クリック
-		if (Input.GetButtonDown ("Fire1")) {
-			Debug.Log ("Fire1Pressed");
+		if (Input.GetButtonDown ("Thunder")) {
+			//Debug.Log ("Fire1Pressed");
 			GameObject satou = null;
 
 			if(playerState_ == PlayerStates.LockOn)
@@ -173,7 +174,7 @@ public class InputManager : MonoBehaviour {
                 audioSource.PlayOneShot(SBTSound);
 			}
 		}
-		else if (Input.GetButtonUp ("Fire1")) {
+		else if (Input.GetButtonUp ("Thunder")) {
 			thunderEffect.StopEffect ();
 			sbt = false;
 			Idle ();

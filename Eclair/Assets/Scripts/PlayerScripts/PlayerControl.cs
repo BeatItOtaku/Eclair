@@ -101,13 +101,13 @@ public class PlayerControl : MonoBehaviour
 
 		
 		// fly
-		if(Input.GetButtonDown ("Fly"))
+		/*if(Input.GetButtonDown ("Fly"))
 			fly = !fly;
-		aim = Input.GetButton("Aim");
+		aim = Input.GetButton("Aim");*/
 		h = Input.GetAxis("Horizontal");
 		v = Input.GetAxis("Vertical");
-		run = Input.GetButton ("Run");
-		sprint = Input.GetButton ("Sprint");
+		//run = Input.GetButton ("Run");
+		//sprint = Input.GetButton ("Sprint");
 		isMoving = Mathf.Abs(h) > 0.1 || Mathf.Abs(v) > 0.1;
 
 		angleUsing = tutumin.getCameraAngle ().y;
@@ -164,7 +164,7 @@ public class PlayerControl : MonoBehaviour
 			if(timeToNextJump > 0)
 				timeToNextJump -= Time.deltaTime;
 		}
-		if (Input.GetButtonDown ("Jump"))
+		/*if (Input.GetButtonDown ("Jump"))
 		{
 			anim.SetBool(jumpBool, true);
 			if(speed > 0 && timeToNextJump <= 0 && !aim)
@@ -172,7 +172,7 @@ public class PlayerControl : MonoBehaviour
 				GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
 				timeToNextJump = jumpCooldown;
 			}
-		}
+		}*/
 	}
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
