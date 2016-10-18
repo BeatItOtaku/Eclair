@@ -9,6 +9,8 @@ TagManager:
   - ThunderSwitch
   - EclairKeepOut
   - Boss
+  - Plane
+  - BossTail
   layers:
   - Default
   - TransparentFX
