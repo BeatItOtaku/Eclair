@@ -8,7 +8,7 @@ public class BossManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        async = SceneManager.LoadSceneAsync(3,LoadSceneMode.Additive);
+        async = SceneManager.LoadSceneAsync("Result",LoadSceneMode.Additive);
         async.allowSceneActivation = false;    // シーン遷移をしない
     }
 	

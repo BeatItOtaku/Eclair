@@ -41,7 +41,7 @@ public class TitleManager : MonoBehaviour {
     private void LoadScene()
     {
 		SceneManager.LoadSceneAsync ("Loading", LoadSceneMode.Additive);
-        //scene.startMapLoad();
+        scene.startMapLoad();
         loadingText.enabled = true;
         isLoading = true;
         scene.startGame();
