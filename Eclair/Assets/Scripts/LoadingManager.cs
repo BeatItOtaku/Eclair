@@ -10,12 +10,16 @@ public class LoadingManager : MonoBehaviour {
 
 	//かなり頭悪いコード書くけど許して…！
 	KeyValuePair<float,string>[] timeline = {
-		new KeyValuePair<float,string>(1.0f,"WhatIsEclair"),
+        new KeyValuePair<float,string>(0.1f,"Wall"),
+        new KeyValuePair<float,string>(0,"TitleBack"),
+        new KeyValuePair<float,string>(1.0f,"WhatIsEclair"),
 		new KeyValuePair<float,string>(0.5f,"Eclair"),
 		new KeyValuePair<float,string>(0.1f,"EclairCanDo"),
 		new KeyValuePair<float,string>(20,"Eclair"),
 		new KeyValuePair<float,string>(0.1f,"EclairCanDo"),
-		new KeyValuePair<float,string>(0.5f,"KeyboardAndMouse"),
+		new KeyValuePair<float,string>(0.1f,"WhatIsEclair"),
+		new KeyValuePair<float,string>(0.0f,"HowToControl"),
+		new KeyValuePair<float,string>(0.2f,"KeyboardAndMouse"),
 		new KeyValuePair<float,string>(0.1f,"GamePad"),
 	};
 
