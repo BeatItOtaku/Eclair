@@ -40,7 +40,8 @@ public class TitleManager : MonoBehaviour {
 
     private void LoadScene()
     {
-        scene.startMapLoad();
+		SceneManager.LoadSceneAsync ("Loading", LoadSceneMode.Additive);
+        //scene.startMapLoad();
         loadingText.enabled = true;
         isLoading = true;
         scene.startGame();
