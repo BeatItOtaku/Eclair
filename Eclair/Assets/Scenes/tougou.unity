@@ -129,8 +129,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.087291144, z: 0.20000002}
+  m_Center: {x: 0, y: -0.006354429, z: 0.0000000019360407}
 --- !u!1 &89164109 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000010183584654, guid: c751c258ee500434aaba629fe097e791,
@@ -146,8 +146,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3, z: 0.56}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.1, y: 0.06351971, z: 0.1011998}
+  m_Center: {x: 0, y: -0.072733246, z: 0.15644036}
 --- !u!114 &89164111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +165,55 @@ MonoBehaviour:
   rightFoot: {fileID: 11570964}
   bossMuzzle: {fileID: 1547232880}
   bossBarret: {fileID: 0}
+--- !u!65 &89164112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89164109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.092911296, z: 0.26929423}
+  m_Center: {x: 0, y: 0.11645564, z: 0.087860815}
+--- !u!65 &89164113
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89164109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.14112358, z: 0.123148374}
+  m_Center: {x: 0.1, y: -0.0051222085, z: 0.0075250627}
+--- !u!65 &89164114
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89164109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.14112358, z: 0.123148374}
+  m_Center: {x: -0.1, y: -0.0051222085, z: 0.0075250627}
+--- !u!136 &89164115
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89164109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0687999
+  m_Height: 0.55259854
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.02, z: -0.01}
 --- !u!1001 &213977210
 Prefab:
   m_ObjectHideFlags: 0
