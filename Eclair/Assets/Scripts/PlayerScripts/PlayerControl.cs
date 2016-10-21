@@ -19,6 +19,9 @@ public class PlayerControl : MonoBehaviour
 
 	public CameraController tutumin;
 
+	public HPGaugeController hpGaugeController;
+	private int currentHP;
+
 
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
@@ -236,6 +239,16 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
+	void HPManagament(int hp)
+	{
+		if (BossFootCollider.bossFootAttack == true) { 
+			hp = 10;
+		}
+		if (BossBarret.bossShotAttack == true) {
+			hp = 5;
+		}
+		currentHP -= hp;
+	}
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{

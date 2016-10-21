@@ -6,6 +6,8 @@ public class BossBarret : MonoBehaviour {
 	public GameObject player;
 	public GameObject burn;
 
+	public static bool bossShotAttack = false;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -23,7 +25,8 @@ public class BossBarret : MonoBehaviour {
 			Destroy(gameObject);
 
 		if (collider.gameObject.tag == "Player"){
-			//プレイヤーにダメージを与えるスクリプト
+			bossShotAttack = true;
 		}
 	}
+
 }
