@@ -83,13 +83,13 @@ public class BossMoveManager : MonoBehaviour {
 			
 		//ボスが被弾したとき
 		if (bossAttacked == true) {
-			bossAnim.SetBool ("BossAttacled", true);
+			bossAnim.SetTrigger("BossAttacked");
 			BossAttackedCount++;
 		}
 
 		//ボスが倒されたとき
 		if (BossAttackedCount == 3) {
-			bossAnim.SetBool ("BossKilled", true);
+			bossAnim.SetTrigger ("BossKilled");
 		}
 }
 }

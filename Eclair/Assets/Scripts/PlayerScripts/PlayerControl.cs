@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
 
 	public HPGaugeController hpGaugeController;
 	private int currentHP;
+	private int hp;
 
 
 	public float walkSpeed = 4.0f;
@@ -116,7 +117,8 @@ public class PlayerControl : MonoBehaviour
 		angleUsing = tutumin.getCameraAngle ().y;
 		ShotManagament ();
 		SBTManagament ();
-
+		HPManagament();
+		KilledManagament ();
 
 	}
 
@@ -239,15 +241,30 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
-	void HPManagament(int hp)
+	void HPManagament()
 	{
 		if (BossFootCollider.bossFootAttack == true) { 
+			Debug.Log ("attack");
+			anim.SetTrigger ("BigAttacked");
+			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 			hp = 10;
+			BossFootCollider.bossFootAttack = false;
 		}
 		if (BossBarret.bossShotAttack == true) {
+			anim.SetTrigger ("SmallAttacked");
 			hp = 5;
+			BossBarret.bossShotAttack = false;
 		}
 		currentHP -= hp;
+		//gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+	}
+
+	void KilledManagament()
+	{
+		if (currentHP == 0)
+		{
+			anim.SetTrigger ("EcalirKilled");
+		}
 	}
 
 	Vector3 Rotating(float horizontal, float vertical)
