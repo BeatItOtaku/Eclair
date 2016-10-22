@@ -21,10 +21,10 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: -994
-        inSlope: 5448.7607
-        outSlope: 5448.7607
+        inSlope: 3897.681
+        outSlope: 3897.681
         tangentMode: 0
-      - time: 0.5
+      - time: 0.6666667
         value: -88
         inSlope: 15.51819
         outSlope: 15.51819
@@ -50,7 +50,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.5
+    m_StopTime: 0.6666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -71,10 +71,10 @@ AnimationClip:
       m_Curve:
       - time: 0
         value: -994
-        inSlope: 5448.7607
-        outSlope: 5448.7607
+        inSlope: 3897.681
+        outSlope: 3897.681
         tangentMode: 0
-      - time: 0.5
+      - time: 0.6666667
         value: -88
         inSlope: 15.51819
         outSlope: 15.51819

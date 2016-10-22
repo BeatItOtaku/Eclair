@@ -6,9 +6,9 @@ using System.Collections;
 public class TitleManager : MonoBehaviour {
 
     public AudioClip select;
-    public Text loadingText;
+    //public Text loadingText;
 
-    public MapLoader scene;
+    private MapLoader scene;
 
     private bool isLoading = false;
 
@@ -21,15 +21,11 @@ public class TitleManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             GetComponent<AudioSource>().PlayOneShot(select);
 			NextLevel ();
             //TODO: シーン切り替え動作
-        }
-        if (isLoading && loadingText != null)
-        {
-            //loadingText.text = "Now Loading... " + (scene.MapAsync.progress * 100).ToString("F0") + "%";
         }
     }
 
@@ -42,7 +38,6 @@ public class TitleManager : MonoBehaviour {
     {
 		SceneManager.LoadSceneAsync ("Loading", LoadSceneMode.Additive);
         scene.startMapLoad();
-        loadingText.enabled = true;
         isLoading = true;
         scene.startGame();
     }
