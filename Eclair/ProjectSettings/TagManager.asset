@@ -12,6 +12,7 @@ TagManager:
   - Plane
   - BossTail
   - EnemyObject
+  - NoMoveBolt
   layers:
   - Default
   - TransparentFX

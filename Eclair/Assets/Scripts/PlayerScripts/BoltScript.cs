@@ -40,28 +40,37 @@ public class BoltScript : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collider)
 	{	
-		if (collider.gameObject.tag == "Player")
-			return;
-		if (collider.gameObject.tag == "Bolt")
-			return;
+		if (collider.gameObject.tag != "Boss") {
+			
+			if (collider.gameObject.tag == "Player")
+				return;
+			if (collider.gameObject.tag == "Bolt")
+				return;
 		
-		//Debug.Log ("hoge");
-		try {gameObject.GetComponent<LinearMovement> ().Speed = 0;}
-		catch {
-			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			//Debug.Log ("hoge");
+			try {
+				gameObject.GetComponent<LinearMovement> ().Speed = 0;
+			} catch {
+				gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			}
+
+			GetComponent<AudioSource> ().PlayOneShot (boltLandSound);
+			isLanded = true;
+
+			if (Target == null)
+				return;
+
+			//gameObject.transform.position = Target;
+			//Debug.Log(TargetQuaternion.eulerAngles);
+			TargetQuaternion = Quaternion.LookRotation (collider.contacts [0].normal);
+			TargetQuaternion *= Quaternion.Euler (collidedRotateOffset);
+			gameObject.transform.rotation = Quaternion.Lerp (gameObject.transform.rotation, TargetQuaternion, 0.2f);
+			gameObject.transform.localScale *= scaleWhenCollided;
+
+
+		} else {
+			Destroy (gameObject,0.5f);
 		}
-
-        GetComponent<AudioSource>().PlayOneShot(boltLandSound);
-        isLanded = true;
-
-        if (Target == null) return;
-
-		//gameObject.transform.position = Target;
-        //Debug.Log(TargetQuaternion.eulerAngles);
-		TargetQuaternion = Quaternion.LookRotation(collider.contacts[0].normal);
-        TargetQuaternion *= Quaternion.Euler(collidedRotateOffset);
-        gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.2f);
-        gameObject.transform.localScale *= scaleWhenCollided;
-
+			
 	}
 }

@@ -19,12 +19,10 @@ public class BossFootCollider : MonoBehaviour {
 	}
 	private void OnTriggerEnter (Collider collider)
 	{
-		//if (collider.gameObject.tag == "Player") {
-			//if (footTime >= 2f) {
+		if (collider.gameObject.tag == "Player") {
+
 				bossFootAttack = true;
-				//footTime = 0;
-			//}
-		//}
 	}
 			
+}
 }

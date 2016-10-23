@@ -59,8 +59,8 @@ public class Etoile : MonoBehaviour {
 				Instantiate (lightning, transform.position, transform.rotation);
 				im.Idle ();
 				Destroy (target);
-			}			
-		}
+			}
 	}
+}
 }
 	

@@ -15,7 +15,7 @@ public class BossMoveManager : MonoBehaviour {
 	private bool bossShot = true;
 	public static bool bossAttacked = false;
 
-	private int BossAttackedCount = 0;
+	private int BossAttackedCount = 1;
 
 	private Vector3 playerV;
 	private Vector3 leftFootV;
@@ -66,7 +66,7 @@ public class BossMoveManager : MonoBehaviour {
 			bossAnim.SetBool ("LeftRotate", false);
 
 			bossAnim.SetBool ("RightRotate", true);
-			transform.Rotate (Vector3.up * Time.deltaTime * 20);
+			transform.Rotate (Vector3.up * Time.deltaTime * 10*BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
 			bossShot = false;
 		}
@@ -74,13 +74,14 @@ public class BossMoveManager : MonoBehaviour {
 		//直進
 
 			if (difDistanceLR > -2.0f) {
+			if (difDistanceCT < 0) {
 				Debug.Log ("forward");
 				bossAnim.SetBool ("LeftRotate", false);
 				bossAnim.SetBool ("RightRotate", false);
 
 				bossAnim.SetBool ("MoveForward", true);
-				transform.position += transform.forward * Time.deltaTime;
-
+				transform.position += transform.forward * Time.deltaTime*BossAttackedCount;
+			}
 
 		}
 
@@ -91,7 +92,7 @@ public class BossMoveManager : MonoBehaviour {
 			bossAnim.SetBool ("MoveForward", false);
 
 			bossAnim.SetBool ("LeftRotate", true);
-			transform.Rotate (Vector3.down * Time.deltaTime*20);
+			transform.Rotate (Vector3.down * Time.deltaTime*10*BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime *0;
 			bossShot = false;
 	}
@@ -99,14 +100,12 @@ public class BossMoveManager : MonoBehaviour {
 
 
 	//ボスの砲撃
-
 //ボスとプレイヤーの位置関係を取得するスクリプト
 		if (centerDistance >= 9.0f) {
 			bossShot = true;
 		} else {
 			bossShot = false;
 		}
-		//発射のスクリプト
 		shotInterval += Time.deltaTime;
 
 		if (shotInterval > shotIntervalMax) {
@@ -126,7 +125,7 @@ public class BossMoveManager : MonoBehaviour {
 		}
 
 		//ボスが倒されたとき
-		if (BossAttackedCount == 3) {
+		if (BossAttackedCount == 4) {
 			bossAnim.SetTrigger ("BossKilled");
 			Debug.Log ("kill");
 		}

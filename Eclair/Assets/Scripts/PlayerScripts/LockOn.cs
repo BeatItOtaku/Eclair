@@ -35,7 +35,7 @@ public class LockOn : MonoBehaviour {
 	}
 
 	public GameObject startLockOn(){
-		foreach (GameObject go in GameObject.FindGameObjectsWithTag ("Bolt")) {
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag ("Bolt") ) {
 			if (go != null) {
                 if (go.GetComponent<BoltScript>().isLanded)
                 {
