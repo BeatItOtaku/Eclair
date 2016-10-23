@@ -9,6 +9,9 @@ TagManager:
   - ThunderSwitch
   - EclairKeepOut
   - Boss
+  - Plane
+  - BossTail
+  - EnemyObject
   layers:
   - Default
   - TransparentFX

@@ -30,6 +30,7 @@ public class HPGaugeController : MonoBehaviour {
             OnCurrentHPChanged(currentHP_);
         }
     }
+	private int hp;
 
     private float HPGaugeWidth;
     private float targetWidth;
