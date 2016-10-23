@@ -13,6 +13,7 @@ public class BossFootCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (bossFootAttack);
 		//footTime += Time.deltaTime;;
 	
 	}

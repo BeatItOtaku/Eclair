@@ -5,7 +5,7 @@ public class EnemyNormal : EnemyBase {
 
 	// Use this for initialization
 	void Start () {
-		maxHp = 15;
+		//maxHp = 15;
 	}
 	
 	// Update is called once per frame
@@ -14,6 +14,6 @@ public class EnemyNormal : EnemyBase {
 	}
 
 	public override void Damage(int damage){
-		HP -= damage;
+		//HP -= damage;
 	}
 }

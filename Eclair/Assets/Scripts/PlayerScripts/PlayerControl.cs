@@ -181,7 +181,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) {
+		if (BossFootCollider.bossFootAttack == false) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -198,7 +198,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) 
+			if (BossFootCollider.bossFootAttack == false /*|| BossBarret.bossShotAttack == false*/) 
 			{
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
