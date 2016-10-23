@@ -3,9 +3,12 @@ using System.Collections;
 
 public class EnemyNormal : EnemyBase {
 
+	public int maxHp = 15;
+	public int HP { get; set; }
+
 	// Use this for initialization
 	void Start () {
-		maxHp = 15;
+		HP = maxHp;
 	}
 	
 	// Update is called once per frame
