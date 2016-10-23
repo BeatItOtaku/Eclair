@@ -177,6 +177,7 @@ MonoBehaviour:
   lockOnSound: {fileID: 8300000, guid: 6aa89c80313a98543a5da717b5081689, type: 3}
   etoileSound: {fileID: 8300000, guid: f6f82f460603c1349879c683862ef991, type: 3}
   etoileEndSound: {fileID: 8300000, guid: aabd5ac4b0946d74497d754c6e0ebd18, type: 3}
+  tutorialAnim: {fileID: 1146868286}
 --- !u!4 &100080970
 Transform:
   m_ObjectHideFlags: 0
