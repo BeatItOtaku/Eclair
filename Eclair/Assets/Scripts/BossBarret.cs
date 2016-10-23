@@ -10,23 +10,27 @@ public class BossBarret : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+		player = GameObject.FindGameObjectWithTag ("Player");
+		transform.LookAt (player.transform);
+
 	}
 
 	// Update is called once per frame
 	void Update () {
-		transform.LookAt (player.transform);
-		transform.position +=transform.forward * Time.deltaTime * 50;			
+		
+		transform.position +=transform.forward * Time.deltaTime*20;			
 	}
 
 	private void OnCollisionEnter (Collision collider)
 	{
-			Instantiate(burn,transform.position,transform.rotation);
-			Destroy(gameObject);
 
 		if (collider.gameObject.tag == "Player"){
+			Instantiate(burn,transform.position,transform.rotation);
 			bossShotAttack = true;
+			Destroy(gameObject);
 		}
+		Instantiate(burn,transform.position,transform.rotation);
+		Destroy (gameObject);
 	}
 
 }

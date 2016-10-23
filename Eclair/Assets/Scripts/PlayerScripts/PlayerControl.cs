@@ -11,18 +11,16 @@ public class PlayerControl : MonoBehaviour
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
-	//public GameObject muzzle;
-	//public GameObject shirt;
 
 	private float angleUsing;
 	private int angleId;
 
 	public CameraController tutumin;
 
-	public HPGaugeController hpGaugeController;
 	private int currentHP;
 	private int hp;
 
+	public GameObject enemyObject;
 
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
@@ -67,9 +65,9 @@ public class PlayerControl : MonoBehaviour
 	private float distToGround;
 	private float sprintFactor;
 
+	private float attackedTime =0;
 	void Awake()
 	{
-
 		anim = GetComponent<Animator> ();
 		cameraTransform = Camera.main.transform;
 
@@ -119,6 +117,7 @@ public class PlayerControl : MonoBehaviour
 		SBTManagament ();
 		HPManagament();
 		KilledManagament ();
+
 
 	}
 
@@ -182,7 +181,9 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		Rotating(horizontal, vertical);
+		if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) {
+			Rotating (horizontal, vertical);
+		}
 
 		if (isMoving) {
 			
@@ -197,11 +198,14 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			transform.position += transform.forward * Time.deltaTime * 5;
+			if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) 
+			{
+				transform.position += transform.forward * Time.deltaTime * 5;
+			}
 		} else {
 			speed = 0f;
 			anim.SetFloat (speedFloat, 0f);
-			transform.position += transform.forward * Time.deltaTime*0;
+			transform.position += transform.forward * Time.deltaTime * 0;
 		}
 
 		/*		anim.SetBool ("Grounded", true); 
@@ -244,19 +248,30 @@ public class PlayerControl : MonoBehaviour
 	void HPManagament()
 	{
 		if (BossFootCollider.bossFootAttack == true) { 
-			Debug.Log ("attack");
-			anim.SetTrigger ("BigAttacked");
-			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			GameObject bossFoot = GameObject.FindGameObjectWithTag ("EnemyObject");
+			transform.LookAt (bossFoot.transform);
+			attackedTime += Time.deltaTime;
+			anim.SetBool ("BigAttacked",true);
 			hp = 10;
-			BossFootCollider.bossFootAttack = false;
+			if (attackedTime > 1.3f) {
+				BossFootCollider.bossFootAttack = false;
+				anim.SetBool ("BigAttacked",false);
+				attackedTime = 0;
+			}
+
 		}
 		if (BossBarret.bossShotAttack == true) {
+			attackedTime += Time.deltaTime;
 			anim.SetTrigger ("SmallAttacked");
 			hp = 5;
-			BossBarret.bossShotAttack = false;
+			if (attackedTime > 1.0f) {
+				BossBarret.bossShotAttack = false;
+				anim.SetBool ("SmallAttacked",false);
+				attackedTime = 0;
+			}
 		}
 		currentHP -= hp;
-		//gameObject.GetComponent<Rigidbody> ().isKinematic = false;
+
 	}
 
 	void KilledManagament()
@@ -269,47 +284,42 @@ public class PlayerControl : MonoBehaviour
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{
-		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
-		if (!fly)
-			forward.y = 0.0f;
-		forward = forward.normalized;
+			Vector3 forward = cameraTransform.TransformDirection (Vector3.forward);
+			if (!fly)
+				forward.y = 0.0f;
+			forward = forward.normalized;
 
-		Vector3 right = new Vector3(forward.z, 0, -forward.x);
+			Vector3 right = new Vector3 (forward.z, 0, -forward.x);
 
-		Vector3 targetDirection;
+			Vector3 targetDirection;
 
-		float finalTurnSmoothing;
+			float finalTurnSmoothing;
 
-		if(IsAiming())
-		{
-			targetDirection = forward;
-			finalTurnSmoothing = aimTurnSmoothing;
-		}
-		else
-		{
-			targetDirection = forward * vertical + right * horizontal;
-			finalTurnSmoothing = turnSmoothing;
-		}
+			if (IsAiming ()) {
+				targetDirection = forward;
+				finalTurnSmoothing = aimTurnSmoothing;
+			} else {
+				targetDirection = forward * vertical + right * horizontal;
+				finalTurnSmoothing = turnSmoothing;
+			}
 
-		if((isMoving && targetDirection != Vector3.zero) || IsAiming())
-		{
-			Quaternion targetRotation = Quaternion.LookRotation (targetDirection, Vector3.up);
-			// fly
-			if (fly)
-				targetRotation *= Quaternion.Euler (90, 0, 0);
+			if ((isMoving && targetDirection != Vector3.zero) || IsAiming ()) {
+				Quaternion targetRotation = Quaternion.LookRotation (targetDirection, Vector3.up);
+				// fly
+				if (fly)
+					targetRotation *= Quaternion.Euler (90, 0, 0);
 
-			Quaternion newRotation = Quaternion.Slerp(GetComponent<Rigidbody>().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime);
-			GetComponent<Rigidbody>().MoveRotation (newRotation);
-			lastDirection = targetDirection;
-		}
-		//idle - fly or grounded
-		if(!(Mathf.Abs(h) > 0.9 || Mathf.Abs(v) > 0.9))
-		{
-			Repositioning();
-		}
+				Quaternion newRotation = Quaternion.Slerp (GetComponent<Rigidbody> ().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime);
+				GetComponent<Rigidbody> ().MoveRotation (newRotation);
+				lastDirection = targetDirection;
+			}
+			//idle - fly or grounded
+			if (!(Mathf.Abs (h) > 0.9 || Mathf.Abs (v) > 0.9)) {
+				Repositioning ();
+			}
 
-		return targetDirection;
-	}	
+			return targetDirection;
+	}
 
 	private void Repositioning()
 	{

@@ -5,6 +5,7 @@ public class BossFootCollider : MonoBehaviour {
 
 	public static bool bossFootAttack = false;
 
+	//private float footTime =0; //ボスが足を振り下ろす間隔を表現するための時間
 	// Use this for initialization
 	void Start () {
 	
@@ -12,14 +13,17 @@ public class BossFootCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//footTime += Time.deltaTime;;
 	
 	}
-	private void OnCollisionEnter (Collision collider)
+	private void OnTriggerEnter (Collider collider)
 	{
-		if (collider.gameObject.tag == "Player")
-		{
-			bossFootAttack = true;
-		}
+		//if (collider.gameObject.tag == "Player") {
+			//if (footTime >= 2f) {
+				bossFootAttack = true;
+				//footTime = 0;
+			//}
+		//}
 	}
 			
 }
