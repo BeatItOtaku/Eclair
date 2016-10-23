@@ -37,6 +37,8 @@ public class InputManager : MonoBehaviour {
     public AudioClip etoileSound;
     public AudioClip etoileEndSound;
 
+	public Animator tutorialAnim;
+
 	private int height,width;
 	private Vector3 screenMiddle;
 
@@ -45,6 +47,21 @@ public class InputManager : MonoBehaviour {
 	const float DefaultShotDistance = 10;
 
 	public enum PlayerStates {Idle,LockOn , Bolt, SBT, Etoile}
+
+
+	private int tutorialLevel_ = 0;
+	/// <summary>
+	/// 初期値は0、マウス終わったら1、移動終わったら2、SBT終わったら3、ボルト打ったら4、エトワールしたら5になる
+	/// </summary>
+	public int TutorialLevel {
+		get {
+			return tutorialLevel_;
+		}
+		set {
+			tutorialLevel_ = value;
+			tutorialAnim.SetInteger ("TutorialLevel", value);
+		}
+	}
 
 	private PlayerStates playerState_ = PlayerStates.Idle;
 	/// <summary>
@@ -97,36 +114,47 @@ public class InputManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (TutorialLevel < 2) {
+			if (Mathf.Abs ((Input.GetAxis ("Horizontal") + Input.GetAxis ("Vertical"))) > 0.2f)
+				TutorialLevel = 2;
+			if (Mathf.Abs ((Input.GetAxis("Camera X") + Input.GetAxis("Camera Y"))) > 0.2f)
+				TutorialLevel = 1;
+		}
+
 		//右クリック
 		if(Input.GetButtonDown("LaunchBolt")){
             //Debug.Log ("MouseLeft");
 
             if (playerState == PlayerStates.LockOn)//ロックオン状態の時は対象切り替え
 			{
-                GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
-                onLockOnSwitched(go);
+				if (TutorialLevel >= 2) {
+					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
+					onLockOnSwitched (go);
+				}
             }
             else//ロックオン状態じゃないときはボルト射出
             {
-                Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
-                RaycastHit hit;
-                Vector3 hitPosition;
-                Quaternion hitQuaternion = Quaternion.Euler(0,0,0);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    //Debug.Log ("ahoaho");
-                    hitPosition = hit.point;
-                    hitQuaternion = Quaternion.LookRotation(hit.normal);
-                }
-                else
-                {
-                    hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
-                }
-                if(player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion))
-                {
-                    audioSource.PlayOneShot(boltLaunchSound);
-                    playerState_ = PlayerStates.Bolt;
-                }
+				if (TutorialLevel >= 3) {
+					if (TutorialLevel == 3)
+						TutorialLevel = 4;
+					
+					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
+					RaycastHit hit;
+					Vector3 hitPosition;
+					Quaternion hitQuaternion = Quaternion.Euler (0, 0, 0);
+					if (Physics.Raycast (ray, out hit)) {
+						//Debug.Log ("ahoaho");
+						hitPosition = hit.point;
+						hitQuaternion = Quaternion.LookRotation (hit.normal);
+					} else {
+						hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
+					}
+					if (player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition, hitQuaternion)) {
+						audioSource.PlayOneShot (boltLaunchSound);
+						playerState_ = PlayerStates.Bolt;
+					}
+				}
+
             }
 
 		}
@@ -144,14 +172,16 @@ public class InputManager : MonoBehaviour {
 
 		//Shiftキーでロックオン
 		if(Input.GetButtonDown("LockOn")){
-			GameObject go;
-			if (playerState_ == PlayerStates.Idle) {
-				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
-                if (go != null)
-                {
-                    playerState_ = PlayerStates.LockOn;
-                    onLockOnSwitched(go);
-                }
+			if (TutorialLevel >= 2) {
+
+				GameObject go;
+				if (playerState_ == PlayerStates.Idle) {
+					go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
+					if (go != null) {
+						playerState_ = PlayerStates.LockOn;
+						onLockOnSwitched (go);
+					}
+				}
 			}
 		}
 		else if (Input.GetButtonUp("LockOn"))//Eキー離したらロックオンやめる
@@ -162,17 +192,22 @@ public class InputManager : MonoBehaviour {
 
 		//左クリック
 		if (Input.GetButtonDown ("Thunder")) {
-			//Debug.Log ("Fire1Pressed");
-			GameObject satou = null;
+			if (TutorialLevel >= 2) {
+				if (TutorialLevel == 2)
+					TutorialLevel = 3;
+				//Debug.Log ("Fire1Pressed");
+				GameObject satou = null;
 
-			if(playerState_ == PlayerStates.LockOn)
-				satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
-			if (satou != null) {
-				sbt = true;
-				playerState_ = PlayerStates.SBT;
-				thunderEffect.StartEffect (player.transform.position, satou.transform.position);
-                audioSource.PlayOneShot(SBTSound);
+				if (playerState_ == PlayerStates.LockOn)
+					satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+				if (satou != null) {
+					sbt = true;
+					playerState_ = PlayerStates.SBT;
+					thunderEffect.StartEffect (player.transform.position, satou.transform.position);
+					audioSource.PlayOneShot (SBTSound);
+				}
 			}
+
 		}
 		else if (Input.GetButtonUp ("Thunder")) {
 			thunderEffect.StopEffect ();
@@ -186,19 +221,25 @@ public class InputManager : MonoBehaviour {
 
 		//エトワールボタン
 		if (Input.GetButtonDown ("Etoile")) {
-			if (playerState_ == PlayerStates.LockOn){
-                audioSource.PlayOneShot(etoileSound);				
-				eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
-				eto_.transform.position = player.transform.position;
-				etoile = true;
-				eto.SetActive (true);
-				GameObject lockonTarget = lockOn.getCurrentTarget ();
-				//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
-				EtoScript.target = lockonTarget;
-				playerState_ = PlayerStates.Etoile;
-				player.SetActive (false);
+			if (TutorialLevel >= 4) {
+				if (TutorialLevel == 4)
+					TutorialLevel = 5;
+
+				if (playerState_ == PlayerStates.LockOn) {
+					audioSource.PlayOneShot (etoileSound);				
+					eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
+					eto_.transform.position = player.transform.position;
+					etoile = true;
+					eto.SetActive (true);
+					GameObject lockonTarget = lockOn.getCurrentTarget ();
+					//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
+					EtoScript.target = lockonTarget;
+					playerState_ = PlayerStates.Etoile;
+					player.SetActive (false);
+				}
 			}
 		}
+
 	}
 
 
