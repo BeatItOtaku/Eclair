@@ -24,13 +24,13 @@ public class BossMoveManager : MonoBehaviour {
 	private Vector3 centerV;
 	private Vector3 tailV;
 
-	private float leftDistance;
-	private float rightDistance;
-	private float centerDistance;
-	private float tailDistance;
+	private float leftDistance; //ボスの左足からプレイヤーまでの距離
+	private float rightDistance; //ボスの右足からプレイヤーまでの距離
+	private float centerDistance; //ボスの中心からプレイヤーまでの距離
+	private float tailDistance; //ボスの尻尾の先からプレイヤーまでの距離
 
-	private float difDistanceLR;//leftDistance,rightDistanceの差
-	private float difDistanceCT;//centerDistance,tailDistanceの差
+	private float difDistanceLR; //leftDistance,rightDistanceの差
+	private float difDistanceCT; //centerDistance,tailDistanceの差
 
 	private float shotInterval =0;
 	private float shotIntervalMax = 1;
@@ -134,7 +134,7 @@ public class BossMoveManager : MonoBehaviour {
 		if (shotInterval > shotIntervalMax) {
 			shotInterval = 0;			
 			if (bossShot == true) {
-				//Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
+				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 			}
 		}
 			
