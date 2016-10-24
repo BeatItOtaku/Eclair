@@ -3,12 +3,12 @@ using System.Collections;
 
 public class EnemyNormal : EnemyBase {
 
-	public int maxHp;
+	public int maxHp = 16;
 	public int HP{ get; set; }
 
 	// Use this for initialization
 	void Start () {
-		maxHp = 15;
+		HP = maxHp;
 	}
 	
 	// Update is called once per frame
@@ -18,5 +18,9 @@ public class EnemyNormal : EnemyBase {
 
 	public override void Damage(int damage,Vector3 direction){
 		HP -= damage;
+		Debug.Log ("ZakoHP:" + HP);
+		if (HP <= 0) {
+			Destroy (gameObject);
+		}
 	}
 }

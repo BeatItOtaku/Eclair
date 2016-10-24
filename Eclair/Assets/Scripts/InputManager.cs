@@ -213,7 +213,7 @@ public class InputManager : MonoBehaviour {
 				Debug.Log (c.name);
 				enemy.Damage (15, target.transform.position - player.transform.position);
 			} else {
-				Debug.Log (colliders.Length);
+				//Debug.Log (colliders.Length);
 			}
 		}
 	}
@@ -243,7 +243,7 @@ public class InputManager : MonoBehaviour {
         st += "CameraY : " + camControl.cameraY + "\n";
         st += "CameraAngle : " + camControl.cameraAngle + "\n";
 
-		Debug.Log (playerState_.ToString ());
+		//Debug.Log (playerState_.ToString ());
 
 
         return st;
