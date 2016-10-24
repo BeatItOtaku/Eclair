@@ -168,10 +168,7 @@ public class InputManager : MonoBehaviour {
 			if(playerState_ == PlayerStates.LockOn)
 				satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
 			if (satou != null) {
-				sbt = true;
-				playerState_ = PlayerStates.SBT;
-				thunderEffect.StartEffect (player.transform.position, satou.transform.position);
-                audioSource.PlayOneShot(SBTSound);
+				startSBT (satou);//長いのでメソッド化したよ
 			}
 		}
 		else if (Input.GetButtonUp ("Thunder")) {
@@ -197,6 +194,26 @@ public class InputManager : MonoBehaviour {
 				EtoScript.target = lockonTarget;
 				playerState_ = PlayerStates.Etoile;
 				player.SetActive (false);
+			}
+		}
+	}
+
+	private void startSBT(GameObject target){
+		sbt = true;
+		playerState_ = PlayerStates.SBT;
+		thunderEffect.StartEffect (player.transform.position, target.transform.position);
+		audioSource.PlayOneShot(SBTSound);
+
+		//ビリビリ上にあるオブジェクトを求めるよ
+		Collider[] colliders = Physics.OverlapCapsule(player.transform.position, target.transform.position,1);
+		foreach(Collider c in colliders){
+			try{
+				EnemyBase enemy = c.gameObject.GetComponent<EnemyBase>();
+				//ここで例外が発生しないということはエクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわち敵である
+				enemy.Damage(15);
+			}
+			catch{
+				//衝突した相手がBoltでもKeepoutでも敵でもなかった時
 			}
 		}
 	}
