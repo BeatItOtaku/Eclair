@@ -210,7 +210,7 @@ public class InputManager : MonoBehaviour {
 			try{
 				EnemyBase enemy = c.gameObject.GetComponent<EnemyBase>();
 				//ここで例外が発生しないということはエクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわち敵である
-				enemy.Damage(15);
+				enemy.Damage(15,target.transform.position - player.transform.position);
 			}
 			catch{
 				//衝突した相手がBoltでもKeepoutでも敵でもなかった時

@@ -18,5 +18,15 @@ public abstract class EnemyBase : MonoBehaviour {
 	/// damageの値は、ボルト射出では5、SBTでは15、エトワールでは30
 	/// </summary>
 	/// <param name="damage">Damage.</param>
-	public abstract void Damage (int damage);
+	public void Damage (int damage){
+		Damage (damage, new Vector3 (0, 0, 0));
+	}
+
+	/// <summary>
+	/// ダメージを食らいます。
+	/// damageの値は、ボルト射出では5、SBTでは15、エトワールでは30
+	/// </summary>
+	/// <param name="damage">ダメージ値</param>
+	/// <param name="direction">どの方向へ攻撃を食らったか</param>
+	public abstract void Damage (int damage, Vector3 direction);
 }
