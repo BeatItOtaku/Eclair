@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BossTail : MonoBehaviour {
+public class BossTail : EnemyBase {
 
 	// Use this for initialization
 	void Start () {
@@ -12,13 +12,10 @@ public class BossTail : MonoBehaviour {
 	void Update () {
 	
 	}
-	private void OnCollisionEnter (Collision collider)
-	{
-		//エトワールでぶつかったとき
-		if(collider.gameObject.tag == "player"){
-			BossMoveManager.bossAttacked = true;
-		}
-		//SBTで攻撃したとき
 
-}
+	public override void Damage (int damage, Vector3 direction)
+	{
+		if (damage > 5)
+			BossMoveManager.bossAttacked = true;
+	}
 }
