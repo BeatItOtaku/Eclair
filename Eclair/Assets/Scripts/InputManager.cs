@@ -243,7 +243,7 @@ public class InputManager : MonoBehaviour {
         st += "CameraY : " + camControl.cameraY + "\n";
         st += "CameraAngle : " + camControl.cameraAngle + "\n";
 
-		Debug.Log (playerState_.ToString ());
+		//Debug.Log (playerState_.ToString ());
 
 
         return st;

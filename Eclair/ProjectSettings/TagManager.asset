@@ -5,13 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Bolt
-  - Objects
   - ThunderSwitch
   - EclairKeepOut
   - Boss
-  - Plane
   - BossTail
-  - EnemyObject
+  - NoMoveBolt
+  - ETOEclair
   layers:
   - Default
   - TransparentFX

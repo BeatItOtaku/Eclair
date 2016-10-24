@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BoltScript : MonoBehaviour {
@@ -53,7 +53,6 @@ public class BoltScript : MonoBehaviour {
 			Destroy (gameObject, 0.5f);
 		}
 		else {//敵じゃなかった時
-		
 		
 			//Debug.Log ("hoge");
 			try {

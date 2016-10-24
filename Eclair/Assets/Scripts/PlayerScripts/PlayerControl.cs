@@ -116,7 +116,7 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
-		KilledManagament ();
+		//KilledManagament ();
 
 
 	}
@@ -181,7 +181,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) {
+		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -198,8 +198,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) 
-			{
+			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
 		} else {
@@ -248,7 +247,7 @@ public class PlayerControl : MonoBehaviour
 	void HPManagament()
 	{
 		if (BossFootCollider.bossFootAttack == true) { 
-			GameObject bossFoot = GameObject.FindGameObjectWithTag ("EnemyObject");
+			GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
 			transform.LookAt (bossFoot.transform);
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("BigAttacked",true);
@@ -262,9 +261,9 @@ public class PlayerControl : MonoBehaviour
 		}
 		if (BossBarret.bossShotAttack == true) {
 			attackedTime += Time.deltaTime;
-			anim.SetTrigger ("SmallAttacked");
+			anim.SetBool ("SmallAttacked",true);
 			hp = 5;
-			if (attackedTime > 1.0f) {
+			if (attackedTime > 0.4f) {
 				BossBarret.bossShotAttack = false;
 				anim.SetBool ("SmallAttacked",false);
 				attackedTime = 0;
@@ -274,13 +273,13 @@ public class PlayerControl : MonoBehaviour
 
 	}
 
-	void KilledManagament()
+	/*void KilledManagament()
 	{
 		if (currentHP == 0)
 		{
-			anim.SetTrigger ("EcalirKilled");
+			anim.SetTrigger ("EclairKilled");
 		}
-	}
+	}*/
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{
