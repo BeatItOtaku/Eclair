@@ -1057,6 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1088387005}
   boss: {fileID: 89164109}
+  bossCenter: {fileID: 1979439929}
   leftFoot: {fileID: 1552673561}
   rightFoot: {fileID: 11570964}
   bossMuzzle: {fileID: 1547232880}
@@ -20832,8 +20833,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.20918262, y: 0.1, z: 0.30297258}
-  m_Center: {x: -0.010993024, y: 0, z: 0.0070737572}
+  m_Size: {x: 0.20918262, y: 0.1, z: 0.29363295}
+  m_Center: {x: -0.010993024, y: 0, z: 0.011743545}
 --- !u!1 &1560297938
 GameObject:
   m_ObjectHideFlags: 0
@@ -23689,6 +23690,10 @@ Prefab:
       propertyPath: m_TagString
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 4000011198629874, guid: c751c258ee500434aaba629fe097e791, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.166
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c751c258ee500434aaba629fe097e791, type: 2}
   m_IsPrefabParent: 0
@@ -26318,6 +26323,11 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.16731882, y: 0.0068077436, z: -0.031631738}
     m_Extent: {x: 0.26766372, y: 0.010746351, z: 0.07505379}
   m_DirtyAABB: 0
+--- !u!1 &1979439929 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011671246402, guid: c751c258ee500434aaba629fe097e791,
+    type: 2}
+  m_PrefabInternal: {fileID: 1732034134}
 --- !u!1 &1981291259
 GameObject:
   m_ObjectHideFlags: 0

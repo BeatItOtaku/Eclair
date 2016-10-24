@@ -25,8 +25,10 @@ public class ETO : MonoBehaviour {
 	}
 	private void OnCollisionEnter (Collision collider)
 	{
-		Debug.Log ("ETO.OnCollisionEnter");
-		if (collider.gameObject.tag == "Bolt" ) {	
+		//Debug.Log ("ETO.OnCollisionEnter");
+
+		//ボルトにぶつかったとき・・・電気のエフェクトを出す
+		if (collider.gameObject.tag == "Bolt") {	
 			Debug.Log ("CollideToBolt");
 			player.transform.position = target.transform.position;
 			Instantiate (lightning, transform.position, transform.rotation);
@@ -35,8 +37,9 @@ public class ETO : MonoBehaviour {
 			im.Idle ();
 			gameObject.SetActive (false);
 		}			
-		if(collider.gameObject.tag == "EclairKeepOut"){
-			Debug.Log ("CollideToKeepOut");
+		//ボルト以外にぶつかったとき・・・電気のエフェクトは出ない
+		if(collider.gameObject.tag == "EclairKeepOut"||collider.gameObject.tag == "Boss"){
+			//Debug.Log ("CollideToKeepOut");
 			player.transform.position = InputManager.eto_.transform.position;
 			Destroy (target);
 			InputManager.etoile = false;
