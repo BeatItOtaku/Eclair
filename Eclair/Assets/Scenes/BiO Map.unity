@@ -4734,22 +4734,6 @@ Prefab:
     - {fileID: 6400000, guid: 9796017b74dcb4b429c5c71d887ec177, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 9796017b74dcb4b429c5c71d887ec177, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &528016420 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 185080, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
-  m_PrefabInternal: {fileID: 1018803347}
---- !u!65 &528016421
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 528016420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.49, y: 0.76, z: 0.47}
-  m_Center: {x: 0, y: 0.39, z: 0}
 --- !u!1 &531134355
 GameObject:
   m_ObjectHideFlags: 0
@@ -9102,15 +9086,15 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 64000013990087930, guid: b10df5365ca4d7545889e7d94740221e,
+    - target: {fileID: 54000013645929994, guid: b10df5365ca4d7545889e7d94740221e,
         type: 2}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_Mass
+      value: 128
       objectReference: {fileID: 0}
-    - target: {fileID: 65000013182590216, guid: b10df5365ca4d7545889e7d94740221e,
+    - target: {fileID: 114000013199941066, guid: b10df5365ca4d7545889e7d94740221e,
         type: 2}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: futtobiFactor
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}

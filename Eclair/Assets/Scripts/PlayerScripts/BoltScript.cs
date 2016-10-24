@@ -50,7 +50,7 @@ public class BoltScript : MonoBehaviour {
 		EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
 		if (enemy != null) {//敵だった時
 			enemy.Damage (5, gameObject.transform.forward);
-			Destroy (enemy.gameObject, 0.5f);
+			Destroy (gameObject, 0.5f);
 		}
 		else {//敵じゃなかった時
 		

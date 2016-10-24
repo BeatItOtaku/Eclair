@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyBarrel : EnemyBase {
 
-	public float futtobiFactor = 0.5f;
+	public float futtobiFactor = 8;
 
 	// Use this for initialization
 	void Start () {
