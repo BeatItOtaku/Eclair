@@ -46,14 +46,13 @@ public class BoltScript : MonoBehaviour {
 			Destroy (gameObject);
 			return;
 		}
-
-		try{
-			EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
-			//ここで例外が発生しないということはエクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわち敵である
-			enemy.Damage(5,gameObject.transform.forward);
+			
+		EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
+		if (enemy != null) {//敵だった時
+			enemy.Damage (5, gameObject.transform.forward);
+			Destroy (enemy.gameObject, 0.5f);
 		}
-		catch{
-			//衝突した相手が敵じゃなかった時
+		else {//敵じゃなかった時
 		
 		
 			//Debug.Log ("hoge");

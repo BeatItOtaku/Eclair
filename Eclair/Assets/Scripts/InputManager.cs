@@ -207,13 +207,13 @@ public class InputManager : MonoBehaviour {
 		//ビリビリ上にあるオブジェクトを求めるよ
 		Collider[] colliders = Physics.OverlapCapsule(player.transform.position, target.transform.position,1);
 		foreach(Collider c in colliders){
-			try{
-				EnemyBase enemy = c.gameObject.GetComponent<EnemyBase>();
-				//ここで例外が発生しないということはエクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわち敵である
-				enemy.Damage(15,target.transform.position - player.transform.position);
-			}
-			catch{
-				//衝突した相手がBoltでもKeepoutでも敵でもなかった時
+			EnemyBase enemy = c.gameObject.GetComponent<EnemyBase>();
+			//Destroy (c.gameObject);
+			if (enemy != null) {//エクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわちそれは敵である
+				Debug.Log (c.name);
+				enemy.Damage (15, target.transform.position - player.transform.position);
+			} else {
+				Debug.Log (colliders.Length);
 			}
 		}
 	}

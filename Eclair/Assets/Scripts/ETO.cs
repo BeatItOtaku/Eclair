@@ -42,14 +42,8 @@ public class ETO : MonoBehaviour {
 			im.Idle ();
 			gameObject.SetActive (false);
 		} else {
-			try{
-				EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
-				//ここで例外が発生しないということはエクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわち敵である
-				enemy.Damage(30,target.transform.position - transform.position);
-			}
-			catch{
-				//衝突した相手がBoltでもKeepoutでも敵でもなかった時
-			}
+			EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
+			if(enemy != null) enemy.Damage(30,target.transform.position - transform.position);
 		}
 	}
 }
