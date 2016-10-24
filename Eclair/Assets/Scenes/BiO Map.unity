@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.8682808, g: 0.81025547, b: 0.83678514, a: 1}
+  m_IndirectSpecularColor: {r: 0.86764395, g: 0.8102578, b: 0.83642805, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2252,6 +2252,10 @@ Prefab:
     - target: {fileID: 185080, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
       propertyPath: m_Name
       value: barrel 4 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
@@ -5156,6 +5160,10 @@ Prefab:
     - target: {fileID: 185080, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
       propertyPath: m_Name
       value: barrel 4 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
@@ -9081,10 +9089,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1018803348 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 487070, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
-  m_PrefabInternal: {fileID: 1018803347}
 --- !u!1 &1021353795
 GameObject:
   m_ObjectHideFlags: 0
@@ -9439,6 +9443,10 @@ Prefab:
       propertyPath: m_Name
       value: barrel 4 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
   m_IsPrefabParent: 0
@@ -9488,6 +9496,10 @@ Prefab:
     - target: {fileID: 185080, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
       propertyPath: m_Name
       value: barrel 4 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
@@ -11887,6 +11899,10 @@ Prefab:
       propertyPath: m_Name
       value: barrel 4 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
   m_IsPrefabParent: 0
@@ -12984,6 +13000,10 @@ Prefab:
     - target: {fileID: 185080, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
       propertyPath: m_Name
       value: barrel 4 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
@@ -14354,47 +14374,6 @@ Prefab:
     - {fileID: 6400000, guid: 3c5ed8b6d94de2d4d9eb79b295f42e97, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 3c5ed8b6d94de2d4d9eb79b295f42e97, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &1709743028
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1709743029}
-  - 65: {fileID: 1709743030}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1709743029
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1709743028}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.398, z: 0}
-  m_LocalScale: {x: 0.47564805, y: 0.79420966, z: 0.46244603}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1018803348}
-  m_RootOrder: 1
---- !u!65 &1709743030
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1709743028}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1710820599
 GameObject:
   m_ObjectHideFlags: 0
@@ -14844,6 +14823,10 @@ Prefab:
     - target: {fileID: 185080, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
       propertyPath: m_Name
       value: barrel 4 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010083358078, guid: b10df5365ca4d7545889e7d94740221e, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b10df5365ca4d7545889e7d94740221e, type: 2}

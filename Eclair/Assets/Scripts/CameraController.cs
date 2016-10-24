@@ -129,7 +129,7 @@ public class CameraController : MonoBehaviour
             {
                 float deltaY = Input.GetAxis("Camera X") * Time.deltaTime * mouseSensitivity;
                 float deltaAngle = Input.GetAxis("Camera Y") * Time.deltaTime * mouseSensitivity;
-                Debug.Log(deltaY + "," + deltaAngle);
+                //Debug.Log(deltaY + "," + deltaAngle);
 				float deltaYAbs = Mathf.Abs (deltaY);
 				float deltaAngleAbs = Mathf.Abs (deltaAngle);
 				if (0.1 < deltaYAbs && deltaYAbs < 120) targetY += deltaY;

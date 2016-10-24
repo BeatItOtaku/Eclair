@@ -42,26 +42,39 @@ public class BoltScript : MonoBehaviour {
 	{	
 		if (collider.gameObject.tag == "Player")
 			return;
-		if (collider.gameObject.tag == "Bolt")
+		else if (collider.gameObject.tag == "Bolt") {
+			Destroy (gameObject);
 			return;
-		
-		//Debug.Log ("hoge");
-		try {gameObject.GetComponent<LinearMovement> ().Speed = 0;}
-		catch {
-			gameObject.GetComponent<Rigidbody> ().isKinematic = true;
 		}
+			
+		EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
+		if (enemy != null) {//敵だった時
+			enemy.Damage (5, gameObject.transform.forward);
+			Destroy (gameObject, 0.5f);
+		}
+		else {//敵じゃなかった時
+		
+		
+			//Debug.Log ("hoge");
+			try {
+				gameObject.GetComponent<LinearMovement> ().Speed = 0;
+			} catch {
+				gameObject.GetComponent<Rigidbody> ().isKinematic = true;
+			}
 
-        GetComponent<AudioSource>().PlayOneShot(boltLandSound);
-        isLanded = true;
+			GetComponent<AudioSource> ().PlayOneShot (boltLandSound);
+			isLanded = true;
 
-        if (Target == null) return;
+			if (Target == null)
+				return;
 
-		//gameObject.transform.position = Target;
-        //Debug.Log(TargetQuaternion.eulerAngles);
-		TargetQuaternion = Quaternion.LookRotation(collider.contacts[0].normal);
-        TargetQuaternion *= Quaternion.Euler(collidedRotateOffset);
-        gameObject.transform.rotation = Quaternion.Lerp(gameObject.transform.rotation, TargetQuaternion, 0.2f);
-        gameObject.transform.localScale *= scaleWhenCollided;
+			//gameObject.transform.position = Target;
+			//Debug.Log(TargetQuaternion.eulerAngles);
+			TargetQuaternion = Quaternion.LookRotation (collider.contacts [0].normal);
+			TargetQuaternion *= Quaternion.Euler (collidedRotateOffset);
+			gameObject.transform.rotation = Quaternion.Lerp (gameObject.transform.rotation, TargetQuaternion, 0.2f);
+			gameObject.transform.localScale = new Vector3 (scaleWhenCollided, scaleWhenCollided, scaleWhenCollided);
 
+		}
 	}
 }

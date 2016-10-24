@@ -16,7 +16,7 @@ public class EnemyNormal : EnemyBase {
 	
 	}
 
-	public override void Damage(int damage){
+	public override void Damage(int damage,Vector3 direction){
 		HP -= damage;
 	}
 }
