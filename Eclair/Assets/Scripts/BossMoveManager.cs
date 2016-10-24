@@ -11,9 +11,10 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject rightFoot;
 	public GameObject bossMuzzle;
 	public GameObject bossBarret;
+	public GameObject muzzleFrash;
 	public GameObject bossTail;
 
-	private bool bossShot = true;
+	private bool bossShot = false;
 	public static bool bossAttacked = false;
 
 	public static int BossAttackedCount = 1;
@@ -33,7 +34,7 @@ public class BossMoveManager : MonoBehaviour {
 	private float difDistanceCT; //centerDistance,tailDistanceの差
 
 	private float shotInterval =0;
-	private float shotIntervalMax = 1;
+	private float shotIntervalMax = 0.1f;
 
 	private float waitTime = 0;
 	private bool wait = false;
@@ -66,11 +67,8 @@ public class BossMoveManager : MonoBehaviour {
 		//右回転
 		if (difDistanceLR > 2.0f && waitTime == 0) {
 			//Debug.Log ("right");
-			bossAnim.SetBool ("MoveForward", false);
-			bossAnim.SetBool ("LeftRotate", false);
-
-			bossAnim.SetBool ("RightRotate", true);
-			transform.Rotate (Vector3.up * Time.deltaTime * 10 * BossAttackedCount);
+			bossAnim.SetBool ("Move", true);
+			transform.Rotate (Vector3.up * Time.deltaTime * 12 * BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
 			bossShot = false;
 			waitTime = 0;
@@ -81,10 +79,7 @@ public class BossMoveManager : MonoBehaviour {
 		if (difDistanceLR > -2.0f && waitTime == 0) {
 			if (difDistanceCT < 0) {
 				//Debug.Log ("forward");
-				bossAnim.SetBool ("LeftRotate", false);
-				bossAnim.SetBool ("RightRotate", false);
-
-				bossAnim.SetBool ("MoveForward", true);
+				bossAnim.SetBool ("Move", true);
 				transform.position += transform.forward * Time.deltaTime;
 				waitTime = 0;
 			}
@@ -94,11 +89,8 @@ public class BossMoveManager : MonoBehaviour {
 		//左回転
 		else if (difDistanceLR < -2.0f && waitTime == 0) {
 			//Debug.Log ("left");
-			bossAnim.SetBool ("RightRotate", false);
-			bossAnim.SetBool ("MoveForward", false);
-
-			bossAnim.SetBool ("LeftRotate", true);
-			transform.Rotate (Vector3.down * Time.deltaTime * 10 * BossAttackedCount);
+			bossAnim.SetBool ("Move", true);
+			transform.Rotate (Vector3.down * Time.deltaTime * 12 * BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
 			bossShot = false;
 			waitTime = 0;
@@ -106,6 +98,7 @@ public class BossMoveManager : MonoBehaviour {
 
 		//エクレアが真後ろにいるとき反転してくる
 		if (difDistanceCT > 0) {
+			bossShot = false;
 			wait = true;
 		}
 		if (wait == true) {
@@ -124,7 +117,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//ボスの砲撃
 //ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 9.0f) {
+		if (centerDistance >= 8.0f) {
 			bossShot = true;
 		} else {
 			bossShot = false;
@@ -135,6 +128,7 @@ public class BossMoveManager : MonoBehaviour {
 			shotInterval = 0;			
 			if (bossShot == true) {
 				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
+				Instantiate (muzzleFrash, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 			}
 		}
 			
