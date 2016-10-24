@@ -8,6 +8,10 @@ public class BoltScript : MonoBehaviour {
     public AudioClip boltLandSound;
 
     public bool isLanded = false;
+    /// <summary>
+    /// 固定ボルトかどうか
+    /// </summary>
+    public bool isFixed = false;
 	
 	// Use this for initialization
 	void Start () {

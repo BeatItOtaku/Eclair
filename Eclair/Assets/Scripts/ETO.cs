@@ -37,7 +37,7 @@ public class ETO : MonoBehaviour {
 			im.Idle ();
 			gameObject.SetActive (false);
 
-			if (target.layer == 7) {
+			if (target.GetComponent<BoltScript>().isFixed == false) {
 				//layer7は"Bolt"
 				Destroy (target);
 			}
