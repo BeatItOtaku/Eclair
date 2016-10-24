@@ -51,6 +51,8 @@ public class BoltScript : MonoBehaviour {
 		if (enemy != null) {//敵だった時
 			enemy.Damage (5, gameObject.transform.forward);
 			Destroy (gameObject, 0.5f);
+		} else if (collider.gameObject.tag == "Boss") {
+			Destroy (gameObject, 0.5f);
 		}
 		else {//敵じゃなかった時
 		
