@@ -25,8 +25,8 @@ public class ETO : MonoBehaviour {
 	}
 	private void OnCollisionEnter (Collision collider)
 	{
-		Debug.Log ("ETO.OnCollisionEnter");
-		if (collider.gameObject.tag == "Bolt" ) {	
+		//Debug.Log ("ETO.OnCollisionEnter");
+		if (collider.gameObject.tag == "Bolt") {	
 			Debug.Log ("CollideToBolt");
 			player.transform.position = target.transform.position;
 			Instantiate (lightning, transform.position, transform.rotation);
@@ -34,14 +34,22 @@ public class ETO : MonoBehaviour {
 			InputManager.etoile = false;
 			im.Idle ();
 			gameObject.SetActive (false);
-		}			
-		if(collider.gameObject.tag == "EclairKeepOut"){
+		} else if (collider.gameObject.tag == "EclairKeepOut") {
 			Debug.Log ("CollideToKeepOut");
 			player.transform.position = InputManager.eto_.transform.position;
 			Destroy (target);
 			InputManager.etoile = false;
 			im.Idle ();
 			gameObject.SetActive (false);
+		} else {
+			try{
+				EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
+				//ここで例外が発生しないということはエクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわち敵である
+				enemy.Damage(30);
+			}
+			catch{
+				//衝突した相手がBoltでもKeepoutでも敵でもなかった時
+			}
 		}
 	}
 }
