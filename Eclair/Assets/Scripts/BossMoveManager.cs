@@ -16,7 +16,7 @@ public class BossMoveManager : MonoBehaviour {
 	private bool bossShot = true;
 	public static bool bossAttacked = false;
 
-	private int BossAttackedCount = 1;
+	public static int BossAttackedCount = 1;
 
 	private Vector3 playerV;
 	private Vector3 leftFootV;
@@ -85,7 +85,7 @@ public class BossMoveManager : MonoBehaviour {
 				bossAnim.SetBool ("RightRotate", false);
 
 				bossAnim.SetBool ("MoveForward", true);
-				transform.position += transform.forward * Time.deltaTime * BossAttackedCount;
+				transform.position += transform.forward * Time.deltaTime;
 				waitTime = 0;
 			}
 
@@ -141,7 +141,6 @@ public class BossMoveManager : MonoBehaviour {
 		//ボスが被弾したとき
 		if (bossAttacked == true) {
 			bossAnim.SetTrigger("BossAttacked");
-			BossAttackedCount++;
 			Debug.Log ("attack");
 			bossAttacked = false;
 		}
@@ -151,6 +150,7 @@ public class BossMoveManager : MonoBehaviour {
 		{
 			bossAnim.SetTrigger ("BossKilled");
 			Debug.Log ("kill");
+			gameObject.SetActive(false);
 		}
 }
 }

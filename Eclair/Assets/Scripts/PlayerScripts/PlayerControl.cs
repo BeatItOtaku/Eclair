@@ -116,7 +116,7 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
-		KilledManagament ();
+		//KilledManagament ();
 
 
 	}
@@ -273,13 +273,13 @@ public class PlayerControl : MonoBehaviour
 
 	}
 
-	void KilledManagament()
+	/*void KilledManagament()
 	{
 		if (currentHP == 0)
 		{
-			anim.SetTrigger ("EcalirKilled");
+			anim.SetTrigger ("EclairKilled");
 		}
-	}
+	}*/
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{

@@ -15,7 +15,8 @@ public class BossTail : MonoBehaviour {
 	private void OnCollisionEnter (Collision collider)
 	{
 		//エトワールでぶつかったとき
-		if(collider.gameObject.tag == "player"){
+		if(collider.gameObject.tag == "ETOEclair"){
+			BossMoveManager.BossAttackedCount++;
 			BossMoveManager.bossAttacked = true;
 		}
 		//SBTで攻撃したとき
