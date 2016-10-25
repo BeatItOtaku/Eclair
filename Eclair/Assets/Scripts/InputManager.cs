@@ -20,6 +20,7 @@ public class InputManager : MonoBehaviour {
 	public CrossHairController crossHair;
 
     public CameraController camControl;
+	public CamSensitivityController camSensitivityControl;
 
     public AudioSource audioSource;
 
@@ -195,6 +196,13 @@ public class InputManager : MonoBehaviour {
 				playerState_ = PlayerStates.Etoile;
 				player.SetActive (false);
 			}
+		}
+
+		//カメラ感度
+		if (Input.GetButtonDown ("Plus")) {
+			camSensitivityControl.Up ();
+		} else if (Input.GetButtonDown ("Minus")) {
+			camSensitivityControl.Down ();
 		}
 	}
 
