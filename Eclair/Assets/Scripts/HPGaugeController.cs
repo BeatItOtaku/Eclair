@@ -80,8 +80,8 @@ public class HPGaugeController : MonoBehaviour {
         return HPGaugeWidth - empty.GetComponent<RectTransform>().sizeDelta.x;
     }
 
-    public void Damage(int hp)
+    /*public void Damage(int hp)
     {
         currentHP -= hp;
-    }
+    }*/
 }
