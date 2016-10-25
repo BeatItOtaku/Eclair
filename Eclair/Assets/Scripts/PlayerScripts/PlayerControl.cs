@@ -18,7 +18,6 @@ public class PlayerControl : MonoBehaviour
 	public CameraController tutumin;
 
 	public HPGaugeController hpGaugeController;
-	public HPGaugeController damage;
 
 	private int hp;
 

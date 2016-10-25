@@ -13,8 +13,10 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject bossBarret;
 	public GameObject muzzleFrash;
 	public GameObject bossTail;
-	public GameObject bossSmoke1;
-	public GameObject bossSmoke2;
+	public GameObject bossSmoke1;//エフェクト
+	public GameObject bossSmoke2;//エフェクト
+	public GameObject fire;//エフェクト
+	public GameObject bossKilled;//爆発する
 
 	private bool bossShot;
 	public static bool bossAttacked = false;
@@ -49,6 +51,7 @@ public class BossMoveManager : MonoBehaviour {
 		bossShot = false;
 		bossSmoke1.SetActive (false);
 		bossSmoke2.SetActive (false);
+		fire.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -150,12 +153,14 @@ public class BossMoveManager : MonoBehaviour {
 		if (BossAttackedCount == 3)
 		{
 			bossSmoke2.SetActive (true);
+			fire.SetActive (true);
 		}
 		//ボスが倒されたとき
 		if (BossAttackedCount == 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
 			bossAnim.SetTrigger ("BossKilled");
 			Debug.Log ("kill");
+			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
 			gameObject.SetActive(false);
 		}
 }
