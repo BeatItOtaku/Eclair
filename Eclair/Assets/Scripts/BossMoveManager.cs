@@ -13,8 +13,10 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject bossBarret;
 	public GameObject muzzleFrash;
 	public GameObject bossTail;
+	public GameObject bossSmoke1;
+	public GameObject bossSmoke2;
 
-	private bool bossShot = false;
+	private bool bossShot;
 	public static bool bossAttacked = false;
 
 	public static int BossAttackedCount = 1;
@@ -44,6 +46,9 @@ public class BossMoveManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		bossAnim = boss.GetComponent<Animator> ();
+		bossShot = false;
+		bossSmoke1.SetActive (false);
+		bossSmoke2.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -66,11 +71,11 @@ public class BossMoveManager : MonoBehaviour {
 
 		//右回転
 		if (difDistanceLR > 2.0f && waitTime == 0) {
+			bossShot = false;
 			//Debug.Log ("right");
 			bossAnim.SetBool ("Move", true);
 			transform.Rotate (Vector3.up * Time.deltaTime * 12 * BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
-			bossShot = false;
 			waitTime = 0;
 		}
 
@@ -88,11 +93,11 @@ public class BossMoveManager : MonoBehaviour {
 
 		//左回転
 		else if (difDistanceLR < -2.0f && waitTime == 0) {
+			bossShot = false;
 			//Debug.Log ("left");
 			bossAnim.SetBool ("Move", true);
 			transform.Rotate (Vector3.down * Time.deltaTime * 12 * BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
-			bossShot = false;
 			waitTime = 0;
 		}
 
@@ -103,8 +108,8 @@ public class BossMoveManager : MonoBehaviour {
 		}
 		if (wait == true) {
 			waitTime += Time.deltaTime;
-			if (waitTime > 2f) {
-				transform.Rotate (Vector3.down * Time.deltaTime * 60);
+			if (waitTime > 2f/BossAttackedCount) {
+				transform.Rotate (Vector3.down * Time.deltaTime * 40*BossAttackedCount);
 			}
 		}
 		if (difDistanceLR < -4.0f || difDistanceLR > 4.0f) {
@@ -117,7 +122,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//ボスの砲撃
 //ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 8.0f) {
+		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<2.0f && difDistanceCT < 0) {
 			bossShot = true;
 		} else {
 			bossShot = false;
@@ -138,7 +143,14 @@ public class BossMoveManager : MonoBehaviour {
 			Debug.Log ("attack");
 			bossAttacked = false;
 		}
-
+		if (BossAttackedCount == 2)
+		{
+			bossSmoke1.SetActive (true);
+		}
+		if (BossAttackedCount == 3)
+		{
+			bossSmoke2.SetActive (true);
+		}
 		//ボスが倒されたとき
 		if (BossAttackedCount == 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{

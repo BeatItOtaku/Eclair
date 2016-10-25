@@ -17,10 +17,10 @@ public class PlayerControl : MonoBehaviour
 
 	public CameraController tutumin;
 
-	private int currentHP;
-	private int hp;
+	public HPGaugeController hpGaugeController;
+	public HPGaugeController damage;
 
-	public GameObject enemyObject;
+	private int hp;
 
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
@@ -82,6 +82,8 @@ public class PlayerControl : MonoBehaviour
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		sprintFactor = sprintSpeed / runSpeed;
 		angleId = Animator.StringToHash ("AngleUsing");
+		//damage = hpGaugeController.GetComponent<HPGaugeController> ();
+
 	}
 
 	bool IsGrounded() {
@@ -269,8 +271,7 @@ public class PlayerControl : MonoBehaviour
 				attackedTime = 0;
 			}
 		}
-		currentHP -= hp;
-
+		hpGaugeController.Damage ((int)(Time.deltaTime*hp + 0.5f));
 	}
 
 	/*void KilledManagament()
