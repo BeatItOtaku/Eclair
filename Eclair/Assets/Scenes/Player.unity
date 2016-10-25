@@ -930,6 +930,11 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013882709788, guid: 058f5889209e04c4b92707084a5c4dfd,
+        type: 2}
+      propertyPath: HPGauge
+      value: 
+      objectReference: {fileID: 1928534849}
     m_RemovedComponents:
     - {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
@@ -3686,7 +3691,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011243394194, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000012624373660, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a,
         type: 2}
@@ -3706,3 +3711,9 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1928534849 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000010387352836, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1928534848}
+  m_Script: {fileID: 11500000, guid: df6dfc3e2f5ed43fd8b229142c7819e2, type: 3}

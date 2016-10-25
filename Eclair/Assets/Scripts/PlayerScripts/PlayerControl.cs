@@ -17,8 +17,18 @@ public class PlayerControl : MonoBehaviour
 
 	public CameraController tutumin;
 
-	private int currentHP;
-	private int hp;
+	public HPGaugeController HPGauge;
+	private int hp_ = MaxHP;
+	public int HP{
+		get{
+			return hp_;
+		}
+		set{
+			hp_ = value;
+			HPGauge.currentHP = value;
+		}
+	}
+	const int MaxHP = 100;
 
 	public GameObject enemyObject;
 
@@ -251,7 +261,6 @@ public class PlayerControl : MonoBehaviour
 			transform.LookAt (bossFoot.transform);
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("BigAttacked",true);
-			hp = 10;
 			if (attackedTime > 1.3f) {
 				BossFootCollider.bossFootAttack = false;
 				anim.SetBool ("BigAttacked",false);
@@ -262,14 +271,12 @@ public class PlayerControl : MonoBehaviour
 		if (BossBarret.bossShotAttack == true) {
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("SmallAttacked",true);
-			hp = 5;
 			if (attackedTime > 0.4f) {
 				BossBarret.bossShotAttack = false;
 				anim.SetBool ("SmallAttacked",false);
 				attackedTime = 0;
 			}
 		}
-		currentHP -= hp;
 
 	}
 
@@ -345,5 +352,9 @@ public class PlayerControl : MonoBehaviour
 	public bool isSprinting()
 	{
 		return sprint && !aim && (isMoving);
+	}
+
+	public void Damage(int damage){
+		HP -= damage;
 	}
 }
