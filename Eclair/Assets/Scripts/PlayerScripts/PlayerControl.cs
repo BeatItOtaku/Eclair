@@ -17,8 +17,18 @@ public class PlayerControl : MonoBehaviour
 
 	public CameraController tutumin;
 
-	private int currentHP;
-	private int hp;
+	public HPGaugeController HPGauge;
+	private int hp_ = MaxHP;
+	public int HP{
+		get{
+			return hp_;
+		}
+		set{
+			hp_ = value;
+			HPGauge.currentHP = value;
+		}
+	}
+	const int MaxHP = 100;
 
 	public GameObject enemyObject;
 
@@ -85,7 +95,7 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	bool IsGrounded() {
-		return Physics.Raycast(transform.position+ new Vector3(0,0.1f,0), -Vector3.up, distToGround + 0.5f);
+		return Physics.Raycast(transform.position + new Vector3(0,0.1f,0), -Vector3.up,  0.15f);
 	}
 
 	void Update(){
@@ -116,7 +126,7 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
-		KilledManagament ();
+		//KilledManagament ();
 
 
 	}
@@ -181,7 +191,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) {
+		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -198,8 +208,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			if (BossFootCollider.bossFootAttack == false || BossBarret.bossShotAttack == false) 
-			{
+			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
 		} else {
@@ -248,11 +257,10 @@ public class PlayerControl : MonoBehaviour
 	void HPManagament()
 	{
 		if (BossFootCollider.bossFootAttack == true) { 
-			GameObject bossFoot = GameObject.FindGameObjectWithTag ("EnemyObject");
+			GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
 			transform.LookAt (bossFoot.transform);
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("BigAttacked",true);
-			hp = 10;
 			if (attackedTime > 1.3f) {
 				BossFootCollider.bossFootAttack = false;
 				anim.SetBool ("BigAttacked",false);
@@ -262,25 +270,23 @@ public class PlayerControl : MonoBehaviour
 		}
 		if (BossBarret.bossShotAttack == true) {
 			attackedTime += Time.deltaTime;
-			anim.SetTrigger ("SmallAttacked");
-			hp = 5;
-			if (attackedTime > 1.0f) {
+			anim.SetBool ("SmallAttacked",true);
+			if (attackedTime > 0.4f) {
 				BossBarret.bossShotAttack = false;
 				anim.SetBool ("SmallAttacked",false);
 				attackedTime = 0;
 			}
 		}
-		currentHP -= hp;
 
 	}
 
-	void KilledManagament()
+	/*void KilledManagament()
 	{
 		if (currentHP == 0)
 		{
-			anim.SetTrigger ("EcalirKilled");
+			anim.SetTrigger ("EclairKilled");
 		}
-	}
+	}*/
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{
@@ -346,5 +352,9 @@ public class PlayerControl : MonoBehaviour
 	public bool isSprinting()
 	{
 		return sprint && !aim && (isMoving);
+	}
+
+	public void Damage(int damage){
+		HP -= damage;
 	}
 }

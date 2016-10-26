@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BoltScript : MonoBehaviour {
@@ -8,6 +8,10 @@ public class BoltScript : MonoBehaviour {
     public AudioClip boltLandSound;
 
     public bool isLanded = false;
+    /// <summary>
+    /// 固定ボルトかどうか
+    /// </summary>
+    public bool isFixed = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -51,9 +55,10 @@ public class BoltScript : MonoBehaviour {
 		if (enemy != null) {//敵だった時
 			enemy.Damage (5, gameObject.transform.forward);
 			Destroy (gameObject, 0.5f);
+		} else if (collider.gameObject.tag == "Boss") {
+			Destroy (gameObject, 0.5f);
 		}
 		else {//敵じゃなかった時
-		
 		
 			//Debug.Log ("hoge");
 			try {
