@@ -21,7 +21,7 @@ GameObject:
   - 4: {fileID: 4000014212722886}
   - 33: {fileID: 33000011788267868}
   - 23: {fileID: 23000012929564444}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   - 114: {fileID: 114000013627491700}
   - 54: {fileID: 54000012886696046}
   - 136: {fileID: 136000012459846244}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: NoMoveBoltPrefab
   m_TagString: NoMoveBolt
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   - 4: {fileID: 4000013600122016}
   - 33: {fileID: 33000012180824858}
   - 23: {fileID: 23000012607670398}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
