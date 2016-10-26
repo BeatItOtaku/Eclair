@@ -37,4 +37,11 @@ public class EnemyNormal : EnemyBase {
 			Destroy (gameObject);
 		}
 	}
+
+	void OnCollisionEnter(Collision col){
+		Debug.Log ("kougeki");
+		if(col.gameObject.CompareTag("Player")){
+			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
+		}
+	}
 }

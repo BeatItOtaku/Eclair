@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviour {
 
 	const float DefaultShotDistance = 10;
 
-	public enum PlayerStates {Idle,LockOn , Bolt, SBT, Etoile}
+	public enum PlayerStates {Idle,LockOn , Bolt, SBT, Etoile, Damaging}
 
 	private PlayerStates playerState_ = PlayerStates.Idle;
 	/// <summary>
