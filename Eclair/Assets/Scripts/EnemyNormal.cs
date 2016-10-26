@@ -4,7 +4,8 @@ using System.Collections;
 public class EnemyNormal : EnemyBase {
 
 	public int maxHp = 15;
-    public int force = 4;
+    public int attackReaction = 4;
+    public int damageReaction = 6;
 	public int HP{ get; set; }
 
 	public GameObject player;
@@ -37,11 +38,18 @@ public class EnemyNormal : EnemyBase {
 
 	public override void Damage(int damage,Vector3 direction){
 		HP -= damage;
-		Debug.Log ("ZakoHP:" + HP);
-		if (HP <= 0) {
+        if (HP <= 0)
+        {
             anim.SetTrigger("Died");
-			Destroy (gameObject,1.0f);
-		}
+            Destroy(gameObject, 1.0f);
+        }
+        else
+        {
+            anim.SetTrigger("Damaged");
+            GetComponent<Rigidbody>().AddForce(-transform.forward * damageReaction, ForceMode.VelocityChange);
+        }
+        Debug.Log ("ZakoHP:" + HP);
+
 	}
 
 	void OnCollisionEnter(Collision col){
@@ -49,7 +57,7 @@ public class EnemyNormal : EnemyBase {
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
 			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
-            GetComponent<Rigidbody>().AddForce(-transform.forward * force, ForceMode.VelocityChange);
+            GetComponent<Rigidbody>().AddForce(-transform.forward * attackReaction, ForceMode.VelocityChange);
 		}
 	}
 }
