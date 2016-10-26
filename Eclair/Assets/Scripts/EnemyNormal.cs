@@ -3,10 +3,12 @@ using System.Collections;
 
 public class EnemyNormal : EnemyBase {
 
-	public int maxHp = 16;
+	public int maxHp = 15;
+    public int force = 4;
 	public int HP{ get; set; }
 
 	public GameObject player;
+    private Animator anim;
 
 	/// <summary>
 	/// エクレアを感知する距離
@@ -17,16 +19,19 @@ public class EnemyNormal : EnemyBase {
 	void Start () {
 		HP = maxHp;
 		player = GameObject.FindGameObjectWithTag ("Player");
+        anim = GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Vector3.Distance (player.transform.position, transform.position) < searchDistance) {
-			//プレイヤーが近づいてる時
+            //プレイヤーが近づいてる時
+            anim.SetBool("isAttacking", true);
 			transform.LookAt(player.transform.position);
 			transform.position += transform.forward * Time.deltaTime;
 		} else {
-			transform.position += transform.forward * Time.deltaTime;
+            anim.SetBool("isAttacking", false);
+            transform.position += transform.forward * Time.deltaTime;
 		}
 	}
 
@@ -34,14 +39,17 @@ public class EnemyNormal : EnemyBase {
 		HP -= damage;
 		Debug.Log ("ZakoHP:" + HP);
 		if (HP <= 0) {
-			Destroy (gameObject);
+            anim.SetTrigger("Died");
+			Destroy (gameObject,1.0f);
 		}
 	}
 
 	void OnCollisionEnter(Collision col){
 		Debug.Log ("kougeki");
 		if(col.gameObject.CompareTag("Player")){
+            anim.SetTrigger("Attack");
 			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
+            GetComponent<Rigidbody>().AddForce(-transform.forward * force, ForceMode.VelocityChange);
 		}
 	}
 }
