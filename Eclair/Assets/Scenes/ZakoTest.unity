@@ -657,6 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 15
+  force: 6
   player: {fileID: 0}
   searchDistance: 16
 --- !u!54 &1532247627
@@ -691,7 +692,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012142452824, guid: c6746ad9d4c2d1e48a81cfd80b009f25, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5.48
       objectReference: {fileID: 0}
     - target: {fileID: 4000012142452824, guid: c6746ad9d4c2d1e48a81cfd80b009f25, type: 2}
       propertyPath: m_LocalRotation.x
