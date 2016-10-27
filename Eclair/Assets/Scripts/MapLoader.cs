@@ -38,7 +38,7 @@ public class MapLoader : MonoBehaviour
     {
         if (MapAsync == null)
         {
-            MapAsync = SceneManager.LoadSceneAsync(2);//, LoadSceneMode.Additive);
+            MapAsync = SceneManager.LoadSceneAsync("BiO Map");//, LoadSceneMode.Additive);
             MapAsync.allowSceneActivation = false;
         }
     }
@@ -61,7 +61,7 @@ public class MapLoader : MonoBehaviour
         {
             //Debug.Log("aho");
             MapAsync.allowSceneActivation = true;
-            SceneManager.LoadSceneAsync(1,LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync("Player",LoadSceneMode.Additive);
             startGameFlag = false;
             MapAsync = null;
         }
