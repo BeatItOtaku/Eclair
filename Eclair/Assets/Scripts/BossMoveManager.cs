@@ -3,8 +3,10 @@ using System.Collections;
 
 public class BossMoveManager : MonoBehaviour {
 
+	//エクレア
 	public GameObject player;
 
+	//ボスの体とエフェクト
 	public GameObject boss;
 	public GameObject bossCenter;
 	public GameObject leftFoot;
@@ -17,6 +19,9 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject bossSmoke2;//エフェクト
 	public GameObject fire;//エフェクト
 	public GameObject bossKilled;//爆発する
+
+	public GameObject bossKilledCameraPosition;
+	public Transform bossCamera;
 
 	private bool bossShot;
 	public static bool bossAttacked = false;
@@ -40,7 +45,7 @@ public class BossMoveManager : MonoBehaviour {
 	private float shotInterval =0;
 	private float shotIntervalMax = 0.1f;
 
-	private float waitTime = 0;
+	public static float waitTime = 0;
 	private bool wait = false;
 
 	private Animator bossAnim;
@@ -156,12 +161,15 @@ public class BossMoveManager : MonoBehaviour {
 			fire.SetActive (true);
 		}
 		//ボスが倒されたとき
-		if (BossAttackedCount == 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		if (BossAttackedCount == 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
-			bossAnim.SetTrigger ("BossKilled");
-			Debug.Log ("kill");
-			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
-			gameObject.SetActive(false);
+			bossKilledCameraPosition.transform.position = bossCamera.position;
+			bossKilledCameraPosition.transform.LookAt (bossCamera);
+			PlayerControl.EclairImmobile = true;
+				bossAnim.SetTrigger ("BossKilled");
+				Debug.Log ("kill");
+				Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
+				gameObject.SetActive (false);
 		}
 }
 }

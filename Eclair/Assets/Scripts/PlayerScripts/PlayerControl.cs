@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
 
 	public HPGaugeController hpGaugeController;
 
+	public InputManager im;
 	private int hp;
 
 	public float walkSpeed = 4.0f;
@@ -59,6 +60,8 @@ public class PlayerControl : MonoBehaviour
 
 	private bool isMoving = false;
 
+	public static bool EclairImmobile;
+
 	// fly
 	public static bool fly = false;
 	private float distToGround;
@@ -82,6 +85,7 @@ public class PlayerControl : MonoBehaviour
 		sprintFactor = sprintSpeed / runSpeed;
 		angleId = Animator.StringToHash ("AngleUsing");
 		//damage = hpGaugeController.GetComponent<HPGaugeController> ();
+		EclairImmobile = false;
 
 	}
 
@@ -117,6 +121,7 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
+		StopManagament ();
 		//KilledManagament ();
 
 
@@ -182,7 +187,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
+		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -199,7 +204,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
+			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false) {
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
 		} else {
@@ -270,7 +275,7 @@ public class PlayerControl : MonoBehaviour
 				attackedTime = 0;
 			}
 		}
-		hpGaugeController.Damage ((int)(Time.deltaTime*hp + 0.5f));
+		//hpGaugeController.Damage ((int)(Time.deltaTime*hp + 0.5f));
 	}
 
 	/*void KilledManagament()
@@ -346,4 +351,14 @@ public class PlayerControl : MonoBehaviour
 	{
 		return sprint && !aim && (isMoving);
 	}
+	void StopManagament(){
+		if (EclairImmobile == true) {
+			im.Idle ();
+			im.enabled = false;
+			anim.enabled = false;
+		} else {
+			anim.enabled = true;
+			im.enabled = true;
+		}
+}
 }
