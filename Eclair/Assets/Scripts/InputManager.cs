@@ -45,7 +45,7 @@ public class InputManager : MonoBehaviour {
 
 	const float DefaultShotDistance = 10;
 
-	public enum PlayerStates {Idle,LockOn , Bolt, SBT, Etoile}
+	public enum PlayerStates {Idle,LockOn , Bolt, SBT, Etoile, Damaging}
 
 	private PlayerStates playerState_ = PlayerStates.Idle;
 	/// <summary>
@@ -221,7 +221,7 @@ public class InputManager : MonoBehaviour {
 				Debug.Log (c.name);
 				enemy.Damage (15, target.transform.position - player.transform.position);
 			} else {
-				Debug.Log (colliders.Length);
+				//Debug.Log (colliders.Length);
 			}
 		}
 	}
