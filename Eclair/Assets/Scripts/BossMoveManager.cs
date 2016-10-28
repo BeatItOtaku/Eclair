@@ -51,6 +51,8 @@ public class BossMoveManager : MonoBehaviour {
 
 	private Animator bossAnim;
 
+	private AsyncOperation result;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindWithTag ("Player");
@@ -59,6 +61,8 @@ public class BossMoveManager : MonoBehaviour {
 		bossSmoke1.SetActive (false);
 		bossSmoke2.SetActive (false);
 		fire.SetActive (false);
+		result = SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
+		result.allowSceneActivation = false;
 	}
 	
 	// Update is called once per frame
@@ -150,6 +154,7 @@ public class BossMoveManager : MonoBehaviour {
 		//ボスが被弾したとき
 		if (bossAttacked == true) {
 			bossAnim.SetTrigger("BossAttacked");
+			//BossAttackedCount++;
 			Debug.Log ("attack");
 			bossAttacked = false;
 		}
@@ -163,16 +168,17 @@ public class BossMoveManager : MonoBehaviour {
 			fire.SetActive (true);
 		}
 		//ボスが倒されたとき
-		if (BossAttackedCount == 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		if (BossAttackedCount >= 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
+			CameraController.cursorIsLocked = false;
+			result.allowSceneActivation = true;
+			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
+			gameObject.SetActive (false);
 			bossKilledCameraPosition.transform.position = bossCamera.position;
 			bossKilledCameraPosition.transform.LookAt (bossCamera);
-			PlayerControl.EclairImmobile = true;
-				bossAnim.SetTrigger ("BossKilled");
-				Debug.Log ("kill");
-				Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
-				gameObject.SetActive (false);
-			SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
+			//PlayerControl.EclairImmobile = true;
+			bossAnim.SetTrigger ("BossKilled");
+			Debug.Log ("kill");
 		}
-}
+	}
 }
