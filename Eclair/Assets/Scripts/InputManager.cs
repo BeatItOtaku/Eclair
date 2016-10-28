@@ -7,6 +7,7 @@ using System.Collections;
 public class InputManager : MonoBehaviour {
 
 	public GameObject player;
+	public GameObject muzzle;
 	public GameObject eto;
 	public static GameObject eto_= null;
 	public static bool etoile;
@@ -173,7 +174,7 @@ public class InputManager : MonoBehaviour {
 			}
 		}
 		else if (Input.GetButtonUp ("Thunder")) {
-			thunderEffect.StopEffect ();
+			//thunderEffect.StopEffect ();
 			sbt = false;
 			Idle ();
 		}
@@ -209,11 +210,11 @@ public class InputManager : MonoBehaviour {
 	private void startSBT(GameObject target){
 		sbt = true;
 		playerState_ = PlayerStates.SBT;
-		thunderEffect.StartEffect (player.transform.position, target.transform.position);
+		thunderEffect.StartEffect (muzzle.transform.position, target.transform.position);
 		audioSource.PlayOneShot(SBTSound);
 
 		//ビリビリ上にあるオブジェクトを求めるよ
-		Collider[] colliders = Physics.OverlapCapsule(player.transform.position, target.transform.position,1);
+		Collider[] colliders = Physics.OverlapCapsule(muzzle.transform.position, target.transform.position,1);
 		foreach(Collider c in colliders){
 			EnemyBase enemy = c.gameObject.GetComponent<EnemyBase>();
 			//Destroy (c.gameObject);
