@@ -28,14 +28,13 @@ public class ThunderSwitchScript : MonoBehaviour {
 				float angle = Vector3.Angle (thunder, objectVector);
 				time += Time.deltaTime;
 
-				if (satou != null) {
 					if (angle < 30) {
 						if (time < 3) {
 							animator.SetBool ("ThunderSwitch", true);
 							Debug.Log ("hi");
 						}
 					}
-				}
+
 				if (time >= 3) {
 					Debug.Log ("eiei");
 					animator.SetBool ("ThunderSwitch", false);

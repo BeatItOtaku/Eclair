@@ -97,6 +97,10 @@ public class CameraController : MonoBehaviour
 			if (InputManager.etoile == false) {
 				lookAt = player;
 			}
+		if (BossMoveManager.BossAttackedCount == 2) {
+			lookAt = CameraChanger.mainCamera_;
+		}
+
 	}
 
 	// 全ての処理が終わったあとにカメラの位置を調整するためにLateUpdateにする
@@ -117,24 +121,26 @@ public class CameraController : MonoBehaviour
         //distance += scroll * 4;
         //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
         if (cursorIsLocked) {
-			if (isLockOn && lockOnTarget != null)
-            {
-                Vector2 rot = CaliculateTargetRotation(lockOnTarget);
-                targetY = rot.y;
-                targetAngle = rot.x;
-                targetAngle += cameraVerticalAngleOffsetWhenLockOn;
-                //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
-            }
-            else
-            {
-                float deltaY = Input.GetAxis("Camera X") * Time.deltaTime * mouseSensitivity;
-                float deltaAngle = Input.GetAxis("Camera Y") * Time.deltaTime * mouseSensitivity;
-                //Debug.Log(deltaY + "," + deltaAngle);
-				float deltaYAbs = Mathf.Abs (deltaY);
-				float deltaAngleAbs = Mathf.Abs (deltaAngle);
-				if (0.1 < deltaYAbs && deltaYAbs < 120) targetY += deltaY;
-				if (0.1 < deltaAngleAbs && deltaAngleAbs < 90) targetAngle -= deltaAngle;
-            }
+			if (isLockOn && lockOnTarget != null) {
+				Vector2 rot = CaliculateTargetRotation (lockOnTarget);
+				targetY = rot.y;
+				targetAngle = rot.x;
+				targetAngle += cameraVerticalAngleOffsetWhenLockOn;
+				//Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
+			} else {
+				
+				if (PlayerControl.EclairImmobile == false) {
+					float deltaY = Input.GetAxis ("Camera X") * Time.deltaTime * mouseSensitivity;
+					float deltaAngle = Input.GetAxis ("Camera Y") * Time.deltaTime * mouseSensitivity;
+					//Debug.Log(deltaY + "," + deltaAngle);
+					float deltaYAbs = Mathf.Abs (deltaY);
+					float deltaAngleAbs = Mathf.Abs (deltaAngle);
+					if (0.1 < deltaYAbs && deltaYAbs < 120)
+						targetY += deltaY;
+					if (0.1 < deltaAngleAbs && deltaAngleAbs < 90)
+						targetAngle -= deltaAngle;
+				}
+			}
 		}
 
         //Debug.Log("targetY = " + targetY + ", targetAngle = " + targetAngle);
@@ -153,6 +159,7 @@ public class CameraController : MonoBehaviour
         setCameraPosition (currentY, currentAngle);
 
 	}
+
 
 	private void setCameraPosition(float y, float angle){
 			//if (angle > maxAngle) angle = maxAngle;

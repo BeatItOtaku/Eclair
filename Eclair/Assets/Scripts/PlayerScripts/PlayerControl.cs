@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 
@@ -29,8 +29,10 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 	const int MaxHP = 100;
+	public HPGaugeController hpGaugeController;
 
-	public GameObject enemyObject;
+	public InputManager im;
+	private int hp;
 
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
@@ -70,6 +72,8 @@ public class PlayerControl : MonoBehaviour
 
 	private bool isMoving = false;
 
+	public static bool EclairImmobile;
+
 	// fly
 	public static bool fly = false;
 	private float distToGround;
@@ -92,6 +96,9 @@ public class PlayerControl : MonoBehaviour
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		sprintFactor = sprintSpeed / runSpeed;
 		angleId = Animator.StringToHash ("AngleUsing");
+		//damage = hpGaugeController.GetComponent<HPGaugeController> ();
+		EclairImmobile = false;
+
 	}
 
 	bool IsGrounded() {
@@ -126,6 +133,7 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
+		StopManagament ();
 		//KilledManagament ();
 
 
@@ -191,7 +199,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
+		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -208,7 +216,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
+			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false) {
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
 		} else {
@@ -356,5 +364,15 @@ public class PlayerControl : MonoBehaviour
 
 	public void Damage(int damage){
 		HP -= damage;
+	}
+	void StopManagament(){
+		if (EclairImmobile == true) {
+			im.Idle ();
+			im.enabled = false;
+			anim.enabled = false;
+		} else {
+			anim.enabled = true;
+			im.enabled = true;
+		}
 	}
 }
