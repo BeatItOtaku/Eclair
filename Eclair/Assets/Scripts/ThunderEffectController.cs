@@ -7,6 +7,8 @@ public class ThunderEffectController : MonoBehaviour {
     public LineRenderer core;
     //public LineRenderer clad;
 	public List<LineRenderer> clads = new List<LineRenderer> ();
+	public List<float> cladWidth = new List<float>();
+	public float coreWidth = 0.6f;
 
     public Vector3 startPoint,endPoint;
 
@@ -15,13 +17,22 @@ public class ThunderEffectController : MonoBehaviour {
     public float speed = 10.0f;//電撃が進むスピード
     public float cladTimeInterval = 0.1f;
 
+	public float coreFadeFactor = 0.8f;
+	public float cladFadeFactor = 0.9f;
+
     private List<Vector3> vertexes = new List<Vector3>();
     private const int MaxVertexSize = 128;
 
+	private float currentCoreWidth;
+	private List<float> currentCladWidth = new List<float>();
+
+	private const float FadeTime = 1.0f;//この時間経過するとstopEffectします。
+	private float time;
+
     //アニメーション関連
-    private float length;//startPointとendPointの長さ
-    private Vector3 endPoint_raw;//startPointから徐々にendPointに近づいていく点
-    private float cursor = 0;//アニメーションがどれだけ進んでるか 0からlengthまでの値を取る
+    //private float length;//startPointとendPointの長さ
+    //private Vector3 endPoint_raw;//startPointから徐々にendPointに近づいていく点
+    //private float cursor = 0;//アニメーションがどれだけ進んでるか 0からlengthまでの値を取る
 
     private float cladTimeIntervalCount = 0;
 
@@ -29,27 +40,26 @@ public class ThunderEffectController : MonoBehaviour {
 	void Start () {
         //vertexes = new Vector3[MaxVertexSize];
         StartEffect();
+		//currentCladWidth = new List<float> ();
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-        if (length > cursor)
-        {
-            cursor += speed * Time.deltaTime;
-        }
-        else cursor = length;
+		time += Time.deltaTime;
+		if (time > FadeTime) {
+			StopEffect ();
+			return;
+		}
+	
+		currentCoreWidth *= coreFadeFactor;
+		core.SetWidth (currentCoreWidth, currentCoreWidth);
 
-        endPoint_raw = Vector3.Lerp(startPoint, endPoint, cursor / length);
-        //Debug.Log(cursor);
+		for (int i = 0; i < clads.Count; i++) {
+			currentCladWidth [i] *= cladFadeFactor;
+			clads [i].SetWidth (currentCladWidth [i], currentCladWidth [i]);
+		}
 
-        ReloadCore();
 
-        cladTimeIntervalCount += Time.deltaTime;
-        if(cladTimeIntervalCount > cladTimeInterval)
-        {
-            ReloadClad();
-            cladTimeIntervalCount = 0;
-        }
 	}
 
     /// <summary>
@@ -91,19 +101,33 @@ public class ThunderEffectController : MonoBehaviour {
 
     public void StartEffect()
     {
-        length = (endPoint - startPoint).magnitude;
-        cursor = 0;
+        //length = (endPoint - startPoint).magnitude;
+        //cursor = 0;
+		currentCladWidth.Clear();
+
+		core.SetWidth (coreWidth, coreWidth);
+		for (int i = 0; i < clads.Count; i++) {
+			clads [i].SetWidth (cladWidth [i], cladWidth [i]);
+			currentCladWidth.Add (cladWidth [i]);
+		}
+		currentCoreWidth = coreWidth;
+		//currentCladWidth = cladWidth;
+
+		time = 0;
+
 		gameObject.SetActive(true);
+		ReloadCore ();
+		ReloadClad ();
     }
 
 	public void StopEffect(){
 		gameObject.SetActive(false);
-		cursor = 0;//念のためここでリセットしとく
+		//cursor = 0;//念のためここでリセットしとく
 	}
 
     public void ReloadCore()
     {
-        core.SetPositions(new Vector3[] { startPoint, endPoint_raw });
+        core.SetPositions(new Vector3[] { startPoint, endPoint });
     }
 
 	/// <summary>
@@ -117,7 +141,7 @@ public class ThunderEffectController : MonoBehaviour {
 
 	private void ReloadClad(LineRenderer clad)
     {
-        int size = GenerateVertexes(startPoint, endPoint_raw);
+        int size = GenerateVertexes(startPoint, endPoint);
 		clad.SetVertexCount(size);
         //clad.SetPositions(vertexes);
         clad.SetPositions(vertexes.ToArray());

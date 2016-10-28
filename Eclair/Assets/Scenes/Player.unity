@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1088387005}
+  muzzle: {fileID: 1416817423}
   eto: {fileID: 795536970}
   thunderEffect: {fileID: 376930922}
   EtoScript: {fileID: 795536971}
@@ -935,6 +936,14 @@ Prefab:
       propertyPath: HPGauge
       value: 
       objectReference: {fileID: 1928534849}
+    - target: {fileID: 4000012556574966, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012556574966, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.33
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
@@ -2772,6 +2781,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: cladWidth.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012324290132, guid: d63e8c9400e104dc581759a1c5c0fb2d, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2812,6 +2826,81 @@ Prefab:
         type: 2}
       propertyPath: speed
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011972494722, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.m_StartColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011972494722, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.m_EndColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000014196793120, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.m_StartColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000014196793120, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.m_EndColor.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011347283588, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.startWidth
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011347283588, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.endWidth
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000010966414646, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.startWidth
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000010966414646, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.endWidth
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011972494722, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.startWidth
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 120000011972494722, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: m_Parameters.endWidth
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: randomWidth
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: cladWidth.Array.data[0]
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: cladWidth.Array.data[1]
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: cladWidth.Array.data[2]
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
+        type: 2}
+      propertyPath: cladFadeFactor
+      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d63e8c9400e104dc581759a1c5c0fb2d, type: 2}
