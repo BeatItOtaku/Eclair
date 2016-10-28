@@ -62,6 +62,7 @@ public class MapLoader : MonoBehaviour
             //Debug.Log("aho");
             MapAsync.allowSceneActivation = true;
             SceneManager.LoadSceneAsync("Player",LoadSceneMode.Additive);
+			SceneManager.LoadSceneAsync ("Boss Map", LoadSceneMode.Additive);
             startGameFlag = false;
             MapAsync = null;
         }

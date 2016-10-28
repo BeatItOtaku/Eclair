@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class BossMoveManager : MonoBehaviour {
@@ -52,6 +53,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindWithTag ("Player");
 		bossAnim = boss.GetComponent<Animator> ();
 		bossShot = false;
 		bossSmoke1.SetActive (false);
@@ -170,6 +172,7 @@ public class BossMoveManager : MonoBehaviour {
 				Debug.Log ("kill");
 				Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
 				gameObject.SetActive (false);
+			SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
 		}
 }
 }
