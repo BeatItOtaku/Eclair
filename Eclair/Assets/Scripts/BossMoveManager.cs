@@ -161,11 +161,11 @@ public class BossMoveManager : MonoBehaviour {
 			fire.SetActive (true);
 		}
 		//ボスが倒されたとき
-		if (BossAttackedCount == 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		if (BossAttackedCount == 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
 			bossKilledCameraPosition.transform.position = bossCamera.position;
 			bossKilledCameraPosition.transform.LookAt (bossCamera);
-			PlayerControl.EclairImmobile = true;
+			//PlayerControl.EclairImmobile = true;
 				bossAnim.SetTrigger ("BossKilled");
 				Debug.Log ("kill");
 				Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);

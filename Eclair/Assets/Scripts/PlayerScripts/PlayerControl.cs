@@ -121,7 +121,7 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
-		StopManagament ();
+		//StopManagament ();
 		//KilledManagament ();
 
 
@@ -351,7 +351,7 @@ public class PlayerControl : MonoBehaviour
 	{
 		return sprint && !aim && (isMoving);
 	}
-	void StopManagament(){
+	/*void StopManagament(){
 		if (EclairImmobile == true) {
 			im.Idle ();
 			im.enabled = false;
@@ -360,5 +360,5 @@ public class PlayerControl : MonoBehaviour
 			anim.enabled = true;
 			im.enabled = true;
 		}
-}
+}*/
 }
