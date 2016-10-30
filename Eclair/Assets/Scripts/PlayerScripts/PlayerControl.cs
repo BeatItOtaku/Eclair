@@ -263,6 +263,7 @@ public class PlayerControl : MonoBehaviour
 	void HPManagament()
 	{
 		if (BossFootCollider.bossFootAttack == true) { 
+			Damage (0);
 			GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
 			transform.LookAt (bossFoot.transform);
 			attackedTime += Time.deltaTime;
@@ -271,15 +272,21 @@ public class PlayerControl : MonoBehaviour
 				BossFootCollider.bossFootAttack = false;
 				anim.SetBool ("BigAttacked",false);
 				attackedTime = 0;
+
 			}
 
 		}
 		if (BossBarret.bossShotAttack == true) {
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("SmallAttacked",true);
+			if (attackedTime > 0 && attackedTime <2.0f) {
+				Damage (0);
+			}
 			if (attackedTime > 0.4f) {
 				BossBarret.bossShotAttack = false;
 				anim.SetBool ("SmallAttacked",false);
+			}
+			if (attackedTime > 2.0f) {
 				attackedTime = 0;
 			}
 		}
