@@ -108,7 +108,7 @@ public class InputManager : MonoBehaviour {
                 GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
                 onLockOnSwitched(go);
             }
-            else//ロックオン状態じゃないときはボルト射出
+			else if(playerState == PlayerStates.Idle)//ロックオン状態じゃないときはボルト射出
             {
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
@@ -176,7 +176,7 @@ public class InputManager : MonoBehaviour {
 		else if (Input.GetButtonUp ("Thunder")) {
 			//thunderEffect.StopEffect ();
 			sbt = false;
-			Idle ();
+			if(playerState_ == PlayerStates.SBT) Idle ();
 		}
 		if (playerState_ == PlayerStates.SBT) {
 			anim.SetBool ("SBTStopToEnd", false);
