@@ -36,6 +36,9 @@ public class TitleManager : MonoBehaviour {
 
     private void LoadScene()
     {
+		if (isLoading)
+			return;
+		
 		SceneManager.LoadSceneAsync ("Loading", LoadSceneMode.Additive);
 		if(!Application.isEditor) scene.startMapLoad();
         isLoading = true;
