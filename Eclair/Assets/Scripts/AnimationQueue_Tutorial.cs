@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 using System.Collections;
 
+[ExecuteInEditMode]
 public class AnimationQueue_Tutorial : AnimationQueueBase {
 
 	private int phase = 0;
