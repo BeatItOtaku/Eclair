@@ -77,6 +77,7 @@ public class CameraController : MonoBehaviour
 
 	void Start()
 	{
+		BossMoveManager.BossAttackedCount = 1;//TODO:
 		lookAt = player;
 		targetY = defaultY;
 		targetAngle = defaultAngle;

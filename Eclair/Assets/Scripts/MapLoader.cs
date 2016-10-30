@@ -4,7 +4,6 @@ using System.Collections;
 
 public class MapLoader : MonoBehaviour
 {
-
     private static MapLoader mInstance;
 
     public AsyncOperation MapAsync;
@@ -61,6 +60,7 @@ public class MapLoader : MonoBehaviour
         {
             //Debug.Log("aho");
             MapAsync.allowSceneActivation = true;
+			PlayerControl.EclairImmobile = false;
             SceneManager.LoadSceneAsync("Player",LoadSceneMode.Additive);
 			SceneManager.LoadSceneAsync ("Boss Map", LoadSceneMode.Additive);
             startGameFlag = false;
