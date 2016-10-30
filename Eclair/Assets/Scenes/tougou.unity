@@ -4140,15 +4140,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011488475782, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -52.3
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4000011488475782, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 11.833
       objectReference: {fileID: 0}
     - target: {fileID: 4000011488475782, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -47.5
+      value: 37.7
       objectReference: {fileID: 0}
     - target: {fileID: 4000011488475782, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4210,6 +4210,11 @@ Prefab:
       propertyPath: camSensitivityControl
       value: 
       objectReference: {fileID: 135251665}
+    - target: {fileID: 114000013226342134, guid: 058f5889209e04c4b92707084a5c4dfd,
+        type: 2}
+      propertyPath: maxDistance
+      value: 48
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 058f5889209e04c4b92707084a5c4dfd, type: 2}
   m_IsPrefabParent: 0
