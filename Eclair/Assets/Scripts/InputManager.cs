@@ -16,6 +16,8 @@ public class InputManager : MonoBehaviour {
 
 	public ETO EtoScript;
 
+	public GameObject em = null;
+
 	public GameObject test;
 
 	public CrossHairController crossHair;
@@ -85,6 +87,7 @@ public class InputManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		em = GameObject.Find ("EventManager");
         //mySceneManager.MapAsync.allowSceneActivation = true;
 		anim = player.GetComponent<Animator> ();
         //audioSource = GetComponent<AudioSource>();
@@ -153,6 +156,9 @@ public class InputManager : MonoBehaviour {
                 {
                     playerState_ = PlayerStates.LockOn;
                     onLockOnSwitched(go);
+					if (EventManager.eventCount == 1) {
+						em.GetComponent<EventManager>().EventCount ();
+					}
                 }
 			}
 		}

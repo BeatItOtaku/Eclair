@@ -21,18 +21,16 @@ public class EventManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		eventCount = 1;
+		eventCount = 0;
 
-		event2_bolt.SetActive (false);
 		event3_zako.SetActive (false);
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (eventCount == 2) {
-			event2_bolt.SetActive (true);		
-		}
+		Debug.Log (eventCount);
+
 		if (eventCount == 3) {
 			event2_bolt.SetActive (false);
 

@@ -14,9 +14,10 @@ public class Event2Camera : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {		
 		if (EventManager.eventCount == 2) {
-			gameObject.transform.LookAt (event2EndPosition.transform);
-			gameObject.transform.position += transform.forward * Time.deltaTime * 10;
-		} else {
+				gameObject.transform.LookAt (event2EndPosition.transform);
+				gameObject.transform.position += transform.forward * Time.deltaTime * 10;
+		}
+	   else {
 			player = GameObject.FindGameObjectWithTag ("Player");
 			gameObject.transform.position = player.transform.position;
 		}

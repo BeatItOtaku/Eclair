@@ -17,7 +17,7 @@ public class Event1_way : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider collider){
 		if (collider.gameObject.tag == "Player") {
-			em.EventCount();
+			em.EventCount ();
 			Destroy (gameObject);
 		}
 	}
