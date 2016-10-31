@@ -2424,7 +2424,7 @@ MonoBehaviour:
   attackReaction: 6
   damageReaction: 8
   dieReaction: 4
-  normalSpeed: 1
+  normalSpeed: 0.5
   attackSpeed: 2
   player: {fileID: 0}
   searchDistance: 12

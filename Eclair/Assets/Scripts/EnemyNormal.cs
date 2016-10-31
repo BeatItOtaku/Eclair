@@ -28,7 +28,8 @@ public class EnemyNormal : EnemyBase {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (player.transform.position, transform.position) < searchDistance) {
+        if(player == null) player = GameObject.FindGameObjectWithTag("Player");
+        if (Vector3.Distance (player.transform.position, transform.position) < searchDistance) {
             //プレイヤーが近づいてる時
             anim.SetBool("isAttacking", true);
 			transform.LookAt(player.transform.position);
