@@ -59,6 +59,19 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
+	private static bool isgamepad_;
+	public static bool isGamePad{
+		get{
+			return isgamepad_;
+		}
+		set{
+			isgamepad_ = value;
+			foreach(GameObject go in GameObject.FindGameObjectsWithTag("TutorialUI")){
+				go.GetComponent<AnimationQueue_Tutorial> ().onControllerChanged (value);
+			}
+		}
+	}
+
 
 
 	/// <summary>
