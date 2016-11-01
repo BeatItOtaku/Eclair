@@ -156,7 +156,7 @@ public class InputManager : MonoBehaviour {
                 {
                     playerState_ = PlayerStates.LockOn;
                     onLockOnSwitched(go);
-					if (EventManager.eventCount == 1) {
+					if (em.GetComponent<EventManager>()) {
 						em.GetComponent<EventManager>().EventCount ();
 					}
                 }
