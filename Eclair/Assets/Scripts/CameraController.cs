@@ -163,16 +163,28 @@ public class CameraController : MonoBehaviour
 
 
 	private void setCameraPosition(float y, float angle){
-			//if (angle > maxAngle) angle = maxAngle;
-			//if (angle < minAngle) angle = minAngle;
+        //if (angle > maxAngle) angle = maxAngle;
+        //if (angle < minAngle) angle = minAngle;
 
+        float mDist = distance;//プレイヤーとカメラの間に物体があった時はmDistが小さくなる
+        
 
-		cameraOffset = new Vector3(0, 0, -distance);
+		cameraOffset = new Vector3(0, 0, -1);
 		cameraOffset = Quaternion.Euler(angle, y, 0) * cameraOffset;
 
-		Transform lookAtTransform = lookAt.GetComponent<Transform>();
+        Transform lookAtTransform = lookAt.GetComponent<Transform>();
+
+        RaycastHit hit;
+        if (Physics.Raycast(lookAtTransform.position, cameraOffset,out hit, distance))
+        {
+            mDist = Vector3.Distance(lookAtTransform.position, hit.point);
+        }
+
+        cameraOffset *= mDist;
+
 		cameraTransform.position = lookAtTransform.position + cameraOffset;
 
+        //カメラはLookAtに指定したオブジェクトよりちょっと上を向く
 		cameraTransform.LookAt(lookAt.GetComponent<Transform>().position);
 		cameraTransform.RotateAround (cameraTransform.position, cameraTransform.right, -cameraVerticalAngleOffset);
 	}
