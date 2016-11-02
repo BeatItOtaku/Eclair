@@ -55,12 +55,12 @@ public class EnemyNormal : EnemyBase {
             anim.SetTrigger("Damaged");
 
         }
-        Debug.Log ("ZakoHP:" + HP);
+        //Debug.Log ("ZakoHP:" + HP);
 
 	}
 
 	void OnCollisionEnter(Collision col){
-		Debug.Log ("kougeki");
+		//Debug.Log ("kougeki");
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
 			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
