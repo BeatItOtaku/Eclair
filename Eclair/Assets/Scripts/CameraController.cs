@@ -10,6 +10,11 @@ public class CameraController : MonoBehaviour
 	public static GameObject lookAt;
 	public GameObject player;
 
+    /// <summary>
+    /// playerにmuzzleを指定しちゃってるのでマジモンのplayerをこっちで指定する。頭悪い。
+    /// </summary>
+    public GameObject truePlayer;
+
 
 	public Transform cameraTransform;   // 操作するカメラ
 	public float mouseSensitivity = 300.0f;  // マウス感度
@@ -179,6 +184,9 @@ public class CameraController : MonoBehaviour
         {
             mDist = Vector3.Distance(lookAtTransform.position, hit.point);
         }
+
+        //あんまり近い時はエクレアを半透明にする
+        if (mDist < 1) ObjectAlphaChanger.Instance.setAlpha(truePlayer, 0.5f) ;
 
         cameraOffset *= mDist;
 

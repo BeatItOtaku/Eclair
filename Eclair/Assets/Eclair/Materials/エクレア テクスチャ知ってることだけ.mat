@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: "\u30A8\u30AF\u30EC\u30A2 \u30C6\u30AF\u30B9\u30C1\u30E3\u77E5\u3063\u3066\u308B\u3053\u3068\u305F\u3099\u3051"
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_Name: "\u30A8\u30AF\u30EC\u30A2 \u30C6\u30AF\u30B9\u30C1\u30E3\u77E5\u3063\u3066\u308B\u3053\u3068\u3060\u3051"
+  m_Shader: {fileID: 4800000, guid: 0ee155380e0bea841a9615112af2a286, type: 3}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
@@ -46,6 +46,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _EmissionTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _MainTex
       second:
         m_Texture: {fileID: 0}
@@ -53,6 +59,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _NormalTex
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,6 +82,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - first:
+        name: _Blightness
+      second: 0
     - first:
         name: _BumpScale
       second: 1

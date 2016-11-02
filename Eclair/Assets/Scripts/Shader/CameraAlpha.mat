@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: "Bottoms\u3079\u305F\u5857\u308A"
-  m_Shader: {fileID: 4800000, guid: 0ee155380e0bea841a9615112af2a286, type: 3}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
+  m_Name: CameraAlpha
+  m_Shader: {fileID: 4800000, guid: f7fa584719f928c4a84cf827c9f4a7a0, type: 3}
+  m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -46,25 +46,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _EmissionTex
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: acffe313f49754e09a9b7511a832e507, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
-      second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - first:
-        name: _NormalTex
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -83,9 +71,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
-        name: _Blightness
-      second: 0
-    - first:
         name: _BumpScale
       second: 1
     - first:
@@ -96,7 +81,7 @@ Material:
       second: 1
     - first:
         name: _DstBlend
-      second: 10
+      second: 0
     - first:
         name: _GlossMapScale
       second: 1
@@ -111,10 +96,13 @@ Material:
       second: 0
     - first:
         name: _Mode
-      second: 3
+      second: 0
     - first:
         name: _OcclusionStrength
       second: 1
+    - first:
+        name: _Opacity
+      second: 0
     - first:
         name: _Parallax
       second: 0.02
@@ -132,7 +120,7 @@ Material:
       second: 0
     - first:
         name: _ZWrite
-      second: 0
+      second: 1
     m_Colors:
     - first:
         name: _Color
