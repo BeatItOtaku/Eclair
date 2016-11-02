@@ -8,6 +8,8 @@ public class ETO : MonoBehaviour {
 	public GameObject lightning;
 	public InputManager im;
 
+	private GameObject eventBolt;
+
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
@@ -37,9 +39,13 @@ public class ETO : MonoBehaviour {
 			im.Idle ();
 			gameObject.SetActive (false);
 
-			if (target.GetComponent<BoltScript>().isFixed == false) {
+			if (target.GetComponent<BoltScript> ().isFixed == false) {
 				//layer7は"Bolt"
 				Destroy (target);
+			}
+			if (EventManager.eventCount == 4) {
+				eventBolt = GameObject.Find ("Event3(Bolt)");
+				eventBolt.tag = "Untagged";
 			}
 		}
 

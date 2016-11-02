@@ -52,6 +52,7 @@ public class EnemyNormal : EnemyBase {
 			Destroy (gameObject, 1.2f);
 			if (EventManager.eventCount == 3) {
 				em.GetComponent<EventManager> ().EventCount ();
+			}
 			} else {
 				anim.SetTrigger ("Damaged");
 
@@ -59,7 +60,6 @@ public class EnemyNormal : EnemyBase {
 			Debug.Log ("ZakoHP:" + HP);
 
 		}
-	}
 
 	void OnCollisionEnter(Collision col){
 		Debug.Log ("kougeki");

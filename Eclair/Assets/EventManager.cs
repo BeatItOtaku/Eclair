@@ -6,12 +6,13 @@ public class EventManager : MonoBehaviour {
 	public GameObject event2_bolt;
 	public GameObject event3_zako;
 	public GameObject event3_bolt;
-	public GameObject event4_bolt;
+	public GameObject event4_bolt1;
+	public GameObject event4_bolt2;
 	public GameObject event5_bolt1;
 
 
 	public GameObject event6_gun;
-	public GameObject event6_EclairGun;
+	public GameObject event6_EclairGun = null;
 	public GameObject event7_wall;
 	public GameObject event8_zako;
 	public GameObject event9_way;
@@ -24,7 +25,10 @@ public class EventManager : MonoBehaviour {
 		eventCount = 0;
 
 		event3_zako.SetActive (false);
+		event3_bolt.SetActive (false);
 
+		event6_EclairGun = GameObject.Find ("Gun");
+		event6_EclairGun.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -38,14 +42,19 @@ public class EventManager : MonoBehaviour {
 			event3_bolt.SetActive (true);
 		}
 		if (eventCount == 4) {
-			event3_bolt.SetActive (false);
-			event4_bolt.SetActive (true);
+			if (event4_bolt1 != null) { 
+				event4_bolt1.tag = "Bolt";
+			} else {
+				EventCount ();
+			}
+			if(event4_bolt2 != null){
+				event4_bolt2.tag = "Bolt";				
+			}
 		}
 		if (eventCount == 5) {
-			event4_bolt.SetActive (false);
-			event5_bolt1.SetActive (true);
+			//event5_bolt1.SetActive (true);
 		}
-		if (eventCount == 6) {
+		if (eventCount == 6) {			
 			//event5_boltX.SetActive(false);
 			event6_gun.SetActive (false);
 			event6_EclairGun.SetActive (true);
