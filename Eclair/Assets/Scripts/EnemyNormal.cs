@@ -14,6 +14,8 @@ public class EnemyNormal : EnemyBase {
 	public GameObject player;
     private Animator anim;
 
+	public GameObject em;
+
 	/// <summary>
 	/// エクレアを感知する距離
 	/// </summary>
@@ -24,6 +26,7 @@ public class EnemyNormal : EnemyBase {
 		HP = maxHp;
 		player = GameObject.FindGameObjectWithTag ("Player");
         anim = GetComponent<Animator>();
+		em = GameObject.Find ("EventManager");
 	}
 	
 	// Update is called once per frame
@@ -41,21 +44,21 @@ public class EnemyNormal : EnemyBase {
 
 	public override void Damage(int damage,Vector3 direction){
 		HP -= damage;
-		GetComponent<Rigidbody>().velocity = (-transform.forward * damageReaction);
-        if (HP <= 0)
-        {
-            anim.SetTrigger("Died");
+		GetComponent<Rigidbody> ().velocity = (-transform.forward * damageReaction);
+		if (HP <= 0) {
+			anim.SetTrigger ("Died");
 			GetComponent<Rigidbody> ().constraints = new RigidbodyConstraints ();
 			GetComponent<Rigidbody> ().velocity += transform.up * dieReaction;
-            Destroy(gameObject, 1.2f);
-        }
-        else
-        {
-            anim.SetTrigger("Damaged");
+			Destroy (gameObject, 1.2f);
+			if (EventManager.eventCount == 3) {
+				em.GetComponent<EventManager> ().EventCount ();
+			} else {
+				anim.SetTrigger ("Damaged");
 
-        }
-        Debug.Log ("ZakoHP:" + HP);
+			}
+			Debug.Log ("ZakoHP:" + HP);
 
+		}
 	}
 
 	void OnCollisionEnter(Collision col){

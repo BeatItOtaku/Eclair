@@ -251,8 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2bc577f816f4626a3c26e5a4fceae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1088387005}
   mainCamera: {fileID: 446296771}
   event2StartCameraPosition: {fileID: 0}
+  event2EndPosition: {fileID: 0}
   uI: {fileID: 1529198007}
   em: {fileID: 0}
   bossKilledCamera: {fileID: 1199482914}

@@ -3,6 +3,7 @@ using System.Collections;
 
 public class CameraChanger : MonoBehaviour {
 
+	public GameObject player;
 	public GameObject mainCamera;
 	public static GameObject mainCamera_ = null;
 
@@ -40,6 +41,7 @@ public class CameraChanger : MonoBehaviour {
 			cameraWaitTime += Time.deltaTime;
 			if (cameraWaitTime >= 10.0f) {
 				PlayerControl.EclairImmobile = false;
+				mainCamera_ = player;
 				em.GetComponent<EventManager>().EventCount ();
 			}
 		}
