@@ -1097,7 +1097,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Take 001
-      firstFrame: 1021
+      firstFrame: 1041
       lastFrame: 1080
       wrapMode: 0
       orientationOffsetY: 0
@@ -5679,7 +5679,7 @@ ModelImporter:
       name: FallEnd
       takeName: Take 001
       firstFrame: 885
-      lastFrame: 900
+      lastFrame: 898
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
