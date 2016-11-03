@@ -13,6 +13,7 @@ TagManager:
   - ETOEclair
   - Plane
   - Objects
+  - TutorialUI
   - BreakWall
   layers:
   - Default

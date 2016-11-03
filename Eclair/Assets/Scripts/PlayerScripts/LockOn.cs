@@ -42,9 +42,17 @@ public class LockOn : MonoBehaviour {
                     //float distance = Vector3.Distance (player.transform.position, go.transform.position);
                     /*if (distance > maxDistance)
                         continue;//遠すぎたらtargetListに追加することなくforの1ループをおわる*/
+
+                    int layerMask = 0;
+                    layerMask += 1 << 8;//Player
+                    //layerMask += 1 << 9;//Bolt
+                    layerMask += 1 << 13;//Boss
+                    layerMask += 1 << 14;//Enemy
+                    layerMask = ~layerMask;//最後に論理否定することにより、上記のLayer以外のすべてのレイヤーを指し示すことになる
+
                     Ray toTargetRay = new Ray(Camera.main.transform.position, go.transform.Find(boltHeadName).position - Camera.main.transform.position);
                     RaycastHit hit;
-                    if (Physics.Raycast(toTargetRay, out hit, maxDistance))
+                    if (Physics.Raycast(toTargetRay, out hit, maxDistance,layerMask))
                     {
                         if (hit.collider.tag == "Bolt")
                             targetList.Add(new KeyValuePair<float, GameObject>(getAnglularDistance(go), go));

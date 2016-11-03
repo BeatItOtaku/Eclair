@@ -6,6 +6,8 @@ using System.Collections;
 public class TitleManager : MonoBehaviour {
 
     public AudioClip select;
+
+	public GameObject dontDestroy;
     //public Text loadingText;
 
     private MapLoader scene;
@@ -14,6 +16,7 @@ public class TitleManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		DontDestroyOnLoad (dontDestroy);
         CameraController.cursorIsLocked = false;
         scene = MapLoader.Instance;
         //scene.startMapLoad();
@@ -36,6 +39,9 @@ public class TitleManager : MonoBehaviour {
 
     private void LoadScene()
     {
+		if (isLoading)
+			return;
+		
 		SceneManager.LoadSceneAsync ("Loading", LoadSceneMode.Additive);
 		if(!Application.isEditor) scene.startMapLoad();
         isLoading = true;

@@ -15,7 +15,7 @@ public class LoadingManager : MonoBehaviour {
         new KeyValuePair<float,string>(1.0f,"WhatIsEclair"),
 		new KeyValuePair<float,string>(0.5f,"Eclair"),
 		new KeyValuePair<float,string>(0.1f,"EclairCanDo"),
-		new KeyValuePair<float,string>(22,"Eclair"),
+		new KeyValuePair<float,string>(8,"Eclair"),
 		new KeyValuePair<float,string>(0.1f,"EclairCanDo"),
 		new KeyValuePair<float,string>(0.1f,"WhatIsEclair"),
 		new KeyValuePair<float,string>(0.0f,"HowToControl"),
