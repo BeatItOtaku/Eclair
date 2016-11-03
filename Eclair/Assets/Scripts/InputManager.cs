@@ -127,7 +127,10 @@ public class InputManager : MonoBehaviour {
                 RaycastHit hit;
                 Vector3 hitPosition;
                 Quaternion hitQuaternion = Quaternion.Euler(0,0,0);
-                if (Physics.Raycast(ray, out hit))
+
+                int layerMask = ~(1 << 8);//レイヤー8(Player)を除く全部
+
+                if (Physics.Raycast(ray, out hit,layerMask))
                 {
                     //Debug.Log ("ahoaho");
                     hitPosition = hit.point;
