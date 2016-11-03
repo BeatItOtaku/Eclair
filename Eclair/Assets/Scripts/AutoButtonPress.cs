@@ -24,8 +24,9 @@ public class AutoButtonPress : MonoBehaviour {
 		if (isCounting) {
 			timeCursor += Time.deltaTime;
 			if (timeCursor >= timeToPress) {
-				GetComponent<Button> ().onClick.Invoke();
 				isCounting = false;
+                Debug.Log("Invoke");
+				GetComponent<Button> ().onClick.Invoke();
 			} else {
 				progress.fillAmount = timeCursor / timeToPress;
 			}
@@ -36,4 +37,10 @@ public class AutoButtonPress : MonoBehaviour {
 		isCounting = true;
 		timeCursor = 0;
 	}
+
+    public void stopCount()
+    {
+        isCounting = false;
+        timeCursor = 0;
+    }
 }

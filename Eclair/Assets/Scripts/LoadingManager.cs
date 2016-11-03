@@ -10,6 +10,8 @@ public class LoadingManager : MonoBehaviour {
 
 	private bool nextButtonShown = false;
 
+    private bool startGamePressed = false;
+
 	private GameObject loading;//走るエクレアとかがあるやつ
 
 	//かなり頭悪いコード書くけど許して…！
@@ -27,7 +29,10 @@ public class LoadingManager : MonoBehaviour {
 		new KeyValuePair<float,string>(0.0f,"HowToControl"),
 		new KeyValuePair<float,string>(0.2f,"KeyboardAndMouse"),
 		new KeyValuePair<float,string>(0.1f,"GamePad"),
-	};
+        new KeyValuePair<float,string>(-1,"FadePanel"),
+        new KeyValuePair<float,string>(0,"TitleManager"),
+        new KeyValuePair<float,string>(2,"RunningEclair2"),
+    };
 
 	// Use this for initialization
 	void Start () {
@@ -54,10 +59,14 @@ public class LoadingManager : MonoBehaviour {
 				nextButtonShown = true;
 			}
 		}
+        if(startGamePressed && cursor > 15)
+        {
+            MapLoader.Instance.startGame();
+        }
 	}
 
 	public void startGame(){
-		MapLoader.Instance.startGame ();
+        startGamePressed = true;
 	}
 
 	public void Invoke(){
