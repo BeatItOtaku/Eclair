@@ -11,6 +11,9 @@ TagManager:
   - BossTail
   - NoMoveBolt
   - ETOEclair
+  - Plane
+  - Objects
+  - BreakWall
   layers:
   - Default
   - TransparentFX

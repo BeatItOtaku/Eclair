@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour {
 	public GameObject event3_bolt;
 	public GameObject event4_bolt1;
 	public GameObject event4_bolt2;
-	public GameObject event5_bolt1;
+	public GameObject event5_bolt;
 
 
 	public GameObject event6_gun;
@@ -27,8 +27,11 @@ public class EventManager : MonoBehaviour {
 		event3_zako.SetActive (false);
 		event3_bolt.SetActive (false);
 
+		event5_bolt.SetActive (false);
+
 		event6_EclairGun = GameObject.Find ("Gun");
 		event6_EclairGun.SetActive (false);
+
 	}
 	
 	// Update is called once per frame
@@ -52,10 +55,10 @@ public class EventManager : MonoBehaviour {
 			}
 		}
 		if (eventCount == 5) {
-			//event5_bolt1.SetActive (true);
+			event5_bolt.SetActive (true);
 		}
 		if (eventCount == 6) {			
-			//event5_boltX.SetActive(false);
+			event5_bolt.SetActive(false);
 			event6_gun.SetActive (false);
 			event6_EclairGun.SetActive (true);
 		}
