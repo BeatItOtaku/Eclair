@@ -764,6 +764,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   select: {fileID: 8300000, guid: f3432fc7c22072f4389ee06ab8a0f2bf, type: 3}
   dontDestroy: {fileID: 300098066}
+  loadMapInEditor: 1
 --- !u!4 &534411950
 Transform:
   m_ObjectHideFlags: 0

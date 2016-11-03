@@ -25,6 +25,7 @@ public class AutoButtonPress : MonoBehaviour {
 			timeCursor += Time.deltaTime;
 			if (timeCursor >= timeToPress) {
 				GetComponent<Button> ().onClick.Invoke();
+				isCounting = false;
 			} else {
 				progress.fillAmount = timeCursor / timeToPress;
 			}
