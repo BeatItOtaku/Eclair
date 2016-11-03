@@ -7,6 +7,8 @@ public class BoltScript : MonoBehaviour {
     public Vector3 collidedRotateOffset;
     public AudioClip boltLandSound;
 
+	public static bool boltOnWall;
+
     public bool isLanded = false;
     /// <summary>
     /// 固定ボルトかどうか
@@ -17,7 +19,7 @@ public class BoltScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-
+		boltOnWall = false;
 	}
 
 	public Vector3 Target {
@@ -42,7 +44,7 @@ public class BoltScript : MonoBehaviour {
 				Collider collider = hit.collider;
 
 				EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
-				if (enemy != null) {//敵だった時
+				if (enemy != null && enemy.gameObject.tag != "BreakWall") {//敵だった時
 					if (!isLanded) {
 						enemy.Damage (5, gameObject.transform.forward);
 						Destroy (gameObject, 0.5f);
@@ -74,6 +76,7 @@ public class BoltScript : MonoBehaviour {
 				}
 			}
 		}
+		Debug.Log (boltOnWall);
 	}
 
 	void OnTriggerEnter(Collider collider){
@@ -81,6 +84,14 @@ public class BoltScript : MonoBehaviour {
 
 		} else if(collider.gameObject.tag != "Bolt") {
 		}
+	
+		else if (collider.gameObject.tag == "BreakWall") {
+			boltOnWall = true;
+
+		} else {
+			boltOnWall = false;
+		}
+			
 		GetComponent<CapsuleCollider> ().isTrigger = false;
 
 	}

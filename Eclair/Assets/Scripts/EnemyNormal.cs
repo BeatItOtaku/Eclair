@@ -14,6 +14,7 @@ public class EnemyNormal : EnemyBase {
 	public GameObject player;
     private Animator anim;
 
+	private GameObject em;
 	/// <summary>
 	/// エクレアを感知する距離
 	/// </summary>
@@ -49,6 +50,10 @@ public class EnemyNormal : EnemyBase {
 			GetComponent<Rigidbody> ().constraints = new RigidbodyConstraints ();
 			GetComponent<Rigidbody> ().velocity += transform.up * dieReaction;
             Destroy(gameObject, 1.2f);
+			if (EventManager.eventCount == 3) {
+				em = GameObject.Find ("EventManager");
+				em.GetComponent<EventManager> ().EventCount ();
+			}
         }
         else
         {

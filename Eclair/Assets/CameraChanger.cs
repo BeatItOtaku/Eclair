@@ -39,7 +39,7 @@ public class CameraChanger : MonoBehaviour {
 			PlayerControl.EclairImmobile = true;
 			mainCamera_ = event2StartCameraPosition;
 			cameraWaitTime += Time.deltaTime;
-			if (cameraWaitTime >= 5.0f) {
+			if (cameraWaitTime >= 3.0f) {
 				PlayerControl.EclairImmobile = false;
 				mainCamera_ = player;
 				em.GetComponent<EventManager>().EventCount ();

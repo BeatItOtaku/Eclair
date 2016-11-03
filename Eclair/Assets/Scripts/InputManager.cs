@@ -116,50 +116,45 @@ public class InputManager : MonoBehaviour {
 	void Update () {
 
 		//右クリック
-		if(Input.GetButtonDown("LaunchBolt")){
-            //Debug.Log ("MouseLeft");
+		if (EventManager.eventCount >= 6) {
+			if (Input.GetButtonDown ("LaunchBolt")) {
+				//Debug.Log ("MouseLeft");
 
-            if (playerState == PlayerStates.LockOn)//ロックオン状態の時は対象切り替え
-			{
-                GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
-                onLockOnSwitched(go);
-            }
-			else if(playerState == PlayerStates.Idle)//ロックオン状態じゃないときはボルト射出
-            {
-                Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
-                RaycastHit hit;
-                Vector3 hitPosition;
-                Quaternion hitQuaternion = Quaternion.Euler(0,0,0);
+				if (playerState == PlayerStates.LockOn) {//ロックオン状態の時は対象切り替え
+					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
+					onLockOnSwitched (go);
+				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
+					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
+					RaycastHit hit;
+					Vector3 hitPosition;
+					Quaternion hitQuaternion = Quaternion.Euler (0, 0, 0);
 
-                int layerMask = ~(1 << 8);//レイヤー8(Player)を除く全部
+					int layerMask = ~(1 << 8);//レイヤー8(Player)を除く全部
 
-                if (Physics.Raycast(ray, out hit,layerMask))
-                {
-                    //Debug.Log ("ahoaho");
-                    hitPosition = hit.point;
-                    hitQuaternion = Quaternion.LookRotation(hit.normal);
-                }
-                else
-                {
-                    hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
-                }
-                if(player.GetComponent<PlayerShot>().LaunchBolt(hitPosition, hitQuaternion))
-                {
-                    audioSource.PlayOneShot(boltLaunchSound);
-                    playerState_ = PlayerStates.Bolt;
-                }
-            }
+					if (Physics.Raycast (ray, out hit, layerMask)) {
+						//Debug.Log ("ahoaho");
+						hitPosition = hit.point;
+						hitQuaternion = Quaternion.LookRotation (hit.normal);
+					} else {
+						hitPosition = Camera.main.transform.position + (Camera.main.transform.forward * DefaultShotDistance);
+					}
+					if (player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition, hitQuaternion)) {
+						audioSource.PlayOneShot (boltLaunchSound);
+						playerState_ = PlayerStates.Bolt;
+					}
+				}
 
-		}
-		if (playerState_ == PlayerStates.Bolt) {
-			boltLaunch = true;
-			boltTime += Time.deltaTime;
-			if (boltTime >= 0.3f) {
-				playerState_ = PlayerStates.Idle;
+			}
+			if (playerState_ == PlayerStates.Bolt) {
+				boltLaunch = true;
+				boltTime += Time.deltaTime;
+				if (boltTime >= 0.3f) {
+					playerState_ = PlayerStates.Idle;
+					boltLaunch = false;
+				}
+			} else {
 				boltLaunch = false;
 			}
-		} else {
-			boltLaunch = false;
 		}
 			
 
@@ -185,39 +180,43 @@ public class InputManager : MonoBehaviour {
         }
 
 		//左クリック
-		if (Input.GetButtonDown ("Thunder")) {
-			//Debug.Log ("Fire1Pressed");
-			GameObject satou = null;
+		if (EventManager.eventCount >= 3) {
+			if (Input.GetButtonDown ("Thunder")) {
+				//Debug.Log ("Fire1Pressed");
+				GameObject satou = null;
 
-			if(playerState_ == PlayerStates.LockOn)
-				satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
-			if (satou != null) {
-				startSBT (satou);//長いのでメソッド化したよ
+				if (playerState_ == PlayerStates.LockOn)
+					satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+				if (satou != null) {
+					startSBT (satou);//長いのでメソッド化したよ
+				}
+			} else if (Input.GetButtonUp ("Thunder")) {
+				//thunderEffect.StopEffect ();
+				sbt = false;
+				if (playerState_ == PlayerStates.SBT)
+					Idle ();
 			}
-		}
-		else if (Input.GetButtonUp ("Thunder")) {
-			//thunderEffect.StopEffect ();
-			sbt = false;
-			if(playerState_ == PlayerStates.SBT) Idle ();
-		}
-		if (playerState_ == PlayerStates.SBT) {
-			anim.SetBool ("SBTStopToEnd", false);
+			if (playerState_ == PlayerStates.SBT) {
+				anim.SetBool ("SBTStopToEnd", false);
+			}
 		}
 
 
 		//エトワールボタン
-		if (Input.GetButtonDown ("Etoile")) {
-			if (playerState_ == PlayerStates.LockOn){
-                audioSource.PlayOneShot(etoileSound);				
-				eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
-				eto_.transform.position = player.transform.position;
-				etoile = true;
-				eto.SetActive (true);
-				GameObject lockonTarget = lockOn.getCurrentTarget ();
-				//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
-				EtoScript.target = lockonTarget;
-				playerState_ = PlayerStates.Etoile;
-				player.SetActive (false);
+		if (EventManager.eventCount >= 4) {
+			if (Input.GetButtonDown ("Etoile")) {
+				if (playerState_ == PlayerStates.LockOn) {
+					audioSource.PlayOneShot (etoileSound);				
+					eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
+					eto_.transform.position = player.transform.position;
+					etoile = true;
+					eto.SetActive (true);
+					GameObject lockonTarget = lockOn.getCurrentTarget ();
+					//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
+					EtoScript.target = lockonTarget;
+					playerState_ = PlayerStates.Etoile;
+					player.SetActive (false);
+				}
 			}
 		}
 

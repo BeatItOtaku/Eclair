@@ -13,7 +13,7 @@ public class Event2Camera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {		
-		if (EventManager.eventCount == 2) {
+		/*if (EventManager.eventCount == 2) {
 				gameObject.transform.LookAt (event2EndPosition.transform);
 				gameObject.transform.position += transform.forward * Time.deltaTime * 10;
 		}
@@ -26,6 +26,6 @@ public class Event2Camera : MonoBehaviour {
 	private void OnTriggerEnter(Collider collider){
 		if(collider.gameObject.name == "EndPosition"){
 			gameObject.transform.position += transform.forward*0;
-		}
+		}*/
 }
 }
