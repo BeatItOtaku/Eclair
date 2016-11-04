@@ -16,11 +16,10 @@ public class WallBreak2 :EnemyBase {
 	}
 	public override void Damage (int damage ,Vector3 direction)
 	{
-		if (BoltScript.boltOnWall == true) {
+		
 			if (damage >= 30) {
 				Instantiate (breakFire, transform.position, transform.rotation);
 				Destroy (gameObject);
-			}
 		}
 	}
 }

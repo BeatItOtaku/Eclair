@@ -5,7 +5,7 @@ public class WallBreak : EnemyBase {
 
 	public GameObject breakFire;
 
-
+	public EventManager em;
 	// Use this for initialization
 	void Start () {
 	
@@ -19,6 +19,7 @@ public class WallBreak : EnemyBase {
 	{
 			if (damage >= 30) {
 				Instantiate (breakFire, transform.position, transform.rotation);
+			em.EventCount ();
 				Destroy (gameObject);
 			}
 		}
