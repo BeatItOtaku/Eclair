@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Metal_HolePlate
-  m_Shader: {fileID: 36, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 31, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: -1
@@ -19,13 +19,13 @@ Material:
         name: _BumpMap
       second:
         m_Texture: {fileID: 2800000, guid: beb8f0504bccc754d8f32dffba7fe16d, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 36, y: 9}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
         m_Texture: {fileID: 2800000, guid: 1de6379e7af6d4341b4cb6d20a4e65ee, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 36, y: 9}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _ParallaxMap
