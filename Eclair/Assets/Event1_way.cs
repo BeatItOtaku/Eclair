@@ -12,7 +12,7 @@ public class Event1_way : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 
 	private void OnTriggerEnter(Collider collider){
