@@ -22,22 +22,23 @@ public class EventManager : MonoBehaviour {
 	//public AnimationQueue_Tutorial queueMove;
 
 	public GameObject event2_bolt;
+	public GameObject event2_sita;
 	public GameObject event3_zako;
 	public GameObject event3_bolt;
 	public GameObject event4_bolt1;
 	public GameObject event4_bolt2;
 	public GameObject event5_bolt;
-
+	public GameObject event5_ue;
 
 	public GameObject event6_gun;
 	public GameObject event6_EclairGun = null;
-	public GameObject event7_wall;
-	public GameObject event8_zako;
+	public GameObject event6_yajirushi;
+	public GameObject event7_zako;
 	public GameObject event9_way;
 
 	public static int eventCount;
 
-	private bool gunGet;
+
 
 
 	// Use this for initialization
@@ -45,17 +46,21 @@ public class EventManager : MonoBehaviour {
 		AnimationQueue = GameObject.Find ("Canvas");
 		//queueMove.Queue ();
 		eventCount = 0;
-		gunGet = false;
 
+
+		event2_sita.SetActive (false);
 		event3_zako.SetActive (false);
 		event3_bolt.SetActive (false);
 
 		event5_bolt.SetActive (false);
+		event5_ue.SetActive (false);
 
 		event6_EclairGun = GameObject.Find ("Gun");
 		event6_EclairGun.SetActive (false);
+		event6_yajirushi.SetActive (false);
 
-		event8_zako.SetActive (false);
+		event7_zako.SetActive (false);
+		GameObject.Find ("Tutorial_Move").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 
 	}
 	
@@ -71,6 +76,8 @@ public class EventManager : MonoBehaviour {
 			break;
 		case 1:
 			//ロックオンのチュートリアルが表示される 
+			event2_sita.SetActive (true);
+			GameObject.Find ("Tutorial_Move").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_LockOn").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			break;
 		case 2:
@@ -99,23 +106,29 @@ public class EventManager : MonoBehaviour {
 			//ETOで移動用のボルトが現れる
 			GameObject.Find ("Hint_Gun").GetComponent<AnimationQueue_InAndOut> ().Queue ();
 			event5_bolt.SetActive (true);
+			event5_ue.SetActive (true);
 			break;
+
 		case 6:
 			//ボルト射出のチュートリアルが表示される
 			GameObject.Find ("Hint_Gun").GetComponent<AnimationQueue_InAndOut> ().Queue ();
+			GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			event2_sita.SetActive (false);
 			event5_bolt.SetActive (false);
+			event5_ue.SetActive (false);
 			event6_gun.SetActive (false);
 			event6_EclairGun.SetActive (true);
-			gunGet = true;
+			event6_yajirushi.SetActive (true);
 			break;
-			EventCount ();
+
 		case 7:
 			//雑魚との戦闘
-			//GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
+			GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Hint_Enter").GetComponent<AnimationQueue_InAndOut> ().Queue ();
-			event8_zako.SetActive (true);
+			event6_yajirushi.SetActive (false);
+			event7_zako.SetActive (true);
 			break;
 		}
 	}
