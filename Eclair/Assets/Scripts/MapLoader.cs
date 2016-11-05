@@ -10,6 +10,11 @@ public class MapLoader : MonoBehaviour
 
     private bool startGameFlag = false;
 
+	public bool isLoaded{
+		get{
+			return MapAsync.progress >= 0.9f;
+		}
+	}
 
     private MapLoader()
     {
@@ -72,5 +77,7 @@ public class MapLoader : MonoBehaviour
     {
         MapAsync = null;//Debug.Log("Application ending after " + Time.time + " seconds");
     }
+
+	
 
 }
