@@ -77,6 +77,7 @@ public class EventManager : MonoBehaviour {
 		}
 		if (eventCount == 3) 
 		{ //SBTのチュートリアルが表示される
+			GameObject.Find("Hint_Enemy").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Tutorial_Thunder").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event2_bolt.SetActive (false);
 
@@ -85,22 +86,23 @@ public class EventManager : MonoBehaviour {
 		}
 		if (eventCount == 4)
 		{ //ETOのチュートリアルが表示される
+			GameObject.Find("Hint_Enemy").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Tutorial_Thunder").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 
-			if (event4_bolt1 != null) { 
-				event4_bolt1.tag = "Bolt";
-			}
-			if (event4_bolt2 != null) {
+			event3_bolt.tag = "Untagged";
+				event4_bolt1.tag = "Bolt";				
 				event4_bolt2.tag = "Bolt";				
-			}
+
 		}
 		if (eventCount == 5) 
 		{//ETOで移動用のボルトが現れる
+			GameObject.Find("Hint_Gun").GetComponent<AnimationQueue_InAndOut>().Queue();
 			event5_bolt.SetActive (true);
 		}
 		if (eventCount == 6) 
 		{ //ボルト射出のチュートリアルが表示される
+			GameObject.Find("Hint_Gun").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event5_bolt.SetActive (false);
@@ -109,14 +111,20 @@ public class EventManager : MonoBehaviour {
 			gunGet = true;
 		}
 		/*if (eventCount == 7) { //ボルトをさして、電撃で破壊する壁（予定）
+GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
 
 		}*/
 		if (eventCount == 7/*8*/)
 		{//雑魚との戦闘
+			//GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
 			event8_zako.SetActive (true);
+			if (event8_zako == null) {
+				EventCount ();
+			}
 		}
 		if (eventCount ==8 /*9*/) 
 		{//工場マップへ移動
+			GameObject.Find("Hint_Enter").GetComponent<AnimationQueue_InAndOut>().Queue();
 		}
 	}
 

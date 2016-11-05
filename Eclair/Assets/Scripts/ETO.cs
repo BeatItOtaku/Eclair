@@ -43,10 +43,6 @@ public class ETO : MonoBehaviour {
 				//layer7は"Bolt"
 				Destroy (target);
 			}
-			if (EventManager.eventCount == 4) {
-				eventBolt = GameObject.Find ("Event3(Bolt)");
-				eventBolt.tag = "Untagged";
-			}
 		}
 
 		//ボルト以外にぶつかったとき・・・電気のエフェクトは出ない

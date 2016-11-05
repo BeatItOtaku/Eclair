@@ -17,7 +17,9 @@ public class GunGet : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collider){
 		if(collider.gameObject.tag == "Player"){
-			em.EventCount ();
+			if (EventManager.eventCount == 5) {
+				em.EventCount ();
+			}
 	}	
 }
 }
