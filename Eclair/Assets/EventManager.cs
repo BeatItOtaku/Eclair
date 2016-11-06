@@ -112,7 +112,7 @@ public class EventManager : MonoBehaviour {
 		case 6:
 			//ボルト射出のチュートリアルが表示される
 			GameObject.Find ("Hint_Gun").GetComponent<AnimationQueue_InAndOut> ().Queue ();
-			GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
+			//GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event2_sita.SetActive (false);
@@ -125,7 +125,7 @@ public class EventManager : MonoBehaviour {
 
 		case 7:
 			//雑魚との戦闘
-			GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
+			//GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
 			GameObject.Find ("Hint_Enter").GetComponent<AnimationQueue_InAndOut> ().Queue ();
 			event6_yajirushi.SetActive (false);
 			event7_zako.SetActive (true);
