@@ -1,19 +1,30 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class BossMoveManager : MonoBehaviour {
 
+	//エクレア
 	public GameObject player;
 
+	//ボスの体とエフェクト
 	public GameObject boss;
 	public GameObject bossCenter;
 	public GameObject leftFoot;
 	public GameObject rightFoot;
 	public GameObject bossMuzzle;
 	public GameObject bossBarret;
+	public GameObject muzzleFrash;
 	public GameObject bossTail;
+	public GameObject bossSmoke1;//エフェクト
+	public GameObject bossSmoke2;//エフェクト
+	public GameObject fire;//エフェクト
+	public GameObject bossKilled;//爆発する
 
-	private bool bossShot = true;
+	public GameObject bossKilledCameraPosition;
+	public Transform bossCamera;
+
+	private bool bossShot;
 	public static bool bossAttacked = false;
 
 	public static int BossAttackedCount = 1;
@@ -33,16 +44,25 @@ public class BossMoveManager : MonoBehaviour {
 	private float difDistanceCT; //centerDistance,tailDistanceの差
 
 	private float shotInterval =0;
-	private float shotIntervalMax = 1;
+	private float shotIntervalMax = 0.1f;
 
-	private float waitTime = 0;
+	public static float waitTime = 0;
 	private bool wait = false;
 
 	private Animator bossAnim;
 
+	private AsyncOperation result;
+
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindWithTag ("Player");
 		bossAnim = boss.GetComponent<Animator> ();
+		bossShot = false;
+		bossSmoke1.SetActive (false);
+		bossSmoke2.SetActive (false);
+		fire.SetActive (false);
+		result = SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
+		result.allowSceneActivation = false;
 	}
 	
 	// Update is called once per frame
@@ -65,14 +85,11 @@ public class BossMoveManager : MonoBehaviour {
 
 		//右回転
 		if (difDistanceLR > 2.0f && waitTime == 0) {
-			//Debug.Log ("right");
-			bossAnim.SetBool ("MoveForward", false);
-			bossAnim.SetBool ("LeftRotate", false);
-
-			bossAnim.SetBool ("RightRotate", true);
-			transform.Rotate (Vector3.up * Time.deltaTime * 10 * BossAttackedCount);
-			transform.position += transform.forward * Time.deltaTime * 0;
 			bossShot = false;
+			//Debug.Log ("right");
+			bossAnim.SetBool ("Move", true);
+			transform.Rotate (Vector3.up * Time.deltaTime * 12 * BossAttackedCount);
+			transform.position += transform.forward * Time.deltaTime * 0;
 			waitTime = 0;
 		}
 
@@ -81,10 +98,7 @@ public class BossMoveManager : MonoBehaviour {
 		if (difDistanceLR > -2.0f && waitTime == 0) {
 			if (difDistanceCT < 0) {
 				//Debug.Log ("forward");
-				bossAnim.SetBool ("LeftRotate", false);
-				bossAnim.SetBool ("RightRotate", false);
-
-				bossAnim.SetBool ("MoveForward", true);
+				bossAnim.SetBool ("Move", true);
 				transform.position += transform.forward * Time.deltaTime;
 				waitTime = 0;
 			}
@@ -93,25 +107,23 @@ public class BossMoveManager : MonoBehaviour {
 
 		//左回転
 		else if (difDistanceLR < -2.0f && waitTime == 0) {
-			//Debug.Log ("left");
-			bossAnim.SetBool ("RightRotate", false);
-			bossAnim.SetBool ("MoveForward", false);
-
-			bossAnim.SetBool ("LeftRotate", true);
-			transform.Rotate (Vector3.down * Time.deltaTime * 10 * BossAttackedCount);
-			transform.position += transform.forward * Time.deltaTime * 0;
 			bossShot = false;
+			//Debug.Log ("left");
+			bossAnim.SetBool ("Move", true);
+			transform.Rotate (Vector3.down * Time.deltaTime * 12 * BossAttackedCount);
+			transform.position += transform.forward * Time.deltaTime * 0;
 			waitTime = 0;
 		}
 
 		//エクレアが真後ろにいるとき反転してくる
 		if (difDistanceCT > 0) {
+			bossShot = false;
 			wait = true;
 		}
 		if (wait == true) {
 			waitTime += Time.deltaTime;
-			if (waitTime > 2f) {
-				transform.Rotate (Vector3.down * Time.deltaTime * 60);
+			if (waitTime > 2f/BossAttackedCount) {
+				transform.Rotate (Vector3.down * Time.deltaTime * 40*BossAttackedCount);
 			}
 		}
 		if (difDistanceLR < -4.0f || difDistanceLR > 4.0f) {
@@ -124,7 +136,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//ボスの砲撃
 //ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 9.0f) {
+		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<2.0f && difDistanceCT < 0) {
 			bossShot = true;
 		} else {
 			bossShot = false;
@@ -135,22 +147,38 @@ public class BossMoveManager : MonoBehaviour {
 			shotInterval = 0;			
 			if (bossShot == true) {
 				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
+				Instantiate (muzzleFrash, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 			}
 		}
 			
 		//ボスが被弾したとき
 		if (bossAttacked == true) {
 			bossAnim.SetTrigger("BossAttacked");
+			//BossAttackedCount++;
 			Debug.Log ("attack");
 			bossAttacked = false;
 		}
-
-		//ボスが倒されたとき
-		if (BossAttackedCount == 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		if (BossAttackedCount == 2)
 		{
+			bossSmoke1.SetActive (true);
+		}
+		if (BossAttackedCount == 3)
+		{
+			bossSmoke2.SetActive (true);
+			fire.SetActive (true);
+		}
+		//ボスが倒されたとき
+		if (BossAttackedCount >= 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		{
+			CameraController.cursorIsLocked = false;
+			result.allowSceneActivation = true;
+			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
+			gameObject.SetActive (false);
+			bossKilledCameraPosition.transform.position = bossCamera.position;
+			bossKilledCameraPosition.transform.LookAt (bossCamera);
+			//PlayerControl.EclairImmobile = true;
 			bossAnim.SetTrigger ("BossKilled");
 			Debug.Log ("kill");
-			gameObject.SetActive(false);
 		}
-}
+	}
 }

@@ -1,7 +1,6 @@
-Ôªøusing UnityEngine;
+using UnityEngine;
 using System.Collections;
-
-
+using System;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -29,8 +28,10 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 	const int MaxHP = 100;
+	public HPGaugeController hpGaugeController;
 
-	public GameObject enemyObject;
+	public InputManager im;
+	//private int hp;
 
 	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
@@ -43,6 +44,8 @@ public class PlayerControl : MonoBehaviour
 
 	public float jumpHeight = 5.0f;
 	public float jumpCooldown = 1.0f;
+
+    public float mutekiTime = 2.0f;
 
 	private float timeToNextJump = 0;
 	
@@ -70,12 +73,18 @@ public class PlayerControl : MonoBehaviour
 
 	private bool isMoving = false;
 
+	public static bool EclairImmobile;
+
 	// fly
 	public static bool fly = false;
 	private float distToGround;
 	private float sprintFactor;
 
 	private float attackedTime =0;
+
+    private float mutekiTimeCursor = 0;
+    private bool isMuteki = false;
+
 	void Awake()
 	{
 		anim = GetComponent<Animator> ();
@@ -92,6 +101,9 @@ public class PlayerControl : MonoBehaviour
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		sprintFactor = sprintSpeed / runSpeed;
 		angleId = Animator.StringToHash ("AngleUsing");
+		//damage = hpGaugeController.GetComponent<HPGaugeController> ();
+		EclairImmobile = false;
+
 	}
 
 	bool IsGrounded() {
@@ -126,12 +138,14 @@ public class PlayerControl : MonoBehaviour
 		ShotManagament ();
 		SBTManagament ();
 		HPManagament();
+		StopManagament ();
+        mutekiManagement();
 		//KilledManagament ();
 
 
 	}
 
-		void FixedUpdate()
+    void FixedUpdate()
 	{
 		anim.SetBool (aimBool, IsAiming());
 		anim.SetFloat(hFloat, h);
@@ -191,7 +205,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
+		if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -208,7 +222,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
-			if (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false) {
+			if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
 		} else {
@@ -256,27 +270,32 @@ public class PlayerControl : MonoBehaviour
 
 	void HPManagament()
 	{
+        //if (isMuteki) return;//ñ≥ìGèÛë‘Ç»ÇÁâΩÇ‡ÇµÇ»Ç¢
+
 		if (BossFootCollider.bossFootAttack == true) { 
 			GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
 			transform.LookAt (bossFoot.transform);
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("BigAttacked",true);
-			if (attackedTime > 1.3f) {
+
+            if (attackedTime > 1.3f) {
 				BossFootCollider.bossFootAttack = false;
 				anim.SetBool ("BigAttacked",false);
 				attackedTime = 0;
-			}
-
-		}
+                if(!isMuteki) startMuteki();
+            }
+        }
 		if (BossBarret.bossShotAttack == true) {
 			attackedTime += Time.deltaTime;
 			anim.SetBool ("SmallAttacked",true);
-			if (attackedTime > 0.4f) {
+
+            if (attackedTime > 0.4f) {
 				BossBarret.bossShotAttack = false;
 				anim.SetBool ("SmallAttacked",false);
 				attackedTime = 0;
-			}
-		}
+                if (!isMuteki) startMuteki();
+            }
+        }
 
 	}
 
@@ -354,7 +373,52 @@ public class PlayerControl : MonoBehaviour
 		return sprint && !aim && (isMoving);
 	}
 
+    /// <summary>
+    /// É_ÉÅÅ[ÉWÇéÛÇØÇΩè„Ç…êÅÇ¡îÚÇ—Ç‹Ç∑ÅBÇªÇÃå„ñ≥ìGéûä‘Ç™énÇ‹ÇËÇ‹Ç∑ÅB
+    /// </summary>
+    /// <param name="damage"></param>
 	public void Damage(int damage){
-		HP -= damage;
+        Debug.Log(isMuteki);
+        if (isMuteki)
+        {
+            //ObjectBlinker.Instance.Blink(gameObject, mutekiTime);
+        }
+        else
+        {
+            HP -= damage;   
+            startMuteki();
+        }
+	}
+
+    void startMuteki()
+    {
+        ObjectBlinker.Instance.Blink(gameObject, mutekiTime);
+        isMuteki = true;
+        mutekiTimeCursor = 0;
+    }
+
+
+    private void mutekiManagement()
+    {
+        if (isMuteki) {
+            mutekiTimeCursor += Time.deltaTime;
+            if(mutekiTimeCursor > mutekiTime)
+            {
+                isMuteki = false;
+                mutekiTimeCursor = 0;//îOÇÃÇΩÇﬂ
+            }
+        }
+    }
+
+
+    void StopManagament(){
+		/*if (EclairImmobile == true) {
+			im.Idle ();
+			im.enabled = false;
+			anim.enabled = false;
+		} else {
+			anim.enabled = true;
+			im.enabled = true;
+		}*/
 	}
 }

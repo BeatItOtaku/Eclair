@@ -28,7 +28,8 @@ public class EnemyNormal : EnemyBase {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Vector3.Distance (player.transform.position, transform.position) < searchDistance) {
+        if(player == null) player = GameObject.FindGameObjectWithTag("Player");
+        if (Vector3.Distance (player.transform.position, transform.position) < searchDistance) {
             //プレイヤーが近づいてる時
             anim.SetBool("isAttacking", true);
 			transform.LookAt(player.transform.position);
@@ -54,12 +55,12 @@ public class EnemyNormal : EnemyBase {
             anim.SetTrigger("Damaged");
 
         }
-        Debug.Log ("ZakoHP:" + HP);
+        //Debug.Log ("ZakoHP:" + HP);
 
 	}
 
 	void OnCollisionEnter(Collision col){
-		Debug.Log ("kougeki");
+		//Debug.Log ("kougeki");
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
 			col.gameObject.GetComponent<PlayerControl> ().Damage (5);

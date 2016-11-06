@@ -96,16 +96,18 @@ public class BGMController : MonoBehaviour
 
     public void Play()
     {
-        if (intro != null)
-        {
-            audioSource[0].clip = intro;
-            audioSource[0].Play();
-            if (loop != null)
-            {
-                audioSource[1].clip = loop;
-                audioSource[1].loop = true;
-                audioSource[1].PlayScheduled(AudioSettings.dspTime + intro.length);
-            }
-        }
+		if (intro != null) {
+			audioSource [0].clip = intro;
+			audioSource [0].Play ();
+			if (loop != null) {
+				audioSource [1].clip = loop;
+				audioSource [1].loop = true;
+				audioSource [1].PlayScheduled (AudioSettings.dspTime + intro.length);
+			}
+		} else {
+			audioSource [1].clip = loop;
+			audioSource [1].loop = true;
+			audioSource [1].Play ();
+		}
     }
 }

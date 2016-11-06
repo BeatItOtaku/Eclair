@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1107995bc8cb9401c9d0ada0e08fd3c5
-timeCreated: 1476253038
+timeCreated: 1477301233
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -365,9 +365,8 @@ ModelImporter:
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar to
-      improve retargeting quality.\n\t'Eclair_LeftFoot' is inbetween humanoid transforms
-      and has rotation animation that will be discarded.\n\t'Eclair_Spine2' is inbetween
-      humanoid transforms and has rotation animation that will be discarded.\n\t'Eclair_RightForeArmRoll'
+      improve retargeting quality.\n\t'Eclair_Spine2' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'Eclair_RightForeArmRoll'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'Eclair_Neck1'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
@@ -3352,7 +3351,7 @@ ModelImporter:
         value: {x: 0, y: 0, z: 0}
         length: 0
         modified: 0
-    - boneName: Eclair_LeftToeBase
+    - boneName: Eclair_LeftFoot
       humanName: LeftFoot
       limit:
         min: {x: 0, y: 0, z: 0}
@@ -3658,6 +3657,14 @@ ModelImporter:
         modified: 0
     - boneName: Eclair_RightHandPinky2
       humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Eclair_LeftToeBase
+      humanName: LeftToes
       limit:
         min: {x: 0, y: 0, z: 0}
         max: {x: 0, y: 0, z: 0}
