@@ -124,6 +124,12 @@ public class InputManager : MonoBehaviour {
             }
 			else if(playerState == PlayerStates.Idle)//ロックオン状態じゃないときはボルト射出
             {
+				GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
+				if (bolt != null) {
+					player.transform.LookAt (bolt.transform);
+					player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
+				}
+
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
@@ -150,9 +156,11 @@ public class InputManager : MonoBehaviour {
 
 		}
 		if (playerState_ == PlayerStates.Bolt) {
+			PlayerControl.EclairImmobile = true;
 			boltLaunch = true;
 			boltTime += Time.deltaTime;
-			if (boltTime >= 0.3f) {
+			if (boltTime >= 0.5f) {
+				PlayerControl.EclairImmobile = false;
 				playerState_ = PlayerStates.Idle;
 				boltLaunch = false;
 			}
@@ -186,11 +194,16 @@ public class InputManager : MonoBehaviour {
 
 			if(playerState_ == PlayerStates.LockOn)
 				satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+			
 			if (satou != null) {
+				player.transform.LookAt(satou.transform);
+				player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0,player.transform. rotation.w);
+
 				startSBT (satou);//長いのでメソッド化したよ
 			}
 		}
 		else if (Input.GetButtonUp ("Thunder")) {
+			
 			//thunderEffect.StopEffect ();
 			sbt = false;
 			if(playerState_ == PlayerStates.SBT) Idle ();
