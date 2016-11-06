@@ -82,6 +82,7 @@ public class InputManager : MonoBehaviour {
 		Debug.Log (playerState_.ToString ());
         if (playerState_ == PlayerStates.Etoile)
         {
+			etoile = false;
             audioSource.Stop();
             audioSource.PlayOneShot(etoileEndSound);
 			CameraController.lookAt = camControl.player;
