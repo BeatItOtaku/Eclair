@@ -68,6 +68,7 @@ public class ETO : MonoBehaviour {
 			if (enemy != null) {
 				enemy.Damage (30, target.transform.position - transform.position);
 				TimeManager.Instance.theWorld (0.2f);
+				Camera.main.GetComponent<RadialBlur> ().Shock (2);
 			}
 		}
 	}

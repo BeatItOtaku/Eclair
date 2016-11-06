@@ -6,6 +6,7 @@
 		_OriginX ("OriginX", Float) = 0.5
 		_OriginY ("OriginY", Float) = 0.5
 		_Force ("Force", Float) = 1
+		_Brightness ("Brightness" , Float) = 1
 	}
 	SubShader
 	{
@@ -44,6 +45,7 @@
 			float _OriginX;
 			float _OriginY;
 			float _Force;
+			float _Brightness;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -54,7 +56,7 @@
 				for(int ii = 1;ii < 5;ii++){
 					col += tex2D(_MainTex, i.uv + dif * ii * _Force / float(20)) / float(5 / ii);
 				}
-				col /= 3;
+				col *= _Brightness / 4;
 				// just invert the colors
 				//col = 1 - col;
 				return col;
