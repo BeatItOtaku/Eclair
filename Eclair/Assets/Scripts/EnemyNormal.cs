@@ -14,6 +14,9 @@ public class EnemyNormal : EnemyBase {
 	public GameObject player;
     private Animator anim;
 
+	public bool isMuteki = false;
+	public float mutekiTime = 1;
+
 	/// <summary>
 	/// エクレアを感知する距離
 	/// </summary>
@@ -21,6 +24,8 @@ public class EnemyNormal : EnemyBase {
 
 	// Use this for initialization
 	void Start () {
+		GetComponent<Rigidbody> ().maxAngularVelocity =  (0.2f);
+
 		HP = maxHp;
 		player = GameObject.FindGameObjectWithTag ("Player");
         anim = GetComponent<Animator>();
@@ -33,16 +38,21 @@ public class EnemyNormal : EnemyBase {
             //プレイヤーが近づいてる時
             anim.SetBool("isAttacking", true);
 			transform.LookAt(player.transform.position);
-			transform.position += transform.forward * attackSpeed * Time.deltaTime;
+			//transform.position += transform.forward * attackSpeed * Time.deltaTime;
 		} else {
             anim.SetBool("isAttacking", false);
-			transform.position += transform.forward * normalSpeed * Time.deltaTime;
+			//transform.position += transform.forward * normalSpeed * Time.deltaTime;
 		}
 	}
 
 	public override void Damage(int damage,Vector3 direction){
+		if (isMuteki)
+			return;
+		else
+			StartCoroutine (startMuteki ());
+		
 		HP -= damage;
-		GetComponent<Rigidbody>().velocity = (-transform.forward * damageReaction);
+		GetComponent<Rigidbody>().AddForce(-transform.forward * damageReaction,ForceMode.VelocityChange);
         if (HP <= 0)
         {
             anim.SetTrigger("Died");
@@ -53,10 +63,13 @@ public class EnemyNormal : EnemyBase {
         }
         else
         {
-            anim.SetTrigger("Damaged");
-
+			if (damage < 5) {
+				anim.SetTrigger ("Defend");
+			} else {
+				anim.SetTrigger ("Damaged");
+			}
         }
-        //Debug.Log ("ZakoHP:" + HP);
+        Debug.Log ("ZakoHP:" + HP);
 
 	}
 
@@ -65,7 +78,13 @@ public class EnemyNormal : EnemyBase {
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
 			if(!isDying) col.gameObject.GetComponent<PlayerControl> ().Damage (5);
-			GetComponent<Rigidbody>().velocity = (-transform.forward * attackReaction);
+			GetComponent<Rigidbody>().AddForce(-transform.forward * attackReaction,ForceMode.VelocityChange);
 		}
+	}
+
+	IEnumerator startMuteki(){
+		isMuteki = true;
+		yield return new WaitForSeconds (mutekiTime);
+		isMuteki = false;
 	}
 }
