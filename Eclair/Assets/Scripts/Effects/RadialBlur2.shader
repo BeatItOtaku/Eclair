@@ -5,6 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_OriginX ("OriginX", Float) = 0.5
 		_OriginY ("OriginY", Float) = 0.5
+		_Force ("Force", Float) = 1
 	}
 	SubShader
 	{
@@ -42,6 +43,7 @@
 			sampler2D _MainTex;
 			float _OriginX;
 			float _OriginY;
+			float _Force;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -50,9 +52,9 @@
 				
 				fixed4 col = tex2D(_MainTex, i.uv);
 				for(int ii = 1;ii < 5;ii++){
-					col += tex2D(_MainTex, (i.uv + dif) * ii / float(5.0)) / float(20);
+					col += tex2D(_MainTex, i.uv + dif * ii * _Force / float(20)) / float(5 / ii);
 				}
-				//col /= 10;
+				col /= 3;
 				// just invert the colors
 				//col = 1 - col;
 				return col;
