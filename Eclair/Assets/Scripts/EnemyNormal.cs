@@ -21,6 +21,7 @@ public class EnemyNormal : EnemyBase {
 
 	// Use this for initialization
 	void Start () {
+		GetComponent<Rigidbody> ().maxAngularVelocity =  (0.2f);
 		HP = maxHp;
 		player = GameObject.FindGameObjectWithTag ("Player");
         anim = GetComponent<Animator>();
@@ -33,10 +34,10 @@ public class EnemyNormal : EnemyBase {
             //プレイヤーが近づいてる時
             anim.SetBool("isAttacking", true);
 			transform.LookAt(player.transform.position);
-			transform.position += transform.forward * attackSpeed * Time.deltaTime;
+			//transform.position += transform.forward * attackSpeed * Time.deltaTime;
 		} else {
             anim.SetBool("isAttacking", false);
-			transform.position += transform.forward * normalSpeed * Time.deltaTime;
+			//transform.position += transform.forward * normalSpeed * Time.deltaTime;
 		}
 	}
 
