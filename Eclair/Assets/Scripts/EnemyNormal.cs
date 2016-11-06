@@ -46,6 +46,7 @@ public class EnemyNormal : EnemyBase {
         if (HP <= 0)
         {
             anim.SetTrigger("Died");
+			isDying = true;
 			GetComponent<Rigidbody> ().constraints = new RigidbodyConstraints ();
 			GetComponent<Rigidbody> ().velocity += transform.up * dieReaction;
             Destroy(gameObject, 1.2f);
@@ -63,7 +64,7 @@ public class EnemyNormal : EnemyBase {
 		//Debug.Log ("kougeki");
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
-			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
+			if(!isDying) col.gameObject.GetComponent<PlayerControl> ().Damage (5);
 			GetComponent<Rigidbody>().velocity = (-transform.forward * attackReaction);
 		}
 	}
