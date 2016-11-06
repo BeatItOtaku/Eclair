@@ -59,6 +59,19 @@ public class InputManager : MonoBehaviour {
 		}
 	}
 
+	private static bool isgamepad_;
+	public static bool isGamePad{
+		get{
+			return isgamepad_;
+		}
+		set{
+			isgamepad_ = value;
+			foreach(GameObject go in GameObject.FindGameObjectsWithTag("TutorialUI")){
+				go.GetComponent<AnimationQueue_Tutorial> ().onControllerChanged (value);
+			}
+		}
+	}
+
 
 
 	/// <summary>
@@ -108,13 +121,16 @@ public class InputManager : MonoBehaviour {
                 GameObject go = player.GetComponent<LockOn>().Switch();//ロックオン状態であれば次の対象へ
                 onLockOnSwitched(go);
             }
-            else//ロックオン状態じゃないときはボルト射出
+			else if(playerState == PlayerStates.Idle)//ロックオン状態じゃないときはボルト射出
             {
                 Ray ray = Camera.main.ScreenPointToRay(screenMiddle);
                 RaycastHit hit;
                 Vector3 hitPosition;
                 Quaternion hitQuaternion = Quaternion.Euler(0,0,0);
-                if (Physics.Raycast(ray, out hit))
+
+                int layerMask = ~(1 << 8);//レイヤー8(Player)を除く全部
+
+                if (Physics.Raycast(ray, out hit,layerMask))
                 {
                     //Debug.Log ("ahoaho");
                     hitPosition = hit.point;
@@ -176,7 +192,7 @@ public class InputManager : MonoBehaviour {
 		else if (Input.GetButtonUp ("Thunder")) {
 			//thunderEffect.StopEffect ();
 			sbt = false;
-			Idle ();
+			if(playerState_ == PlayerStates.SBT) Idle ();
 		}
 		if (playerState_ == PlayerStates.SBT) {
 			anim.SetBool ("SBTStopToEnd", false);

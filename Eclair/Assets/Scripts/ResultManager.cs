@@ -97,15 +97,18 @@ public class ResultManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		CameraController.cursorIsLocked = false;
+		//CameraController.cursorIsLocked = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		time += Time.deltaTime;
-		if (timeline.Length == cursor)
-			return;
-		if (timeline [cursor].Key < time) {
+        if (timeline.Length == cursor)
+        {
+            CameraController.cursorIsLocked = false;
+            return;
+        }
+		else if (timeline [cursor].Key < time) {
 			GameObject.Find (timeline [cursor].Value).GetComponents<AnimationQueueBase>()[0].Queue ();//抽象クラス最高！
 			//Debug.Log (timeline [cursor].Value);
 			time = 0;
