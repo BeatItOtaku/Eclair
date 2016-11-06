@@ -3,16 +3,28 @@ using System.Collections;
 
 public class CameraChanger : MonoBehaviour {
 
+	public GameObject player;
 	public GameObject mainCamera;
 	public static GameObject mainCamera_ = null;
-	public GameObject changeCamera =null;
+
+	public GameObject event2StartCameraPosition = null;
+	public GameObject event2EndPosition = null;
+
 	public GameObject uI;
+
+	public GameObject em = null;
 
 	public GameObject bossKilledCamera;
 
+	private float cameraWaitTime;
+
 	// Use this for initialization
 	void Start () {
+		em = GameObject.Find ("EventManager");
+		event2StartCameraPosition = GameObject.Find ("Event2_StartPosition");
+		event2EndPosition = GameObject.Find ("EndPosition");
 		mainCamera_ = mainCamera;
+		cameraWaitTime = 0;
 	
 	}
 	
@@ -23,6 +35,15 @@ public class CameraChanger : MonoBehaviour {
 			bossKilledCamera.SetActive (true);
 			uI.SetActive (false);
 		}
-		//mainCamera_.SetActive (true);
+		if (EventManager.eventCount == 2) {
+			PlayerControl.EclairImmobile = true;
+			mainCamera_ = event2StartCameraPosition;
+			cameraWaitTime += Time.deltaTime;
+			if (cameraWaitTime >= 2.0f) {
+				PlayerControl.EclairImmobile = false;
+				mainCamera_ = player;
+				em.GetComponent<EventManager>().EventCount ();
+			}
+		}
 	}
 }

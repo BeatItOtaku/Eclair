@@ -98,9 +98,9 @@ public class CameraController : MonoBehaviour
 			if (InputManager.etoile == false) {
 				lookAt = player;
 			}
-		if (BossMoveManager.BossAttackedCount == 2) {
+		if (BossMoveManager.BossAttackedCount == 2 || EventManager.eventCount == 2) {
 			lookAt = CameraChanger.mainCamera_;
-		}
+		} 
 
 	}
 

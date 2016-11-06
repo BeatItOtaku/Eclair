@@ -33,11 +33,11 @@ public class AnimationQueue_Tutorial : AnimationQueueBase {
 	
 	// Update is called once per frame
 	void Update () {
-		if (phase == 1) {
+		if (phase == 2) {
 			time += Time.deltaTime;
 			if (time > 0.4f) {
 				small.Queue ();
-				phase = 2;
+				phase = 3;
 			}
 		}
 	}

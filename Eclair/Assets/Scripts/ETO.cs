@@ -10,6 +10,8 @@ public class ETO : MonoBehaviour {
 
 	public float speed = 30;
 
+	private GameObject eventBolt;
+
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
@@ -50,7 +52,7 @@ public class ETO : MonoBehaviour {
 			im.Idle ();
 			gameObject.SetActive (false);
 
-			if (target.GetComponent<BoltScript>().isFixed == false) {
+			if (target.GetComponent<BoltScript> ().isFixed == false) {
 				//layer7は"Bolt"
 				Destroy (target);
 			}
