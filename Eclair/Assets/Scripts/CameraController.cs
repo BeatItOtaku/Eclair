@@ -174,7 +174,7 @@ public class CameraController : MonoBehaviour
 
         Transform lookAtTransform = lookAt.GetComponent<Transform>();
 
-		int layerMask = ~((1 << 8) | (1 << 9));//PlayerとBoltを除くすべて
+		int layerMask = ~((1 << 8) | (1 << 9) | (1 << 14));//PlayerとBoltとEnemyを除くすべて
 
         RaycastHit hit;
 		if (Physics.Raycast(lookAtTransform.position, cameraOffset,out hit, distance,layerMask))
