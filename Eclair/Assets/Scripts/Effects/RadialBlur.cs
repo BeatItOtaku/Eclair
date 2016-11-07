@@ -12,7 +12,7 @@ public class RadialBlur : MonoBehaviour {
 	[Range(0.0f,5.0f)]
 	public float brightness = 1.0f;
 
-	public float smoothFactor = 0.6f;
+	public float smoothFactor = 0.8f;
 
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{

@@ -12,6 +12,9 @@ public class ETO : MonoBehaviour {
 
 	private GameObject eventBolt;
 
+    public float timeLimit = 5;
+    private float timeCursor = 0;
+
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
@@ -22,6 +25,14 @@ public class ETO : MonoBehaviour {
 		if (InputManager.etoile == true) {
 			//target = player.GetComponent<LockOn> ().getCurrentTarget ();
 			if (target != null) {
+
+                timeCursor += Time.deltaTime;
+                if (timeCursor > timeLimit)
+                {
+                    timeCursor = 0;
+                    im.Idle();//時間たちすぎたらエトワール終了
+                }
+
 				transform.LookAt (target.transform);
 
 				//敵との衝突判定
@@ -34,6 +45,7 @@ public class ETO : MonoBehaviour {
 					transform.position += transform.forward * Time.deltaTime * speed;
 				}
 			} else {
+                timeCursor = 0;
 				im.Idle ();//targetが居なくなったらEtoile終了だぜ
 			}
 		}
@@ -63,6 +75,7 @@ public class ETO : MonoBehaviour {
 			//Debug.Log ("CollideToKeepOut");
 			player.transform.position = InputManager.eto_.transform.position;
 			InputManager.etoile = false;
+            timeCursor = 0;
 			im.Idle ();
 			gameObject.SetActive (false);
 		} else {
@@ -70,7 +83,7 @@ public class ETO : MonoBehaviour {
 			if (enemy != null) {
 				enemy.Damage (30, target.transform.position - transform.position);
 				TimeManager.Instance.theWorld (0.2f);
-				Camera.main.GetComponent<RadialBlur> ().Shock (2);
+				Camera.main.GetComponent<RadialBlur> ().Shock (3);
 			}
 		}
 	}

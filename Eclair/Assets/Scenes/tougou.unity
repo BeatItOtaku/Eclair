@@ -4764,6 +4764,7 @@ MonoBehaviour:
   lightning: {fileID: 100006, guid: ec6e75a3654374c7f9c1007063dcd249, type: 2}
   im: {fileID: 2057756263}
   speed: 30
+  timeLimit: 5
 --- !u!135 &795536972
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9680,6 +9681,7 @@ MonoBehaviour:
   lightning: {fileID: 100006, guid: ec6e75a3654374c7f9c1007063dcd249, type: 2}
   im: {fileID: 2057756263}
   speed: 30
+  timeLimit: 5
 --- !u!135 &1344022111
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -9691,7 +9693,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.53850985
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!1 &1348822381
 GameObject:
   m_ObjectHideFlags: 0
