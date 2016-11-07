@@ -72,6 +72,10 @@ public class InputManager : MonoBehaviour {
 
 	private static bool isgamepad_;
 
+	/// <summary>
+	/// とりあえずMapLoaderからいじることにしてる
+	/// </summary>
+	/// <value><c>true</c> if is game pad; otherwise, <c>false</c>.</value>
 	public static bool isGamePad {
 		get {
 			return isgamepad_;
@@ -193,7 +197,7 @@ public class InputManager : MonoBehaviour {
 			}
 		} else if (Input.GetButtonUp ("LockOn")) {//Eキー離したらロックオンやめる
 			player.GetComponent<LockOn> ().endLockOn ();
-			if (playerState_ == PlayerStates.LockOn)
+			if (playerState_ != PlayerStates.Etoile)
 				Idle ();
 		}
 
@@ -246,6 +250,9 @@ public class InputManager : MonoBehaviour {
 		} else if (Input.GetButtonDown ("Minus")) {
 			camSensitivityControl.Down ();
 		}
+
+		//TODO:キーボード/ゲームパッドの切り替え判定
+		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています
 	}
 
 

@@ -66,11 +66,17 @@ public class MapLoader : MonoBehaviour
             //Debug.Log("aho");
             MapAsync.allowSceneActivation = true;
 			PlayerControl.EclairImmobile = false;
-            SceneManager.LoadSceneAsync("Player",LoadSceneMode.Additive);
+            SceneManager.LoadSceneAsync("tougou",LoadSceneMode.Additive);
 			SceneManager.LoadSceneAsync ("Boss Map", LoadSceneMode.Additive);
             startGameFlag = false;
             MapAsync = null;
         }
+
+		if (Input.GetKeyDown (KeyCode.W) || Input.GetKeyDown (KeyCode.A) || Input.GetKeyDown (KeyCode.S) || Input.GetKeyDown (KeyCode.D)) {
+			if(InputManager.isGamePad) InputManager.isGamePad = false;
+		} else if (Mathf.Abs (Input.GetAxisRaw ("Camera Y")) > 0.4f || Mathf.Abs (Input.GetAxisRaw ("Vertical")) > 0.4f) {
+			if(!InputManager.isGamePad) InputManager.isGamePad = true;//WASDが押されてないのに移動してる => ゲームパッドを触ってる
+		}
     }
 
     void OnApplicationQuit()

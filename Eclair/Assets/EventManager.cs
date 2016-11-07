@@ -18,7 +18,6 @@ public class EventManager : MonoBehaviour {
 
 
 */
-	public GameObject AnimationQueue = null;
 	//public AnimationQueue_Tutorial queueMove;
 
 	public GameObject event2_bolt;
@@ -36,14 +35,16 @@ public class EventManager : MonoBehaviour {
 	public GameObject event7_zako;
 	public GameObject event9_way;
 
+	public GameObject HPGauge;
+
 	public static int eventCount;
 
-
+	private GameObject tutorialMove = null;
 
 
 	// Use this for initialization
 	void Start () {
-		AnimationQueue = GameObject.Find ("Canvas");
+		//AnimationQueue = GameObject.Find ("Canvas");
 		//queueMove.Queue ();
 		eventCount = 0;
 
@@ -60,13 +61,20 @@ public class EventManager : MonoBehaviour {
 		event6_yajirushi.SetActive (false);
 
 		event7_zako.SetActive (false);
-		GameObject.Find ("Tutorial_Move").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Debug.Log (eventCount);
+		if (tutorialMove == null) {
+			tutorialMove = GameObject.Find ("Tutorial_Move");
+			if (tutorialMove != null) {
+				tutorialMove.GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			}
+		}
+		if (HPGauge == null)
+			HPGauge = GameObject.Find ("HPGauge");
 	}
 
 	public void EventCount(){
@@ -130,8 +138,26 @@ public class EventManager : MonoBehaviour {
 			event6_yajirushi.SetActive (false);
 			event7_zako.SetActive (true);
 			break;
+		case 8:
+			//工場へ突入
+			StartCoroutine (hideTutorialUIs());
+			break;
 		}
 	}
+
+	private IEnumerator hideTutorialUIs(){
+		string[] objNames = { "Hint_Enter","Tutorial_Bolt", "Tutorial_LockOn", "Tutorial_Thunder", "Tutorial_Etoile", "Tutorial_Bolt" };
+		foreach(string obj in objNames){
+			InvokeQueue (obj);
+			yield return new WaitForSecondsRealtime (0.1f);
+		}
+		HPGauge.SetActive (true);
+	}
+
+	private void InvokeQueue(string obj){
+		GameObject.Find (obj).GetComponent<AnimationQueueBase> ().Queue ();
+	}
+
 /*	public void EventCount(){
 		eventCount++;
 		if (eventCount == 1) 

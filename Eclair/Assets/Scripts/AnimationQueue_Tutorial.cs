@@ -36,7 +36,7 @@ public class AnimationQueue_Tutorial : AnimationQueueBase {
 		if (phase == 2) {
 			time += Time.deltaTime;
 			if (time > 0.4f) {
-				small.Queue ();
+				if(small != null) small.Queue ();
 				phase = 3;
 			}
 		}
@@ -55,7 +55,7 @@ public class AnimationQueue_Tutorial : AnimationQueueBase {
 
 
 		case 3:
-			small.Queue ();
+			if(small != null) small.Queue ();
 			break;
 		}
 		phase++;
@@ -64,10 +64,10 @@ public class AnimationQueue_Tutorial : AnimationQueueBase {
 	public void onControllerChanged(bool isGamePad){
 		if (isGamePad) {
 			large.GetComponent<Image> ().sprite = largePad;
-			small.GetComponent<Image> ().sprite = smallPad;
+			if(small != null) small.GetComponent<Image> ().sprite = smallPad;
 		} else {
 			large.GetComponent<Image> ().sprite = largeKey;
-			small.GetComponent<Image> ().sprite = smallKey;
+			if(small != null) small.GetComponent<Image> ().sprite = smallKey;
 		}
 	}
 }
