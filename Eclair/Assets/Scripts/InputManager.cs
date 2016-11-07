@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour {
 	public GameObject player;
 	public GameObject muzzle;
 	public GameObject eto;
-	public static GameObject eto_= null;
+	public static GameObject eto_ = null;
 	public static bool etoile;
 
 	public ThunderEffectController thunderEffect;
@@ -22,53 +22,67 @@ public class InputManager : MonoBehaviour {
 
 	public CrossHairController crossHair;
 
-    public CameraController camControl;
+	public CameraController camControl;
 	public CamSensitivityController camSensitivityControl;
 
-    public AudioSource audioSource;
+	public AudioSource audioSource;
 
 
-    public static bool boltLaunch = false;
+	public static bool boltLaunch = false;
 	public static float boltTime = 0;
 
 	public static bool sbt = false;
 
 	public LockOn lockOn;
 
-    public AudioClip boltLaunchSound;
-    public AudioClip SBTSound;
-    public AudioClip lockOnSound;
-    public AudioClip etoileSound;
-    public AudioClip etoileEndSound;
+	public AudioClip boltLaunchSound;
+	public AudioClip SBTSound;
+	public AudioClip lockOnSound;
+	public AudioClip etoileSound;
+	public AudioClip etoileEndSound;
 
-	private int height,width;
+	private int height, width;
 	private Vector3 screenMiddle;
 
 	private Animator anim;
 
 	const float DefaultShotDistance = 10;
 
-	public enum PlayerStates {Idle,LockOn , Bolt, SBT, Etoile, Damaging}
+	public enum PlayerStates
+	{
+		Idle,
+		LockOn,
+		Bolt,
+		SBT,
+		Etoile,
+		Damaging
+	}
 
 	private PlayerStates playerState_ = PlayerStates.Idle;
+
 	/// <summary>
 	/// (Read Only)プレーヤーの現在の状態
 	/// </summary>
 	/// <value>The state of the player.</value>
 	public PlayerStates playerState {
-		get{
+		get {
 			return playerState_;
 		}
 	}
 
 	private static bool isgamepad_;
-	public static bool isGamePad{
-		get{
+
+	/// <summary>
+	/// とりあえずMapLoaderからいじることにしてる
+	/// </summary>
+	/// <value><c>true</c> if is game pad; otherwise, <c>false</c>.</value>
+	public static bool isGamePad {
+		get {
 			return isgamepad_;
 		}
-		set{
+		set {
 			isgamepad_ = value;
-			foreach(GameObject go in GameObject.FindGameObjectsWithTag("TutorialUI")){
+			foreach (GameObject go in GameObject.FindGameObjectsWithTag("TutorialUI")) {
 				go.GetComponent<AnimationQueue_Tutorial> ().onControllerChanged (value);
 			}
 		}
@@ -79,31 +93,33 @@ public class InputManager : MonoBehaviour {
 	/// <summary>
 	/// ロックオン、ボルト射出、SBT、エトワールが終了した時に呼ばれるメソッド
 	/// </summary>
-	public void Idle(){
+	public void Idle ()
+	{
 		player.SetActive (true);
 		Debug.Log (playerState_.ToString ());
-        if (playerState_ == PlayerStates.Etoile)
-        {
-            audioSource.Stop();
-            audioSource.PlayOneShot(etoileEndSound);
+		if (playerState_ == PlayerStates.Etoile) {
+			etoile = false;
+			audioSource.Stop ();
+			audioSource.PlayOneShot (etoileEndSound);
 			CameraController.lookAt = camControl.player;
 			eto.SetActive (false);
-        }
-        playerState_ = PlayerStates.Idle;
+		}
+		playerState_ = PlayerStates.Idle;
 		player.GetComponent<LockOn> ().endLockOn ();
-        crossHair.isLockOn = false;
-        camControl.StopLockOn();
-        PlayerControl.fly = false;
+		crossHair.isLockOn = false;
+		camControl.StopLockOn ();
+		PlayerControl.fly = false;
 		anim.SetBool ("SBTStopToEnd", false);
 
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		em = GameObject.Find ("EventManager");
-        //mySceneManager.MapAsync.allowSceneActivation = true;
+		//mySceneManager.MapAsync.allowSceneActivation = true;
 		anim = player.GetComponent<Animator> ();
-        //audioSource = GetComponent<AudioSource>();
+		//audioSource = GetComponent<AudioSource>();
 
 		etoile = false;
 
@@ -113,7 +129,8 @@ public class InputManager : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 
 		//右クリック
 		if (EventManager.eventCount >= 6) {
@@ -124,6 +141,12 @@ public class InputManager : MonoBehaviour {
 					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 					onLockOnSwitched (go);
 				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
+					GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
+					if (bolt != null) {
+						player.transform.LookAt (bolt.transform);
+						player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
+					}
+
 					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
 					RaycastHit hit;
 					Vector3 hitPosition;
@@ -146,38 +169,37 @@ public class InputManager : MonoBehaviour {
 
 			}
 			if (playerState_ == PlayerStates.Bolt) {
+				PlayerControl.EclairImmobile = true;
 				boltLaunch = true;
 				boltTime += Time.deltaTime;
-				if (boltTime >= 0.3f) {
+				if (boltTime >= 0.5f) {
+					PlayerControl.EclairImmobile = false;
 					playerState_ = PlayerStates.Idle;
 					boltLaunch = false;
 				}
-			} else {
-				boltLaunch = false;
 			}
 		}
-			
-
+					
+		Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
-		if(Input.GetButtonDown("LockOn")){
+		if (Input.GetButtonDown ("LockOn")) {
+			Debug.Log ("lockOn");
 			GameObject go;
 			if (playerState_ == PlayerStates.Idle) {
 				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
-                if (go != null)
-                {
-                    playerState_ = PlayerStates.LockOn;
-                    onLockOnSwitched(go);
+				if (go != null) {
+					playerState_ = PlayerStates.LockOn;
+					onLockOnSwitched (go);
 					if (EventManager.eventCount == 1) {
-						em.GetComponent<EventManager>().EventCount ();
+						em.GetComponent<EventManager> ().EventCount ();
 					}
-                }
+				}
 			}
+		} else if (Input.GetButtonUp ("LockOn")) {//Eキー離したらロックオンやめる
+			player.GetComponent<LockOn> ().endLockOn ();
+			if (playerState_ != PlayerStates.Etoile)
+				Idle ();
 		}
-		else if (Input.GetButtonUp("LockOn"))//Eキー離したらロックオンやめる
-        {
-            player.GetComponent<LockOn>().endLockOn();
-			if(playerState_ == PlayerStates.LockOn) Idle();
-        }
 
 		//左クリック
 		if (EventManager.eventCount >= 3) {
@@ -188,6 +210,8 @@ public class InputManager : MonoBehaviour {
 				if (playerState_ == PlayerStates.LockOn)
 					satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
 				if (satou != null) {
+					player.transform.LookAt (satou.transform);
+					player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
 					startSBT (satou);//長いのでメソッド化したよ
 				}
 			} else if (Input.GetButtonUp ("Thunder")) {
@@ -226,18 +250,23 @@ public class InputManager : MonoBehaviour {
 		} else if (Input.GetButtonDown ("Minus")) {
 			camSensitivityControl.Down ();
 		}
+
+		//TODO:キーボード/ゲームパッドの切り替え判定
+		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています
 	}
 
-	private void startSBT(GameObject target){
+
+	private void startSBT (GameObject target)
+	{
 		sbt = true;
 		playerState_ = PlayerStates.SBT;
 		thunderEffect.StartEffect (muzzle.transform.position, target.transform.position);
-		audioSource.PlayOneShot(SBTSound);
+		audioSource.PlayOneShot (SBTSound);
 
 		//ビリビリ上にあるオブジェクトを求めるよ
-		Collider[] colliders = Physics.OverlapCapsule(muzzle.transform.position, target.transform.position,1);
-		foreach(Collider c in colliders){
-			EnemyBase enemy = c.gameObject.GetComponent<EnemyBase>();
+		Collider[] colliders = Physics.OverlapCapsule (muzzle.transform.position, target.transform.position, 1);
+		foreach (Collider c in colliders) {
+			EnemyBase enemy = c.gameObject.GetComponent<EnemyBase> ();
 			//Destroy (c.gameObject);
 			if (enemy != null) {//エクレアと衝突したオブジェクトにはEnemyBaseが含まれている、すなわちそれは敵である
 				Debug.Log (c.name);
@@ -249,34 +278,35 @@ public class InputManager : MonoBehaviour {
 	}
 
 
-    void onLockOnSwitched(GameObject target)
-    {
-		if(target != null){
-            crossHair.target = target.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
-            crossHair.isLockOn = true;
-            audioSource.PlayOneShot(lockOnSound);
-            camControl.StartLockOn(target);
-        }
+	void onLockOnSwitched (GameObject target)
+	{
+		if (target != null) {
+			crossHair.target = target.transform.position;//player.GetComponent<LockOn> ().getCurrentTarget ().transform.position;
+			crossHair.isLockOn = true;
+			audioSource.PlayOneShot (lockOnSound);
+			camControl.StartLockOn (target);
+		}
 	}
 
-	static float getAngleWithSign(Vector3 v1, Vector3 v2){
+	static float getAngleWithSign (Vector3 v1, Vector3 v2)
+	{
 		float angle = Vector3.Angle (v1, v2);
-		int sign = Vector3.Cross(v1, v2).z < 0 ? -1 : 1;
+		int sign = Vector3.Cross (v1, v2).z < 0 ? -1 : 1;
 		return angle * sign;
 	}
 
-    public string getDebugString()
-    {
-        string st = "";
+	public string getDebugString ()
+	{
+		string st = "";
 
-        st += "PlayerState : " + playerState_.ToString() + "\n";
-        st += "CameraY : " + camControl.cameraY + "\n";
-        st += "CameraAngle : " + camControl.cameraAngle + "\n";
+		st += "PlayerState : " + playerState_.ToString () + "\n";
+		st += "CameraY : " + camControl.cameraY + "\n";
+		st += "CameraAngle : " + camControl.cameraAngle + "\n";
 
 		//Debug.Log (playerState_.ToString ());
 
 
-        return st;
-    }
+		return st;
+	}
 
 }

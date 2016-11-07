@@ -174,8 +174,8 @@ public class BossMoveManager : MonoBehaviour {
 			result.allowSceneActivation = true;
 			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
 			gameObject.SetActive (false);
-			bossKilledCameraPosition.transform.position = bossCamera.position;
-			bossKilledCameraPosition.transform.LookAt (bossCamera);
+			//bossKilledCameraPosition.transform.position = bossCamera.position;
+			//bossKilledCameraPosition.transform.LookAt (bossCamera);
 			//PlayerControl.EclairImmobile = true;
 			bossAnim.SetTrigger ("BossKilled");
 			Debug.Log ("kill");

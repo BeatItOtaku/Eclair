@@ -6,6 +6,7 @@ public class BossStarter : MonoBehaviour {
 	//public Vector3 bossPosition;
 	public GameObject boss;
 	public AudioClip bgm;
+	public GameObject skyball;
 
 	// Use this for initialization
 	void Start () {
@@ -26,5 +27,6 @@ public class BossStarter : MonoBehaviour {
 	void StartBoss(){
 		boss.SetActive (true);
 		Camera.main.GetComponent<BGMController> ().Play (null, bgm);
+		skyball.SetActive (true);
 	}
 }

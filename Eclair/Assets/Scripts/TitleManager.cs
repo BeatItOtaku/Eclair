@@ -10,6 +10,8 @@ public class TitleManager : MonoBehaviour {
 	public GameObject dontDestroy;
     //public Text loadingText;
 
+	public bool loadMapInEditor = false;
+
     private MapLoader scene;
 
     private bool isLoading = false;
@@ -43,8 +45,8 @@ public class TitleManager : MonoBehaviour {
 			return;
 		
 		SceneManager.LoadSceneAsync ("Loading", LoadSceneMode.Additive);
-		if(!Application.isEditor) scene.startMapLoad();
+		if(!Application.isEditor || loadMapInEditor) scene.startMapLoad();
         isLoading = true;
-        scene.startGame();
+        //scene.startGame();
     }
 }

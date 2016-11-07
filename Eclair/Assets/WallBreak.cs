@@ -18,14 +18,13 @@ public class WallBreak : EnemyBase {
 	public override void Damage (int damage ,Vector3 direction)
 	{
 		if (damage >= 30) {
-			
-
-				Instantiate (breakFire, transform.position, transform.rotation);
+			Debug.Log ("damage");
+			Instantiate (breakFire, transform.position, transform.rotation);
 			if (EventManager.eventCount == 4 ||EventManager.eventCount == 6) {
 				em.EventCount ();
 			}
-				Destroy (gameObject);
-			}
+			Destroy (gameObject);
 		}
+	}
 }
 

@@ -8,7 +8,12 @@ public class ETO : MonoBehaviour {
 	public GameObject lightning;
 	public InputManager im;
 
+	public float speed = 30;
+
 	private GameObject eventBolt;
+
+    public float timeLimit = 5;
+    private float timeCursor = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -20,17 +25,37 @@ public class ETO : MonoBehaviour {
 		if (InputManager.etoile == true) {
 			//target = player.GetComponent<LockOn> ().getCurrentTarget ();
 			if (target != null) {
+
+                timeCursor += Time.deltaTime;
+                if (timeCursor > timeLimit)
+                {
+                    timeCursor = 0;
+                    im.Idle();//時間たちすぎたらエトワール終了
+                }
+
 				transform.LookAt (target.transform);
-				transform.position += transform.forward * Time.deltaTime * 30;
+
+				//敵との衝突判定
+				int layerMask = ~(1 << 8 | 1 << 0);//DefaultとPlayer以外全部
+				RaycastHit hit;
+				if (Physics.SphereCast (transform.position, 0.5f, transform.forward, out hit, speed * Time.deltaTime, layerMask)) {
+					transform.position += transform.forward * Time.deltaTime * speed;
+					OnHit (hit.collider);
+				} else {
+					transform.position += transform.forward * Time.deltaTime * speed;
+				}
+			} else {
+                timeCursor = 0;
+				im.Idle ();//targetが居なくなったらEtoile終了だぜ
 			}
 		}
 	}
-	private void OnCollisionEnter (Collision collider)
-	{
-		//Debug.Log ("ETO.OnCollisionEnter");
 
+	private void OnHit (Collider collider)
+	{
+		Debug.Log ("OnHit");
 		//ボルトにぶつかったとき・・・電気のエフェクトを出す
-		if (collider.gameObject.tag == "Bolt") {	
+		if (collider.gameObject.tag == "Bolt" && target.Equals(collider.gameObject)) {	
 			//Debug.Log ("CollideToBolt");
 			player.transform.position = target.transform.position;
 			Instantiate (lightning, transform.position, transform.rotation);
@@ -50,11 +75,16 @@ public class ETO : MonoBehaviour {
 			//Debug.Log ("CollideToKeepOut");
 			player.transform.position = InputManager.eto_.transform.position;
 			InputManager.etoile = false;
+            timeCursor = 0;
 			im.Idle ();
 			gameObject.SetActive (false);
 		} else {
 			EnemyBase enemy = collider.gameObject.GetComponent<EnemyBase>();
-			if(enemy != null) enemy.Damage(30,target.transform.position - transform.position);
+			if (enemy != null) {
+				enemy.Damage (30, target.transform.position - transform.position);
+				TimeManager.Instance.theWorld (0.2f);
+				Camera.main.GetComponent<RadialBlur> ().Shock (3);
+			}
 		}
 	}
 }

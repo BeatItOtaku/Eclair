@@ -11,6 +11,8 @@ TagManager:
   - BossTail
   - NoMoveBolt
   - ETOEclair
+  - Plane
+  - Objects
   - TutorialUI
   - BreakWall
   layers:
@@ -28,9 +30,9 @@ TagManager:
   - NoMoveBolt
   - EclairKeepOut
   - Boss
+  - Enemy
   - Event7Pass
-  - 
-  - 
+  - Ground
   - 
   - 
   - 
