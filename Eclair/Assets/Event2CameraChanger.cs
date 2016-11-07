@@ -8,6 +8,8 @@ public class Event2CameraChanger : MonoBehaviour {
 
 	public EventManager2 em2;
 	public GameObject event2_1Angle;
+	public GameObject event2_5Angle;
+	public GameObject event2_8Angle;
 
 	private float waitTime;
 	public static bool cameraSet;
@@ -24,19 +26,32 @@ public class Event2CameraChanger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (em2.eventCount2 == 1) 
-		{
+		{			
+			CameraController.lookAt = event2_1Angle;
+			CameraChange ();
+
+		}
+		if (em2.eventCount2 == 5) {
+			CameraController.lookAt = event2_5Angle;
+			CameraChange ();
+		}
+		if (em2.eventCount2 == 8) {
+			CameraController.lookAt = event2_8Angle;
+			CameraChange ();
+		}
+			
+	}
+		public void CameraChange(){
 			cameraSet = true;
 			PlayerControl.EclairImmobile = true;
-			CameraController.lookAt = event2_1Angle;
 			waitTime += Time.deltaTime;
 
-			if (waitTime >= 3.0f) {
+			if(waitTime >=3.0f){
 				cameraSet = false;
 				PlayerControl.EclairImmobile = false;
-				em2.EventCount2 ();
+			em2.EventCount2 ();
 				waitTime = 0;
-	
 			}
 		}
-	}
+				
 }
