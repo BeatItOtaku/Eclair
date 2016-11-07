@@ -35,7 +35,7 @@ public class EventManager : MonoBehaviour {
 	public GameObject event7_zako;
 	public GameObject event9_way;
 
-	public GameObject HPGauge;
+	public GameObject HPGauge = null;
 
 	public static int eventCount;
 
