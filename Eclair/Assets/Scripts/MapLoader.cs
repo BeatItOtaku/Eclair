@@ -74,7 +74,7 @@ public class MapLoader : MonoBehaviour
 
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
 			if(InputManager.isGamePad) InputManager.isGamePad = false;
-		} else if (Mathf.Abs (Input.GetAxisRaw ("Camera Y")) > 0.4f || Mathf.Abs (Input.GetAxisRaw ("Vertical")) > 0.4f) {
+		} else if (Mathf.Abs (Input.GetAxisRaw ("Horizontal")) > 0.4f || Mathf.Abs (Input.GetAxisRaw ("Vertical")) > 0.4f) {
 			if(!InputManager.isGamePad) InputManager.isGamePad = true;//WASDが押されてないのに移動してる => ゲームパッドを触ってる
 		}
     }
