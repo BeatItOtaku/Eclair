@@ -182,6 +182,7 @@ public class InputManager : MonoBehaviour {
 					
 		Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
+		if(EventManager.eventCount >=1){
 		if (Input.GetButtonDown ("LockOn")) {
 			Debug.Log ("lockOn");
 			GameObject go;
@@ -200,6 +201,7 @@ public class InputManager : MonoBehaviour {
 			if (playerState_ != PlayerStates.Etoile)
 				Idle ();
 		}
+	}
 
 		//左クリック
 		if (EventManager.eventCount >= 3) {

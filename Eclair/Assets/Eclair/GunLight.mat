@@ -6,15 +6,34 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: RadialBlurMat
-  m_Shader: {fileID: 4800000, guid: df9c0d7cae7ab4ceb9c21d9e31cd7f27, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_Name: GunLight
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 1
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
+    - first:
+        name: _BodyBumpTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _BodyOcclusionTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _BumpDetailTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - first:
         name: _BumpMap
       second:
@@ -22,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _ColorControl
+        name: _BumpTrimTex
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -41,6 +60,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _DetailNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _DiffuseTrimTex
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,15 +101,36 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: tDiffuse
+        name: _SpecGlossMap
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - first:
-        name: _Brightness
-      second: 1.1000001
+        name: _AtlasOffsetX
+      second: 0
+    - first:
+        name: _AtlasOffsetY
+      second: 0
+    - first:
+        name: _AtlasScaleX
+      second: 1
+    - first:
+        name: _AtlasScaleY
+      second: 1
+    - first:
+        name: _BodyBumpPower
+      second: 1
+    - first:
+        name: _BodyOcclusionPower
+      second: 1
+    - first:
+        name: _BumpDetailPower
+      second: 1
+    - first:
+        name: _BumpPower
+      second: 1
     - first:
         name: _BumpScale
       second: 1
@@ -95,14 +141,23 @@ Material:
         name: _DetailNormalMapScale
       second: 1
     - first:
-        name: _DstBlend
+        name: _DetailTexEnable
       second: 0
     - first:
-        name: _Force
-      second: 2.4248483e-11
+        name: _DetailTexOffset
+      second: 1
+    - first:
+        name: _DetailTexPower
+      second: 1.5
+    - first:
+        name: _DetailTexScale
+      second: 2
+    - first:
+        name: _DstBlend
+      second: 10
     - first:
         name: _GlossMapScale
-      second: 1
+      second: 0.3
     - first:
         name: _Glossiness
       second: 0.5
@@ -114,22 +169,19 @@ Material:
       second: 0
     - first:
         name: _Mode
-      second: 0
+      second: 3
     - first:
         name: _OcclusionStrength
       second: 1
     - first:
-        name: _OriginX
-      second: 0.5
-    - first:
-        name: _OriginY
-      second: 0.5
-    - first:
         name: _Parallax
       second: 0.02
     - first:
+        name: _Shininess
+      second: 0.078125
+    - first:
         name: _SmoothnessTextureChannel
-      second: 0
+      second: 1
     - first:
         name: _SpecularHighlights
       second: 1
@@ -137,48 +189,39 @@ Material:
         name: _SrcBlend
       second: 1
     - first:
+        name: _TrimShininess
+      second: 0.078125
+    - first:
         name: _UVSec
       second: 0
     - first:
-        name: _WaveScale
-      second: 0.07
-    - first:
         name: _ZWrite
-      second: 1
-    - first:
-        name: fClamp
-      second: 1
-    - first:
-        name: fDecay
-      second: 0.93
-    - first:
-        name: fDensity
-      second: 0.96
-    - first:
-        name: fExposure
-      second: 0.6
-    - first:
-        name: fWeight
-      second: 0.4
-    - first:
-        name: fX
-      second: 0.5
-    - first:
-        name: fY
-      second: 0.5
+      second: 0
     m_Colors:
     - first:
-        name: WaveSpeed
-      second: {r: 19, g: 9, b: -16, a: -7}
-    - first:
-        name: _Color
-      second: {r: 1, g: 1, b: 1, a: 1}
-    - first:
-        name: _EmissionColor
+        name: _BodyOcclusionColor
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
-        name: _Origin
-      second: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
+        name: _Color
+      second: {r: 1, g: 1, b: 1, a: 0.297}
     - first:
-        name: _horizonColor
-      second: {r: 0.172, g: 0.463, b: 0.435, a: 0}
+        name: _DetailTexColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _EmissionColor
+      second: {r: 0.06421668, g: 0.066176474, b: 0.03065528, a: 1}
+    - first:
+        name: _MainSpecColor
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - first:
+        name: _SpecColor
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _TrimColor
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _TrimSpecColor
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - first:
+        name: _VertexMaskColor
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}

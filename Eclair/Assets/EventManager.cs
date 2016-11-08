@@ -9,9 +9,9 @@ public class EventManager : MonoBehaviour {
     2 カメラが銃を写す（ロックオンキーを押す）
     3 SBTのチュートリアル（銃を写したカメラがプレイヤーを写すように戻る）
     4 ETOのチュートリアル(敵を倒す）
-    5 ETO用のボルトが現れる（ETOで壁を破壊する）
-    6 ボルトを撃つチュートリアル（銃を取得する）
-    7 ボルトを壁にさして電撃で壊す（6と同じ）
+    5 SBTスイッチのチュートリアル（ETOで壁を壊す）
+    6 金網のチュートリアル（SBTスイッチで道を開ける）
+    7 銃をゲット
     8 敵を倒す（壁を破壊する）
     9 工場内マップに移動する（道を通る）
 
@@ -106,7 +106,7 @@ public class EventManager : MonoBehaviour {
 			GameObject.Find ("Tutorial_Thunder").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 
-			event3_bolt.tag = "Untagged";
+			event3_bolt.SetActive (false);
 			event4_bolt1.tag = "Bolt";				
 			event4_bolt2.tag = "Bolt";	
 			break;
