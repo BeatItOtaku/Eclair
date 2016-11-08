@@ -57,7 +57,7 @@ public class EventManager : MonoBehaviour {
 		event5_ue.SetActive (false);
 
 		event6_EclairGun = GameObject.Find ("Gun");
-		event6_EclairGun.SetActive (false);
+		//event6_EclairGun.SetActive (false);
 		event6_yajirushi.SetActive (false);
 
 		event7_zako.SetActive (false);

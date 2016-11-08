@@ -826,6 +826,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010852933914, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
   m_IsPrefabParent: 0
@@ -1511,6 +1515,10 @@ Prefab:
     - target: {fileID: 1000011029729808, guid: cd4b2b3bbe49e4bfa9aaafc599552c89, type: 2}
       propertyPath: m_Name
       value: CamSensitivity
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011029729808, guid: cd4b2b3bbe49e4bfa9aaafc599552c89, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cd4b2b3bbe49e4bfa9aaafc599552c89, type: 2}
@@ -2801,7 +2809,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012644750950, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000013193730586, guid: c7b8c6c1ca175464faaa7474e0b80efc,
         type: 2}
@@ -3797,7 +3805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012644750950, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000011189093166, guid: c7b8c6c1ca175464faaa7474e0b80efc,
         type: 2}
@@ -5413,7 +5421,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012644750950, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000011940624118, guid: c7b8c6c1ca175464faaa7474e0b80efc,
         type: 2}
@@ -6438,6 +6446,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012644750950, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
   m_IsPrefabParent: 0
@@ -7037,6 +7049,10 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012644750950, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
@@ -8203,6 +8219,7 @@ MonoBehaviour:
   ShotPause: {fileID: 0}
   player: {fileID: 1088387005}
   boltRotationOffset: {x: 0, y: 0, z: 0}
+  go: {fileID: 0}
   usePhysics: 1
   force: 32
   shotIntervalMin: 1
@@ -8788,7 +8805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012644750950, guid: c7b8c6c1ca175464faaa7474e0b80efc, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000011189093166, guid: c7b8c6c1ca175464faaa7474e0b80efc,
         type: 2}
@@ -9473,6 +9490,10 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010852933914, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
@@ -10700,6 +10721,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010852933914, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
   m_IsPrefabParent: 0
@@ -11201,6 +11226,7 @@ MonoBehaviour:
   ShotPause: {fileID: 0}
   player: {fileID: 1581712544}
   boltRotationOffset: {x: 0, y: 0, z: 0}
+  go: {fileID: 0}
   usePhysics: 1
   force: 32
   shotIntervalMin: 1
@@ -11644,6 +11670,15 @@ Prefab:
         type: 2}
       propertyPath: smoothFactor
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011552009430, guid: 28d8841057b824d9ca9f9acadc6a18a9, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010737844746, guid: 28d8841057b824d9ca9f9acadc6a18a9,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28d8841057b824d9ca9f9acadc6a18a9, type: 2}
@@ -12667,7 +12702,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011243394194, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a, type: 2}
@@ -12938,6 +12973,10 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010852933914, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e5cada6137a344df9b1f1ebd55168b86, type: 2}

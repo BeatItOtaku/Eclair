@@ -133,7 +133,7 @@ public class InputManager : MonoBehaviour {
 	{
 
 		//右クリック
-		if (EventManager.eventCount >= 6) {
+		//if (EventManager.eventCount >= 6) {
 			if (Input.GetButtonDown ("LaunchBolt")) {
 				//Debug.Log ("MouseLeft");
 
@@ -141,10 +141,10 @@ public class InputManager : MonoBehaviour {
 					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 					onLockOnSwitched (go);
 				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
-					GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
+				GameObject bolt = player.GetComponent<PlayerShot>().go;
 					if (bolt != null) {
 						player.transform.LookAt (bolt.transform);
-						player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
+					player.transform.rotation = new Quaternion (0, player.transform.rotation.y , 0, player.transform.rotation.w);
 					}
 
 					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
@@ -178,7 +178,7 @@ public class InputManager : MonoBehaviour {
 					boltLaunch = false;
 				}
 			}
-		}
+		//}
 					
 		Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
@@ -202,7 +202,7 @@ public class InputManager : MonoBehaviour {
 		}
 
 		//左クリック
-		if (EventManager.eventCount >= 3) {
+		//if (EventManager.eventCount >= 3) {
 			if (Input.GetButtonDown ("Thunder")) {
 				//Debug.Log ("Fire1Pressed");
 				GameObject satou = null;
@@ -223,11 +223,11 @@ public class InputManager : MonoBehaviour {
 			if (playerState_ == PlayerStates.SBT) {
 				anim.SetBool ("SBTStopToEnd", false);
 			}
-		}
+		//}
 
 
 		//エトワールボタン
-		if (EventManager.eventCount >= 4) {
+		//if (EventManager.eventCount >= 4) {
 			if (Input.GetButtonDown ("Etoile")) {
 				if (playerState_ == PlayerStates.LockOn) {
 					audioSource.PlayOneShot (etoileSound);				
@@ -242,7 +242,7 @@ public class InputManager : MonoBehaviour {
 					player.SetActive (false);
 				}
 			}
-		}
+		//}
 
 		//カメラ感度
 		if (Input.GetButtonDown ("Plus")) {
