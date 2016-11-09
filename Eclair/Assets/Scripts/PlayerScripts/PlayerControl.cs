@@ -246,12 +246,14 @@ public class PlayerControl : MonoBehaviour
 	void ShotManagament()
 	{
 		if(InputManager.boltLaunch == true){
+			PlayerControl.EclairImmobile = true;
 			anim.SetBool ("Shot", true);
 			anim.SetFloat(angleId,angleUsing);
 		
 
 		}
 		if(InputManager.boltLaunch == false){
+			PlayerControl.EclairImmobile = false;
 			anim.SetBool("Shot",false);
 
 		}

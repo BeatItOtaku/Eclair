@@ -16,7 +16,7 @@ public class Even7Through : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider collider){
-		if (collider.gameObject.tag == "Player" && EventManager.eventCount == 6) 
+		if (collider.gameObject.tag == "Player" && EventManager.eventCount == 7) 
 		{			
 				em.EventCount ();
 		}
