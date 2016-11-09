@@ -7,13 +7,14 @@ public class SBTswitchTutorial : EnemyBase {
 	public GameObject lightSphere;
 	public GameObject glass;
 
-	public static bool tutorialSBTSwitch;
+	public EventManager em;
+
 
 	// Use this for initialization
 	void Start () {
 		
 		(glass.GetComponent ("Halo") as Behaviour).enabled = false;
-		tutorialSBTSwitch = false;
+
 	}
 	
 	// Update is called once per frame
@@ -26,8 +27,9 @@ public class SBTswitchTutorial : EnemyBase {
 			lightSphere.SetActive (false);
 			meshrender.material.color = new Color (0, 0, 0, 0.5f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = true;
-			tutorialSBTSwitch = true;
-
+			if (EventManager.eventCount == 5) {
+				em.EventCount ();
+			}
 		}
 
 	}

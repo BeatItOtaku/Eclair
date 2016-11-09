@@ -24,15 +24,15 @@ public class EventManager : MonoBehaviour {
 	public GameObject event2_sita;
 	public GameObject event3_zako;
 	public GameObject event3_bolt;
-	public GameObject event4_bolt1;
-	public GameObject event4_bolt2;
+	public GameObject event4_bolt;
 	public GameObject event5_bolt;
-	public GameObject event5_ue;
-
-	public GameObject event6_gun;
-	public GameObject event6_EclairGun = null;
 	public GameObject event6_yajirushi;
-	public GameObject event7_zako;
+	public GameObject event6_bolt;
+	public GameObject event7_gun;
+	public GameObject event7_EclairGun = null;
+	public GameObject event7_yajirushi;
+	public GameObject event7_gunParticle;
+	public GameObject event8_zako;
 	public GameObject event9_way;
 
 	public GameObject HPGauge = null;
@@ -54,13 +54,15 @@ public class EventManager : MonoBehaviour {
 		event3_bolt.SetActive (false);
 
 		event5_bolt.SetActive (false);
-		event5_ue.SetActive (false);
 
-		event6_EclairGun = GameObject.Find ("Gun");
-		event6_EclairGun.SetActive (false);
 		event6_yajirushi.SetActive (false);
+		event6_bolt.SetActive (false);
+		event7_EclairGun = GameObject.Find ("Gun");
+		event7_EclairGun.SetActive (false);
+		event7_yajirushi.SetActive (false);
 
-		event7_zako.SetActive (false);
+		event7_gunParticle.SetActive (false);
+		event8_zako.SetActive (false);
 
 	}
 	
@@ -92,6 +94,7 @@ public class EventManager : MonoBehaviour {
 			GameObject.Find ("Tutorial_LockOn").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			break;
 		case 3:
+			event2_sita.SetActive (false);
 			//SBTのチュートリアルが表示される
 			GameObject.Find ("Hint_Enemy").GetComponent<AnimationQueue_InAndOut> ().Queue ();
 			GameObject.Find ("Tutorial_Thunder").GetComponent<AnimationQueue_Tutorial> ().Queue ();
@@ -107,39 +110,39 @@ public class EventManager : MonoBehaviour {
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 
 			event3_bolt.SetActive (false);
-			event4_bolt1.tag = "Bolt";				
-			event4_bolt2.tag = "Bolt";	
+			event4_bolt.tag = "Bolt";				
+
 			break;
 		case 5:
-			//ETOで移動用のボルトが現れる
-			GameObject.Find ("Hint_Gun").GetComponent<AnimationQueue_InAndOut> ().Queue ();
+			//SBTスイッチのチュートリアル
+			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+
 			event5_bolt.SetActive (true);
-			event5_ue.SetActive (true);
 			break;
 
 		case 6:
-			//ボルト射出のチュートリアルが表示される
-			GameObject.Find ("Hint_Gun").GetComponent<AnimationQueue_InAndOut> ().Queue ();
-			//GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
-			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
-			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
-			event2_sita.SetActive (false);
-			event5_bolt.SetActive (false);
-			event5_ue.SetActive (false);
-			event6_gun.SetActive (false);
-			event6_EclairGun.SetActive (true);
+			//金網すりぬけチュートリアル
 			event6_yajirushi.SetActive (true);
+			event6_bolt.SetActive (true);
+			event5_bolt.SetActive (false);
 			break;
-
 		case 7:
-			//雑魚との戦闘
-			//GameObject.Find("Hint_Bolt").GetComponent<AnimationQueue_InAndOut>().Queue();
-			GameObject.Find ("Hint_Enter").GetComponent<AnimationQueue_InAndOut> ().Queue ();
-			event6_yajirushi.SetActive (false);
-			event7_zako.SetActive (true);
+			//銃ゲット
+			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			event7_EclairGun.SetActive (true);
+			event7_gun.SetActive (false);
+			event7_yajirushi.SetActive (true);
+			event7_gunParticle.SetActive (true);
+
 			break;
 		case 8:
+			//敵との戦闘
+
+			event8_zako.SetActive(true);
+			break;
+		case 9:
 			//工場へ突入
+			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			StartCoroutine (hideTutorialUIs());
 			break;
 		}

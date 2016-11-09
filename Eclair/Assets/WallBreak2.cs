@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WallBreak2 :EnemyBase {
+public class WallBreak2 :MonoBehaviour {
 
 	public GameObject breakFire;
 
@@ -12,14 +12,9 @@ public class WallBreak2 :EnemyBase {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
-	public override void Damage (int damage ,Vector3 direction)
-	{
-		
-			if (damage >= 30) {
-				Instantiate (breakFire, transform.position, transform.rotation);
-				Destroy (gameObject);
+		if (EventManager.eventCount == 6) {
+			Instantiate (breakFire, transform.position, transform.rotation);
+			Destroy (gameObject);
 		}
 	}
 }

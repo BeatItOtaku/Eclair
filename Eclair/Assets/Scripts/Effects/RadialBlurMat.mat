@@ -99,7 +99,7 @@ Material:
       second: 0
     - first:
         name: _Force
-      second: 2.4248483e-11
+      second: 3.1183744e-10
     - first:
         name: _GlossMapScale
       second: 1

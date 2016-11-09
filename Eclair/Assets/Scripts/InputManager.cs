@@ -133,7 +133,7 @@ public class InputManager : MonoBehaviour {
 	{
 
 		//右クリック
-		if (EventManager.eventCount >= 6) {
+		if (EventManager.eventCount >= 7) {
 			if (Input.GetButtonDown ("LaunchBolt")) {
 				//Debug.Log ("MouseLeft");
 

@@ -7,7 +7,7 @@ public class GunGet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -17,9 +17,9 @@ public class GunGet : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision collider){
 		if(collider.gameObject.tag == "Player"){
-			if (EventManager.eventCount == 5) {
-				em.EventCount ();
+			if (EventManager.eventCount == 6) {
+						em.EventCount ();
+					}
 			}
 	}	
-}
 }
