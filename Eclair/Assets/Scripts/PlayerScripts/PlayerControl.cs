@@ -221,8 +221,9 @@ public class PlayerControl : MonoBehaviour
 				speed = walkSpeed;
 
 			}
-			anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
+
 			if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
+				anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
 		} else {
@@ -241,11 +242,15 @@ public class PlayerControl : MonoBehaviour
 			transform.position += transform.forward * Time.deltaTime * 0;
 		}*/
 		GetComponent<Rigidbody>().AddForce(Vector3.forward*speed);
+
+		if (EclairImmobile == true) {
+			isMoving = false;
+		}
 	}
 
 	void ShotManagament()
 	{
-		if(InputManager.boltLaunch == true){
+		if(InputManager.boltLaunch == true && EclairImmobile == false){
 			anim.SetBool ("Shot", true);
 			anim.SetFloat(angleId,angleUsing);
 
@@ -258,7 +263,7 @@ public class PlayerControl : MonoBehaviour
 
 	void SBTManagament()
 	{
-		if(InputManager.sbt == true){
+		if(InputManager.sbt == true && EclairImmobile == false){
 			anim.SetBool("SBT",true);
 			anim.SetFloat (angleId, angleUsing);
 		}
