@@ -14,6 +14,7 @@ public class SBTSwitchManager1 : MonoBehaviour {
 	void Update () {
 		if (em2.eventCount2 == 2 && SBTSwitchzako1.SBT1On == true && SBTSwitchzako2.SBT2On == true) {
 			em2.EventCount2 ();
+			DoorScript.doorOpen = true;
 		}
 	
 	}

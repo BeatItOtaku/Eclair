@@ -37,6 +37,7 @@ public class EventManager2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log ("eventCount2");
 	
 	}
 

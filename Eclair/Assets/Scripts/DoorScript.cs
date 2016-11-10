@@ -21,9 +21,6 @@ public class DoorScript : MonoBehaviour {
 
 		if (doorOpen == true) {
 			animator.SetTrigger ("Open");
-			if (em2.eventCount2 == 2) {
-				em2.EventCount2 ();
-			}
 	}
 }
 }

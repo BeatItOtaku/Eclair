@@ -637,7 +637,7 @@ MonoBehaviour:
   defaultAngle: 30
   defaultY: 0
   maxAngle: 80
-  minAngle: 5
+  minAngle: -30
   smoothFactor: 0.5
   cameraVerticalAngleOffset: 16
   cameraVerticalAngleOffsetWhenLockOn: 45
@@ -2985,7 +2985,7 @@ MonoBehaviour:
   camControl: {fileID: 446296779}
   camSensitivityControl: {fileID: 0}
   audioSource: {fileID: 446296780}
-  lockOn: {fileID: 1088387010}
+  lockOn: {fileID: 929639127}
   boltLaunchSound: {fileID: 8300000, guid: afe45737abd92e54e81f2c4c132e1b4c, type: 3}
   SBTSound: {fileID: 8300000, guid: 5cf221a22b26aa04795940fd2209b157, type: 3}
   lockOnSound: {fileID: 8300000, guid: 6aa89c80313a98543a5da717b5081689, type: 3}
@@ -3158,12 +3158,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1000011476000270, guid: 058f5889209e04c4b92707084a5c4dfd,
     type: 2}
   m_PrefabInternal: {fileID: 2010181523}
---- !u!114 &1088387010 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000013226342134, guid: 058f5889209e04c4b92707084a5c4dfd,
-    type: 2}
-  m_PrefabInternal: {fileID: 2010181523}
-  m_Script: {fileID: 11500000, guid: 4198c4d8ac9f64bb1b450e3dd63812aa, type: 3}
 --- !u!114 &1088387011 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000010465115200, guid: 058f5889209e04c4b92707084a5c4dfd,
