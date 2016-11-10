@@ -18,8 +18,9 @@ public class DoorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (doorOpen);
 
-		if (doorOpen == true) {
+		if (em2.eventCount2 == 3 && doorOpen == true) {
 			animator.SetTrigger ("Open");
 	}
 }

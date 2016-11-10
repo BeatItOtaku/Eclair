@@ -27,6 +27,13 @@ public class SBTSwitchzako3: EnemyBase {
 			OnTime = 0;
 		}
 
+		if (OnTime >= 2.0f && em2.eventCount2 == 2 && SBT3On == true) {
+			lightSphere.SetActive (true);
+			meshrender.material.color = new Color (0, 0, 0, 1.0f);
+			(glass.GetComponent ("Halo") as Behaviour).enabled = false;
+			SBT3On = false;
+		}
+
 	}
 	public override void Damage(int damage ,Vector3 direction){
 		if (damage == 15 && meshrender.material.color.a != 0.5f)  {
@@ -35,12 +42,7 @@ public class SBTSwitchzako3: EnemyBase {
 			(glass.GetComponent ("Halo") as Behaviour).enabled = true;
 			SBT3On = true;
 
-			if (OnTime >= 2.0f && em2.eventCount2 == 2) {
-				lightSphere.SetActive (true);
-				meshrender.material.color = new Color (0, 0, 0, 1.0f);
-				(glass.GetComponent ("Halo") as Behaviour).enabled = false;
-				SBT3On = false;
-			}
+
 		}
 
 	}

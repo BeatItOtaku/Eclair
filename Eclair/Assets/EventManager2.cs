@@ -17,7 +17,7 @@ public class EventManager2 : MonoBehaviour {
 	/// 9はボス扉に突入
 	/// </summary>
 
-	public static int bossSwitchCount;
+	public  int bossSwitchCount;
 	public int eventCount2;
 
 	public GameObject event1_camera;
@@ -28,7 +28,7 @@ public class EventManager2 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		bossSwitchCount = 0;
-		eventCount2 = 0;
+		eventCount2 = 2;
 
 		event2_zako.SetActive (false);
 		event7_zako.SetActive (false);
@@ -37,7 +37,7 @@ public class EventManager2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("eventCount2");
+		Debug.Log (eventCount2);
 	
 	}
 

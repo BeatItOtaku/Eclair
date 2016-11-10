@@ -219,7 +219,7 @@ ModelImporter:
     4300046: FrameParts26
     4300048: FrameParts27
     4300050: pCube5
-    7400000: Take 001
+    7400000: Open
     9500000: //RootNode
     13700000: pCube4
     13700002: pCube7
@@ -249,7 +249,187 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Open
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 300
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group1/pCube7
+        weight: 1
+      - path: group2
+        weight: 1
+      - path: group2/FrameParts28
+        weight: 1
+      - path: group2/FrameParts29
+        weight: 1
+      - path: group2/FrameParts30
+        weight: 1
+      - path: group2/FrameParts31
+        weight: 1
+      - path: group2/FrameParts32
+        weight: 1
+      - path: group2/FrameParts33
+        weight: 1
+      - path: group2/pCube8
+        weight: 1
+      - path: group2/Pole9
+        weight: 1
+      - path: group2/Pole10
+        weight: 1
+      - path: group3
+        weight: 1
+      - path: group3/FrameParts14
+        weight: 1
+      - path: group3/FrameParts15
+        weight: 1
+      - path: group3/FrameParts24
+        weight: 1
+      - path: group3/FrameParts25
+        weight: 1
+      - path: group3/FrameParts26
+        weight: 1
+      - path: group3/FrameParts27
+        weight: 1
+      - path: group3/pCube5
+        weight: 1
+      - path: group3/Pole3
+        weight: 1
+      - path: group3/Pole6
+        weight: 1
+      - path: joint1
+        weight: 1
+      - path: joint1/joint2
+        weight: 1
+      - path: joint1/joint3
+        weight: 1
+      - path: joint1/joint4
+        weight: 1
+      - path: joint8
+        weight: 1
+      - path: joint8/joint5
+        weight: 1
+      - path: joint8/joint6
+        weight: 1
+      - path: joint8/joint7
+        weight: 1
+      - path: locator1
+        weight: 1
+      - path: nurbsCube1
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform11
+        weight: 1
+      - path: pCube4
+        weight: 1
+      - path: pCube6
+        weight: 1
+      - path: pCube6/polySurface1
+        weight: 1
+      - path: pCube6/polySurface2
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5/polySurface7
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5/polySurface7/polySurface9
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5/polySurface7/polySurface10
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5/polySurface7/transform18
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5/polySurface8
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface5/transform17
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/polySurface6
+        weight: 1
+      - path: pCube6/polySurface2/polySurface3/transform16
+        weight: 1
+      - path: pCube6/polySurface2/polySurface4
+        weight: 1
+      - path: pCube6/polySurface2/transform15
+        weight: 1
+      - path: pCube6/transform14
+        weight: 1
+      - path: pCylinder1
+        weight: 1
+      - path: pCylinder1/transform5
+        weight: 1
+      - path: pCylinder2
+        weight: 1
+      - path: pCylinder2/transform4
+        weight: 1
+      - path: pCylinder3
+        weight: 1
+      - path: pCylinder3/transform3
+        weight: 1
+      - path: pCylinder4
+        weight: 1
+      - path: pCylinder4/transform2
+        weight: 1
+      - path: pCylinder5
+        weight: 1
+      - path: pCylinder5/transform1
+        weight: 1
+      - path: pCylinder6
+        weight: 1
+      - path: pCylinder6/transform10
+        weight: 1
+      - path: pCylinder7
+        weight: 1
+      - path: pCylinder7/transform9
+        weight: 1
+      - path: pCylinder8
+        weight: 1
+      - path: pCylinder8/transform8
+        weight: 1
+      - path: pCylinder9
+        weight: 1
+      - path: pCylinder9/transform7
+        weight: 1
+      - path: pCylinder10
+        weight: 1
+      - path: pCylinder10/transform6
+        weight: 1
+      - path: pCylinder11
+        weight: 1
+      - path: pCylinder11/transform13
+        weight: 1
+      - path: pCylinder12
+        weight: 1
+      - path: pCylinder12/transform12
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
