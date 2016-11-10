@@ -27,7 +27,7 @@ public class SBTSwitchzako5: EnemyBase {
 			OnTime = 0;
 		}
 
-		if (OnTime >= 2.0f && em2.eventCount2 == 2 && SBT5On == true) {
+		if (OnTime >= 2.0f && em2.eventCount2 == 3 && SBT5On == true) {
 			lightSphere.SetActive (true);
 			meshrender.material.color = new Color (0, 0, 0, 1.0f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = false;

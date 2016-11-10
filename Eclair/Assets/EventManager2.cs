@@ -24,11 +24,13 @@ public class EventManager2 : MonoBehaviour {
 	public GameObject event2_zako;
 	public GameObject event7_zako;
 
+	public BossGate bg;
+
 
 	// Use this for initialization
 	void Start () {
 		bossSwitchCount = 0;
-		eventCount2 = 4;
+		eventCount2 = 2;
 
 		event2_zako.SetActive (false);
 		event7_zako.SetActive (false);
@@ -38,6 +40,7 @@ public class EventManager2 : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Debug.Log (eventCount2);
+		Debug.Log (bossSwitchCount);
 	
 	}
 
@@ -97,6 +100,7 @@ public class EventManager2 : MonoBehaviour {
 
 		case 2:
 			//ボスの扉のランプがもう一つ点灯
+			bg.DoorOpen();
 			break;
 		}
 	}

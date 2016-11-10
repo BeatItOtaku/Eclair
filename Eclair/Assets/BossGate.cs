@@ -12,10 +12,14 @@ public class BossGate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+	
+	}
+
+	public void DoorOpen(){
 		if (em2.bossSwitchCount == 2) {
 			anim.SetTrigger ("Open");
 			em2.EventCount2 ();
 		}
-	
 	}
 }
