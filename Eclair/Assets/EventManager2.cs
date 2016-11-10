@@ -36,7 +36,7 @@ public class EventManager2 : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		bossSwitchCount = 0;
-		eventCount2 = 4;
+		eventCount2 = 2;
 
 		event2_zako.SetActive (false);
 		event2_yajirushi.SetActive (false);
