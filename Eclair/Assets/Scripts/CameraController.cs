@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -95,12 +95,14 @@ public class CameraController : MonoBehaviour
 			lookAt = InputManager.eto_;
 			//Debug.Log ("eiei");
 		}
+		if (Event2CameraChanger.cameraSet == false) {
 			if (InputManager.etoile == false) {
 				lookAt = player;
 			}
+		}
 		if (/*BossMoveManager.BossAttackedCount == 2 || */EventManager.eventCount == 2) {
 			lookAt = CameraChanger.mainCamera_;
-		} 
+		}
 
 	}
 
