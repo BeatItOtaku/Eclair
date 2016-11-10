@@ -99,7 +99,11 @@ Material:
       second: 0
     - first:
         name: _Force
+<<<<<<< HEAD
       second: 6.735689e-11
+=======
+      second: 0.000000011139594
+>>>>>>> origin/Tutorial_Naotee
     - first:
         name: _GlossMapScale
       second: 1
