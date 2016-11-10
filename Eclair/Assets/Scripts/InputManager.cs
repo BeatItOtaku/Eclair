@@ -180,7 +180,7 @@ public class InputManager : MonoBehaviour {
 			}
 		}
 					
-		Debug.Log ("hoghoe");
+		//Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
 		if(EventManager.eventCount >=1){
 		if (Input.GetButtonDown ("LockOn")) {
@@ -263,6 +263,7 @@ public class InputManager : MonoBehaviour {
 		sbt = true;
 		playerState_ = PlayerStates.SBT;
 		thunderEffect.StartEffect (muzzle.transform.position, target.transform.position);
+        Camera.main.GetComponent<RadialBlur>().Shock(0.5f,1.2f);
 		audioSource.PlayOneShot (SBTSound);
 
 		//ビリビリ上にあるオブジェクトを求めるよ

@@ -30,7 +30,7 @@ public class ETO : MonoBehaviour {
                 if (timeCursor > timeLimit)
                 {
                     timeCursor = 0;
-                    im.Idle();//時間たちすぎたらエトワール終了
+                    im.Idle();//時間たちすぎたらエトワール終了、バグ対策
                 }
 
 				transform.LookAt (target.transform);
@@ -42,6 +42,10 @@ public class ETO : MonoBehaviour {
 					transform.position += transform.forward * Time.deltaTime * speed;
 					OnHit (hit.collider);
 				} else {
+                    //SphereCastはものが発射地点にあると反応してくれないらしいから、SphereCastの結果が無くても諦めない
+                    foreach (Collider c in Physics.OverlapSphere(transform.position, 0.5f, layerMask)){
+                        OnHit(c);
+                    }
 					transform.position += transform.forward * Time.deltaTime * speed;
 				}
 			} else {
@@ -53,7 +57,7 @@ public class ETO : MonoBehaviour {
 
 	private void OnHit (Collider collider)
 	{
-		Debug.Log ("OnHit");
+		Debug.Log ("ETO Collided To " + collider.gameObject.tag);
 		//ボルトにぶつかったとき・・・電気のエフェクトを出す
 		if (collider.gameObject.tag == "Bolt" && target.Equals(collider.gameObject)) {	
 			//Debug.Log ("CollideToBolt");
@@ -61,6 +65,7 @@ public class ETO : MonoBehaviour {
 			Instantiate (lightning, transform.position, transform.rotation);
 			//Destroy (target);
 			InputManager.etoile = false;
+            timeCursor = 0;
 			im.Idle ();
 			gameObject.SetActive (false);
 
@@ -83,7 +88,7 @@ public class ETO : MonoBehaviour {
 			if (enemy != null) {
 				enemy.Damage (30, target.transform.position - transform.position);
 				TimeManager.Instance.theWorld (0.2f);
-				Camera.main.GetComponent<RadialBlur> ().Shock (3);
+				Camera.main.GetComponent<RadialBlur> ().Shock (2);
 			}
 		}
 	}
