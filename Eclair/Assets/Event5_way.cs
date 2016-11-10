@@ -4,6 +4,8 @@ using System.Collections;
 public class Event5_way : MonoBehaviour {
 
 	public GameObject fire;
+	public GameObject point1;
+	public GameObject point2;
 
 	public EventManager2 em2;
 
@@ -15,7 +17,8 @@ public class Event5_way : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (em2.eventCount2 == 5) {
-			Instantiate (fire, transform.position, transform.rotation);
+			Instantiate (fire, point1.transform.position, point1.transform.rotation);
+			Instantiate (fire, point2.transform.position, point2.transform.rotation);
 			Destroy (gameObject);
 		}
 	

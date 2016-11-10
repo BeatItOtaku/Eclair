@@ -17,9 +17,9 @@ public class BossSwitch1 : MonoBehaviour {
 	
 	}
 
-	private void OnCollisonEnter(Collision collider){
+	private void OnTriggerEnter(Collider collider){
 		if (collider.gameObject.tag == "Player") {
-			anim.SetTrigger ("SwtichOn");
+			anim.SetTrigger ("SwitchOn");
 			if (em2.eventCount2 == 4) {
 				em2.EventCount2 ();
 				em2.BossSwitch ();
