@@ -53,6 +53,10 @@ public class BossMoveManager : MonoBehaviour {
 
 	private AsyncOperation result;
 
+	public static bool rotation;
+	public static bool walk;
+
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindWithTag ("Player");
@@ -82,14 +86,18 @@ public class BossMoveManager : MonoBehaviour {
 		difDistanceCT = centerDistance - tailDistance;
 
 		//ボスの動き
+		Debug.Log(walk);
+		Debug.Log (rotation);
 
 		//右回転
 		if (difDistanceLR > 2.0f && waitTime == 0) {
+			rotation = true;
+			walk = false;
 			bossShot = false;
 			//Debug.Log ("right");
 			bossAnim.SetBool ("Rotation", true);
 			bossAnim.SetBool ("Walk", false);
-			transform.Rotate (Vector3.up * Time.deltaTime * 12 * BossAttackedCount);
+			transform.Rotate (Vector3.up * Time.deltaTime * 24 * BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
 			waitTime = 0;
 		}
@@ -98,6 +106,8 @@ public class BossMoveManager : MonoBehaviour {
 
 		if (difDistanceLR > -2.0f && waitTime == 0) {
 			if (difDistanceCT < 0) {
+				walk = true;
+				rotation = false;
 				//Debug.Log ("forward");
 				bossAnim.SetBool ("Walk", true);
 				bossAnim.SetBool ("Rotation", false);
@@ -109,17 +119,21 @@ public class BossMoveManager : MonoBehaviour {
 
 		//左回転
 		else if (difDistanceLR < -2.0f && waitTime == 0) {
+			rotation = true;
+			walk = false;
 			bossShot = false;
 			//Debug.Log ("left");
 			bossAnim.SetBool ("Rotation", true);
 			bossAnim.SetBool ("Walk", false);
-			transform.Rotate (Vector3.down * Time.deltaTime * 12 * BossAttackedCount);
+			transform.Rotate (Vector3.down * Time.deltaTime * 24 * BossAttackedCount);
 			transform.position += transform.forward * Time.deltaTime * 0;
 			waitTime = 0;
 		}
 
 		//エクレアが真後ろにいるとき反転してくる
 		if (difDistanceCT > 0) {
+			walk = false;
+			rotation = false;
 			bossShot = false;
 			wait = true;
 		}

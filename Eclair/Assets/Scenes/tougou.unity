@@ -3170,7 +3170,7 @@ MonoBehaviour:
   muzzle: {fileID: 477499653}
   eto: {fileID: 1593192671}
   thunderEffect: {fileID: 376930922}
-  EtoScript: {fileID: 1696551083}
+  EtoScript: {fileID: 1593192672}
   em: {fileID: 0}
   test: {fileID: 0}
   crossHair: {fileID: 1779815845}
