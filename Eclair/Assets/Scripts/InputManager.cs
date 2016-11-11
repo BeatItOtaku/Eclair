@@ -254,7 +254,7 @@ public class InputManager : MonoBehaviour {
 		//TODO:キーボード/ゲームパッドの切り替え判定
 		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています
 	}
-
+	}
 
 	private void startSBT (GameObject target)
 	{

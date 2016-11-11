@@ -123,8 +123,9 @@ public class BGMController : MonoBehaviour
 	}
 
 	public IEnumerator Change_raw(AudioClip intro, AudioClip loop,float volume){
-		Fade (0.5f);
+		Fade (0.5f,TransitionKind.Out);
 		Play (intro, loop, volume);
+		return null;
 	}
 
 	public IEnumerator Fade(float duration,TransitionKind transitionKind){
