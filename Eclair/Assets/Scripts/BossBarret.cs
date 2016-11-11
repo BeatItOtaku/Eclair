@@ -30,7 +30,7 @@ public class BossBarret : MonoBehaviour {
 		if (collider.gameObject.tag == "Player"){
 			bossShotAttack = true;
 		}
-		Instantiate(burn,transform.position,transform.rotation);
+		//Instantiate(burn,transform.position,transform.rotation);
 		Destroy (gameObject);
 	}
 

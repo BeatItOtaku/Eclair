@@ -44,7 +44,7 @@ public class ObjectBlinker : MonoBehaviour
 	{
 		if (blinkee != null) {
 			timeCursor += Time.deltaTime;
-			Debug.Log (timeCursor / interval);
+			//Debug.Log (timeCursor / interval);
 			setSkinnedMeshRendererVisible (blinkee, ((int)(timeCursor / interval) % 2) == 0);
 
 			if(timeCursor > timelength){
