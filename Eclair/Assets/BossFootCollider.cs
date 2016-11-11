@@ -5,7 +5,6 @@ public class BossFootCollider : MonoBehaviour {
 
 	public static bool bossFootAttack = false;
 
-	//private float footTime =0; //ボスが足を振り下ろす間隔を表現するための時間
 	// Use this for initialization
 	void Start () {
 	

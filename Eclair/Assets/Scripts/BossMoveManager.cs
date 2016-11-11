@@ -5,7 +5,7 @@ using System.Collections;
 public class BossMoveManager : MonoBehaviour {
 
 	//エクレア
-	public GameObject player;
+	public GameObject player = null;
 
 	//ボスの体とエフェクト
 	public GameObject boss;
@@ -96,10 +96,11 @@ public class BossMoveManager : MonoBehaviour {
 
 		//直進
 
-		if (difDistanceLR > -1.0f && waitTime == 0) {
+		if (difDistanceLR > -1.0f && waitTime == 0 &&centerDistance >1.0f) {
 			if (difDistanceCT < 0) {
 				//Debug.Log ("forward");
 				bossAnim.SetBool ("Walk", true);
+				bossAnim.SetBool ("Rotation", false);
 				//transform.position += transform.forward * Time.deltaTime;
 				waitTime = 0;
 			}
