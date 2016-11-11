@@ -22,7 +22,13 @@ public class EventManager2 : MonoBehaviour {
 
 	public GameObject event1_camera;
 	public GameObject event2_zako;
+	public GameObject event2_yajirushi;
+	public GameObject event3_yajirushi;
+	public GameObject event4_bikkuri;
+	public GameObject event6_yajirushi;
+	public GameObject event7_bikkuri;
 	public GameObject event7_zako;
+	public GameObject event9_yajirushi;
 
 	public BossGate bg;
 
@@ -33,7 +39,13 @@ public class EventManager2 : MonoBehaviour {
 		eventCount2 = 2;
 
 		event2_zako.SetActive (false);
+		event2_yajirushi.SetActive (false);
+		event3_yajirushi.SetActive (false);
+		event4_bikkuri.SetActive (false);
+		event6_yajirushi.SetActive (false);
+		event7_bikkuri.SetActive (false);
 		event7_zako.SetActive (false);
+		event9_yajirushi.SetActive (false);
 	
 	}
 	
@@ -56,33 +68,44 @@ public class EventManager2 : MonoBehaviour {
 			//カメラがボス扉を映す
 			break;
 		case 2:
+			event2_yajirushi.SetActive (true);
 			event2_zako.SetActive (true);
 
 			break;
 
 		case 3:
+			event2_yajirushi.SetActive (false);
+			event3_yajirushi.SetActive (true);
 
 			break;
 
 		case 4:
+			event3_yajirushi.SetActive (false);
+			event4_bikkuri.SetActive (true);
 			break;
 
 	    case 5:
+			event4_bikkuri.SetActive (false);
 			
 			break;
 
 		case 6:
+			event6_yajirushi.SetActive (true);
 
 			break;
 
 		case 7:
+			event6_yajirushi.SetActive (false);
+			event7_bikkuri.SetActive (true);
 			event7_zako.SetActive (true);
 			break;
 
 		case 8:
+			event7_bikkuri.SetActive (false);
 			break;
 
 		case 9:
+			event9_yajirushi.SetActive (true);
 			break;
 		}
 	}
