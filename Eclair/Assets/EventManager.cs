@@ -91,7 +91,7 @@ public class EventManager : MonoBehaviour {
 	}
 
 	public void EventCount(){
-        Debug.Log("EventCount:" + eventCount);
+        Debug.Log("EventCount:" + eventCount + " to " + (eventCount + 1));
         eventCount++;
 		switch (eventCount) {
 		case 0:

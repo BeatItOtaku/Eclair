@@ -76,7 +76,7 @@ public class BoltScript : MonoBehaviour {
 				}
 			}
 		}
-		Debug.Log (boltOnWall);
+		//Debug.Log (boltOnWall);
 	}
 
 	void OnTriggerEnter(Collider collider){

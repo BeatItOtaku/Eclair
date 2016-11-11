@@ -46,7 +46,8 @@ public class EventManager2 : MonoBehaviour {
 		event7_bikkuri.SetActive (false);
 		event7_zako.SetActive (false);
 		event9_yajirushi.SetActive (false);
-	
+
+        EventManager.eventCount = 10;
 	}
 	
 	// Update is called once per frame
