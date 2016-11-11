@@ -137,12 +137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  mainCamera: {fileID: 446296771}
+  mainCamera: {fileID: 0}
   event2StartCameraPosition: {fileID: 0}
   event2EndPosition: {fileID: 0}
-  uI: {fileID: 1529198007}
+  uI: {fileID: 0}
   em: {fileID: 0}
-  bossKilledCamera: {fileID: 1199482914}
+  bossKilledCamera: {fileID: 0}
 --- !u!1001 &69981468
 Prefab:
   m_ObjectHideFlags: 0
@@ -408,12 +408,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224000011940624118, guid: c7b8c6c1ca175464faaa7474e0b80efc,
     type: 2}
   m_PrefabInternal: {fileID: 668673459}
---- !u!114 &155563615 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000011427607412, guid: cd4b2b3bbe49e4bfa9aaafc599552c89,
-    type: 2}
-  m_PrefabInternal: {fileID: 233729751}
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &155563619 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000012703281594, guid: cd4b2b3bbe49e4bfa9aaafc599552c89,
@@ -1039,7 +1033,7 @@ MonoBehaviour:
   intro: {fileID: 8300000, guid: 4f79fb72c4b51274bbae03f4bcadeb93, type: 3}
   loop: {fileID: 8300000, guid: 715630ce52d6ff049a3c50ccc2140d17, type: 3}
   PlayOnAwake: 1
-  defaultVolume: 0.7
+  defaultVolume: 1
   volumeSmoothFactor: 0.5
 --- !u!114 &446296778
 MonoBehaviour:
@@ -1047,17 +1041,17 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 446296771}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  threshold: 0.75
-  intensity: 0.95
+  threshold: 0.25
+  intensity: 0.75
   blurSize: 1
   blurIterations: 1
   blurType: 0
-  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
+  fastBloomShader: {fileID: 0}
 --- !u!114 &446296779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,14 +1063,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81396b64060294a4eaf4d1fc21d518b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2083721402}
-  cameraTransform: {fileID: 446296776}
+  player: {fileID: 0}
+  cameraTransform: {fileID: 0}
   mouseSensitivity: 300
   defaultDistance: 3
   defaultAngle: 30
   defaultY: 180
   maxAngle: 80
-  minAngle: -30
+  minAngle: 5
   smoothFactor: 0.5
   cameraVerticalAngleOffset: 16
   cameraVerticalAngleOffsetWhenLockOn: 45
@@ -1166,10 +1160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1845b89d07e41b1b3baac70acf4907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 8b5e3339037364a4c9311337a3cc0eee, type: 2}
-  force: 0
-  brightness: 1.1
-  smoothFactor: 0.6
+  material: {fileID: 0}
+  force: 1.2
+  brightness: 1
+  smoothFactor: 0.8
 --- !u!114 &446296782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,8 +1175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01f2f7a385ad4850ab0c7d14d034f06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 155563615}
-  cam: {fileID: 446296779}
+  text: {fileID: 0}
+  cam: {fileID: 0}
   defaultCameraSensitivity: 1
 --- !u!1001 &449928620
 Prefab:
@@ -3052,12 +3046,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b8229c4e4156469c8378f78f9ec9f79, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &527695238 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000010999128830, guid: d63e8c9400e104dc581759a1c5c0fb2d,
-    type: 2}
-  m_PrefabInternal: {fileID: 69981468}
-  m_Script: {fileID: 11500000, guid: 8f893b325525f684c856811410e66420, type: 3}
 --- !u!1 &528028804
 GameObject:
   m_ObjectHideFlags: 0
@@ -5512,9 +5500,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  player: {fileID: 1581712544}
-  lightning: {fileID: 100006, guid: ec6e75a3654374c7f9c1007063dcd249, type: 2}
-  im: {fileID: 2057756263}
+  player: {fileID: 0}
+  lightning: {fileID: 0}
+  im: {fileID: 0}
   speed: 30
   timeLimit: 5
 --- !u!135 &1344022111
@@ -6101,9 +6089,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4198c4d8ac9f64bb1b450e3dd63812aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1581712544}
+  player: {fileID: 0}
   boltHeadName: pCylinder2
-  maxDistance: 64
+  maxDistance: 24
 --- !u!114 &1581712547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6115,13 +6103,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaec9f3a92d74e1eac0b35d93040849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shot: {fileID: 1000012028248400, guid: 27e61d77ce08c4e6f9661f0a5b0426c8, type: 2}
-  muzzle: {fileID: 2083721402}
+  shot: {fileID: 0}
+  muzzle: {fileID: 0}
   ShotPause: {fileID: 0}
-  player: {fileID: 1581712544}
+  player: {fileID: 0}
   boltRotationOffset: {x: 0, y: 0, z: 0}
-  usePhysics: 1
-  force: 32
+  usePhysics: 0
+  force: 10
   shotIntervalMin: 1
 --- !u!114 &1581712548
 MonoBehaviour:
@@ -6134,10 +6122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f9481eaeb92ac4280d5fc884fc452a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutumin: {fileID: 446296779}
-  HPGauge: {fileID: 653785924}
-  hpGaugeController: {fileID: 653785924}
-  im: {fileID: 2057756263}
+  tutumin: {fileID: 0}
+  HPGauge: {fileID: 0}
+  hpGaugeController: {fileID: 0}
+  im: {fileID: 0}
   walkSpeed: 4
   runSpeed: 1
   sprintSpeed: 2
@@ -6187,9 +6175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55573e30fe81a42e491bc2e859f98217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lightning: {fileID: 100006, guid: ec6e75a3654374c7f9c1007063dcd249, type: 2}
-  player: {fileID: 1581712544}
-  im: {fileID: 2057756263}
+  lightning: {fileID: 0}
+  player: {fileID: 0}
+  im: {fileID: 0}
 --- !u!224 &1663456977 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224000014011632500, guid: bcb5d5b4e1e28334ea5f9cdb240cdf5a,
@@ -6356,7 +6344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   player: {fileID: 0}
-  lightning: {fileID: 100006, guid: ec6e75a3654374c7f9c1007063dcd249, type: 2}
+  lightning: {fileID: 0}
   im: {fileID: 0}
   speed: 30
   timeLimit: 5
@@ -6961,21 +6949,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1581712544}
   muzzle: {fileID: 2083721402}
-  eto: {fileID: 1344022107}
-  thunderEffect: {fileID: 527695238}
-  EtoScript: {fileID: 1344022108}
+  eto: {fileID: 0}
+  thunderEffect: {fileID: 0}
+  EtoScript: {fileID: 0}
   em: {fileID: 0}
   test: {fileID: 0}
-  crossHair: {fileID: 1779815845}
-  camControl: {fileID: 446296779}
-  camSensitivityControl: {fileID: 446296782}
-  audioSource: {fileID: 446296780}
+  crossHair: {fileID: 0}
+  camControl: {fileID: 0}
+  camSensitivityControl: {fileID: 0}
+  audioSource: {fileID: 0}
   lockOn: {fileID: 1581712546}
-  boltLaunchSound: {fileID: 8300000, guid: afe45737abd92e54e81f2c4c132e1b4c, type: 3}
-  SBTSound: {fileID: 8300000, guid: 5cf221a22b26aa04795940fd2209b157, type: 3}
-  lockOnSound: {fileID: 8300000, guid: 6aa89c80313a98543a5da717b5081689, type: 3}
-  etoileSound: {fileID: 8300000, guid: f6f82f460603c1349879c683862ef991, type: 3}
-  etoileEndSound: {fileID: 8300000, guid: aabd5ac4b0946d74497d754c6e0ebd18, type: 3}
+  boltLaunchSound: {fileID: 0}
+  SBTSound: {fileID: 0}
+  lockOnSound: {fileID: 0}
+  etoileSound: {fileID: 0}
+  etoileEndSound: {fileID: 0}
 --- !u!4 &2057756264
 Transform:
   m_ObjectHideFlags: 0
