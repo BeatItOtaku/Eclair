@@ -15,7 +15,7 @@ public class SwitchAnimation : MonoBehaviour {
 	void Update () {
 		if (FootSwitchScript.switchState == 1) {
 			animator.SetBool ("startSwitch", true);
-			DoorScript.open = true;
+			//DoorScript.open = true;
 			if (FootSwitchScript.startSwitch == true) {
 				animator.SetBool ("Switch", true);
 
@@ -23,7 +23,7 @@ public class SwitchAnimation : MonoBehaviour {
 		}
 		if (FootSwitchScript.switchState == 2) {
 			animator.SetBool ("Switch", false);
-			DoorScript.open = false;
+			//DoorScript.open = false;
 		}
 	
 	}

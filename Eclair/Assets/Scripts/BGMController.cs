@@ -3,6 +3,9 @@ using System.Collections;
 
 public class BGMController : MonoBehaviour
 {
+	public enum TransitionKind { In, Out};
+
+	public TransitionKind transitionKind = TransitionKind.In;
 
     public AudioClip intro;
     public AudioClip loop;
@@ -110,4 +113,29 @@ public class BGMController : MonoBehaviour
 			audioSource [1].Play ();
 		}
     }
+
+	public void Change(AudioClip intro, AudioClip loop){
+		Change_raw (intro, loop, Volume);
+	}
+
+	public void Change(AudioClip intro, AudioClip loop,float volume){
+		Change_raw (intro, loop, volume);
+	}
+
+	public IEnumerator Change_raw(AudioClip intro, AudioClip loop,float volume){
+		Fade (0.5f);
+		Play (intro, loop, volume);
+	}
+
+	public IEnumerator Fade(float duration,TransitionKind transitionKind){
+		float timeCursor = 0;
+		float startVolume = this.Volume;
+		while (timeCursor < duration) {
+			timeCursor += Time.deltaTime;
+			float a = transitionKind == TransitionKind.In ? (timeCursor / duration) : (1 - (timeCursor / duration));
+			Volume = startVolume * a;
+			yield return null;
+		}
+		Volume = startVolume * (transitionKind == TransitionKind.In ? 1 : 0);
+	}
 }

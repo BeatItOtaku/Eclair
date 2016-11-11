@@ -1,0 +1,216 @@
+fileFormatVersion: 2
+guid: bd463bf183104425da68044ec1283039
+timeCreated: 1478142317
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: FrameParts
+    100004: FrameParts1
+    100006: FrameParts10
+    100008: FrameParts11
+    100010: FrameParts12
+    100012: FrameParts13
+    100014: FrameParts2
+    100016: FrameParts3
+    100018: FrameParts4
+    100020: FrameParts5
+    100022: FrameParts6
+    100024: FrameParts7
+    100026: FrameParts8
+    100028: FrameParts9
+    100030: pCube1
+    100032: pCylinder1
+    100034: pCylinder10
+    100036: pCylinder11
+    100038: pCylinder12
+    100040: pCylinder2
+    100042: pCylinder3
+    100044: pCylinder4
+    100046: pCylinder5
+    100048: pCylinder6
+    100050: pCylinder7
+    100052: pCylinder8
+    100054: pCylinder9
+    100056: Pole1
+    100058: Pole2
+    100060: Pole4
+    100062: Pole5
+    100064: transform1
+    100066: transform10
+    100068: transform11
+    100070: transform12
+    100072: transform13
+    100074: transform2
+    100076: transform3
+    100078: transform4
+    100080: transform5
+    100082: transform6
+    100084: transform7
+    100086: transform8
+    100088: transform9
+    400000: //RootNode
+    400002: FrameParts
+    400004: FrameParts1
+    400006: FrameParts10
+    400008: FrameParts11
+    400010: FrameParts12
+    400012: FrameParts13
+    400014: FrameParts2
+    400016: FrameParts3
+    400018: FrameParts4
+    400020: FrameParts5
+    400022: FrameParts6
+    400024: FrameParts7
+    400026: FrameParts8
+    400028: FrameParts9
+    400030: pCube1
+    400032: pCylinder1
+    400034: pCylinder10
+    400036: pCylinder11
+    400038: pCylinder12
+    400040: pCylinder2
+    400042: pCylinder3
+    400044: pCylinder4
+    400046: pCylinder5
+    400048: pCylinder6
+    400050: pCylinder7
+    400052: pCylinder8
+    400054: pCylinder9
+    400056: Pole1
+    400058: Pole2
+    400060: Pole4
+    400062: Pole5
+    400064: transform1
+    400066: transform10
+    400068: transform11
+    400070: transform12
+    400072: transform13
+    400074: transform2
+    400076: transform3
+    400078: transform4
+    400080: transform5
+    400082: transform6
+    400084: transform7
+    400086: transform8
+    400088: transform9
+    2300000: FrameParts
+    2300002: FrameParts1
+    2300004: FrameParts10
+    2300006: FrameParts11
+    2300008: FrameParts12
+    2300010: FrameParts13
+    2300012: FrameParts2
+    2300014: FrameParts3
+    2300016: FrameParts4
+    2300018: FrameParts5
+    2300020: FrameParts6
+    2300022: FrameParts7
+    2300024: FrameParts8
+    2300026: FrameParts9
+    2300028: Pole1
+    2300030: Pole2
+    2300032: Pole4
+    2300034: Pole5
+    3300000: FrameParts
+    3300002: FrameParts1
+    3300004: FrameParts10
+    3300006: FrameParts11
+    3300008: FrameParts12
+    3300010: FrameParts13
+    3300012: FrameParts2
+    3300014: FrameParts3
+    3300016: FrameParts4
+    3300018: FrameParts5
+    3300020: FrameParts6
+    3300022: FrameParts7
+    3300024: FrameParts8
+    3300026: FrameParts9
+    3300028: Pole1
+    3300030: Pole2
+    3300032: Pole4
+    3300034: Pole5
+    4300000: FrameParts
+    4300002: FrameParts1
+    4300004: FrameParts2
+    4300006: FrameParts3
+    4300008: FrameParts4
+    4300010: FrameParts5
+    4300012: FrameParts6
+    4300014: FrameParts7
+    4300016: Pole1
+    4300018: Pole2
+    4300020: FrameParts8
+    4300022: FrameParts9
+    4300024: FrameParts10
+    4300026: FrameParts11
+    4300028: FrameParts12
+    4300030: FrameParts13
+    4300032: Pole4
+    4300034: Pole5
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

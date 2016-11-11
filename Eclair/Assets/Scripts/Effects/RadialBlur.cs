@@ -22,10 +22,15 @@ public class RadialBlur : MonoBehaviour {
 	}
 
 	public void Shock(float force){
-		StartCoroutine (Shock_raw (force));
+		StartCoroutine (Shock_raw (force,force));
 	}
 
-	private IEnumerator Shock_raw(float force){
+    public void Shock(float force,float brightness)
+    {
+        StartCoroutine(Shock_raw(force, brightness));
+    }
+
+    private IEnumerator Shock_raw(float force,float brightness){
 		Debug.Log ("Shock");
 		bool disableWhenEnd = false;
 		if (!enabled) {
@@ -36,11 +41,11 @@ public class RadialBlur : MonoBehaviour {
 		float targetBrightness = this.brightness;
 		float timeCursor = 0;
 		this.force = force;
-		this.brightness = force;
+		this.brightness = brightness;
 		while (timeCursor < 1) {
 			timeCursor += Time.deltaTime;
 			this.force = Mathf.Lerp (targetForce, this.force, smoothFactor);
-			this.brightness = Mathf.Lerp (targetBrightness, brightness, smoothFactor);
+			this.brightness = Mathf.Lerp (targetBrightness, this.brightness, smoothFactor);
 			yield return null;
 		}
 		this.force = targetForce;

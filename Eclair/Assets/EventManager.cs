@@ -68,7 +68,6 @@ public class EventManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (eventCount);
 		if (tutorialMove == null) {
 			tutorialMove = GameObject.Find ("Tutorial_Move");
 			if (tutorialMove != null) {
@@ -80,7 +79,8 @@ public class EventManager : MonoBehaviour {
 	}
 
 	public void EventCount(){
-		eventCount++;
+        Debug.Log("EventCount:" + eventCount);
+        eventCount++;
 		switch (eventCount) {
 		case 0:
 			break;

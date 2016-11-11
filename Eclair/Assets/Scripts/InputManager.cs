@@ -133,7 +133,7 @@ public class InputManager : MonoBehaviour {
 	{
 
 		//右クリック
-		if (EventManager.eventCount >= 7) {
+		if (EventManager.eventCount >= 7 && PlayerControl.EclairImmobile == false) {
 			if (Input.GetButtonDown ("LaunchBolt")) {
 				//Debug.Log ("MouseLeft");
 
@@ -151,7 +151,6 @@ public class InputManager : MonoBehaviour {
 					RaycastHit hit;
 					Vector3 hitPosition;
 					Quaternion hitQuaternion = Quaternion.Euler (0, 0, 0);
-
 					int layerMask = ~(1 << 8);//レイヤー8(Player)を除く全部
 
 					if (Physics.Raycast (ray, out hit, layerMask)) {
@@ -169,20 +168,20 @@ public class InputManager : MonoBehaviour {
 
 			}
 			if (playerState_ == PlayerStates.Bolt) {
-				PlayerControl.EclairImmobile = true;
 				boltLaunch = true;
 				boltTime += Time.deltaTime;
-				if (boltTime >= 0.5f) {
-					PlayerControl.EclairImmobile = false;
+				if (boltTime >= 0.3f) {
 					playerState_ = PlayerStates.Idle;
 					boltLaunch = false;
 				}
+			} else {
+				boltLaunch = false;
 			}
 		}
 					
-		Debug.Log ("hoghoe");
+		//Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
-		if(EventManager.eventCount >=1){
+		if(EventManager.eventCount >=1 && PlayerControl.EclairImmobile == false){
 		if (Input.GetButtonDown ("LockOn")) {
 			Debug.Log ("lockOn");
 			GameObject go;
@@ -201,7 +200,6 @@ public class InputManager : MonoBehaviour {
 			if (playerState_ != PlayerStates.Etoile)
 				Idle ();
 		}
-	}
 
 		//左クリック
 		if (EventManager.eventCount >= 3) {
@@ -229,7 +227,7 @@ public class InputManager : MonoBehaviour {
 
 
 		//エトワールボタン
-		if (EventManager.eventCount >= 4) {
+		if (PlayerControl.EclairImmobile == false && EventManager.eventCount >= 4) {
 			if (Input.GetButtonDown ("Etoile")) {
 				if (playerState_ == PlayerStates.LockOn) {
 					audioSource.PlayOneShot (etoileSound);				
@@ -263,6 +261,7 @@ public class InputManager : MonoBehaviour {
 		sbt = true;
 		playerState_ = PlayerStates.SBT;
 		thunderEffect.StartEffect (muzzle.transform.position, target.transform.position);
+        Camera.main.GetComponent<RadialBlur>().Shock(0.5f,1.2f);
 		audioSource.PlayOneShot (SBTSound);
 
 		//ビリビリ上にあるオブジェクトを求めるよ
