@@ -133,7 +133,7 @@ public class InputManager : MonoBehaviour {
 	{
 
 		//右クリック
-		if (EventManager.eventCount >= 7 && PlayerControl.EclairImmobile == false) {
+		if (EventManager.eventCount >= 7 ) {
 			if (Input.GetButtonDown ("LaunchBolt")) {
 				//Debug.Log ("MouseLeft");
 
@@ -181,7 +181,7 @@ public class InputManager : MonoBehaviour {
 					
 		//Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
-		if(EventManager.eventCount >=1 && PlayerControl.EclairImmobile == false){
+		if(EventManager.eventCount >=1){
 		if (Input.GetButtonDown ("LockOn")) {
 			Debug.Log ("lockOn");
 			GameObject go;
@@ -253,6 +253,7 @@ public class InputManager : MonoBehaviour {
 
 		//TODO:キーボード/ゲームパッドの切り替え判定
 		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています
+	}
 	}
 
 

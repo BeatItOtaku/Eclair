@@ -41,6 +41,11 @@ public class EventManager : MonoBehaviour {
 
 	private GameObject tutorialMove = null;
 
+	Camera mainCamera;
+
+	public AudioClip intro;
+	public AudioClip loop;
+
 
 	// Use this for initialization
 	void Start () {
@@ -76,6 +81,13 @@ public class EventManager : MonoBehaviour {
 		}
 		if (HPGauge == null)
 			HPGauge = GameObject.Find ("HPGauge");
+
+		if (mainCamera == null) {
+			mainCamera = Camera.main;
+			if (mainCamera != null) {
+				mainCamera.GetComponent<BGMController> ().Play(intro,loop,0.7f);
+			}
+		}
 	}
 
 	public void EventCount(){

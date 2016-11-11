@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1957564396}
-  m_IndirectSpecularColor: {r: 0.910716, g: 0.85003704, b: 0.8780392, a: 1}
+  m_IndirectSpecularColor: {r: 0.91005003, g: 0.85003924, b: 0.87766516, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -16088,6 +16088,7 @@ GameObject:
   - 65: {fileID: 945247542}
   - 23: {fileID: 945247541}
   - 114: {fileID: 945247540}
+  - 114: {fileID: 945247544}
   m_Layer: 0
   m_Name: Event9(Way)
   m_TagString: Untagged
@@ -16102,8 +16103,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 945247538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -91.9, y: -0.38, z: -25.3}
-  m_LocalScale: {x: 0.2, y: 3, z: 14.781505}
+  m_LocalPosition: {x: -97.07, y: 2.15, z: -25.3}
+  m_LocalScale: {x: 0.2, y: 8.765109, z: 14.781505}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1508232072}
@@ -16114,7 +16115,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 945247538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 299fea8eae10f4211837f0da4029e732, type: 3}
   m_Name: 
@@ -16168,6 +16169,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 945247538}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &945247544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 945247538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 536c5614d72a54c2e80987821a974ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &947578012
 Prefab:
   m_ObjectHideFlags: 0
@@ -22672,6 +22684,8 @@ MonoBehaviour:
   event8_zako: {fileID: 644937151}
   event9_way: {fileID: 945247538}
   HPGauge: {fileID: 0}
+  intro: {fileID: 8300000, guid: 32b38883a0e0b4752b2e8943a4a8f127, type: 3}
+  loop: {fileID: 8300000, guid: de7311d7774264dd2aaf4f67e00b99bf, type: 3}
 --- !u!4 &1508232072
 Transform:
   m_ObjectHideFlags: 0

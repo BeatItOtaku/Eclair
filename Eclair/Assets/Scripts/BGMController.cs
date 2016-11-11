@@ -115,16 +115,17 @@ public class BGMController : MonoBehaviour
     }
 
 	public void Change(AudioClip intro, AudioClip loop){
-		Change_raw (intro, loop, Volume);
+		StartCoroutine(Change_raw (intro, loop, Volume));
 	}
 
 	public void Change(AudioClip intro, AudioClip loop,float volume){
-		Change_raw (intro, loop, volume);
+		StartCoroutine(Change_raw (intro, loop, volume));
 	}
 
 	public IEnumerator Change_raw(AudioClip intro, AudioClip loop,float volume){
-		Fade (0.5f);
+		Fade (0.5f,TransitionKind.Out);
 		Play (intro, loop, volume);
+		return null;
 	}
 
 	public IEnumerator Fade(float duration,TransitionKind transitionKind){
@@ -137,5 +138,12 @@ public class BGMController : MonoBehaviour
 			yield return null;
 		}
 		Volume = startVolume * (transitionKind == TransitionKind.In ? 1 : 0);
+	}
+
+	public void Stop(){
+		if (intro != null) {
+			audioSource [0].Stop ();
+			audioSource [1].Stop ();
+		}
 	}
 }

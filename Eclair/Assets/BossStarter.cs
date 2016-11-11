@@ -8,14 +8,21 @@ public class BossStarter : MonoBehaviour {
 	public AudioClip bgm;
 	public GameObject skyball;
 
+	public Camera mainCamera;
+
 	// Use this for initialization
 	void Start () {
-	
+		EventManager.eventCount = 10;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (mainCamera == null) {
+			mainCamera = Camera.main;
+			if (mainCamera != null) {
+				mainCamera.GetComponent<BGMController> ().Stop ();
+			}
+		}
 	}
 
 	void OnTriggerEnter(Collider col){
