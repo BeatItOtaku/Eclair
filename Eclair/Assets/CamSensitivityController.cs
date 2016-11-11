@@ -16,9 +16,9 @@ public class CamSensitivityController : MonoBehaviour {
 	private int cameraSensitivity;//Enumの値 MinからMaxまでの値をとる
 
 	public Dictionary<int,int> sensitivityMap = new Dictionary<int, int> () {
-		{(int)CameraSensitivity.Low,200},
+		{(int)CameraSensitivity.Low,150},
 		{(int)CameraSensitivity.Normal,300},
-		{(int)CameraSensitivity.High,400}
+		{(int)CameraSensitivity.High,500}
 	};
 
 	public Dictionary<int,string> sensitivityString = new Dictionary<int, string> () {

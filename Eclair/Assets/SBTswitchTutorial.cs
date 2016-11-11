@@ -7,7 +7,7 @@ public class SBTswitchTutorial : EnemyBase {
 	public GameObject lightSphere;
 	public GameObject glass;
 
-
+	public EventManager em;
 
 
 	// Use this for initialization
@@ -27,6 +27,9 @@ public class SBTswitchTutorial : EnemyBase {
 			lightSphere.SetActive (false);
 			meshrender.material.color = new Color (0, 0, 0, 0.5f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = true;
+			if (EventManager.eventCount == 5) {
+				em.EventCount ();
+			}
 		}
 
 	}

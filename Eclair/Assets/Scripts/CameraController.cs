@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -100,7 +100,7 @@ public class CameraController : MonoBehaviour
 				lookAt = player;
 			}
 		}
-		if (BossMoveManager.BossAttackedCount == 2) {
+		if (/*BossMoveManager.BossAttackedCount == 2 || */EventManager.eventCount == 2) {
 			lookAt = CameraChanger.mainCamera_;
 		}
 
@@ -176,7 +176,7 @@ public class CameraController : MonoBehaviour
 
         Transform lookAtTransform = lookAt.GetComponent<Transform>();
 
-		int layerMask = ~((1 << 8) | (1 << 9));//PlayerとBoltを除くすべて
+		int layerMask = ~((1 << 8) | (1 << 9) | (1 << 14) | (1 << 16));//PlayerとBoltとEnemyとGroundを除くすべて
 
         RaycastHit hit;
 		if (Physics.Raycast(lookAtTransform.position, cameraOffset,out hit, distance,layerMask))

@@ -251,11 +251,14 @@ public class PlayerControl : MonoBehaviour
 	void ShotManagament()
 	{
 		if(InputManager.boltLaunch == true && EclairImmobile == false){
+			PlayerControl.EclairImmobile = true;
 			anim.SetBool ("Shot", true);
 			anim.SetFloat(angleId,angleUsing);
+		
 
 		}
 		if(InputManager.boltLaunch == false){
+			PlayerControl.EclairImmobile = false;
 			anim.SetBool("Shot",false);
 
 		}
@@ -264,10 +267,14 @@ public class PlayerControl : MonoBehaviour
 	void SBTManagament()
 	{
 		if(InputManager.sbt == true && EclairImmobile == false){
+			PlayerControl.EclairImmobile = true;
 			anim.SetBool("SBT",true);
 			anim.SetFloat (angleId, angleUsing);
+		
+
 		}
 		if(InputManager.sbt == false){
+			PlayerControl.EclairImmobile = false;
 			anim.SetBool ("SBTStopToEnd", true);
 			anim.SetBool ("SBT", false);
 		}
@@ -339,9 +346,10 @@ public class PlayerControl : MonoBehaviour
 				if (fly)
 					targetRotation *= Quaternion.Euler (90, 0, 0);
 
+
 				Quaternion newRotation = Quaternion.Slerp (GetComponent<Rigidbody> ().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime);
 				GetComponent<Rigidbody> ().MoveRotation (newRotation);
-				lastDirection = targetDirection;
+			//lastDirection = targetDirection;
 			}
 			//idle - fly or grounded
 			if (!(Mathf.Abs (h) > 0.9 || Mathf.Abs (v) > 0.9)) {
@@ -349,10 +357,12 @@ public class PlayerControl : MonoBehaviour
 			}
 
 			return targetDirection;
+
 	}
 
 	private void Repositioning()
 	{
+		
 		Vector3 repositioning = lastDirection;
 		if(repositioning != Vector3.zero)
 		{

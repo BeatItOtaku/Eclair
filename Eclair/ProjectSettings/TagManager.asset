@@ -14,6 +14,7 @@ TagManager:
   - Plane
   - Objects
   - TutorialUI
+  - BreakWall
   layers:
   - Default
   - TransparentFX
@@ -29,9 +30,9 @@ TagManager:
   - NoMoveBolt
   - EclairKeepOut
   - Boss
-  - 
-  - 
-  - 
+  - Enemy
+  - Event7Pass
+  - Ground
   - 
   - 
   - 
