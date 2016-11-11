@@ -15,7 +15,7 @@ public class BossFootCollider : MonoBehaviour {
 		//footTime += Time.deltaTime;;
 	
 	}
-	private void OnTriggerEnter (Collider collider)
+	private void OnCollisionEnter (Collision collider)
 	{
 		if (collider.gameObject.tag == "Player") {
 

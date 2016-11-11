@@ -84,7 +84,7 @@ public class BossMoveManager : MonoBehaviour {
 		//ボスの動き
 
 		//右回転
-		if (difDistanceLR > 1.0f && waitTime == 0) {
+		if (difDistanceLR > 2.0f && waitTime == 0) {
 			bossShot = false;
 			//Debug.Log ("right");
 			bossAnim.SetBool ("Rotation", true);
@@ -96,19 +96,19 @@ public class BossMoveManager : MonoBehaviour {
 
 		//直進
 
-		if (difDistanceLR > -1.0f && waitTime == 0 &&centerDistance >1.0f) {
+		if (difDistanceLR > -2.0f && waitTime == 0) {
 			if (difDistanceCT < 0) {
 				//Debug.Log ("forward");
 				bossAnim.SetBool ("Walk", true);
 				bossAnim.SetBool ("Rotation", false);
-				//transform.position += transform.forward * Time.deltaTime;
+				transform.position += transform.forward * Time.deltaTime *3;
 				waitTime = 0;
 			}
 
 		}
 
 		//左回転
-		else if (difDistanceLR < -1.0f && waitTime == 0) {
+		else if (difDistanceLR < -2.0f && waitTime == 0) {
 			bossShot = false;
 			//Debug.Log ("left");
 			bossAnim.SetBool ("Rotation", true);
@@ -140,7 +140,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//ボスの砲撃
 //ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<1.0f && difDistanceCT < 0) {
+		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<2.0f && difDistanceCT < 0) {
 			bossShot = true;
 		} else {
 			bossShot = false;
