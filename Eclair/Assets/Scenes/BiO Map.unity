@@ -10448,7 +10448,7 @@ GameObject:
   - 65: {fileID: 576208997}
   - 23: {fileID: 576208996}
   - 114: {fileID: 576208995}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Event7(WallPass)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19419,7 +19419,7 @@ GameObject:
   - 65: {fileID: 1142860725}
   - 23: {fileID: 1142860724}
   - 114: {fileID: 1142860723}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Event7(WallPass) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

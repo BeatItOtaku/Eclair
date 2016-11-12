@@ -140,7 +140,7 @@ public class PlayerControl : MonoBehaviour
 		HPManagament();
 		StopManagament ();
         mutekiManagement();
-		//KilledManagament ();
+		KilledManagament ();
 
 
 	}
@@ -311,13 +311,14 @@ public class PlayerControl : MonoBehaviour
 
 	}
 
-	/*void KilledManagament()
+	void KilledManagament()
 	{
-		if (currentHP == 0)
+		if (HP <= 0)
 		{
+			gameObject.gameObject.tag = "Untagged";
 			anim.SetTrigger ("EclairKilled");
 		}
-	}*/
+	}
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{

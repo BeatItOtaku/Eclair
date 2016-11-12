@@ -148,7 +148,7 @@ public class EventManager : MonoBehaviour {
 			event7_gun.SetActive (false);
 			event7_yajirushi.SetActive (true);
 			event7_gunParticle.SetActive (true);
-
+			EventCount();
 			break;
 		case 8:
 			//敵との戦闘
