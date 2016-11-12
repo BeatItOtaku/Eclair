@@ -73,6 +73,9 @@ public class EventManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (event7_EclairGun == null) {
+			event7_EclairGun = GameObject.Find ("Gun");
+		}
 		if (tutorialMove == null) {
 			tutorialMove = GameObject.Find ("Tutorial_Move");
 			if (tutorialMove != null) {
