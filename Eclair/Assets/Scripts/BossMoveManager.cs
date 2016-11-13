@@ -86,8 +86,7 @@ public class BossMoveManager : MonoBehaviour {
 
 
 		//右回転
-		if (difDistanceLR > 2.0f && waitTime == 0) {
-			bossShot = false;
+		if (difDistanceLR > 2.0f && waitTime == 0 && bossShot == false) {
 			//Debug.Log ("right");
 			bossAnim.SetBool ("Rotation", true);
 			bossAnim.SetBool ("Walk", false);
@@ -98,7 +97,7 @@ public class BossMoveManager : MonoBehaviour {
 
 		//直進
 
-		if (difDistanceLR > -2.0f && waitTime == 0) {
+		if (difDistanceLR > -2.0f && waitTime == 0 && bossShot == false) {
 			if (difDistanceCT < 0) {
 				//Debug.Log ("forward");
 				bossAnim.SetBool ("Walk", true);
@@ -110,8 +109,8 @@ public class BossMoveManager : MonoBehaviour {
 		}
 
 		//左回転
-		else if (difDistanceLR < -2.0f && waitTime == 0) {
-			bossShot = false;
+		else if (difDistanceLR < -2.0f && waitTime == 0 && bossShot == false) {
+			
 			//Debug.Log ("left");
 			bossAnim.SetBool ("Rotation", true);
 			bossAnim.SetBool ("Walk", false);
@@ -142,7 +141,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//ボスの砲撃
 //ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<2.0f && difDistanceCT < 0) {
+		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<1.5f && difDistanceCT < 0) {
 			bossShot = true;
 		} else {
 			bossShot = false;
@@ -152,6 +151,8 @@ public class BossMoveManager : MonoBehaviour {
 		if (shotInterval > shotIntervalMax) {
 			shotInterval = 0;			
 			if (bossShot == true) {
+				bossAnim.SetBool ("Walk", false);
+				bossAnim.SetBool ("Rotation", false);
 				bossAnim.SetBool ("BossShot", true);
 				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 				Instantiate (muzzleFrash, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
