@@ -14,8 +14,10 @@ public class Event9_way : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-		GameObject.Find ("FadeOutPanel").GetComponent<AnimationQueueBase> ().Queue ();
-		Camera.main.GetComponent<BGMController> ().Fade (1, BGMController.TransitionKind.Out);
-		MapLoader.Instance.startFactory ();
+		if (col.gameObject.tag == "Player") {
+			GameObject.Find ("FadeOutPanel").GetComponent<AnimationQueueBase> ().Queue ();
+			Camera.main.GetComponent<BGMController> ().Fade (1, BGMController.TransitionKind.Out);
+			MapLoader.Instance.startFactory ();
+		}
 	}
 }

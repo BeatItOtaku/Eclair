@@ -73,6 +73,9 @@ public class EventManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (event7_EclairGun == null) {
+			event7_EclairGun = GameObject.Find ("Gun");
+		}
 		if (tutorialMove == null) {
 			tutorialMove = GameObject.Find ("Tutorial_Move");
 			if (tutorialMove != null) {
@@ -145,7 +148,7 @@ public class EventManager : MonoBehaviour {
 			event7_gun.SetActive (false);
 			event7_yajirushi.SetActive (true);
 			event7_gunParticle.SetActive (true);
-
+			EventCount();
 			break;
 		case 8:
 			//敵との戦闘
