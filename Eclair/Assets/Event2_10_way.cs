@@ -17,6 +17,6 @@ public class Event2_10_way : MonoBehaviour {
 		GameObject.Find ("FadeOutPanel").GetComponent<AnimationQueueBase> ().Queue ();
 		Camera.main.GetComponent<BGMController> ().Fade (1, BGMController.TransitionKind.Out);
 		//MapLoader.Instance.startBoss ();
-		MapLoader.Instance.Reset();
+		MapLoader.Reset();
 	}
 }

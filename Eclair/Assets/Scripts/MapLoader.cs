@@ -70,8 +70,8 @@ public class MapLoader : MonoBehaviour
 			PlayerControl.EclairImmobile = false;
             SceneManager.LoadSceneAsync("tougou",LoadSceneMode.Additive);
 			//SceneManager.LoadSceneAsync ("Boss Map", LoadSceneMode.Additive);
-			ZakoMapASync = SceneManager.LoadSceneAsync ("ZakoMap");
-			ZakoMapASync.allowSceneActivation = false;
+			//ZakoMapASync = SceneManager.LoadSceneAsync ("ZakoMap");
+			//ZakoMapASync.allowSceneActivation = false;
             startGameFlag = false;
             MapAsync = null;
         }
@@ -88,7 +88,7 @@ public class MapLoader : MonoBehaviour
     }
 
 	//タイトル画面に戻るよ
-	public void Reset(){
+	public static void Reset(){
 		SceneManager.LoadScene ("Title");
 	}
 
@@ -102,8 +102,8 @@ public class MapLoader : MonoBehaviour
 			ZakoMapASync.allowSceneActivation = true;
 			ZakoMapASync = null;
 			SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
-			BossMapASync = SceneManager.LoadSceneAsync ("Boss Map");
-			BossMapASync.allowSceneActivation = false;
+			//BossMapASync = SceneManager.LoadSceneAsync ("Boss Map");
+			//BossMapASync.allowSceneActivation = false;
 		}
 	}
 
@@ -114,5 +114,16 @@ public class MapLoader : MonoBehaviour
 			SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
 		}
 	}
+
+    public static void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+	    SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Additive);
+    }
 
 }

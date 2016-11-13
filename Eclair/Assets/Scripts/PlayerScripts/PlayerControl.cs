@@ -85,6 +85,8 @@ public class PlayerControl : MonoBehaviour
     private float mutekiTimeCursor = 0;
     private bool isMuteki = false;
 
+    private bool died = false;
+
 	void Awake()
 	{
 		anim = GetComponent<Animator> ();
@@ -140,7 +142,7 @@ public class PlayerControl : MonoBehaviour
 		HPManagament();
 		StopManagament ();
         mutekiManagement();
-		//KilledManagament ();
+        DeathManagement();
 
 
 	}
@@ -422,6 +424,15 @@ public class PlayerControl : MonoBehaviour
                 isMuteki = false;
                 mutekiTimeCursor = 0;//”O‚Ì‚½‚ß
             }
+        }
+    }
+
+    void DeathManagement()
+    {
+        if(HP <= 0 && died == false)
+        {
+            died = true;
+            MapLoader.Instance.GameOver();
         }
     }
 
