@@ -14,9 +14,17 @@ public class Event2_10_way : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-		GameObject.Find ("FadeOutPanel").GetComponent<AnimationQueueBase> ().Queue ();
-		Camera.main.GetComponent<BGMController> ().Fade (1, BGMController.TransitionKind.Out);
-		//MapLoader.Instance.startBoss ();
-		MapLoader.Instance.Reset();
+        if(col.CompareTag("Player"))
+            StartCoroutine(coroutine());
+		//MapLoader.Instance.Reset();
 	}
+
+    IEnumerator coroutine()
+    {
+        GameObject.Find("FadeOutPanel").GetComponent<AnimationQueueBase>().Queue();
+        Camera.main.GetComponent<BGMController>().Fade(2, BGMController.TransitionKind.Out);
+        yield return new WaitForSeconds(2);
+        GameObject.Find("RunningEclair").GetComponent<AnimationQueueBase>().Queue();
+        MapLoader.Instance.startBoss();
+    }
 }

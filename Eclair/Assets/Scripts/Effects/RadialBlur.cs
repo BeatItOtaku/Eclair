@@ -31,7 +31,7 @@ public class RadialBlur : MonoBehaviour {
     }
 
     private IEnumerator Shock_raw(float force,float brightness){
-		Debug.Log ("Shock");
+		//Debug.Log ("Shock");
 		bool disableWhenEnd = false;
 		if (!enabled) {
 			enabled = true;

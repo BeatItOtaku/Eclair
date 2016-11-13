@@ -5,8 +5,6 @@ public class BGMController : MonoBehaviour
 {
 	public enum TransitionKind { In, Out};
 
-	public TransitionKind transitionKind = TransitionKind.In;
-
     public AudioClip intro;
     public AudioClip loop;
 
@@ -123,12 +121,17 @@ public class BGMController : MonoBehaviour
 	}
 
 	public IEnumerator Change_raw(AudioClip intro, AudioClip loop,float volume){
-		Fade (0.5f,TransitionKind.Out);
+		Fade_raw (0.5f,TransitionKind.Out);
 		Play (intro, loop, volume);
 		return null;
 	}
 
-	public IEnumerator Fade(float duration,TransitionKind transitionKind){
+    public void Fade(float duration,TransitionKind transitionKind)
+    {
+        StartCoroutine(Fade_raw(duration, transitionKind));
+    }
+
+	private IEnumerator Fade_raw(float duration,TransitionKind transitionKind){
 		float timeCursor = 0;
 		float startVolume = this.Volume;
 		while (timeCursor < duration) {

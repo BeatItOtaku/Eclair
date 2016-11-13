@@ -79,10 +79,10 @@ public class MapLoader : MonoBehaviour
 		if (Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
 			if(InputManager.isGamePad) InputManager.isGamePad = false;
 		} else if (Mathf.Abs (Input.GetAxisRaw ("Horizontal")) > 0.4f || Mathf.Abs (Input.GetAxisRaw ("Vertical")) > 0.4f) {
-			if(!InputManager.isGamePad) InputManager.isGamePad = true;//WASDが押されてないのに移動してる => ゲームパッドを触ってる
+			if(!InputManager.isGamePad) InputManager.isGamePad = true;//WASDが押されてないのに移動してる => ゲームパッド(の左スティック)を触ってる
 		}
 
-		if (Input.GetKey (KeyCode.E) && Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.C)) {
+		if (!CameraController.cursorIsLocked && Input.GetKey (KeyCode.E) && Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.C)) {
 			Reset ();
 		}
     }
@@ -98,21 +98,32 @@ public class MapLoader : MonoBehaviour
     }
 
 	public void startFactory(){
-		if (ZakoMapASync != null) {
-			ZakoMapASync.allowSceneActivation = true;
-			ZakoMapASync = null;
-			SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
-			BossMapASync = SceneManager.LoadSceneAsync ("Boss Map");
-			BossMapASync.allowSceneActivation = false;
-		}
+        if (ZakoMapASync != null)
+        {
+            ZakoMapASync.allowSceneActivation = true;
+            ZakoMapASync = null;
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("ZakoMap");
+        }
+		SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
+		BossMapASync = SceneManager.LoadSceneAsync ("Boss Map");
+		BossMapASync.allowSceneActivation = false;
+
 	}
 
 	public void startBoss(){
-		if (BossMapASync != null) {
-			BossMapASync.allowSceneActivation = true;
-			BossMapASync = null;
-			SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
-		}
+        if (BossMapASync != null)
+        {
+            BossMapASync.allowSceneActivation = true;
+            BossMapASync = null;
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Boss Map");
+        }
+		SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
 	}
 
 }
