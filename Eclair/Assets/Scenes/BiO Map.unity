@@ -16211,7 +16211,6 @@ GameObject:
   - 33: {fileID: 945247543}
   - 65: {fileID: 945247542}
   - 23: {fileID: 945247541}
-  - 114: {fileID: 945247540}
   - 114: {fileID: 945247544}
   m_Layer: 0
   m_Name: Event9(Way)
@@ -16233,18 +16232,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1508232072}
   m_RootOrder: 18
---- !u!114 &945247540
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 945247538}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 299fea8eae10f4211837f0da4029e732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  em: {fileID: 1508232071}
 --- !u!23 &945247541
 MeshRenderer:
   m_ObjectHideFlags: 0
