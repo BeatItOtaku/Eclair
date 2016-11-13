@@ -8,7 +8,7 @@ public class AnimationQueue_InAndOut : AnimationQueueBase {
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Image> ().enabled = false;
+        GetComponent<MaskableGraphic>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -21,7 +21,7 @@ public class AnimationQueue_InAndOut : AnimationQueueBase {
 		if (isStaged) {//アウトのアニメーション
 			GetComponent<Animator>().Play("Out");
 		} else {//インのアニメーション
-			GetComponent<Image> ().enabled = true;
+			GetComponent<MaskableGraphic> ().enabled = true;
 			isStaged = true;
 			GetComponent<Animator>().Play("In");
 		}
