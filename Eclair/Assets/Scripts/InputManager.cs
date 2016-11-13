@@ -126,6 +126,8 @@ public class InputManager : MonoBehaviour {
 		height = Screen.height;
 		width = Screen.width;
 		screenMiddle = new Vector3 (width / 2, height / 2, 0);
+
+        GameObject.Find("FadeInPanel").GetComponent<AnimationQueueBase>().Queue();
 	}
 
 	// Update is called once per frame

@@ -41,7 +41,7 @@ public class TimeManager : MonoBehaviour {
 	}
 
 	private IEnumerator theWorld_raw(float stopTime){
-		Debug.Log ("startTheWorld");
+		//Debug.Log ("startTheWorld");
 		isStopping = true;
 		float scale = 0.005f;
 		Time.timeScale = scale;
@@ -54,7 +54,7 @@ public class TimeManager : MonoBehaviour {
 			yield return null;
 		}
 		Time.timeScale = 1;
-		Debug.Log ("endTheWorld");
+		//Debug.Log ("endTheWorld");
 
 	}
 
