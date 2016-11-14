@@ -69,6 +69,7 @@ public class MapLoader : MonoBehaviour
             MapAsync.allowSceneActivation = true;
 			PlayerControl.EclairImmobile = false;
             SceneManager.LoadSceneAsync("tougou",LoadSceneMode.Additive);
+            ScoreCounter.GameStarted();
 			//SceneManager.LoadSceneAsync ("Boss Map", LoadSceneMode.Additive);
 			//ZakoMapASync = SceneManager.LoadSceneAsync ("ZakoMap");
 			//ZakoMapASync.allowSceneActivation = false;

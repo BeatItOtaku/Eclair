@@ -64,6 +64,7 @@ public class EnemyNormal : EnemyBase {
 				em = GameObject.Find ("EventManager");
 				em.GetComponent<EventManager> ().EventCount ();
 			}
+            ScoreCounter.EnemyBeated();
         }
         else
         {
