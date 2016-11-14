@@ -6,6 +6,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//エクレア
 	public GameObject player = null;
+	public GameObject playerPositionY;
 
 	//ボスの体とエフェクト
 	public GameObject boss;
@@ -30,6 +31,7 @@ public class BossMoveManager : MonoBehaviour {
 	public static int BossAttackedCount = 1;
 
 	private Vector3 playerV;
+	private Vector3 playerHeightV;
 	private Vector3 leftFootV;
 	private Vector3 rightFootV;
 	private Vector3 centerV;
@@ -45,6 +47,8 @@ public class BossMoveManager : MonoBehaviour {
 
 	private float shotInterval =0;
 	private float shotIntervalMax = 0.1f;
+
+	private float playerHeightF;
 
 	public static float waitTime = 0;
 	private bool wait = false;
@@ -68,7 +72,9 @@ public class BossMoveManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (playerHeightF);
 		playerV = player.transform.position;
+		playerHeightV = playerPositionY.transform.position;
 		leftFootV = leftFoot.transform.position;
 		rightFootV = rightFoot.transform.position;
 		centerV = bossCenter.transform.position;
@@ -81,6 +87,8 @@ public class BossMoveManager : MonoBehaviour {
 		centerDistance = Vector3.Distance (playerV, centerV);
 		tailDistance = Vector3.Distance (playerV, tailV);
 		difDistanceCT = centerDistance - tailDistance;
+
+		playerHeightF = Vector3.Distance (playerV, playerHeightV);
 
 		//ボスの動き
 
@@ -103,7 +111,7 @@ public class BossMoveManager : MonoBehaviour {
 				//Debug.Log ("forward");
 				bossAnim.SetBool ("Walk", true);
 				bossAnim.SetBool ("Rotation", false);
-				transform.position += transform.forward * Time.deltaTime *3;
+				//transform.position += transform.forward * Time.deltaTime *3;
 				waitTime = 0;
 			}
 
@@ -138,11 +146,16 @@ public class BossMoveManager : MonoBehaviour {
 			wait = false;
 		}
 
+		if (playerHeightF >= 10.0f) {
+			bossAnim.SetBool ("Rotation", false);
+			bossAnim.SetBool ("Walk", true);
+		}
+
 
 
 	//ボスの砲撃
 //ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<2.0f && difDistanceCT < 0) {
+		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<1.0f && difDistanceCT < 0) {
 			bossShot = true;
 		} else {
 			bossShot = false;
