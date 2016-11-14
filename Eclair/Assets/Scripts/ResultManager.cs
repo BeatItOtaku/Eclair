@@ -97,7 +97,8 @@ public class ResultManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//CameraController.cursorIsLocked = false;
+        //CameraController.cursorIsLocked = false;
+        setResult((int)ScoreCounter.TimeSinceStarted, ScoreCounter.BeatedEnemyCount, ScoreCounter.LaunchedBoltCount);
 	}
 	
 	// Update is called once per frame
