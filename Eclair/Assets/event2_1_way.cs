@@ -16,7 +16,7 @@ public class event2_1_way : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider collider){
-		if ( em2.eventCount2 == 6) {
+		if ( em2.eventCount2 == 5) {
 			if (collider.gameObject.tag == "Player") {
 				em2.EventCount2 ();
 

@@ -72,7 +72,7 @@ Material:
     m_Floats:
     - first:
         name: _Brightness
-      second: 1.8768144
+      second: 1.7478932
     - first:
         name: _BumpScale
       second: 1
@@ -87,7 +87,7 @@ Material:
       second: 0
     - first:
         name: _Force
-      second: 1.7262541
+      second: 1.4397849
     - first:
         name: _GlossMapScale
       second: 1
