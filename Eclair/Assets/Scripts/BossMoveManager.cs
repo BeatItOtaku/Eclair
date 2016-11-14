@@ -6,6 +6,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//エクレア
 	public GameObject player = null;
+	public GameObject playerPosition;
 
 	//ボスの体とエフェクト
 	public GameObject boss;
@@ -30,10 +31,13 @@ public class BossMoveManager : MonoBehaviour {
 	public static int BossAttackedCount = 1;
 
 	private Vector3 playerV;
+	private Vector3 playerPositionV;
 	private Vector3 leftFootV;
 	private Vector3 rightFootV;
 	private Vector3 centerV;
 	private Vector3 tailV;
+
+	private float playerHeight;
 
 	private float leftDistance; //ボスの左足からプレイヤーまでの距離
 	private float rightDistance; //ボスの右足からプレイヤーまでの距離
@@ -50,6 +54,7 @@ public class BossMoveManager : MonoBehaviour {
 	private bool wait = false;
 
 	private Animator bossAnim;
+	private int phId;//plyaerHeight
 
 	private AsyncOperation result;
 
@@ -64,11 +69,14 @@ public class BossMoveManager : MonoBehaviour {
 		fire.SetActive (false);
 		result = SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
 		result.allowSceneActivation = false;
+		phId = Animator.StringToHash ("PlayerHeight");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (playerHeight);
 		playerV = player.transform.position;
+		playerPositionV = playerPosition.transform.position;
 		leftFootV = leftFoot.transform.position;
 		rightFootV = rightFoot.transform.position;
 		centerV = bossCenter.transform.position;
@@ -81,6 +89,8 @@ public class BossMoveManager : MonoBehaviour {
 		centerDistance = Vector3.Distance (playerV, centerV);
 		tailDistance = Vector3.Distance (playerV, tailV);
 		difDistanceCT = centerDistance - tailDistance;
+
+		playerHeight = Vector3.Distance (playerV, playerPositionV);
 
 		//ボスの動き
 
@@ -137,6 +147,12 @@ public class BossMoveManager : MonoBehaviour {
 			wait = false;
 		}
 
+		//エクレアがボスの上にいるとき歩く
+		if (centerDistance <= 1.0f && playerHeight >= 10.0f) {
+			bossAnim.SetBool ("Rotation", false);
+			bossAnim.SetBool ("Walk", true);
+		}
+
 
 
 	//ボスの砲撃
@@ -154,6 +170,7 @@ public class BossMoveManager : MonoBehaviour {
 				bossAnim.SetBool ("Walk", false);
 				bossAnim.SetBool ("Rotation", false);
 				bossAnim.SetBool ("BossShot", true);
+				bossAnim.SetFloat (phId, playerHeight);
 				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 				Instantiate (muzzleFrash, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 			} else {
