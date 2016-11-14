@@ -54,6 +54,7 @@ public class BossMoveManager : MonoBehaviour {
 	private bool wait = false;
 
 	private Animator bossAnim;
+	private int phId;
 
 	private AsyncOperation result;
 
@@ -62,6 +63,7 @@ public class BossMoveManager : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindWithTag ("Player");
 		bossAnim = boss.GetComponent<Animator> ();
+		phId = Animator.StringToHash ("PlayerHeight");
 		bossShot = false;
 		bossSmoke1.SetActive (false);
 		bossSmoke2.SetActive (false);
@@ -146,6 +148,7 @@ public class BossMoveManager : MonoBehaviour {
 			wait = false;
 		}
 
+		//ボスの上方にプレイヤーが来たときボスは歩く
 		if (playerHeightF >= 10.0f) {
 			bossAnim.SetBool ("Rotation", false);
 			bossAnim.SetBool ("Walk", true);
@@ -165,7 +168,10 @@ public class BossMoveManager : MonoBehaviour {
 		if (shotInterval > shotIntervalMax) {
 			shotInterval = 0;			
 			if (bossShot == true) {
+				bossAnim.SetBool ("Rotation", false);
+				bossAnim.SetBool ("Walk", false);
 				bossAnim.SetBool ("BossShot", true);
+				bossAnim.SetFloat (phId, playerHeightF);
 				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 				Instantiate (muzzleFrash, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 			} else {
@@ -192,11 +198,14 @@ public class BossMoveManager : MonoBehaviour {
 			fire.SetActive (true);
 		}
 		//ボスが倒されたとき
-		if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		if (BossAttackedCount >= 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
+			transform.Rotate (Vector3.up * 0);
+			transform.position += transform.forward * Time.deltaTime * 0;
 			Debug.Log ("kill");
 			waitTime += Time.deltaTime;
 			bossAnim.SetTrigger ("BossKilled");
+
 			if(waitTime >= 4.0f){
 			CameraController.cursorIsLocked = false;
 			result.allowSceneActivation = true;
