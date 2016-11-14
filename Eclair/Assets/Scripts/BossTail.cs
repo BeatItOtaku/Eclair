@@ -15,7 +15,7 @@ public class BossTail : EnemyBase {
 
 	public override void Damage (int damage, Vector3 direction)
 	{
-		if (damage > 5){
+		if (damage >= 15){
 			BossMoveManager.BossAttackedCount++;
 			BossMoveManager.bossAttacked = true;
 		}

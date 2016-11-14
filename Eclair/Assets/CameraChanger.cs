@@ -32,7 +32,7 @@ public class CameraChanger : MonoBehaviour {
 	void Update () {
 		if (BossMoveManager.BossAttackedCount == 2) {
 			mainCamera_ = bossKilledCamera;
-			bossKilledCamera.SetActive (true);
+			//bossKilledCamera.SetActive (true);
 			uI.SetActive (false);
 		}
 		if (EventManager.eventCount == 2) {

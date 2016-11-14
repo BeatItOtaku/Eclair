@@ -46,7 +46,7 @@ public class EventManager : MonoBehaviour {
 	void Start () {
 		//AnimationQueue = GameObject.Find ("Canvas");
 		//queueMove.Queue ();
-		eventCount = 0;
+		eventCount = 10;
 
 
 		event2_sita.SetActive (false);
