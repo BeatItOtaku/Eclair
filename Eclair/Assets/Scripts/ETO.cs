@@ -57,7 +57,7 @@ public class ETO : MonoBehaviour {
 
 	private void OnHit (Collider collider)
 	{
-		Debug.Log ("ETO Collided To " + collider.gameObject.tag);
+		//Debug.Log ("ETO Collided To " + collider.gameObject.tag);
 		//ボルトにぶつかったとき・・・電気のエフェクトを出す
 		if (collider.gameObject.tag == "Bolt" && target.Equals(collider.gameObject)) {	
 			//Debug.Log ("CollideToBolt");

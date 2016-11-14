@@ -40385,7 +40385,7 @@ MonoBehaviour:
   meshrender: {fileID: 1796497100}
   lightSphere: {fileID: 334612291}
   glass: {fileID: 1051103628}
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!1001 &805344318
 Prefab:
   m_ObjectHideFlags: 0
@@ -47103,7 +47103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6f875056cf934d07b014d1537b0e934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!1 &951402404
 GameObject:
   m_ObjectHideFlags: 0
@@ -47981,7 +47981,7 @@ MonoBehaviour:
   fire: {fileID: 0}
   point1: {fileID: 0}
   point2: {fileID: 0}
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!1 &982427693
 GameObject:
   m_ObjectHideFlags: 0
@@ -48740,7 +48740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cc55d7a38f4460faca3c59389f98f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!95 &989677100
 Animator:
   serializedVersion: 3
@@ -50015,7 +50015,7 @@ MonoBehaviour:
   meshrender: {fileID: 1654721745}
   lightSphere: {fileID: 1904063231}
   glass: {fileID: 739253448}
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!1 &1024833709
 GameObject:
   m_ObjectHideFlags: 0
@@ -50817,7 +50817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cebbfd23d12154eddbfbb9ef906a3150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!1 &1046505682
 GameObject:
   m_ObjectHideFlags: 0
@@ -54686,7 +54686,7 @@ MonoBehaviour:
   meshrender: {fileID: 2051038511}
   lightSphere: {fileID: 2054564857}
   glass: {fileID: 1696789397}
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!1 &1131433403
 GameObject:
   m_ObjectHideFlags: 0
@@ -85090,7 +85090,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1739862055}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 28.1, y: 1.9, z: -17.9}
+  m_LocalPosition: {x: 28.1, y: 1.9, z: -19.14}
   m_LocalScale: {x: 6, y: 10, z: 20}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
   m_Children: []
@@ -100932,7 +100932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cc55d7a38f4460faca3c59389f98f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  em2: {fileID: 0}
+  em2: {fileID: 1707958267}
 --- !u!95 &2070540025
 Animator:
   serializedVersion: 3
