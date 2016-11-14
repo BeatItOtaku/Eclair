@@ -1402,10 +1402,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010952632062}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.45806, y: 0.26, z: -12.303761}
+  m_LocalRotation: {x: -0, y: 0.731317, z: -0, w: 0.6820378}
+  m_LocalPosition: {x: -23.157372, y: -0.9422219, z: -1.9220505}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 93.879005, z: 0}
   m_Children:
   - {fileID: 4000010013857330}
   - {fileID: 4000013012174666}
@@ -2461,7 +2461,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: b7b8206bbe16848a6aaed6a60f30071d, type: 3}
   m_Controller: {fileID: 9100000, guid: 7bcdddf340213864d85300a9a6232925, type: 2}
   m_CullingMode: 1
-  m_UpdateMode: 0
+  m_UpdateMode: 1
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -2485,8 +2485,11 @@ MonoBehaviour:
   dieReaction: 4
   normalSpeed: 0.5
   attackSpeed: 2
+  mutekiTime: 0.8
+  effectWhenDied: {fileID: 1000011582249936, guid: 4e4b456e5da569543bbf29080fcfba23,
+    type: 2}
   player: {fileID: 0}
-  searchDistance: 10
+  searchDistance: 16
   moveDistance: 64
 --- !u!136 &136000012668358040
 CapsuleCollider:
