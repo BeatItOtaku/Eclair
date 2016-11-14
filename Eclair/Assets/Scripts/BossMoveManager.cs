@@ -180,7 +180,7 @@ public class BossMoveManager : MonoBehaviour {
 			fire.SetActive (true);
 		}
 		//ボスが倒されたとき
-		if (BossAttackedCount >= 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+		if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
 			Debug.Log ("kill");
 			waitTime += Time.deltaTime;
