@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CameraChanger : MonoBehaviour {
 
-	public GameObject player;
+	/*public GameObject player;
 	public GameObject mainCamera;
 	public static GameObject mainCamera_ = null;
 
@@ -16,21 +16,33 @@ public class CameraChanger : MonoBehaviour {
 
 	public GameObject bossKilledCamera;
 
-	private float cameraWaitTime;
+	private float cameraWaitTime;*/
+
+	private static GameObject currentCamera;
+	public static GameObject CurrentCamera {
+		get {
+			return currentCamera;
+		}
+		set {
+			currentCamera.SetActive (false);
+			currentCamera = value;
+			value.SetActive (true);
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
-		em = GameObject.Find ("EventManager");
+		/*em = GameObject.Find ("EventManager");
 		event2StartCameraPosition = GameObject.Find ("Event2_StartPosition");
 		event2EndPosition = GameObject.Find ("EndPosition");
 		mainCamera_ = mainCamera;
-		cameraWaitTime = 0;
-	
+		cameraWaitTime = 0;*/
+		currentCamera = Camera.main.gameObject;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (BossMoveManager.BossAttackedCount == 2) {
+		/*if (BossMoveManager.BossAttackedCount == 2) {
 			mainCamera_ = bossKilledCamera;
 			bossKilledCamera.SetActive (true);
 			uI.SetActive (false);
@@ -44,6 +56,10 @@ public class CameraChanger : MonoBehaviour {
 				mainCamera_ = player;
 				em.GetComponent<EventManager>().EventCount ();
 			}
-		}
+		}*/
+	}
+
+	public void OnSceneChanged(){
+		currentCamera = Camera.main.gameObject;
 	}
 }

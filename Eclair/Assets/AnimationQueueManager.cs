@@ -6,6 +6,17 @@ public class AnimationQueueManager : MonoBehaviour {
     public QueueTable timeline;
 
     private int cursor = 0;
+	public int Cursor {
+		get{
+			return cursor;
+		}
+		set{
+			OnCursorChanged (cursor,value);
+			cursor = value;
+		}
+	}
+
+	abstract void OnCursorChanged (int before, int after);
 
     protected virtual void Start()
     {
@@ -19,6 +30,7 @@ public class AnimationQueueManager : MonoBehaviour {
             yield return new WaitForSeconds(q.Key);
             Debug.Log("Queue:" + q.Value.ToString());
             q.Value.GetComponent<AnimationQueueBase>().Queue();
+			Cursor++;
         }
     }
 }
