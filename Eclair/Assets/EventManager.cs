@@ -144,6 +144,7 @@ public class EventManager : MonoBehaviour {
 		case 7:
 			//銃ゲット
 			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			event6_bolt.SetActive (false);
 			event7_EclairGun.SetActive (true);
 			event7_gun.SetActive (false);
 			event7_yajirushi.SetActive (true);
