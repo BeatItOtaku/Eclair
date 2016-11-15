@@ -148,7 +148,7 @@ public class InputManager : MonoBehaviour {
 						player.transform.LookAt (bolt.transform);
 						player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
 					}*/
-
+					playerState_ = PlayerStates.Bolt;
 					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
 					RaycastHit hit;
 					Vector3 hitPosition;
@@ -164,23 +164,23 @@ public class InputManager : MonoBehaviour {
 					}
 					if (player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition, hitQuaternion)) {
 						audioSource.PlayOneShot (boltLaunchSound);
-						playerState_ = PlayerStates.Bolt;
+
 					}
 
                     GameObject bolt = GameObject.FindGameObjectWithTag("Bolt");
                     if (bolt != null)
                     {
-                        //player.transform.LookAt(bolt.transform);
-                        //player.transform.rotation = new Quaternion(0, player.transform.rotation.y, 0, player.transform.rotation.w);
-                        Quaternion rot = Quaternion.LookRotation(hitPosition - player.transform.position);
-                        player.transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
+						if (boltLaunch == true) {
+							Quaternion rot = Quaternion.LookRotation (hitPosition - player.transform.position);
+							player.transform.rotation = Quaternion.Euler (0, rot.eulerAngles.y, 0);
+						}
                     }
 
                 }
 
 			}
 			if (playerState_ == PlayerStates.Bolt) {
-				boltLaunch = true;
+				
 				boltTime += Time.deltaTime;
 				if (boltTime >= 0.3f) {
 					playerState_ = PlayerStates.Idle;

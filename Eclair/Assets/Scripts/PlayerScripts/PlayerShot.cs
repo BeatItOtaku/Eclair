@@ -50,6 +50,7 @@ public class PlayerShot : MonoBehaviour {
         Vector3 playerToTarget = target - muzzle.transform.position;
 		playerToTarget.Normalize ();
 		GameObject go = (GameObject)Instantiate (shot, muzzle.transform.position, Quaternion.LookRotation(playerToTarget) * boltQuaternionOffset);
+		InputManager.boltLaunch = true;
 		InputManager.boltTime = 0;
         if (usePhysics)
         {
