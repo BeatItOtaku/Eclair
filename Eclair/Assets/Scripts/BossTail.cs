@@ -7,6 +7,7 @@ public class BossTail : EnemyBase {
 	public GameObject halo2;
 
 	private float damageTime;
+	private bool damageStart;
 	// Use this for initialization
 	void Start () {
 		(halo1.GetComponent ("Halo") as Behaviour).enabled = true;
@@ -16,14 +17,14 @@ public class BossTail : EnemyBase {
 
 	// Update is called once per frame
 	void Update () {
-		if (BossMoveManager.bossAttacked == true) {
+		if (damageStart == true) {
 			damageTime += Time.deltaTime;
 		}
 			if(damageTime >=3.0f){
 			(halo1.GetComponent ("Halo") as Behaviour).enabled = true;
 			(halo2.GetComponent ("Halo") as Behaviour).enabled = false;
 			damageTime = 0;
-			BossMoveManager.bossAttacked = false;
+			damageStart = false;
 
 		}
 
@@ -36,8 +37,9 @@ public class BossTail : EnemyBase {
 			BossMoveManager.BossAttackedCount++;
 			(halo1.GetComponent ("Halo") as Behaviour).enabled = false;
 			(halo2.GetComponent ("Halo") as Behaviour).enabled = true;
-			if (BossMoveManager.BossAttackedCount <= 3) {
+			if (BossMoveManager.BossAttackedCount < 4) {
 				BossMoveManager.bossAttacked = true;
+				damageStart = true;
 
 			}
 		}
