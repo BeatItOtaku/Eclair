@@ -10,8 +10,8 @@ public class BossTail : EnemyBase {
 	private bool damageStart;
 	// Use this for initialization
 	void Start () {
-		(halo1.GetComponent ("Halo") as Behaviour).enabled = true;
-		(halo2.GetComponent ("Halo") as Behaviour).enabled = false;
+		//(halo1.GetComponent ("Halo") as Behaviour).enabled = true;
+		//(halo2.GetComponent ("Halo") as Behaviour).enabled = false;
 		damageTime = 0;
 	}
 
@@ -21,8 +21,8 @@ public class BossTail : EnemyBase {
 			damageTime += Time.deltaTime;
 		}
 			if(damageTime >=3.0f){
-			(halo1.GetComponent ("Halo") as Behaviour).enabled = true;
-			(halo2.GetComponent ("Halo") as Behaviour).enabled = false;
+			//(halo1.GetComponent ("Halo") as Behaviour).enabled = true;
+			//(halo2.GetComponent ("Halo") as Behaviour).enabled = false;
 			damageTime = 0;
 			damageStart = false;
 
@@ -35,8 +35,8 @@ public class BossTail : EnemyBase {
 	{
 		if (damage >= 15){
 			BossMoveManager.BossAttackedCount++;
-			(halo1.GetComponent ("Halo") as Behaviour).enabled = false;
-			(halo2.GetComponent ("Halo") as Behaviour).enabled = true;
+			//(halo1.GetComponent ("Halo") as Behaviour).enabled = false;
+			//(halo2.GetComponent ("Halo") as Behaviour).enabled = true;//BossMoveManager‚ÉˆÚ“®‚µ‚Ü‚µ‚½
 			if (BossMoveManager.BossAttackedCount < 4) {
 				BossMoveManager.bossAttacked = true;
 				damageStart = true;

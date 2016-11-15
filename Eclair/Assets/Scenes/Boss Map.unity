@@ -269,10 +269,10 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -1545226494
+  randomSeed: -1962939764
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -1974,7 +1974,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 758872143}
-  m_RootOrder: 51
+  m_RootOrder: 49
 --- !u!1001 &107310977
 Prefab:
   m_ObjectHideFlags: 0
@@ -2513,6 +2513,8 @@ MonoBehaviour:
   bossSmoke2: {fileID: 872722771}
   fire: {fileID: 1914215549}
   bossKilled: {fileID: 100006, guid: 6aea392f353e04156a230db0fba22230, type: 2}
+  haloGreen: {fileID: 0}
+  haloRed: {fileID: 0}
 --- !u!95 &508764938
 Animator:
   serializedVersion: 3
@@ -2718,13 +2720,13 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 591306416}
-  m_LocalRotation: {x: -0.573325, y: -0.4138822, z: -0.4138822, w: 0.573325}
-  m_LocalPosition: {x: 0, y: 0.022, z: -0.254}
+  m_LocalRotation: {x: 0.107133955, y: 0.6989437, z: 0.6971331, w: -0.11834491}
+  m_LocalPosition: {x: 0.0051962957, y: -0.009585854, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 758872143}
-  m_RootOrder: 50
+  m_Father: {fileID: 758872156}
+  m_RootOrder: 2
 --- !u!199 &591306418
 ParticleSystemRenderer:
   m_ObjectHideFlags: 0
@@ -2818,10 +2820,10 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -1652702820
+  randomSeed: 1811579
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -4607,6 +4609,46 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 9047b7ccb6da8a740ac02a412fccb90c, type: 3}
   m_PrefabInternal: {fileID: 1959904070}
+--- !u!1 &612312465
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 612312466}
+  - 122: {fileID: 612312467}
+  m_Layer: 13
+  m_Name: HaloRed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &612312466
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 612312465}
+  m_LocalRotation: {x: 2.631897e-18, y: -1.1971448e-16, z: -0.0000000037252903, w: 1}
+  m_LocalPosition: {x: 0.03599997, y: 0.0000000059371814, z: 7.615591e-17}
+  m_LocalScale: {x: 1.0000001, y: 0.99999994, z: 0.99999994}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 758872156}
+  m_RootOrder: 3
+--- !u!122 &612312467
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 612312465}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4278190335
+  m_Size: 2
 --- !u!4 &616214211 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2aa48431a36505b4f9bf95dff3e9ea6f, type: 3}
@@ -6539,17 +6581,6 @@ GameObject:
 GameObject:
   m_PrefabParentObject: {fileID: 100010, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
   m_PrefabInternal: {fileID: 758872142}
---- !u!122 &758872148
-Halo:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 758872146}
-  m_Enabled: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278190335
-  m_Size: 2
 --- !u!114 &758872149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6575,6 +6606,8 @@ MonoBehaviour:
   bossSmoke2: {fileID: 872722771}
   fire: {fileID: 1914215549}
   bossKilled: {fileID: 100006, guid: 6aea392f353e04156a230db0fba22230, type: 2}
+  haloGreen: {fileID: 1690732384}
+  haloRed: {fileID: 612312465}
 --- !u!54 &758872150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6980,10 +7013,10 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -585202086
+  randomSeed: -849095821
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -8685,7 +8718,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 758872143}
-  m_RootOrder: 52
+  m_RootOrder: 50
 --- !u!1001 &901769217
 Prefab:
   m_ObjectHideFlags: 0
@@ -9632,6 +9665,8 @@ MonoBehaviour:
   bossSmoke2: {fileID: 872722771}
   fire: {fileID: 1914215549}
   bossKilled: {fileID: 100006, guid: 6aea392f353e04156a230db0fba22230, type: 2}
+  haloGreen: {fileID: 0}
+  haloRed: {fileID: 0}
 --- !u!54 &908217038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9951,7 +9986,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: 1387668431
+  randomSeed: -2102120395
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -12461,6 +12496,35 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1503913828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1503913829}
+  m_Layer: 13
+  m_Name: MuzzleRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1503913829
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1503913828}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19, y: 0.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 1664607046}
+  m_Father: {fileID: 1868581976}
+  m_RootOrder: 0
 --- !u!1 &1514670293
 GameObject:
   m_ObjectHideFlags: 0
@@ -12920,13 +12984,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1664607045}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.169, z: 0.3028}
+  m_LocalRotation: {x: 0.014704729, y: -0.7069539, z: 0.014704729, w: 0.7069539}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 758872143}
-  m_RootOrder: 48
+  m_Father: {fileID: 1503913829}
+  m_RootOrder: 0
 --- !u!114 &1664607047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12952,7 +13016,7 @@ GameObject:
   - 4: {fileID: 1690732385}
   - 122: {fileID: 1690732386}
   m_Layer: 13
-  m_Name: Halo
+  m_Name: HaloGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12970,7 +13034,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 758872156}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!122 &1690732386
 Halo:
   m_ObjectHideFlags: 0
@@ -12980,7 +13044,7 @@ Halo:
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 4278255464
   m_Size: 2
 --- !u!1 &1695460894
 GameObject:
@@ -13320,7 +13384,7 @@ ParticleSystem:
   moveWithTransform: 1
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -995793571
+  randomSeed: 1217522241
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -15038,6 +15102,10 @@ Prefab:
     - {fileID: 6400000, guid: 9047b7ccb6da8a740ac02a412fccb90c, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 9047b7ccb6da8a740ac02a412fccb90c, type: 3}
   m_IsPrefabParent: 0
+--- !u!4 &1868581976 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400000, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
+  m_PrefabInternal: {fileID: 758872142}
 --- !u!1001 &1881861339
 Prefab:
   m_ObjectHideFlags: 0
@@ -16665,10 +16733,10 @@ ParticleSystem:
   looping: 1
   prewarm: 0
   playOnAwake: 1
-  moveWithTransform: 1
+  moveWithTransform: 0
   autoRandomSeed: 1
   scalingMode: 2
-  randomSeed: -521687363
+  randomSeed: 1323055623
   InitialModule:
     serializedVersion: 2
     enabled: 1
@@ -18279,15 +18347,15 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1914215549}
-  m_LocalRotation: {x: -0, y: -0.58531785, z: -0, w: 0.810804}
-  m_LocalPosition: {x: 0, y: 0.047, z: -0.266}
+  m_LocalRotation: {x: -0.007927326, y: 0.98717535, z: -0.0012803352, w: -0.1594376}
+  m_LocalPosition: {x: 0.016793236, y: 0.015603635, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 964864676}
   - {fileID: 1860384187}
-  m_Father: {fileID: 758872143}
-  m_RootOrder: 53
+  m_Father: {fileID: 758872156}
+  m_RootOrder: 0
 --- !u!1 &1922977442
 GameObject:
   m_ObjectHideFlags: 0
@@ -18554,7 +18622,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 758872143}
-  m_RootOrder: 49
+  m_RootOrder: 48
 --- !u!114 &2004214426
 MonoBehaviour:
   m_ObjectHideFlags: 0
