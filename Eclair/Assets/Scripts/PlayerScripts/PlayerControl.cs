@@ -113,6 +113,7 @@ public class PlayerControl : MonoBehaviour
 	}
 
 	void Update(){
+		Debug.Log (EclairImmobile);
 		//CharacterController controller = GetComponent<CharacterController> ();
 		if (IsGrounded())//controller.isGrounded) {
 		{anim.SetBool ("NewGrounded", true);
@@ -252,15 +253,15 @@ public class PlayerControl : MonoBehaviour
 
 	void ShotManagament()
 	{
-		if(InputManager.boltLaunch == true && EclairImmobile == false){
-			PlayerControl.EclairImmobile = true;
+		if(InputManager.boltLaunch == true ){
+			
 			anim.SetBool ("Shot", true);
 			anim.SetFloat(angleId,angleUsing);
 		
 
 		}
 		if(InputManager.boltLaunch == false){
-			PlayerControl.EclairImmobile = false;
+			
 			anim.SetBool("Shot",false);
 
 		}

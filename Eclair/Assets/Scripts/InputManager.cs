@@ -143,6 +143,7 @@ public class InputManager : MonoBehaviour {
 					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 					onLockOnSwitched (go);
 				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
+					PlayerControl.EclairImmobile =true;
 					/*GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
 					if (bolt != null) {
 						player.transform.LookAt (bolt.transform);
