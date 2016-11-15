@@ -142,8 +142,8 @@ public class InputManager : MonoBehaviour {
 				if (playerState == PlayerStates.LockOn) {//ロックオン状態の時は対象切り替え
 					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 					onLockOnSwitched (go);
-				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
-					PlayerControl.EclairImmobile =true;
+				} else if (playerState == PlayerStates.Bolt) {//ロックオン状態じゃないときはボルト射出
+					
 					/*GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
 					if (bolt != null) {
 						player.transform.LookAt (bolt.transform);
@@ -181,9 +181,11 @@ public class InputManager : MonoBehaviour {
 
 			}
 			if (playerState_ == PlayerStates.Bolt) {
+				PlayerControl.EclairImmobile =true;
 				boltLaunch = true;
 				boltTime += Time.deltaTime;
 				if (boltTime >= 0.3f) {
+					PlayerControl.EclairImmobile =false;
 					playerState_ = PlayerStates.Idle;
 					boltLaunch = false;
 				}
