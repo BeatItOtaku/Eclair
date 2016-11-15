@@ -104,7 +104,7 @@ public class EnemyNormal : EnemyBase {
 		//Debug.Log ("kougeki");
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
-			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
+			col.gameObject.GetComponent<PlayerControl> ().Damage (2);
 			GetComponent<Rigidbody>().velocity = (-transform.forward * attackReaction);
 		}
 	}

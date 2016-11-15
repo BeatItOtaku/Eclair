@@ -6,6 +6,7 @@ public class BossMoveManager : MonoBehaviour {
 
 	//エクレア
 	public GameObject player = null;
+	public GameObject playerPositionY;
 
 	//ボスの体とエフェクト
 	public GameObject boss;
@@ -21,15 +22,19 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject fire;//エフェクト
 	public GameObject bossKilled;//爆発する
 
-	public GameObject bossKilledCameraPosition;
-	public Transform bossCamera;
+    public GameObject haloGreen;
+    public GameObject haloRed;
 
-	private bool bossShot;
+    //public GameObject bossKilledCameraPosition;
+    //public Transform bossCamera;
+
+    private bool bossShot;
 	public static bool bossAttacked = false;
 
 	public static int BossAttackedCount = 1;
 
 	private Vector3 playerV;
+	private Vector3 playerHeightV;
 	private Vector3 leftFootV;
 	private Vector3 rightFootV;
 	private Vector3 centerV;
@@ -45,11 +50,17 @@ public class BossMoveManager : MonoBehaviour {
 
 	private float shotInterval =0;
 	private float shotIntervalMax = 0.1f;
+    private float shotStartIntervalMax = 0.5f;
+    private float BossShotDelay = 0.8f;
+
+	private float playerHeightF;
 
 	public static float waitTime = 0;
+	private float dethTime = 0;
 	private bool wait = false;
 
 	private Animator bossAnim;
+	private int phId;
 
 	private AsyncOperation result;
 
@@ -58,6 +69,7 @@ public class BossMoveManager : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindWithTag ("Player");
 		bossAnim = boss.GetComponent<Animator> ();
+		phId = Animator.StringToHash ("PlayerHeight");
 		bossShot = false;
 		bossSmoke1.SetActive (false);
 		bossSmoke2.SetActive (false);
@@ -68,7 +80,9 @@ public class BossMoveManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//Debug.Log (playerHeightF);
 		playerV = player.transform.position;
+		playerHeightV = playerPositionY.transform.position;
 		leftFootV = leftFoot.transform.position;
 		rightFootV = rightFoot.transform.position;
 		centerV = bossCenter.transform.position;
@@ -82,109 +96,153 @@ public class BossMoveManager : MonoBehaviour {
 		tailDistance = Vector3.Distance (playerV, tailV);
 		difDistanceCT = centerDistance - tailDistance;
 
-		//ボスの動き
+		playerHeightF = Vector3.Distance (playerV, playerHeightV);
+
+        //ボスの動き
+
+        if (!bossAnim.GetBool("BossShot"))
+        {
+
+            //右回転
+            if (difDistanceLR > 2.0f && waitTime == 0)
+            {
+                bossShot = false;
+                //Debug.Log ("right");
+                bossAnim.SetBool("Rotation", true);
+                bossAnim.SetBool("Walk", false);
+                transform.Rotate(Vector3.up * Time.deltaTime * 32 * BossAttackedCount);
+                transform.position += transform.forward * Time.deltaTime * 0;
+                waitTime = 0;
+            }
 
 
-		//右回転
-		if (difDistanceLR > 2.0f && waitTime == 0) {
-			bossShot = false;
-			//Debug.Log ("right");
-			bossAnim.SetBool ("Rotation", true);
-			bossAnim.SetBool ("Walk", false);
-			transform.Rotate (Vector3.up * Time.deltaTime * 24 * BossAttackedCount);
-			transform.position += transform.forward * Time.deltaTime * 0;
-			waitTime = 0;
-		}
+            //左回転
+            else if (difDistanceLR < -2.0f && waitTime == 0)
+            {
+                bossShot = false;
+                //Debug.Log ("left");
+                bossAnim.SetBool("Rotation", true);
+                bossAnim.SetBool("Walk", false);
+                transform.Rotate(Vector3.down * Time.deltaTime * 32 * BossAttackedCount);
+                transform.position += transform.forward * Time.deltaTime * 0;
+                waitTime = 0;
+            }
 
-		//直進
+            //直進
 
-		if (difDistanceLR > -2.0f && waitTime == 0) {
-			if (difDistanceCT < 0) {
-				//Debug.Log ("forward");
-				bossAnim.SetBool ("Walk", true);
-				bossAnim.SetBool ("Rotation", false);
-				transform.position += transform.forward * Time.deltaTime *3;
-				waitTime = 0;
-			}
+            else if (centerDistance > 8.0f && waitTime == 0)
+            {
+                if (difDistanceCT < 0)
+                {
+                    //Debug.Log ("forward");
+                    bossAnim.SetBool("Walk", true);
+                    bossAnim.SetBool("Rotation", false);
+                    //transform.position += transform.forward * Time.deltaTime *3;
+                    waitTime = 0;
+                }
 
-		}
+            }
 
-		//左回転
-		else if (difDistanceLR < -2.0f && waitTime == 0) {
-			bossShot = false;
-			//Debug.Log ("left");
-			bossAnim.SetBool ("Rotation", true);
-			bossAnim.SetBool ("Walk", false);
-			transform.Rotate (Vector3.down * Time.deltaTime * 24 * BossAttackedCount);
-			transform.position += transform.forward * Time.deltaTime * 0;
-			waitTime = 0;
-		}
+            //エクレアが真後ろにいるとき反転してくる
+            if (difDistanceCT > 0)
+            {
+                bossShot = false;
+                wait = true;
+            }
+            if (wait == true)
+            {
+                waitTime += Time.deltaTime;
+                if (waitTime > 2f / BossAttackedCount)
+                {
+                    transform.Rotate(Vector3.down * Time.deltaTime * 40 * BossAttackedCount);
+                    bossAnim.SetBool("Rotation", true);
+                    //Debug.Log("WaitTime" + waitTime);
+                }
+            }
+            if (difDistanceLR < -4.0f || difDistanceLR > 4.0f)
+            {
+                transform.Rotate(Vector3.down * Time.deltaTime * 0);
+                waitTime = 0;
+                //Debug.Log("WaitTime" + waitTime);
+                wait = false;
+            }
 
-		//エクレアが真後ろにいるとき反転してくる
-		if (difDistanceCT > 0) {
-			bossShot = false;
-			wait = true;
-		}
-		if (wait == true) {
-			waitTime += Time.deltaTime;
-			if (waitTime > 2f/BossAttackedCount) {
-				transform.Rotate (Vector3.down * Time.deltaTime * 40*BossAttackedCount);
-				bossAnim.SetBool ("Rotation", true);
-			}
-		}
-		if (difDistanceLR < -4.0f || difDistanceLR > 4.0f) {
-			transform.Rotate (Vector3.down * Time.deltaTime * 0);
-			waitTime = 0;
-			wait = false;
-		}
+            //ボスの上方にプレイヤーが来たときボスは歩く
+            if (playerHeightF >= 10.0f)
+            {
+                bossAnim.SetBool("Rotation", false);
+                bossAnim.SetBool("Walk", true);
+                bossAnim.SetBool("BossShot", false);
+            }
 
+        }
 
-
-	//ボスの砲撃
-//ボスとプレイヤーの位置関係を取得するスクリプト
-		if (centerDistance >= 8.0f && Mathf.Abs(difDistanceLR)<2.0f && difDistanceCT < 0) {
+        //ボスの砲撃
+        //ボスとプレイヤーの位置関係を取得するスクリプト
+        //Debug.Log(centerDistance + ":" + difDistanceLR + ":" + difDistanceCT);
+        /*if (centerDistance >= 8.0f && Mathf.Abs (difDistanceLR) < 2.0f && difDistanceCT < 0) {
 			bossShot = true;
+			bossAnim.SetBool ("Rotation", false);
+			bossAnim.SetBool ("Walk", false);
+			shotInterval += Time.deltaTime;
 		} else {
+			bossAnim.SetBool ("BossShot", false);
 			bossShot = false;
 		}
-		shotInterval += Time.deltaTime;
 
-		if (shotInterval > shotIntervalMax) {
-			shotInterval = 0;			
-			if (bossShot == true) {
+		if (bossShot == true) {
+			if (shotInterval > shotIntervalMax) {
+				shotInterval = 0;
 				bossAnim.SetBool ("BossShot", true);
+				bossAnim.SetFloat (phId, playerHeightF);
 				Instantiate (bossBarret, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
 				Instantiate (muzzleFrash, bossMuzzle.transform.position, bossMuzzle.transform.rotation);
-			} else {
-				bossAnim.SetBool ("BossShot", false);
 			}
-		}
-			
-		//ボスが被弾したとき
-		if (bossAttacked == true) {
-			bossAnim.SetTrigger("BossAttacked");
-			//BossAttackedCount++;
-			Debug.Log ("attack");
-			waitTime = 0;
-			bossAttacked = false;
+		}*/
+        //Debug.Log (bossShot);
 
-		}
+        bossShot =  (32 >= centerDistance && centerDistance >= 8.0f && Mathf.Abs(difDistanceLR) < 2.0f && difDistanceCT < 0) ;
+        if (bossShot) StartCoroutine(ShotManagement());
+
+        //ボスが被弾したとき
+        if (bossAttacked == true)
+        {
+            bossAnim.SetTrigger("BossAttacked");
+            bossAttacked = false;
+            bossAnim.SetBool("Rotation", false);
+            bossAnim.SetBool("Walk", false);
+            bossAnim.SetBool("BossShot", false);
+            //BossAttackedCount++;
+            Debug.Log("attack");
+            waitTime = 0;
+            bossAttacked = false;
+
+        }
 		if (BossAttackedCount == 2)
 		{
 			bossSmoke1.SetActive (true);
+            haloRed.SetActive(true);
+            setBossSpeed(1.4f);
 		}
 		if (BossAttackedCount == 3)
 		{
 			bossSmoke2.SetActive (true);
 			fire.SetActive (true);
-		}
-		//ボスが倒されたとき
-		if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+            haloGreen.SetActive(false);
+            setBossSpeed(1.8f);
+        }
+        //ボスが倒されたとき
+        if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
+            setBossSpeed(1);
+			transform.Rotate (Vector3.up * 0);
+			transform.position += transform.forward * Time.deltaTime * 0;
 			Debug.Log ("kill");
-			waitTime += Time.deltaTime;
+			dethTime += Time.deltaTime;
 			bossAnim.SetTrigger ("BossKilled");
-			if(waitTime >= 4.0f){
+			Debug.Log (dethTime);
+
+			if(dethTime >= 4.0f){
 			CameraController.cursorIsLocked = false;
 			result.allowSceneActivation = true;
 			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
@@ -197,4 +255,61 @@ public class BossMoveManager : MonoBehaviour {
 
 		}
 	}
+
+    private void setBossSpeed(float speed)
+    {
+        bossAnim.speed = speed;
+    }
+
+    private bool shotManagementIsRunning = false;
+    IEnumerator ShotManagement()
+    {
+        if (shotManagementIsRunning) yield break;
+
+        shotManagementIsRunning = true;
+
+        float shotTimeCursor = 0;
+        while (shotTimeCursor < shotStartIntervalMax)
+        {
+            if (!bossShot)
+            {
+                shotManagementIsRunning = false;
+                yield break;
+            }
+            shotTimeCursor += Time.deltaTime;
+        }
+        //0.5秒間ずっとBossShotがtrueだったときだけ以降の処理は実行される
+        shotTimeCursor = 0;
+        bossAnim.SetBool("Rotation", false);
+        bossAnim.SetBool("Walk", false);
+        bossAnim.SetBool("BossShot", true);
+        //yield return new WaitForSeconds(BossShotDelay);
+        while (bossShot)//bossShotがtrueである間ずっと弾を撃ち続ける
+        {
+            AnimatorStateInfo stateInfo = bossAnim.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("BossShot"))
+            {
+                LaunchShot(bossMuzzle.transform.position, bossMuzzle.transform.rotation);
+                bossAnim.SetFloat(phId, playerHeightF);
+                yield return new WaitForSeconds(shotIntervalMax);
+            }
+            else if (stateInfo.IsName("BossShotEnd"))
+            {
+                break;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+        bossAnim.SetBool("BossShot", false);
+        shotManagementIsRunning = false;
+        yield break;
+    }
+
+    void LaunchShot(Vector3 position,Quaternion rotation)
+    {
+        Instantiate(bossBarret, position, rotation);
+        Instantiate(muzzleFrash, position, rotation);
+    }
 }

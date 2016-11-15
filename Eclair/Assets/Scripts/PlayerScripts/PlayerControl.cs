@@ -288,27 +288,27 @@ public class PlayerControl : MonoBehaviour
         //if (isMuteki) return;//無敵状態なら何もしない
 
 		if (BossFootCollider.bossFootAttack == true) { 
-			GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
-			transform.LookAt (bossFoot.transform);
+			//GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
+			//transform.LookAt (bossFoot.transform);
 			attackedTime += Time.deltaTime;
-			anim.SetBool ("BigAttacked",true);
+			//anim.SetBool ("BigAttacked",true);
 
             if (attackedTime > 1.3f) {
 				BossFootCollider.bossFootAttack = false;
-				anim.SetBool ("BigAttacked",false);
+				//anim.SetBool ("BigAttacked",false);
 				attackedTime = 0;
-                if(!isMuteki) startMuteki();
+                //if(!isMuteki) startMuteki();
             }
         }
 		if (BossBarret.bossShotAttack == true) {
 			attackedTime += Time.deltaTime;
-			anim.SetBool ("SmallAttacked",true);
+			//anim.SetBool ("SmallAttacked",true);
 
             if (attackedTime > 0.4f) {
 				BossBarret.bossShotAttack = false;
-				anim.SetBool ("SmallAttacked",false);
+				//anim.SetBool ("SmallAttacked",false);
 				attackedTime = 0;
-                if (!isMuteki) startMuteki();
+                //if (!isMuteki) startMuteki();
             }
         }
 
@@ -391,11 +391,16 @@ public class PlayerControl : MonoBehaviour
 		return sprint && !aim && (isMoving);
 	}
 
+    public void Damage(int damage)
+    {
+        Damage(damage, new Vector3(0, 0, 0));
+    }
+
     /// <summary>
     /// ダメージを受けた上に吹っ飛びます。その後無敵時間が始まります。
     /// </summary>
     /// <param name="damage"></param>
-	public void Damage(int damage){
+	public void Damage(int damage,Vector3 direction){
         Debug.Log(isMuteki);
         if (isMuteki)
         {
@@ -403,10 +408,26 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            HP -= damage;   
-            startMuteki();
+            if(!direction.Equals(new Vector3(0,0,0))) transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, Quaternion.LookRotation(-direction).eulerAngles.y, transform.rotation.eulerAngles.z);
+            HP -= damage;
+            if(damage > 8)
+            {
+                StartCoroutine(whenAttacked("BigAttacked", 1.3f));
+            }
+            else
+            {
+                StartCoroutine(whenAttacked("SmallAttacked", 0.4f));
+            }
         }
 	}
+
+    IEnumerator whenAttacked(string parameter,float time)
+    {
+        startMuteki();
+        anim.SetBool(parameter, true);
+        yield return new WaitForSeconds(time);
+        anim.SetBool(parameter, false);
+    }
 
     void startMuteki()
     {
