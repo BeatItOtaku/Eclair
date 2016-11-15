@@ -74,6 +74,7 @@ public class PlayerControl : MonoBehaviour
 	private bool isMoving = false;
 
 	public static bool EclairImmobile;
+	public static bool shotPause;
 
 	// fly
 	public static bool fly = false;
@@ -207,7 +208,7 @@ public class PlayerControl : MonoBehaviour
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
+		if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false && shotPause ==false)) {
 			Rotating (horizontal, vertical);
 		}
 
@@ -224,7 +225,7 @@ public class PlayerControl : MonoBehaviour
 
 			}
 
-			if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
+			if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false && shotPause ==false)) {
 				anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
 				transform.position += transform.forward * Time.deltaTime * 5;
 			}
@@ -252,15 +253,15 @@ public class PlayerControl : MonoBehaviour
 
 	void ShotManagament()
 	{
-		if(InputManager.boltLaunch == true && EclairImmobile == false){
-			PlayerControl.EclairImmobile = true;
+		if(InputManager.boltLaunch == true ){
+			shotPause = true;
 			anim.SetBool ("Shot", true);
 			anim.SetFloat(angleId,angleUsing);
 		
 
 		}
 		if(InputManager.boltLaunch == false){
-			PlayerControl.EclairImmobile = false;
+			shotPause = false;
 			anim.SetBool("Shot",false);
 
 		}
