@@ -65,8 +65,6 @@ public class EventManager : MonoBehaviour {
 		event7_EclairGun = GameObject.Find ("Gun");
 		event7_EclairGun.SetActive (false);
 		event7_yajirushi.SetActive (false);
-
-		event7_gunParticle.SetActive (false);
 		event8_zako.SetActive (false);
 
 	}
@@ -151,7 +149,8 @@ public class EventManager : MonoBehaviour {
 			event7_EclairGun.SetActive (true);
 			event7_gun.SetActive (false);
 			event7_yajirushi.SetActive (true);
-			event7_gunParticle.SetActive (true);
+			GameObject Pa = (GameObject)Instantiate (event7_gunParticle, event7_gun.transform.position, transform.rotation);
+			Pa.transform.Rotate (-90, 0, 0);
 			EventCount();
 			break;
 		case 8:
