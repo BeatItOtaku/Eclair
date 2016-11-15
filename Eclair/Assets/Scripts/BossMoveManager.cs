@@ -185,7 +185,7 @@ public class BossMoveManager : MonoBehaviour {
 			//BossAttackedCount++;
 			Debug.Log ("attack");
 			waitTime = 0;
-			bossAttacked = false;
+			//bossAttacked = false;
 
 		}
 		if (BossAttackedCount == 2)
