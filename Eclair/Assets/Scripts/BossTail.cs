@@ -32,12 +32,14 @@ public class BossTail : EnemyBase {
 
 	public override void Damage (int damage, Vector3 direction)
 	{
-		if (damage > 15){
+		if (damage >= 15){
 			BossMoveManager.BossAttackedCount++;
-			BossMoveManager.bossAttacked = true;
 			(halo1.GetComponent ("Halo") as Behaviour).enabled = false;
 			(halo2.GetComponent ("Halo") as Behaviour).enabled = true;
+			if (BossMoveManager.BossAttackedCount <= 3) {
+				BossMoveManager.bossAttacked = true;
 
+			}
 		}
 	}
 }

@@ -74,7 +74,7 @@ public class BossMoveManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (playerHeightF);
+		//Debug.Log (playerHeightF);
 		playerV = player.transform.position;
 		playerHeightV = playerPositionY.transform.position;
 		leftFootV = leftFoot.transform.position;
@@ -182,6 +182,9 @@ public class BossMoveManager : MonoBehaviour {
 		//ボスが被弾したとき
 		if (bossAttacked == true) {
 			bossAnim.SetTrigger("BossAttacked");
+			bossAnim.SetBool ("Rotation", false);
+			bossAnim.SetBool ("Walk", false);
+			bossAnim.SetBool ("BossShot", false);
 			//BossAttackedCount++;
 			Debug.Log ("attack");
 			waitTime = 0;
