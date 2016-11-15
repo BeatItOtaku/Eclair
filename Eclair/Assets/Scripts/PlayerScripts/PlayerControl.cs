@@ -431,6 +431,7 @@ public class PlayerControl : MonoBehaviour
     {
         if(HP <= 0 && died == false)
         {
+			anim.SetTrigger ("EclairKilled");
             died = true;
             MapLoader.Instance.GameOver();
         }
