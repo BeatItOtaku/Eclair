@@ -38,8 +38,9 @@ sysinfo.txt
 
 #IROIRO
 
-*.psd
 *.ai
 *.clip
 *.mp4
 *.bak
+
+Eclair/Assets/Scenes/BiO Map.unity

@@ -1,0 +1,144 @@
+fileFormatVersion: 2
+guid: 71648bcf78cc1474785c2fbe63be25a0
+timeCreated: 1478932650
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: FrameParts1
+    100004: FrameParts11
+    100006: FrameParts12
+    100008: FrameParts24
+    100010: FrameParts3
+    100012: FrameParts4
+    100014: FrameParts5
+    100016: FrameParts7
+    100018: FrameParts8
+    100020: FrameParts9
+    100022: Pole
+    100024: Pole1
+    100026: Pole3
+    100028: Pole4
+    400000: //RootNode
+    400002: FrameParts1
+    400004: FrameParts11
+    400006: FrameParts12
+    400008: FrameParts24
+    400010: FrameParts3
+    400012: FrameParts4
+    400014: FrameParts5
+    400016: FrameParts7
+    400018: FrameParts8
+    400020: FrameParts9
+    400022: Pole
+    400024: Pole1
+    400026: Pole3
+    400028: Pole4
+    2300000: FrameParts1
+    2300002: FrameParts11
+    2300004: FrameParts12
+    2300006: FrameParts24
+    2300008: FrameParts3
+    2300010: FrameParts4
+    2300012: FrameParts5
+    2300014: FrameParts7
+    2300016: FrameParts8
+    2300018: FrameParts9
+    2300020: Pole
+    2300022: Pole1
+    2300024: Pole3
+    2300026: Pole4
+    3300000: FrameParts1
+    3300002: FrameParts11
+    3300004: FrameParts12
+    3300006: FrameParts24
+    3300008: FrameParts3
+    3300010: FrameParts4
+    3300012: FrameParts5
+    3300014: FrameParts7
+    3300016: FrameParts8
+    3300018: FrameParts9
+    3300020: Pole
+    3300022: Pole1
+    3300024: Pole3
+    3300026: Pole4
+    4300000: Pole
+    4300002: FrameParts1
+    4300004: FrameParts3
+    4300006: FrameParts4
+    4300008: FrameParts5
+    4300010: FrameParts7
+    4300012: Pole1
+    4300014: Pole3
+    4300016: FrameParts8
+    4300018: FrameParts9
+    4300020: FrameParts11
+    4300022: FrameParts12
+    4300024: Pole4
+    4300026: FrameParts24
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

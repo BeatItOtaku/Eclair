@@ -1,0 +1,174 @@
+fileFormatVersion: 2
+guid: ac002aee4c42e4a8fa9ac7f6508b4c12
+timeCreated: 1478932650
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: FrameParts1
+    100002: FrameParts10
+    100004: FrameParts11
+    100006: FrameParts12
+    100008: FrameParts13
+    100010: FrameParts2
+    100012: FrameParts24
+    100014: FrameParts3
+    100016: FrameParts4
+    100018: FrameParts5
+    100020: FrameParts6
+    100022: FrameParts7
+    100024: FrameParts8
+    100026: FrameParts9
+    100028: Pole
+    100030: Pole1
+    100032: Pole2
+    100034: Pole3
+    100036: Pole4
+    100038: Pole5
+    100040: //RootNode
+    400000: FrameParts1
+    400002: FrameParts10
+    400004: FrameParts11
+    400006: FrameParts12
+    400008: FrameParts13
+    400010: FrameParts2
+    400012: FrameParts24
+    400014: FrameParts3
+    400016: FrameParts4
+    400018: FrameParts5
+    400020: FrameParts6
+    400022: FrameParts7
+    400024: FrameParts8
+    400026: FrameParts9
+    400028: Pole
+    400030: Pole1
+    400032: Pole2
+    400034: Pole3
+    400036: Pole4
+    400038: Pole5
+    400040: //RootNode
+    2300000: FrameParts1
+    2300002: FrameParts10
+    2300004: FrameParts11
+    2300006: FrameParts12
+    2300008: FrameParts13
+    2300010: FrameParts2
+    2300012: FrameParts24
+    2300014: FrameParts3
+    2300016: FrameParts4
+    2300018: FrameParts5
+    2300020: FrameParts6
+    2300022: FrameParts7
+    2300024: FrameParts8
+    2300026: FrameParts9
+    2300028: Pole
+    2300030: Pole1
+    2300032: Pole2
+    2300034: Pole3
+    2300036: Pole4
+    2300038: Pole5
+    3300000: FrameParts1
+    3300002: FrameParts10
+    3300004: FrameParts11
+    3300006: FrameParts12
+    3300008: FrameParts13
+    3300010: FrameParts2
+    3300012: FrameParts24
+    3300014: FrameParts3
+    3300016: FrameParts4
+    3300018: FrameParts5
+    3300020: FrameParts6
+    3300022: FrameParts7
+    3300024: FrameParts8
+    3300026: FrameParts9
+    3300028: Pole
+    3300030: Pole1
+    3300032: Pole2
+    3300034: Pole3
+    3300036: Pole4
+    3300038: Pole5
+    4300000: Pole
+    4300002: FrameParts1
+    4300004: FrameParts2
+    4300006: FrameParts3
+    4300008: FrameParts4
+    4300010: FrameParts5
+    4300012: FrameParts6
+    4300014: FrameParts7
+    4300016: Pole1
+    4300018: Pole2
+    4300020: Pole3
+    4300022: FrameParts8
+    4300024: FrameParts9
+    4300026: FrameParts10
+    4300028: FrameParts11
+    4300030: FrameParts12
+    4300032: FrameParts13
+    4300034: Pole4
+    4300036: Pole5
+    4300038: FrameParts24
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

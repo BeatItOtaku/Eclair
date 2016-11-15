@@ -1,16 +1,39 @@
-Ôªøusing UnityEngine;
+using UnityEngine;
 using System.Collections;
-
-
+using System;
 
 public class PlayerControl : MonoBehaviour
-
-
 {
+	
+
+
 	public void setHorizontalAngle(int angle){
 		h = angle;
 	}
-	public float walkSpeed = 0.15f;
+
+	private float angleUsing;
+	private int angleId;
+
+	public CameraController tutumin;
+
+	public HPGaugeController HPGauge;
+	private int hp_ = MaxHP;
+	public int HP{
+		get{
+			return hp_;
+		}
+		set{
+			hp_ = value;
+			HPGauge.currentHP = value;
+		}
+	}
+	const int MaxHP = 100;
+	public HPGaugeController hpGaugeController;
+
+	public InputManager im;
+	//private int hp;
+
+	public float walkSpeed = 4.0f;
 	public float runSpeed = 1.0f;
 	public float sprintSpeed = 2.0f;
 	public float flySpeed = 4.0f;
@@ -21,6 +44,8 @@ public class PlayerControl : MonoBehaviour
 
 	public float jumpHeight = 5.0f;
 	public float jumpCooldown = 1.0f;
+
+    public float mutekiTime = 2.0f;
 
 	private float timeToNextJump = 0;
 	
@@ -46,12 +71,19 @@ public class PlayerControl : MonoBehaviour
 	private bool run;
 	private bool sprint;
 
-	private bool isMoving;
+	private bool isMoving = false;
+
+	public static bool EclairImmobile;
 
 	// fly
 	public static bool fly = false;
 	private float distToGround;
 	private float sprintFactor;
+
+	private float attackedTime =0;
+
+    private float mutekiTimeCursor = 0;
+    private bool isMuteki = false;
 
 	void Awake()
 	{
@@ -68,28 +100,52 @@ public class PlayerControl : MonoBehaviour
 		groundedBool = Animator.StringToHash("Grounded");
 		distToGround = GetComponent<Collider>().bounds.extents.y;
 		sprintFactor = sprintSpeed / runSpeed;
+		angleId = Animator.StringToHash ("AngleUsing");
+		//damage = hpGaugeController.GetComponent<HPGaugeController> ();
+		EclairImmobile = false;
+
 	}
 
 	bool IsGrounded() {
-		return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+		return Physics.Raycast(transform.position + new Vector3(0,0.1f,0), -Vector3.up,  0.15f);
 	}
 
 	void Update(){
+		//CharacterController controller = GetComponent<CharacterController> ();
+		if (IsGrounded())//controller.isGrounded) {
+		{anim.SetBool ("NewGrounded", true);
+			//transform.position += Vector3.down * 0;
+
+		} else {
+			anim.SetBool ("NewGrounded", false);
+			//transform.position += Vector3.down * Time.deltaTime*10;
+		}
+
+
+
 		
 		// fly
-		if(Input.GetButtonDown ("Fly"))
+		/*if(Input.GetButtonDown ("Fly"))
 			fly = !fly;
-		aim = Input.GetButton("Aim");
+		aim = Input.GetButton("Aim");*/
 		h = Input.GetAxis("Horizontal");
 		v = Input.GetAxis("Vertical");
-		run = Input.GetButton ("Run");
-		sprint = Input.GetButton ("Sprint");
+		//run = Input.GetButton ("Run");
+		//sprint = Input.GetButton ("Sprint");
 		isMoving = Mathf.Abs(h) > 0.1 || Mathf.Abs(v) > 0.1;
+
+		angleUsing = tutumin.getCameraAngle ().y;
+		ShotManagament ();
+		SBTManagament ();
+		HPManagament();
+		StopManagament ();
+        mutekiManagement();
+		//KilledManagament ();
 
 
 	}
 
-		void FixedUpdate()
+    void FixedUpdate()
 	{
 		anim.SetBool (aimBool, IsAiming());
 		anim.SetFloat(hFloat, h);
@@ -109,6 +165,18 @@ public class PlayerControl : MonoBehaviour
 		}
 	}
 
+	private void OnCollisionEnter (Collision collider)
+	{
+		if(collider.gameObject.tag == "Plane")
+		{ anim.SetBool ("NewGrounded", true);
+		}
+		else{
+			anim.SetBool ("NewGrounded", false);
+		}
+	}
+
+
+
 	// fly
 	void FlyManagement(float horizontal, float vertical)
 	{
@@ -124,7 +192,7 @@ public class PlayerControl : MonoBehaviour
 			if(timeToNextJump > 0)
 				timeToNextJump -= Time.deltaTime;
 		}
-		if (Input.GetButtonDown ("Jump"))
+		/*if (Input.GetButtonDown ("Jump"))
 		{
 			anim.SetBool(jumpBool, true);
 			if(speed > 0 && timeToNextJump <= 0 && !aim)
@@ -132,84 +200,169 @@ public class PlayerControl : MonoBehaviour
 				GetComponent<Rigidbody>().velocity = new Vector3(0, jumpHeight, 0);
 				timeToNextJump = jumpCooldown;
 			}
-		}
+		}*/
 	}
 
 	void MovementManagement(float horizontal, float vertical, bool running, bool sprinting)
 	{
-		Rotating(horizontal, vertical);
+		if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
+			Rotating (horizontal, vertical);
+		}
 
-		if(isMoving)
-		{
-			if(sprinting)
-			{
+		if (isMoving) {
+			
+			if (sprinting) {
 				speed = sprintSpeed;
-			}
-			else if (running)
-			{
+
+			} else if (running) {
 				speed = runSpeed;
-			}
-			else
-			{
+
+			} else {
 				speed = walkSpeed;
+
 			}
 
-			anim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
-		}
-		else
-		{
+			if (isMuteki || (BossFootCollider.bossFootAttack == false && BossBarret.bossShotAttack == false && EclairImmobile == false)) {
+				anim.SetFloat (speedFloat, speed, speedDampTime, Time.deltaTime);
+				transform.position += transform.forward * Time.deltaTime * 5;
+			}
+		} else {
 			speed = 0f;
-			anim.SetFloat(speedFloat, 0f);
+			anim.SetFloat (speedFloat, 0f);
+			transform.position += transform.forward * Time.deltaTime * 0;
 		}
+
+		/*		anim.SetBool ("Grounded", true); 
+				transform.position += transform.forward * Time.deltaTime * 5;
+			} 
+
+		}
+		if(horizontal == 0 && vertical == 0){
+			anim.SetBool ("Grounded", false);
+			transform.position += transform.forward * Time.deltaTime * 0;
+		}*/
 		GetComponent<Rigidbody>().AddForce(Vector3.forward*speed);
+
+		if (EclairImmobile == true) {
+			isMoving = false;
+		}
 	}
+
+	void ShotManagament()
+	{
+		if(InputManager.boltLaunch == true && EclairImmobile == false){
+			PlayerControl.EclairImmobile = true;
+			anim.SetBool ("Shot", true);
+			anim.SetFloat(angleId,angleUsing);
+		
+
+		}
+		if(InputManager.boltLaunch == false){
+			PlayerControl.EclairImmobile = false;
+			anim.SetBool("Shot",false);
+
+		}
+	}
+
+	void SBTManagament()
+	{
+		if(InputManager.sbt == true && EclairImmobile == false){
+			PlayerControl.EclairImmobile = true;
+			anim.SetBool("SBT",true);
+			anim.SetFloat (angleId, angleUsing);
+		
+
+		}
+		if(InputManager.sbt == false){
+			PlayerControl.EclairImmobile = false;
+			anim.SetBool ("SBTStopToEnd", true);
+			anim.SetBool ("SBT", false);
+		}
+	}
+
+	void HPManagament()
+	{
+        //if (isMuteki) return;//ñ≥ìGèÛë‘Ç»ÇÁâΩÇ‡ÇµÇ»Ç¢
+
+		if (BossFootCollider.bossFootAttack == true) { 
+			GameObject bossFoot = GameObject.FindGameObjectWithTag ("Boss");
+			transform.LookAt (bossFoot.transform);
+			attackedTime += Time.deltaTime;
+			anim.SetBool ("BigAttacked",true);
+
+            if (attackedTime > 1.3f) {
+				BossFootCollider.bossFootAttack = false;
+				anim.SetBool ("BigAttacked",false);
+				attackedTime = 0;
+                if(!isMuteki) startMuteki();
+            }
+        }
+		if (BossBarret.bossShotAttack == true) {
+			attackedTime += Time.deltaTime;
+			anim.SetBool ("SmallAttacked",true);
+
+            if (attackedTime > 0.4f) {
+				BossBarret.bossShotAttack = false;
+				anim.SetBool ("SmallAttacked",false);
+				attackedTime = 0;
+                if (!isMuteki) startMuteki();
+            }
+        }
+
+	}
+
+	/*void KilledManagament()
+	{
+		if (currentHP == 0)
+		{
+			anim.SetTrigger ("EclairKilled");
+		}
+	}*/
 
 	Vector3 Rotating(float horizontal, float vertical)
 	{
-		Vector3 forward = cameraTransform.TransformDirection(Vector3.forward);
-		if (!fly)
-			forward.y = 0.0f;
-		forward = forward.normalized;
+			Vector3 forward = cameraTransform.TransformDirection (Vector3.forward);
+			if (!fly)
+				forward.y = 0.0f;
+			forward = forward.normalized;
 
-		Vector3 right = new Vector3(forward.z, 0, -forward.x);
+			Vector3 right = new Vector3 (forward.z, 0, -forward.x);
 
-		Vector3 targetDirection;
+			Vector3 targetDirection;
 
-		float finalTurnSmoothing;
+			float finalTurnSmoothing;
 
-		if(IsAiming())
-		{
-			targetDirection = forward;
-			finalTurnSmoothing = aimTurnSmoothing;
-		}
-		else
-		{
-			targetDirection = forward * vertical + right * horizontal;
-			finalTurnSmoothing = turnSmoothing;
-		}
+			if (IsAiming ()) {
+				targetDirection = forward;
+				finalTurnSmoothing = aimTurnSmoothing;
+			} else {
+				targetDirection = forward * vertical + right * horizontal;
+				finalTurnSmoothing = turnSmoothing;
+			}
 
-		if((isMoving && targetDirection != Vector3.zero) || IsAiming())
-		{
-			Quaternion targetRotation = Quaternion.LookRotation (targetDirection, Vector3.up);
-			// fly
-			if (fly)
-				targetRotation *= Quaternion.Euler (90, 0, 0);
+			if ((isMoving && targetDirection != Vector3.zero) || IsAiming ()) {
+				Quaternion targetRotation = Quaternion.LookRotation (targetDirection, Vector3.up);
+				// fly
+				if (fly)
+					targetRotation *= Quaternion.Euler (90, 0, 0);
 
-			Quaternion newRotation = Quaternion.Slerp(GetComponent<Rigidbody>().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime);
-			GetComponent<Rigidbody>().MoveRotation (newRotation);
-			lastDirection = targetDirection;
-		}
-		//idle - fly or grounded
-		if(!(Mathf.Abs(h) > 0.9 || Mathf.Abs(v) > 0.9))
-		{
-			Repositioning();
-		}
 
-		return targetDirection;
-	}	
+				Quaternion newRotation = Quaternion.Slerp (GetComponent<Rigidbody> ().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime);
+				GetComponent<Rigidbody> ().MoveRotation (newRotation);
+			//lastDirection = targetDirection;
+			}
+			//idle - fly or grounded
+			if (!(Mathf.Abs (h) > 0.9 || Mathf.Abs (v) > 0.9)) {
+				Repositioning ();
+			}
+
+			return targetDirection;
+
+	}
 
 	private void Repositioning()
 	{
+		
 		Vector3 repositioning = lastDirection;
 		if(repositioning != Vector3.zero)
 		{
@@ -233,5 +386,54 @@ public class PlayerControl : MonoBehaviour
 	public bool isSprinting()
 	{
 		return sprint && !aim && (isMoving);
+	}
+
+    /// <summary>
+    /// É_ÉÅÅ[ÉWÇéÛÇØÇΩè„Ç…êÅÇ¡îÚÇ—Ç‹Ç∑ÅBÇªÇÃå„ñ≥ìGéûä‘Ç™énÇ‹ÇËÇ‹Ç∑ÅB
+    /// </summary>
+    /// <param name="damage"></param>
+	public void Damage(int damage){
+        Debug.Log(isMuteki);
+        if (isMuteki)
+        {
+            //ObjectBlinker.Instance.Blink(gameObject, mutekiTime);
+        }
+        else
+        {
+            HP -= damage;   
+            startMuteki();
+        }
+	}
+
+    void startMuteki()
+    {
+        ObjectBlinker.Instance.Blink(gameObject, mutekiTime);
+        isMuteki = true;
+        mutekiTimeCursor = 0;
+    }
+
+
+    private void mutekiManagement()
+    {
+        if (isMuteki) {
+            mutekiTimeCursor += Time.deltaTime;
+            if(mutekiTimeCursor > mutekiTime)
+            {
+                isMuteki = false;
+                mutekiTimeCursor = 0;//îOÇÃÇΩÇﬂ
+            }
+        }
+    }
+
+
+    void StopManagament(){
+		/*if (EclairImmobile == true) {
+			im.Idle ();
+			im.enabled = false;
+			anim.enabled = false;
+		} else {
+			anim.enabled = true;
+			im.enabled = true;
+		}*/
 	}
 }
