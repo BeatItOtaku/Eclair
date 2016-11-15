@@ -132,12 +132,13 @@ public class EventManager : MonoBehaviour {
 		case 5:
 			//SBTスイッチのチュートリアル
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
-
+			GameObject.Find ("Tutorial_SBTSwitch").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event5_bolt.SetActive (true);
 			break;
 
 		case 6:
 			//金網すりぬけチュートリアル
+			GameObject.Find ("Tutorial_SBTSwitch").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event6_yajirushi.SetActive (true);
 			event6_bolt.SetActive (true);
 			event5_bolt.SetActive (false);
