@@ -30,7 +30,7 @@ public class CameraChanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (BossMoveManager.BossAttackedCount == 2) {
+		if (BossMoveManager.BossAttackedCount == 4) {
 			mainCamera_ = bossKilledCamera;
 			bossKilledCamera.SetActive (true);
 			uI.SetActive (false);
