@@ -75,6 +75,9 @@ public class EventManager : MonoBehaviour {
 	void Update () {
 		if (event7_EclairGun == null) {
 			event7_EclairGun = GameObject.Find ("Gun");
+			if (eventCount < 7) {
+				event7_EclairGun.SetActive (false);
+			}
 		}
 		if (tutorialMove == null) {
 			tutorialMove = GameObject.Find ("Tutorial_Move");
