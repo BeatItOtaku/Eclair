@@ -73,6 +73,8 @@ public class BoltScript : MonoBehaviour {
 					gameObject.transform.position = hit.point;
 					gameObject.transform.rotation = Quaternion.Lerp (gameObject.transform.rotation, TargetQuaternion, 0.5f);
 					gameObject.transform.localScale = new Vector3 (scaleWhenCollided, scaleWhenCollided, scaleWhenCollided);
+
+                    ScoreCounter.BoltLaunched();
 				}
 			}
 		}

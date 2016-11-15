@@ -6,7 +6,7 @@ public class AnimationQueue_Play : AnimationQueueBase {
 
 	// Use this for initialization
 	void Start () {
-		GetComponent<Image> ().enabled = false;
+		GetComponent<MaskableGraphic> ().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -16,7 +16,7 @@ public class AnimationQueue_Play : AnimationQueueBase {
 
 	public override void Queue(){
 		//Debug.Log ("aho");
-		GetComponent<Image> ().enabled = true;
+		GetComponent<MaskableGraphic> ().enabled = true;
 		GetComponent<Animation> ().Play ();
 	}
 }

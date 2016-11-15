@@ -143,11 +143,11 @@ public class InputManager : MonoBehaviour {
 					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 					onLockOnSwitched (go);
 				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
-					GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
+					/*GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
 					if (bolt != null) {
 						player.transform.LookAt (bolt.transform);
 						player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
-					}
+					}*/
 
 					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
 					RaycastHit hit;
@@ -166,7 +166,17 @@ public class InputManager : MonoBehaviour {
 						audioSource.PlayOneShot (boltLaunchSound);
 						playerState_ = PlayerStates.Bolt;
 					}
-				}
+
+                    GameObject bolt = GameObject.FindGameObjectWithTag("Bolt");
+                    if (bolt != null)
+                    {
+                        //player.transform.LookAt(bolt.transform);
+                        //player.transform.rotation = new Quaternion(0, player.transform.rotation.y, 0, player.transform.rotation.w);
+                        Quaternion rot = Quaternion.LookRotation(hitPosition - player.transform.position);
+                        player.transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
+                    }
+
+                }
 
 			}
 			if (playerState_ == PlayerStates.Bolt) {
@@ -257,7 +267,6 @@ public class InputManager : MonoBehaviour {
 		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています
 	}
 	}
-
 
 	private void startSBT (GameObject target)
 	{
