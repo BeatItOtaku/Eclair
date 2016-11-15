@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 12133419}
   m_LocalRotation: {x: -0, y: -0.70721155, z: -0, w: 0.7070021}
-  m_LocalPosition: {x: -8.1, y: 1.0999985, z: -124.4}
+  m_LocalPosition: {x: 0, y: 1.0999985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: -90.01601, z: 0}
   m_Children:
@@ -5926,7 +5926,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 4.66
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5990,7 +5990,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100242, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18428,7 +18428,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 374f3b75259104342bf08be817b266f4, type: 2}
     - target: {fileID: 100010, guid: 9551cb1e2e08b4d5c8eb3e34fb626fc3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400060, guid: 9551cb1e2e08b4d5c8eb3e34fb626fc3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -20716,8 +20716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDying: 0
-  halo1: {fileID: 0}
-  halo2: {fileID: 0}
+  halo1: {fileID: 758872146}
+  halo2: {fileID: 276070622}
 --- !u!135 &2004214427
 SphereCollider:
   m_ObjectHideFlags: 0
