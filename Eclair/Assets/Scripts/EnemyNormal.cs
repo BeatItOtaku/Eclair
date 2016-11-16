@@ -42,7 +42,7 @@ public class EnemyNormal : EnemyBase {
             anim.enabled = true;
             anim.SetBool("isAttacking", true);
 			Quaternion rot = Quaternion.LookRotation (player.transform.position - transform.position);
-			transform.rotation = Quaternion.Euler (0, rot.y, 0);
+			transform.rotation = Quaternion.Euler (0, rot.eulerAngles.y, 0);
 			//transform.LookAt(player.transform.position);
 			//transform.position += transform.forward * attackSpeed * Time.deltaTime;
 		} else if (distance < moveDistance){

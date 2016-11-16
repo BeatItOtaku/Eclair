@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -176,6 +177,7 @@ public class ResultManager : MonoBehaviour {
 	}
 
 	public void GoToTitle(){
-		Application.LoadLevel (0);
+		//Application.LoadLevel (0);
+		SceneManager.LoadSceneAsync("Credit");
 	}
 }

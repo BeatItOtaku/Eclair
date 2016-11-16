@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour {
 
 	public GameObject event2_bolt;
 	public GameObject event2_sita;
+	public GameObject event2_camera;
 	public GameObject event3_zako;
 	public GameObject event3_bolt;
 	public GameObject event4_bolt;
@@ -108,6 +109,7 @@ public class EventManager : MonoBehaviour {
 			break;
 		case 2:
 			GameObject.Find ("Tutorial_LockOn").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			StartCoroutine (lockOnDelay ());
 			break;
 		case 3:
 			event2_sita.SetActive (false);
@@ -165,6 +167,13 @@ public class EventManager : MonoBehaviour {
 			StartCoroutine (hideTutorialUIs());
 			break;
 		}
+	}
+
+	IEnumerator lockOnDelay(){
+		event2_camera.SetActive (true);
+		yield return new WaitForSecondsRealtime (1.2f);
+		event2_camera.SetActive (false);
+		EventCount ();
 	}
 
 	private IEnumerator hideTutorialUIs(){

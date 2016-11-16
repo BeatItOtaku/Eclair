@@ -128,6 +128,8 @@ public class InputManager : MonoBehaviour {
 		screenMiddle = new Vector3 (width / 2, height / 2, 0);
 
         GameObject.Find("FadeInPanel").GetComponent<AnimationQueueBase>().Queue();
+
+		CameraChanger.Instance.enabled = true;//インスタンスを作っとく
 	}
 
 	// Update is called once per frame

@@ -16,7 +16,7 @@ public class AnimationQueueManager : MonoBehaviour {
 		}
 	}
 
-	abstract void OnCursorChanged (int before, int after);
+	protected virtual void OnCursorChanged (int before, int after){;}
 
     protected virtual void Start()
     {

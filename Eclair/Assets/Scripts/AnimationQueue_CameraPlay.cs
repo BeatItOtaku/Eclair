@@ -4,7 +4,7 @@ using System.Collections;
 
 public class AnimationQueue_CameraPlay : AnimationQueueBase {
 
-	public CameraChanger changer;
+	//public CameraChanger changer;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +18,7 @@ public class AnimationQueue_CameraPlay : AnimationQueueBase {
 
 	public override void Queue(){
 		//Debug.Log ("aho");
-		changer.CurrentCamera = gameObject;
+		CameraChanger.CurrentCamera = gameObject;
 		GetComponent<Animation> ().Play ();
 	}
 }
