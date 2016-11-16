@@ -27,8 +27,9 @@ public class EventManager2 : MonoBehaviour {
 	public GameObject event6_yajirushi;
 	public GameObject event7_bikkuri;
 	public GameObject event9_yajirushi;
+	public Camera event9_camera;
 
-	public BossGate bg;
+    public BossGate bg;
 
 
 	// Use this for initialization
@@ -101,12 +102,18 @@ public class EventManager2 : MonoBehaviour {
 			break;
 
 		case 9:
-			event9_yajirushi.SetActive (true);
+                StartCoroutine(event9Coroutine());
 			break;
 		}
 	}
 
-	public void BossSwitch(){
+    IEnumerator event9Coroutine()
+    {
+        yield return StartCoroutine(CameraChanger.Instance.ChangeTemporary_raw(event9_camera, 5));
+		event9_yajirushi.SetActive (true);
+    }
+
+    public void BossSwitch(){
 		bossSwitchCount++;
 		switch (bossSwitchCount) {
 

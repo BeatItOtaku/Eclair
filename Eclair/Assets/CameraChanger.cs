@@ -18,15 +18,15 @@ public class CameraChanger : MonoBehaviour {
 
 	private float cameraWaitTime;*/
 
-	private static GameObject currentCamera;
-	public static GameObject CurrentCamera {
+	private static Camera currentCamera;
+	public static Camera CurrentCamera {
 		get {
 			return currentCamera;
 		}
 		set {
-			if(currentCamera != null)currentCamera.SetActive (false);
+            if (currentCamera != null) currentCamera.enabled = false;
 			currentCamera = value;
-			value.SetActive (true);
+            value.enabled = true;
 		}
 	}
 
@@ -54,7 +54,7 @@ public class CameraChanger : MonoBehaviour {
 		event2EndPosition = GameObject.Find ("EndPosition");
 		mainCamera_ = mainCamera;
 		cameraWaitTime = 0;*/
-		currentCamera = null;//Camera.main.gameObject;
+		currentCamera = Camera.main;
 	}
 	
 	// Update is called once per frame
@@ -77,16 +77,16 @@ public class CameraChanger : MonoBehaviour {
 	}
 
 	public void OnSceneChanged(){
-		currentCamera = Camera.main.gameObject;
+		currentCamera = Camera.main;
 	}
 
-	public void ChangeTemporary(GameObject go,float time){
-		StartCoroutine (ChangeTemporary_raw (go, time));
+	public void ChangeTemporary(Camera cam,float time){
+		StartCoroutine (ChangeTemporary_raw (cam, time));
 	}
 
-	private IEnumerator ChangeTemporary_raw(GameObject go,float time){
-		GameObject beforeCamera = CurrentCamera;
-		CurrentCamera = go;
+	public IEnumerator ChangeTemporary_raw(Camera cam,float time){
+		Camera beforeCamera = CurrentCamera;
+		CurrentCamera = cam;
 		yield return new WaitForSecondsRealtime (time);
 		if(beforeCamera != null) CurrentCamera = beforeCamera;
 	}
