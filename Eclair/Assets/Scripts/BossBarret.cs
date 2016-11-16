@@ -30,7 +30,7 @@ public class BossBarret : MonoBehaviour {
 	private void OnCollisionEnter (Collision collider)
 	{
 
-		if (collider.gameObject.tag == "Player"){
+		if (collider.gameObject.tag == "Player" && collider.gameObject.tag != "ETOEclair"){
             bossShotAttack = true;
             player.GetComponent<PlayerControl>().Damage(2,gameObject.transform.rotation.eulerAngles);
         }

@@ -423,9 +423,11 @@ public class PlayerControl : MonoBehaviour
     IEnumerator whenAttacked(string parameter,float time)
     {
         startMuteki();
+		//PlayerControl.EclairImmobile = true;
         anim.SetBool(parameter, true);
         yield return new WaitForSeconds(time);
         anim.SetBool(parameter, false);
+		//PlayerControl.EclairImmobile = false;
     }
 
     void startMuteki()
