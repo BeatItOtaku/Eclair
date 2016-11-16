@@ -1374,6 +1374,8 @@ GameObject:
   - 114: {fileID: 1871416628}
   - 114: {fileID: 1871416627}
   - 114: {fileID: 1871416631}
+  - 114: {fileID: 1871416632}
+  - 81: {fileID: 1871416633}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1510,6 +1512,29 @@ MonoBehaviour:
       Value: {fileID: 30731274}
     - Key: 0.2
       Value: {fileID: 55395569}
+--- !u!114 &1871416632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1871416626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf61e071d181bd46ab30c22a3b653ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intro: {fileID: 8300000, guid: 7ff9e49af270508438aae2694572b0a6, type: 3}
+  loop: {fileID: 0}
+  PlayOnAwake: 1
+  defaultVolume: 1
+  volumeSmoothFactor: 0.5
+--- !u!81 &1871416633
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1871416626}
+  m_Enabled: 1
 --- !u!1 &2021268487
 GameObject:
   m_ObjectHideFlags: 0

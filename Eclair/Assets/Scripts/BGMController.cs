@@ -144,9 +144,7 @@ public class BGMController : MonoBehaviour
 	}
 
 	public void Stop(){
-		if (intro != null) {
 			audioSource [0].Stop ();
 			audioSource [1].Stop ();
-		}
 	}
 }
