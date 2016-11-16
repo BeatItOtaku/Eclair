@@ -12,10 +12,12 @@ public class BossBarret : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag ("Player");
-		/*if (player == null) {	
+		if (player == null) {	
 			player = GameObject.FindGameObjectWithTag ("ETOEclair");
-		} */
-		transform.LookAt (player.transform.FindChild("Muzzle"));
+			transform.LookAt (player.transform);
+		} else {
+			transform.LookAt (player.transform.FindChild ("Muzzle"));
+		}
 
 	}
 
@@ -28,7 +30,7 @@ public class BossBarret : MonoBehaviour {
 	private void OnCollisionEnter (Collision collider)
 	{
 
-		if (collider.gameObject.tag == "Player"){
+		if (collider.gameObject.tag == "Player" && collider.gameObject.tag != "ETOEclair"){
             bossShotAttack = true;
             player.GetComponent<PlayerControl>().Damage(2,gameObject.transform.rotation.eulerAngles);
         }
