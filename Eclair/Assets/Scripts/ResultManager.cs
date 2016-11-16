@@ -125,7 +125,7 @@ public class ResultManager : MonoBehaviour {
 
 		timeText.time = usedTime;
 		timeRank.rank = calicurateRankAscending (usedTime, timeRankThreshold);
-		timeScore.number = (usedTime - optiTime) * timeScoreFactor;
+		timeScore.number = (optiTime - usedTime) * timeScoreFactor;
 
 		enemyText.number = beatedEnemy;
 		enemyRank.rank = calicurateRankDescending (beatedEnemy, enemyRankThreshold);
@@ -177,7 +177,15 @@ public class ResultManager : MonoBehaviour {
 	}
 
 	public void GoToTitle(){
-		//Application.LoadLevel (0);
-		SceneManager.LoadSceneAsync("Credit");
+        //Application.LoadLevel (0);
+        StartCoroutine(GoToTitie_raw());
 	}
+
+    IEnumerator GoToTitie_raw()
+    {
+        AsyncOperation async =  SceneManager.LoadSceneAsync("Credit");
+        async.allowSceneActivation = false;
+        yield return new WaitForSecondsRealtime(0.5f);
+        async.allowSceneActivation = true;
+    }
 }
