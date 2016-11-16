@@ -14,6 +14,10 @@ public class RadialBlur : MonoBehaviour {
 
 	public float smoothFactor = 0.8f;
 
+    private Coroutine coroutine = null;
+    private float targetForce;
+    private float targetBrightness;
+
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
 		material.SetFloat ("_Force", force);
@@ -21,13 +25,23 @@ public class RadialBlur : MonoBehaviour {
 		Graphics.Blit(source, destination, material);
 	}
 
+    void Start()
+    {
+        targetForce = 0;
+        targetBrightness = 1.1f;
+    }
+
 	public void Shock(float force){
 		StartCoroutine (Shock_raw (force,force));
 	}
 
     public void Shock(float force,float brightness)
     {
-        StartCoroutine(Shock_raw(force, brightness));
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        coroutine = StartCoroutine(Shock_raw(force, brightness));
     }
 
     private IEnumerator Shock_raw(float force,float brightness){
@@ -37,8 +51,8 @@ public class RadialBlur : MonoBehaviour {
 			enabled = true;
 			disableWhenEnd = true;
 		}
-		float targetForce = this.force;
-		float targetBrightness = this.brightness;
+		//targetForce = this.force;
+		//targetBrightness = this.brightness;
 		float timeCursor = 0;
 		this.force = force;
 		this.brightness = brightness;
@@ -56,5 +70,7 @@ public class RadialBlur : MonoBehaviour {
 
 		if (disableWhenEnd)
 			enabled = false;
+
+        coroutine = null;
 	}
 }
