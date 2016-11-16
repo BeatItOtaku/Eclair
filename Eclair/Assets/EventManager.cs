@@ -170,9 +170,13 @@ public class EventManager : MonoBehaviour {
 	}
 
 	IEnumerator lockOnDelay(){
-		event2_camera.SetActive (true);
+        Camera beforeCamera = Camera.main;
+        beforeCamera.enabled = false;
+        event2_camera.GetComponent<Camera>().enabled = true;
 		yield return new WaitForSecondsRealtime (1.2f);
-		event2_camera.SetActive (false);
+		event2_camera.GetComponent<Camera>().enabled = false;
+        beforeCamera.enabled = true;
+        //CameraChanger.Instance.ChangeTemporary(event2_camera, 1.2f);
 		EventCount ();
 	}
 

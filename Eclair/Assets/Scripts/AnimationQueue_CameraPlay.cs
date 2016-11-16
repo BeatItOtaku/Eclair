@@ -18,7 +18,7 @@ public class AnimationQueue_CameraPlay : AnimationQueueBase {
 
 	public override void Queue(){
 		//Debug.Log ("aho");
-		CameraChanger.CurrentCamera = gameObject;
+		CameraChanger.CurrentCamera = GetComponent<Camera>();
 		GetComponent<Animation> ().Play ();
 	}
 }
