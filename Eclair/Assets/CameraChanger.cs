@@ -84,7 +84,7 @@ public class CameraChanger : MonoBehaviour {
 		StartCoroutine (ChangeTemporary_raw (cam, time));
 	}
 
-	private IEnumerator ChangeTemporary_raw(Camera cam,float time){
+	public IEnumerator ChangeTemporary_raw(Camera cam,float time){
 		Camera beforeCamera = CurrentCamera;
 		CurrentCamera = cam;
 		yield return new WaitForSecondsRealtime (time);
