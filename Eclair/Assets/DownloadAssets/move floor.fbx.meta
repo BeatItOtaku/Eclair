@@ -37,7 +37,7 @@ ModelImporter:
     3300000: pCube2
     4300000: pCube2
     4300002: pCube6Shape
-    7400000: Take 001
+    7400000: propera
     9500000: //RootNode
     13700000: pCube6Shape
   materials:
@@ -60,7 +60,63 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: propera
+      takeName: Take 001
+      firstFrame: 3
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: joint1
+        weight: 1
+      - path: pCube2
+        weight: 1
+      - path: pCube3
+        weight: 1
+      - path: pCube3/transform4
+        weight: 1
+      - path: pCube4
+        weight: 1
+      - path: pCube4/transform6
+        weight: 1
+      - path: pCube5
+        weight: 1
+      - path: pCube5/transform5
+        weight: 1
+      - path: pCube6
+        weight: 1
+      - path: pCube6/transform8
+        weight: 1
+      - path: pCube6Shape
+        weight: 1
+      - path: pCylinder4
+        weight: 1
+      - path: pCylinder4/transform7
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
