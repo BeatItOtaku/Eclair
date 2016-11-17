@@ -82,6 +82,7 @@ public class EventManager : MonoBehaviour {
 			tutorialMove = GameObject.Find ("Tutorial_Move");
 			if (tutorialMove != null) {
 				tutorialMove.GetComponent<AnimationQueue_Tutorial> ().Queue ();
+				InvokeQueue ("Tutorial_CamSensitivity");
 			}
 		}
 		if (HPGauge == null)
@@ -104,6 +105,7 @@ public class EventManager : MonoBehaviour {
 		case 1:
 			//ロックオンのチュートリアルが表示される 
 			event2_sita.SetActive (true);
+			InvokeQueue("Tutorial_CamSensitivity");
 			GameObject.Find ("Tutorial_Move").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			GameObject.Find ("Tutorial_LockOn").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			break;

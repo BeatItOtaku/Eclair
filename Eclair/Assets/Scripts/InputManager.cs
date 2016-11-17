@@ -195,79 +195,82 @@ public class InputManager : MonoBehaviour {
 					
 		//Debug.Log ("hoghoe");
 		//Shiftキーでロックオン
-		if(EventManager.eventCount >=1){
-		if (Input.GetButtonDown ("LockOn")) {
-			Debug.Log ("lockOn");
-			GameObject go;
-			if (playerState_ == PlayerStates.Idle) {
-				go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
-				if (go != null) {
-					playerState_ = PlayerStates.LockOn;
-					onLockOnSwitched (go);
-					if (EventManager.eventCount == 1) {
-						em.GetComponent<EventManager> ().EventCount ();
+		if (EventManager.eventCount >= 1) {
+			if (Input.GetButtonDown ("LockOn")) {
+				Debug.Log ("lockOn");
+				GameObject go;
+				if (playerState_ == PlayerStates.Idle) {
+					go = player.GetComponent<LockOn> ().startLockOn ();//アイドル状態であればロックオンを開始
+					if (go != null) {
+						playerState_ = PlayerStates.LockOn;
+						onLockOnSwitched (go);
+						if (EventManager.eventCount == 1) {
+							em.GetComponent<EventManager> ().EventCount ();
+						}
 					}
 				}
-			}
-		} else if (Input.GetButtonUp ("LockOn")) {//Eキー離したらロックオンやめる
-			player.GetComponent<LockOn> ().endLockOn ();
-			if (playerState_ != PlayerStates.Etoile)
-				Idle ();
-		}
-
-		//左クリック
-		if (EventManager.eventCount >= 3) {
-			if (Input.GetButtonDown ("Thunder")) {
-				//Debug.Log ("Fire1Pressed");
-				GameObject satou = null;
-
-				if (playerState_ == PlayerStates.LockOn)
-					satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
-				if (satou != null) {
-					player.transform.LookAt (satou.transform);
-					player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
-					startSBT (satou);//長いのでメソッド化したよ
-				}
-			} else if (Input.GetButtonUp ("Thunder")) {
-				//thunderEffect.StopEffect ();
-				sbt = false;
-				if (playerState_ == PlayerStates.SBT)
+			} else if (Input.GetButtonUp ("LockOn")) {//Eキー離したらロックオンやめる
+				player.GetComponent<LockOn> ().endLockOn ();
+				if (playerState_ != PlayerStates.Etoile)
 					Idle ();
 			}
-			if (playerState_ == PlayerStates.SBT) {
-				anim.SetBool ("SBTStopToEnd", false);
+
+			//左クリック
+			if (EventManager.eventCount >= 3) {
+				if (Input.GetButtonDown ("Thunder")) {
+					//Debug.Log ("Fire1Pressed");
+					GameObject satou = null;
+
+					if (playerState_ == PlayerStates.LockOn)
+						satou = player.GetComponent<LockOn> ().getCurrentTarget ();//satouとはロックオンで取得したボルト
+					if (satou != null) {
+						player.transform.LookAt (satou.transform);
+						player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
+						startSBT (satou);//長いのでメソッド化したよ
+					}
+				} else if (Input.GetButtonUp ("Thunder")) {
+					//thunderEffect.StopEffect ();
+					sbt = false;
+					if (playerState_ == PlayerStates.SBT)
+						Idle ();
+				}
+				if (playerState_ == PlayerStates.SBT) {
+					anim.SetBool ("SBTStopToEnd", false);
+				}
 			}
-		}
 
 
-		//エトワールボタン
-		if (PlayerControl.EclairImmobile == false && EventManager.eventCount >= 4) {
-			if (Input.GetButtonDown ("Etoile")) {
-				if (playerState_ == PlayerStates.LockOn) {
-					audioSource.PlayOneShot (etoileSound);				
-					eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
-					eto_.transform.position = player.transform.position;
-					etoile = true;
-					eto.SetActive (true);
-					GameObject lockonTarget = lockOn.getCurrentTarget ();
-					//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
-					EtoScript.target = lockonTarget;
-					playerState_ = PlayerStates.Etoile;
-					player.SetActive (false);
+			//エトワールボタン
+			if (PlayerControl.EclairImmobile == false && EventManager.eventCount >= 4) {
+				if (Input.GetButtonDown ("Etoile")) {
+					if (playerState_ == PlayerStates.LockOn) {
+						audioSource.PlayOneShot (etoileSound);				
+						eto_ = eto;//(GameObject)Instantiate (eto, transform.position, transform.rotation);
+						eto_.transform.position = player.transform.position;
+						etoile = true;
+						eto.SetActive (true);
+						GameObject lockonTarget = lockOn.getCurrentTarget ();
+						//if(lockonTarget != null) player.GetComponent<ETO> ().startEtoile (lockonTarget);
+						EtoScript.target = lockonTarget;
+						playerState_ = PlayerStates.Etoile;
+						player.SetActive (false);
+					}
 				}
 			}
 		}
 
 		//カメラ感度
 		if (Input.GetButtonDown ("Plus")) {
+				Debug.Log ("Plus");
 			camSensitivityControl.Up ();
 		} else if (Input.GetButtonDown ("Minus")) {
+				Debug.Log ("Minus");
 			camSensitivityControl.Down ();
 		}
 
 		//TODO:キーボード/ゲームパッドの切り替え判定
 		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています
-	}
+		
 	}
 
 	private void startSBT (GameObject target)
