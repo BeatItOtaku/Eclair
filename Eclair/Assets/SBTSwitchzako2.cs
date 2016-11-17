@@ -12,6 +12,11 @@ public class SBTSwitchzako2: EnemyBase {
 
 	private float OnTime;
 
+	public AudioSource audioSource;
+
+	public AudioClip switchOn;
+	public AudioClip switchOff;
+
 	// Use this for initialization
 	void Start () {
 		(glass.GetComponent ("Halo") as Behaviour).enabled = false;
@@ -32,6 +37,7 @@ public class SBTSwitchzako2: EnemyBase {
 			meshrender.material.color = new Color (0, 0, 0, 1.0f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = false;
 			SBT2On = false;
+			audioSource.PlayOneShot (switchOff);
 		}
 
 	}
@@ -41,6 +47,7 @@ public class SBTSwitchzako2: EnemyBase {
 			meshrender.material.color = new Color (0, 0, 0, 0.5f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = true;
 			SBT2On = true;
+			audioSource.PlayOneShot (switchOn);
 
 
 		}

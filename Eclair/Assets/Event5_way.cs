@@ -9,6 +9,8 @@ public class Event5_way : MonoBehaviour {
 
 	public EventManager2 em2;
 
+	public AudioSource audioSource;
+	public AudioClip doorBaku;
 	// Use this for initialization
 	void Start () {
 	
@@ -19,6 +21,7 @@ public class Event5_way : MonoBehaviour {
 		if (em2.eventCount2 == 5) {
 			Instantiate (fire, point1.transform.position, point1.transform.rotation);
 			Instantiate (fire, point2.transform.position, point2.transform.rotation);
+			audioSource.PlayOneShot (doorBaku);
 			Destroy (gameObject);
 		}
 	
