@@ -83,8 +83,11 @@ public class MapLoader : MonoBehaviour
 			if(!InputManager.isGamePad) InputManager.isGamePad = true;//WASDが押されてないのに移動してる => ゲームパッド(の左スティック)を触ってる
 		}
 
-		if (!CameraController.cursorIsLocked && Input.GetKey (KeyCode.E) && Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.C)) {
-			Reset ();
+		if (Input.GetKey (KeyCode.E) && Input.GetKey (KeyCode.S) && Input.GetKey (KeyCode.C)) {
+			if (CameraController.cursorIsLocked)
+				ReloadScene ();
+			else 
+				Reset ();
 		}
     }
 
@@ -137,5 +140,18 @@ public class MapLoader : MonoBehaviour
     {
         SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Additive);
     }
+
+	public void GoToTitle(){
+		//Application.LoadLevel (0);
+		StartCoroutine(GoToTitie_raw());
+	}
+
+	IEnumerator GoToTitie_raw()
+	{
+		AsyncOperation async =  SceneManager.LoadSceneAsync("Credit");
+		async.allowSceneActivation = false;
+		yield return new WaitForSecondsRealtime(0.5f);
+		async.allowSceneActivation = true;
+	}
 
 }

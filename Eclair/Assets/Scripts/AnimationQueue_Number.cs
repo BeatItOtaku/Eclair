@@ -7,6 +7,7 @@ public class AnimationQueue_Number : AnimationQueueBase {
 	private Text text;
 	private int currentNumber = 0;
 	public int number = 10;
+	private int numberAbs;
 	public int step = 1;
 	public bool useSign = false;
 
@@ -14,18 +15,18 @@ public class AnimationQueue_Number : AnimationQueueBase {
 
 	// Use this for initialization
 	void Start () {
-		positive = (number > 0);
-		number = (int)Mathf.Abs (number);
+		//positive = (number > 0);
+		//number = (int)Mathf.Abs (number);
 		text = GetComponent<Text> ();
 		text.enabled = false;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (text.enabled && currentNumber < number) {
+		if (text.enabled && currentNumber < numberAbs) {
 			currentNumber += step;
 			setText (currentNumber);
-		} else if (currentNumber > number) {
+		} else if (currentNumber > numberAbs) {
 			setText (number);
 		}
 	}
@@ -34,7 +35,7 @@ public class AnimationQueue_Number : AnimationQueueBase {
 		text.enabled = true;
 		text.text = "0";
         positive = (number > 0);
-        number = (int)Mathf.Abs(number);
+        numberAbs = (int)Mathf.Abs(number);
     }
 
 	private void setText(int num){
