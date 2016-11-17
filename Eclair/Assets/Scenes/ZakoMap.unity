@@ -39523,6 +39523,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   em2: {fileID: 1707958267}
+  audioSource: {fileID: 1707958269}
+  bossDoorOpen: {fileID: 8300000, guid: 761cb0f18080a458ea97902ac58733f4, type: 3}
 --- !u!1001 &951698096
 Prefab:
   m_ObjectHideFlags: 0
@@ -41235,6 +41237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   em2: {fileID: 1707958267}
+  audioSource: {fileID: 1707958269}
+  bossswitchOn: {fileID: 8300000, guid: 9b4e7fef39a5d4a1cba684d2f4476bcf, type: 3}
 --- !u!95 &989677100
 Animator:
   serializedVersion: 3
@@ -71767,7 +71771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b52d644c2e954bc39b39b2add014867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossSwitchCount: 0
+  bossSwitchCount: 2
   eventCount2: 0
   event1_camera: {fileID: 0}
   event2_yajirushi: {fileID: 675997155}
@@ -86917,6 +86921,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   em2: {fileID: 1707958267}
+  audioSource: {fileID: 1707958269}
+  bossswitchOn: {fileID: 8300000, guid: 9b4e7fef39a5d4a1cba684d2f4476bcf, type: 3}
 --- !u!95 &2070540025
 Animator:
   serializedVersion: 3
