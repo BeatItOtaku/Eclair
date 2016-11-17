@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -19,6 +19,7 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject bossTail;
 	public GameObject bossSmoke1;//エフェクト
 	public GameObject bossSmoke2;//エフェクト
+    public GameObject bossSmokeTail;
 	public GameObject fire;//エフェクト
 	public GameObject exp;
 	public GameObject bossKilled;//爆発する
@@ -45,7 +46,15 @@ public class BossMoveManager : MonoBehaviour {
 
 	public static int BossAttackedCount = 1;
 
-	private Vector3 playerV;
+    public bool isDying = false;
+
+    public AudioClip soundRoaring;
+    public AudioClip soundShot;
+    public AudioClip soundWalk;
+    public AudioClip soundExplosion;
+    public AudioClip soundSBTSwitch;
+
+    private Vector3 playerV;
 	private Vector3 playerHeightV;
 	private Vector3 leftFootV;
 	private Vector3 rightFootV;
@@ -76,7 +85,12 @@ public class BossMoveManager : MonoBehaviour {
 	private Animator bossAnim;
 	private int phId;
 
-	private AsyncOperation result;
+    private bool bossAwaken = false;
+
+    private AudioSource audio;
+
+    private Vector3 neutralPosition;
+    private Quaternion neutralRot;
 
 
 	// Use this for initialization
@@ -87,18 +101,24 @@ public class BossMoveManager : MonoBehaviour {
 		bossShot = false;
 		bossSmoke1.SetActive (false);
 		bossSmoke2.SetActive (false);
+		bossSmokeTail.SetActive (false);
 		fire.SetActive (false);
-		result = SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
-		result.allowSceneActivation = false;
-		exp1 = false;
+        exp1 = false;
 		exp2 = false;
 		exp3 = false;
-		hint.SetActive (false);
+		if(hint != null) hint.SetActive (false);
 		hintTime = 0;
+        GetComponent<Animator>().Play("BossSleeping");
+        audio = GetComponent<AudioSource>();
+        neutralPosition = transform.position;
+        neutralRot = transform.rotation;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (!bossAwaken) return;
+
 		//Debug.Log (playerHeightF);
 		playerV = player.transform.position;
 		playerHeightV = playerPositionY.transform.position;
@@ -119,8 +139,8 @@ public class BossMoveManager : MonoBehaviour {
 
 		hintTime += Time.deltaTime;
 
-		if (hintTime >= 20f) {
-			hint.SetActive (true);
+		if (hintTime >= 60) {
+			if(hint != null) hint.SetActive (true);
 		}
 		Debug.Log (hintTime);
 
@@ -246,6 +266,7 @@ public class BossMoveManager : MonoBehaviour {
         }
 		if (BossAttackedCount == 2)
 		{
+            bossSmokeTail.SetActive(true);
 			bossSmoke1.SetActive (true);
             haloRed.SetActive(true);
             setBossSpeed(1.4f);
@@ -258,10 +279,10 @@ public class BossMoveManager : MonoBehaviour {
             setBossSpeed(1.8f);
         }
         //ボスが倒されたとき
-        if (BossAttackedCount >= 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+        if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
 			PlayerControl.EclairImmobile = true;
-            Camera.main.GetComponent<BGMController>().Stop();
+            //Camera.main.GetComponent<BGMController>().Stop();
             setBossSpeed(1);
 			transform.Rotate (Vector3.up * 0);
 			transform.position += transform.forward * Time.deltaTime * 0;
@@ -281,16 +302,25 @@ public class BossMoveManager : MonoBehaviour {
 				exp3 = true;
 			}
 
-			if(dethTime >= 7.0f){
-            sceneManager.OnBossDied();
-            CameraController.cursorIsLocked = false;
-			result.allowSceneActivation = true;
-			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
-			gameObject.SetActive (false);
-			//bossKilledCameraPosition.transform.position = bossCamera.position;
-			//bossKilledCameraPosition.transform.LookAt (bossCamera);
-			//PlayerControl.EclairImmobile = true;
-			}
+            if (dethTime >= 5.4f)
+            {
+                //sceneManager.OnBossDied();
+                CameraController.cursorIsLocked = false;
+                Instantiate(bossKilled, boss.transform.position, boss.transform.rotation);
+                Camera.current.GetComponent<AudioSource>().PlayOneShot(soundExplosion);
+                gameObject.SetActive(false);
+                //bossKilledCameraPosition.transform.position = bossCamera.position;
+                //bossKilledCameraPosition.transform.LookAt (bossCamera);
+                //PlayerControl.EclairImmobile = true;
+            }
+
+            if(BossAttackedCount >= 4 && isDying == false)
+            {
+                onBossStartDying();
+                ScoreCounter.EnemyBeated();
+                sceneManager.Invoke();
+                isDying = true;
+            }
 
 
 		}
@@ -299,6 +329,35 @@ public class BossMoveManager : MonoBehaviour {
     private void setBossSpeed(float speed)
     {
         bossAnim.speed = speed;
+    }
+
+    public void BossAwake()
+    {
+        bossAnim.SetTrigger("Awake");
+    }
+    public void SBTSwitchPopOnAwake()
+    {
+        haloGreen.SetActive(true);
+        audio.PlayOneShot(soundSBTSwitch);
+    }
+    public void BossAwaken()
+    {
+        bossAwaken = true;
+    }
+
+    public void BossWalkSound()
+    {
+        audio.PlayOneShot(soundWalk);
+    }
+
+    public void Roar()
+    {
+        audio.PlayOneShot(soundRoaring);
+    }
+    public void onBossStartDying()
+    {
+        transform.position = neutralPosition;
+        transform.rotation = neutralRot;
     }
 
     private bool shotManagementIsRunning = false;
@@ -331,6 +390,7 @@ public class BossMoveManager : MonoBehaviour {
             {
                 LaunchShot(bossMuzzle.transform.position, bossMuzzle.transform.rotation);
                 bossAnim.SetFloat(phId, playerHeightF);
+                audio.PlayOneShot(soundShot);
                 yield return new WaitForSeconds(shotIntervalMax);
             }
             else if (stateInfo.IsName("BossShotEnd"))
@@ -346,6 +406,8 @@ public class BossMoveManager : MonoBehaviour {
         shotManagementIsRunning = false;
         yield break;
     }
+
+
 
     void LaunchShot(Vector3 position,Quaternion rotation)
     {

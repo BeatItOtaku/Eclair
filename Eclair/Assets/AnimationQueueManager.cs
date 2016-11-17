@@ -5,6 +5,8 @@ public class AnimationQueueManager : MonoBehaviour {
 
     public QueueTable timeline;
 
+    private float time = 0;
+
     private int cursor = 0;
 	public int Cursor {
 		get{
@@ -20,7 +22,21 @@ public class AnimationQueueManager : MonoBehaviour {
 
     protected virtual void Start()
     {
-        StartCoroutine(coroutine());
+        //StartCoroutine(coroutine());
+    }
+
+    protected virtual void Update()
+    {
+        time += Time.deltaTime;
+        if (timeline.GetList().Count == cursor)
+            return;
+        if (0 <= timeline.GetList()[cursor].Key)
+        {
+            if (timeline.GetList()[cursor].Key < time)
+            {
+                Invoke();
+            }
+        }
     }
 
     IEnumerator coroutine()
@@ -29,9 +45,16 @@ public class AnimationQueueManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(q.Key);
             Debug.Log("Queue:" + q.Value.ToString());
-            q.Value.GetComponent<AnimationQueueBase>().Queue();
+            if(q.Value != null) q.Value.GetComponent<AnimationQueueBase>().Queue();
 			Cursor++;
         }
+    }
+
+    public void Invoke()
+    {
+        if(timeline.GetList()[cursor].Value != null) timeline.GetList()[cursor].Value.GetComponents<AnimationQueueBase>()[0].Queue();//抽象クラス最高！
+        time = 0;
+        Cursor++;
     }
 }
 

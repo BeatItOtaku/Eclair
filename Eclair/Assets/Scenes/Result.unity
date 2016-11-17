@@ -1920,6 +1920,7 @@ MonoBehaviour:
   enemyRankThreshold: 280000001e00000014000000
   boltRankThreshold: 1e0000003c0000005a000000
   totalRankThreshold: d0070000b80b0000a00f0000
+  canvas: {fileID: 1251208032}
   timeText: {fileID: 294952863}
   timeRank: {fileID: 832444412}
   timeScore: {fileID: 902219376}
