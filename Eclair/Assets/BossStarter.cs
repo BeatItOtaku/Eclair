@@ -10,6 +10,8 @@ public class BossStarter : MonoBehaviour {
 
 	public Camera mainCamera;
 
+    public BossSceneManager manager;
+
 	// Use this for initialization
 	void Start () {
 		EventManager.eventCount = 10;
@@ -29,11 +31,13 @@ public class BossStarter : MonoBehaviour {
 		if(!col.CompareTag("Player")) return;
 		Debug.Log ("StartBoss");
 		StartBoss ();
+        Destroy(gameObject);
 	}
 
 	void StartBoss(){
-		boss.SetActive (true);
+        /*boss.SetActive (true);
 		Camera.main.GetComponent<BGMController> ().Play (null, bgm);
-		skyball.SetActive (true);
+		skyball.SetActive (true);*/
+        if (manager.Cursor == 0) manager.Invoke();
 	}
 }

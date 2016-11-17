@@ -35,6 +35,8 @@ public class BossMoveManager : MonoBehaviour {
 
 	public static int BossAttackedCount = 1;
 
+    public bool isDying = false;
+
 	private Vector3 playerV;
 	private Vector3 playerHeightV;
 	private Vector3 leftFootV;
@@ -64,7 +66,7 @@ public class BossMoveManager : MonoBehaviour {
 	private Animator bossAnim;
 	private int phId;
 
-	private AsyncOperation result;
+
 
 
 	// Use this for initialization
@@ -76,8 +78,7 @@ public class BossMoveManager : MonoBehaviour {
 		bossSmoke1.SetActive (false);
 		bossSmoke2.SetActive (false);
 		fire.SetActive (false);
-		result = SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
-		result.allowSceneActivation = false;
+		
 	}
 	
 	// Update is called once per frame
@@ -237,7 +238,7 @@ public class BossMoveManager : MonoBehaviour {
         if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
 			PlayerControl.EclairImmobile = true;
-            Camera.main.GetComponent<BGMController>().Stop();
+            //Camera.main.GetComponent<BGMController>().Stop();
             setBossSpeed(1);
 			transform.Rotate (Vector3.up * 0);
 			transform.position += transform.forward * Time.deltaTime * 0;
@@ -247,15 +248,21 @@ public class BossMoveManager : MonoBehaviour {
 			Debug.Log (dethTime);
 
 			if(dethTime >= 4.0f){
-            sceneManager.OnBossDied();
+            //sceneManager.OnBossDied();
             CameraController.cursorIsLocked = false;
-			result.allowSceneActivation = true;
 			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
 			gameObject.SetActive (false);
 			//bossKilledCameraPosition.transform.position = bossCamera.position;
 			//bossKilledCameraPosition.transform.LookAt (bossCamera);
 			//PlayerControl.EclairImmobile = true;
 			}
+
+            if(BossAttackedCount >= 4 && isDying == false)
+            {
+                ScoreCounter.EnemyBeated();
+                sceneManager.Invoke();
+                isDying = true;
+            }
 
 
 		}

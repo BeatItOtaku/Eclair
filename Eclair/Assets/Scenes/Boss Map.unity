@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17160273, g: 0.160211, b: 0.16636199, a: 1}
+  m_IndirectSpecularColor: {r: 0.17173061, g: 0.16021052, b: 0.16643581, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2517,6 +2517,7 @@ MonoBehaviour:
   haloGreen: {fileID: 0}
   haloRed: {fileID: 0}
   sceneManager: {fileID: 0}
+  isDying: 0
 --- !u!95 &508764938
 Animator:
   serializedVersion: 3
@@ -6619,6 +6620,7 @@ MonoBehaviour:
   haloGreen: {fileID: 1690732384}
   haloRed: {fileID: 612312465}
   sceneManager: {fileID: 1312495182}
+  isDying: 0
 --- !u!54 &758872150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9680,6 +9682,7 @@ MonoBehaviour:
   haloGreen: {fileID: 0}
   haloRed: {fileID: 0}
   sceneManager: {fileID: 0}
+  isDying: 0
 --- !u!54 &908217038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11758,8 +11761,8 @@ GameObject:
   - 81: {fileID: 997631605}
   - 114: {fileID: 997631604}
   - 114: {fileID: 997631603}
-  - 114: {fileID: 997631611}
   - 95: {fileID: 997631610}
+  - 114: {fileID: 997631611}
   m_Layer: 0
   m_Name: BossSceneCamera
   m_TagString: Untagged
@@ -11805,14 +11808,14 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997631602}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!92 &997631606
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997631602}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!124 &997631607
 Behaviour:
   m_ObjectHideFlags: 0
@@ -11826,7 +11829,7 @@ Camera:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 997631602}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -11892,7 +11895,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 997631602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffa8aca72b6b3411abae6011c41c8816, type: 3}
+  m_Script: {fileID: 11500000, guid: a924caffdec26c9498619687e16263da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1012883303
@@ -12471,10 +12474,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeline:
-    list: []
+    list:
+    - Key: -1
+      Value: {fileID: 997631602}
+    - Key: 2
+      Value: {fileID: 0}
+    - Key: 14
+      Value: {fileID: 0}
+    - Key: -1
+      Value: {fileID: 997631602}
+    - Key: 6.5
+      Value: {fileID: 0}
+    - Key: 0.5
+      Value: {fileID: 0}
+    - Key: 0
+      Value: {fileID: 0}
+    - Key: 0
+      Value: {fileID: 0}
   bgm: {fileID: 0}
-  intro: {fileID: 8300000, guid: f2f05c74daab2f54eb62d5dcf2e46035, type: 3}
-  loop: {fileID: 8300000, guid: 826b0cad221eace41a0e5afe42d91114, type: 3}
+  bossBGMIntro: {fileID: 8300000, guid: 88be90e4738de3b4ca25d1e4f73c7c8b, type: 3}
+  bossBGMLoop: {fileID: 8300000, guid: 3f4dd09c0987d4c25a94c2ae9d714ebd, type: 3}
+  resultBGMIntro: {fileID: 8300000, guid: f2f05c74daab2f54eb62d5dcf2e46035, type: 3}
+  resultBGMLoop: {fileID: 8300000, guid: 826b0cad221eace41a0e5afe42d91114, type: 3}
 --- !u!4 &1312495183
 Transform:
   m_ObjectHideFlags: 0
@@ -13404,6 +13425,7 @@ MonoBehaviour:
   bgm: {fileID: 8300000, guid: 3f4dd09c0987d4c25a94c2ae9d714ebd, type: 3}
   skyball: {fileID: 732581152}
   mainCamera: {fileID: 0}
+  manager: {fileID: 1312495182}
 --- !u!23 &1776875786
 MeshRenderer:
   m_ObjectHideFlags: 0
