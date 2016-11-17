@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17173061, g: 0.16021052, b: 0.16643581, a: 1}
+  m_IndirectSpecularColor: {r: 0.17160273, g: 0.160211, b: 0.16636199, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -6562,7 +6562,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b193465ff20644d392e4fe434dba32f, type: 3}
@@ -18671,7 +18671,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2004214424}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0393, z: -0.28}
+  m_LocalPosition: {x: 0, y: 0.122, z: -0.275}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -18701,7 +18701,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2038150605
 Prefab:
