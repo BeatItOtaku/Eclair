@@ -20,7 +20,17 @@ public class BossMoveManager : MonoBehaviour {
 	public GameObject bossSmoke1;//エフェクト
 	public GameObject bossSmoke2;//エフェクト
 	public GameObject fire;//エフェクト
+	public GameObject exp;
 	public GameObject bossKilled;//爆発する
+	public GameObject hint;
+
+	public Transform explosion1;
+	public Transform explosion2;
+	public Transform explosion3;
+
+	private bool exp1;
+	private bool exp2;
+	private bool exp3;
 
     public GameObject haloGreen;
     public GameObject haloRed;
@@ -59,6 +69,8 @@ public class BossMoveManager : MonoBehaviour {
 
 	public static float waitTime = 0;
 	private float dethTime = 0;
+	private float hintTime = 0;
+
 	private bool wait = false;
 
 	private Animator bossAnim;
@@ -78,6 +90,11 @@ public class BossMoveManager : MonoBehaviour {
 		fire.SetActive (false);
 		result = SceneManager.LoadSceneAsync ("Result", LoadSceneMode.Additive);
 		result.allowSceneActivation = false;
+		exp1 = false;
+		exp2 = false;
+		exp3 = false;
+		hint.SetActive (false);
+		hintTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -99,6 +116,13 @@ public class BossMoveManager : MonoBehaviour {
 		difDistanceCT = centerDistance - tailDistance;
 
 		playerHeightF = Vector3.Distance (playerV, playerHeightV);
+
+		hintTime += Time.deltaTime;
+
+		if (hintTime >= 20f) {
+			hint.SetActive (true);
+		}
+		Debug.Log (hintTime);
 
         //ボスの動き
 
@@ -234,7 +258,7 @@ public class BossMoveManager : MonoBehaviour {
             setBossSpeed(1.8f);
         }
         //ボスが倒されたとき
-        if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
+        if (BossAttackedCount >= 2)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
 			PlayerControl.EclairImmobile = true;
             Camera.main.GetComponent<BGMController>().Stop();
@@ -246,7 +270,18 @@ public class BossMoveManager : MonoBehaviour {
 			bossAnim.SetTrigger ("BossKilled");
 			Debug.Log (dethTime);
 
-			if(dethTime >= 4.0f){
+			if (dethTime >= 2.6f && exp1 == false) {
+				Instantiate (exp, explosion1.position, explosion1.rotation);
+				exp1 = true;
+			} else if (dethTime >= 4.35f && exp1 ==true && exp2 == false) {
+				Instantiate (exp, explosion2.position, explosion2.rotation);
+				exp2 = true;
+			} else if (dethTime >= 4.6f && exp1 == true && exp2 == true && exp3 == false) {
+				Instantiate (exp, explosion3.position, explosion3.rotation);
+				exp3 = true;
+			}
+
+			if(dethTime >= 7.0f){
             sceneManager.OnBossDied();
             CameraController.cursorIsLocked = false;
 			result.allowSceneActivation = true;

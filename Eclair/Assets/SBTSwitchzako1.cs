@@ -12,11 +12,16 @@ public class SBTSwitchzako1 : EnemyBase {
 
 	private float OnTime;
 
+	public AudioSource audioSource;
+
+	public AudioClip switchOn;
+	public AudioClip switchOff;
 	// Use this for initialization
 	void Start () {
 		(glass.GetComponent ("Halo") as Behaviour).enabled = false;
 		SBT1On = false;
 		OnTime = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -32,6 +37,7 @@ public class SBTSwitchzako1 : EnemyBase {
 			meshrender.material.color = new Color (0, 0, 0, 1.0f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = false;
 			SBT1On = false;
+			audioSource.PlayOneShot (switchOff);
 		}
 	}
 	public override void Damage(int damage ,Vector3 direction){
@@ -40,6 +46,7 @@ public class SBTSwitchzako1 : EnemyBase {
 			meshrender.material.color = new Color (0, 0, 0, 0.5f);
 			(glass.GetComponent ("Halo") as Behaviour).enabled = true;
 			SBT1On = true;
+			audioSource.PlayOneShot (switchOn);
 			
 
 		}

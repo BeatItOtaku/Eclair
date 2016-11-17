@@ -8,6 +8,8 @@ public class DoorScript : MonoBehaviour {
 
 	public EventManager2 em2;
 
+	public AudioSource audioSource;
+	public AudioClip doorOpenSE;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +24,8 @@ public class DoorScript : MonoBehaviour {
 
 		if (em2.eventCount2 == 3 && doorOpen == true) {
 			animator.SetTrigger ("Open");
+			audioSource.PlayOneShot (doorOpenSE);
+			doorOpen = false;
 	}
 }
 }
