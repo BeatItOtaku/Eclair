@@ -5,6 +5,9 @@ public class GunGet : MonoBehaviour {
 
 	public EventManager em;
 
+	public AudioSource audioSource;
+	public AudioClip gunGet;
+
 	// Use this for initialization
 	void Start () {
 
@@ -18,7 +21,9 @@ public class GunGet : MonoBehaviour {
 	private void OnCollisionEnter(Collision collider){
 		if(collider.gameObject.tag == "Player"){
 			if (EventManager.eventCount == 6) {
+				audioSource.PlayOneShot (gunGet);
 						em.EventCount ();
+
 					}
 			}
 	}	
