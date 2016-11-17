@@ -25,6 +25,8 @@ public class BossMoveManager : MonoBehaviour {
     public GameObject haloGreen;
     public GameObject haloRed;
 
+    public BossSceneManager sceneManager;
+
     //public GameObject bossKilledCameraPosition;
     //public Transform bossCamera;
 
@@ -234,6 +236,7 @@ public class BossMoveManager : MonoBehaviour {
         //ボスが倒されたとき
         if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
+            Camera.main.GetComponent<BGMController>().Stop();
             setBossSpeed(1);
 			transform.Rotate (Vector3.up * 0);
 			transform.position += transform.forward * Time.deltaTime * 0;
@@ -243,7 +246,8 @@ public class BossMoveManager : MonoBehaviour {
 			Debug.Log (dethTime);
 
 			if(dethTime >= 4.0f){
-			CameraController.cursorIsLocked = false;
+            sceneManager.OnBossDied();
+            CameraController.cursorIsLocked = false;
 			result.allowSceneActivation = true;
 			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
 			gameObject.SetActive (false);

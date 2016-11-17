@@ -129,7 +129,7 @@ public class InputManager : MonoBehaviour {
 
         GameObject.Find("FadeInPanel").GetComponent<AnimationQueueBase>().Queue();
 
-		CameraChanger.Instance.enabled = true;//インスタンスを作っとく
+		CameraChanger.CurrentCamera = Camera.main;//インスタンスを作っとく
 	}
 
 	// Update is called once per frame
@@ -275,7 +275,7 @@ public class InputManager : MonoBehaviour {
 		sbt = true;
 		playerState_ = PlayerStates.SBT;
 		thunderEffect.StartEffect (muzzle.transform.position, target.transform.position);
-        Camera.main.GetComponent<RadialBlur>().Shock(0.5f,1.2f);
+        Camera.main.GetComponent<RadialBlur>().Shock(0.5f,1.8f);
 		audioSource.PlayOneShot (SBTSound);
 
 		//ビリビリ上にあるオブジェクトを求めるよ

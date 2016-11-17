@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Event2_10_way : MonoBehaviour {
 
+    public EventManager2 em2;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -14,7 +16,7 @@ public class Event2_10_way : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-        if(col.CompareTag("Player"))
+        if(col.CompareTag("Player") && em2.eventCount2 >= 9)
             StartCoroutine(coroutine());
 		//MapLoader.Instance.Reset();
 	}

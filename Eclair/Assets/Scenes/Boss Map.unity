@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17160273, g: 0.160211, b: 0.16636199, a: 1}
+  m_IndirectSpecularColor: {r: 0.17173061, g: 0.16021052, b: 0.16643581, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2516,6 +2516,7 @@ MonoBehaviour:
   bossKilled: {fileID: 100006, guid: 6aea392f353e04156a230db0fba22230, type: 2}
   haloGreen: {fileID: 0}
   haloRed: {fileID: 0}
+  sceneManager: {fileID: 0}
 --- !u!95 &508764938
 Animator:
   serializedVersion: 3
@@ -6613,6 +6614,7 @@ MonoBehaviour:
   bossKilled: {fileID: 100006, guid: 6aea392f353e04156a230db0fba22230, type: 2}
   haloGreen: {fileID: 1690732384}
   haloRed: {fileID: 612312465}
+  sceneManager: {fileID: 1312495182}
 --- !u!54 &758872150
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9673,6 +9675,7 @@ MonoBehaviour:
   bossKilled: {fileID: 100006, guid: 6aea392f353e04156a230db0fba22230, type: 2}
   haloGreen: {fileID: 0}
   haloRed: {fileID: 0}
+  sceneManager: {fileID: 0}
 --- !u!54 &908217038
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12314,6 +12317,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeline:
     list: []
+  bgm: {fileID: 0}
+  intro: {fileID: 8300000, guid: f2f05c74daab2f54eb62d5dcf2e46035, type: 3}
+  loop: {fileID: 8300000, guid: 826b0cad221eace41a0e5afe42d91114, type: 3}
 --- !u!4 &1312495183
 Transform:
   m_ObjectHideFlags: 0
