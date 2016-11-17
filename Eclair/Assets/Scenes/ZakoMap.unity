@@ -16537,6 +16537,10 @@ Prefab:
       propertyPath: m_Name
       value: Event4(bikkuri)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011474875466, guid: 3ca7f6f1861d448b1aa878396892b6b1, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ca7f6f1861d448b1aa878396892b6b1, type: 2}
   m_IsPrefabParent: 0
@@ -41239,6 +41243,9 @@ MonoBehaviour:
   em2: {fileID: 1707958267}
   audioSource: {fileID: 1707958269}
   bossswitchOn: {fileID: 8300000, guid: 9b4e7fef39a5d4a1cba684d2f4476bcf, type: 3}
+  plate: {fileID: 1825317156}
+  off: {fileID: 2100000, guid: 75f81ef075cb742218a402457bc348a2, type: 2}
+  on: {fileID: 2100000, guid: faae471135a464fc693a06cb34d13070, type: 2}
 --- !u!95 &989677100
 Animator:
   serializedVersion: 3
@@ -86923,6 +86930,9 @@ MonoBehaviour:
   em2: {fileID: 1707958267}
   audioSource: {fileID: 1707958269}
   bossswitchOn: {fileID: 8300000, guid: 9b4e7fef39a5d4a1cba684d2f4476bcf, type: 3}
+  plate: {fileID: 1998256528}
+  off: {fileID: 2100000, guid: 75f81ef075cb742218a402457bc348a2, type: 2}
+  on: {fileID: 2100000, guid: faae471135a464fc693a06cb34d13070, type: 2}
 --- !u!95 &2070540025
 Animator:
   serializedVersion: 3
