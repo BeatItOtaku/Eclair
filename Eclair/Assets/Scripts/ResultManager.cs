@@ -178,14 +178,6 @@ public class ResultManager : MonoBehaviour {
 
 	public void GoToTitle(){
         //Application.LoadLevel (0);
-        StartCoroutine(GoToTitie_raw());
+		MapLoader.Instance.GoToTitle();
 	}
-
-    IEnumerator GoToTitie_raw()
-    {
-        AsyncOperation async =  SceneManager.LoadSceneAsync("Credit");
-        async.allowSceneActivation = false;
-        yield return new WaitForSecondsRealtime(0.5f);
-        async.allowSceneActivation = true;
-    }
 }
