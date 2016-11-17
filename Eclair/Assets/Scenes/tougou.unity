@@ -6259,6 +6259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   em2: {fileID: 0}
+  audioSource: {fileID: 0}
+  doorOpenSE: {fileID: 0}
 --- !u!95 &1494477912
 Animator:
   serializedVersion: 3
