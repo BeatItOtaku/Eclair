@@ -20,7 +20,7 @@ public class BossGate : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (em2.bossSwitchCount == 2) {
-			if (openTime <= 4.0f) {
+			if (openTime <= 3.0f) {
 				audioSource.PlayOneShot (bossDoorOpen);
 				openTime += Time.deltaTime;
 
@@ -33,7 +33,6 @@ public class BossGate : MonoBehaviour {
 	public void DoorOpen(){
 		if (em2.bossSwitchCount == 2) {
 			anim.SetTrigger ("Open");
-			audioSource.PlayOneShot (bossDoorOpen);
 			em2.EventCount2 ();
 		}
 	}
