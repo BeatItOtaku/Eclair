@@ -56,6 +56,8 @@ public class ResultManager : MonoBehaviour {
 	/// </summary>
 	public int[] totalRankThreshold = {2000,3000,4000};
 
+    public GameObject canvas;
+
 	public AnimationQueue_Time timeText;
 	public AnimationQueue_Rank timeRank;
 	public AnimationQueue_Number timeScore;
@@ -111,8 +113,8 @@ public class ResultManager : MonoBehaviour {
             return;
         }
 		else if (timeline [cursor].Key < time) {
-			GameObject.Find (timeline [cursor].Value).GetComponents<AnimationQueueBase>()[0].Queue ();//抽象クラス最高！
-			//Debug.Log (timeline [cursor].Value);
+			Debug.Log (cursor + ":" + timeline [cursor].Value);
+			canvas.transform.FindChild(timeline [cursor].Value).GetComponents<AnimationQueueBase>()[0].Queue ();//抽象クラス最高！
 			time = 0;
 			cursor++;
 		}
