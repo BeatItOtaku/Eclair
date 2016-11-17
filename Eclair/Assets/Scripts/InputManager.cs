@@ -128,6 +128,8 @@ public class InputManager : MonoBehaviour {
 		screenMiddle = new Vector3 (width / 2, height / 2, 0);
 
         GameObject.Find("FadeInPanel").GetComponent<AnimationQueueBase>().Queue();
+
+		CameraChanger.CurrentCamera = Camera.main;//インスタンスを作っとく
 	}
 
 	// Update is called once per frame
@@ -143,12 +145,12 @@ public class InputManager : MonoBehaviour {
 					GameObject go = player.GetComponent<LockOn> ().Switch ();//ロックオン状態であれば次の対象へ
 					onLockOnSwitched (go);
 				} else if (playerState == PlayerStates.Idle) {//ロックオン状態じゃないときはボルト射出
-					GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
+					/*GameObject bolt = GameObject.FindGameObjectWithTag ("Bolt");
 					if (bolt != null) {
 						player.transform.LookAt (bolt.transform);
 						player.transform.rotation = new Quaternion (0, player.transform.rotation.y, 0, player.transform.rotation.w);
-					}
-
+					}*/
+					playerState_ = PlayerStates.Bolt;
 					Ray ray = Camera.main.ScreenPointToRay (screenMiddle);
 					RaycastHit hit;
 					Vector3 hitPosition;
@@ -164,13 +166,23 @@ public class InputManager : MonoBehaviour {
 					}
 					if (player.GetComponent<PlayerShot> ().LaunchBolt (hitPosition, hitQuaternion)) {
 						audioSource.PlayOneShot (boltLaunchSound);
-						playerState_ = PlayerStates.Bolt;
+
 					}
-				}
+
+                    GameObject bolt = GameObject.FindGameObjectWithTag("Bolt");
+                    if (bolt != null)
+                    {
+						if (boltLaunch == true) {
+							Quaternion rot = Quaternion.LookRotation (hitPosition - player.transform.position);
+							player.transform.rotation = Quaternion.Euler (0, rot.eulerAngles.y, 0);
+						}
+                    }
+
+                }
 
 			}
 			if (playerState_ == PlayerStates.Bolt) {
-				boltLaunch = true;
+				
 				boltTime += Time.deltaTime;
 				if (boltTime >= 0.3f) {
 					playerState_ = PlayerStates.Idle;
@@ -258,13 +270,12 @@ public class InputManager : MonoBehaviour {
 	}
 	}
 
-
 	private void startSBT (GameObject target)
 	{
 		sbt = true;
 		playerState_ = PlayerStates.SBT;
 		thunderEffect.StartEffect (muzzle.transform.position, target.transform.position);
-        Camera.main.GetComponent<RadialBlur>().Shock(0.5f,1.2f);
+        Camera.main.GetComponent<RadialBlur>().Shock(0.5f,1.8f);
 		audioSource.PlayOneShot (SBTSound);
 
 		//ビリビリ上にあるオブジェクトを求めるよ

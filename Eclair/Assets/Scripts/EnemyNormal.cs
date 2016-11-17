@@ -12,6 +12,8 @@ public class EnemyNormal : EnemyBase {
 	public float attackSpeed = 4;
     public float mutekiTime = 0.8f;
 
+    public GameObject effectWhenDied;
+
 	public GameObject player;
     private Animator anim;
 
@@ -39,7 +41,9 @@ public class EnemyNormal : EnemyBase {
             //プレイヤーが近づいてる時
             anim.enabled = true;
             anim.SetBool("isAttacking", true);
-			transform.LookAt(player.transform.position);
+			Quaternion rot = Quaternion.LookRotation (player.transform.position - transform.position);
+			transform.rotation = Quaternion.Euler (0, rot.eulerAngles.y, 0);
+			//transform.LookAt(player.transform.position);
 			//transform.position += transform.forward * attackSpeed * Time.deltaTime;
 		} else if (distance < moveDistance){
             anim.enabled = true;
@@ -59,16 +63,17 @@ public class EnemyNormal : EnemyBase {
             anim.SetTrigger("Died");
 			GetComponent<Rigidbody> ().constraints = new RigidbodyConstraints ();
 			GetComponent<Rigidbody> ().velocity += transform.up * dieReaction;
-            Destroy(gameObject, 1.2f);
+            StartCoroutine(Death());
 			if (EventManager.eventCount == 3) {
 				em = GameObject.Find ("EventManager");
 				em.GetComponent<EventManager> ().EventCount ();
 			}
+            ScoreCounter.EnemyBeated();
         }
         else
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            lookRotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
+            lookRotation = Quaternion.Euler(0, lookRotation.eulerAngles.y + 180, 0);
             transform.rotation = lookRotation;
             if (damage < 6) anim.SetTrigger("Defend");
             else anim.SetTrigger("Damaged");
@@ -78,6 +83,13 @@ public class EnemyNormal : EnemyBase {
         //Debug.Log ("ZakoHP:" + HP);
 
 	}
+
+    private IEnumerator Death()
+    {
+        yield return new WaitForSecondsRealtime(1.2f);
+        Instantiate(effectWhenDied, transform.position, new Quaternion(0, 0, 0, 0));
+        Destroy(gameObject);
+    }
 
     IEnumerator startMuteki()
     {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -97,7 +98,8 @@ public class ResultManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//CameraController.cursorIsLocked = false;
+        //CameraController.cursorIsLocked = false;
+        setResult((int)ScoreCounter.TimeSinceStarted, ScoreCounter.BeatedEnemyCount, ScoreCounter.LaunchedBoltCount);
 	}
 	
 	// Update is called once per frame
@@ -123,7 +125,7 @@ public class ResultManager : MonoBehaviour {
 
 		timeText.time = usedTime;
 		timeRank.rank = calicurateRankAscending (usedTime, timeRankThreshold);
-		timeScore.number = (usedTime - optiTime) * timeScoreFactor;
+		timeScore.number = (optiTime - usedTime) * timeScoreFactor;
 
 		enemyText.number = beatedEnemy;
 		enemyRank.rank = calicurateRankDescending (beatedEnemy, enemyRankThreshold);
@@ -175,6 +177,15 @@ public class ResultManager : MonoBehaviour {
 	}
 
 	public void GoToTitle(){
-		Application.LoadLevel (0);
+        //Application.LoadLevel (0);
+        StartCoroutine(GoToTitie_raw());
 	}
+
+    IEnumerator GoToTitie_raw()
+    {
+        AsyncOperation async =  SceneManager.LoadSceneAsync("Credit");
+        async.allowSceneActivation = false;
+        yield return new WaitForSecondsRealtime(0.5f);
+        async.allowSceneActivation = true;
+    }
 }

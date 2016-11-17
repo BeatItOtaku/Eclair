@@ -33,7 +33,9 @@ public class AnimationQueue_Number : AnimationQueueBase {
 	public override void Queue(){
 		text.enabled = true;
 		text.text = "0";
-	}
+        positive = (number > 0);
+        number = (int)Mathf.Abs(number);
+    }
 
 	private void setText(int num){
 		string sign = "";

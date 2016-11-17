@@ -21,16 +21,15 @@ public class EventManager2 : MonoBehaviour {
 	public int eventCount2;
 
 	public GameObject event1_camera;
-	public GameObject event2_zako;
 	public GameObject event2_yajirushi;
 	public GameObject event3_yajirushi;
 	public GameObject event4_bikkuri;
 	public GameObject event6_yajirushi;
 	public GameObject event7_bikkuri;
-	public GameObject event7_zako;
 	public GameObject event9_yajirushi;
+	public Camera event9_camera;
 
-	public BossGate bg;
+    public BossGate bg;
 
 
 	// Use this for initialization
@@ -38,13 +37,11 @@ public class EventManager2 : MonoBehaviour {
 		bossSwitchCount = 0;
 		eventCount2 = 2;
 
-		event2_zako.SetActive (false);
 		event2_yajirushi.SetActive (false);
 		event3_yajirushi.SetActive (false);
 		event4_bikkuri.SetActive (false);
 		event6_yajirushi.SetActive (false);
 		event7_bikkuri.SetActive (false);
-		event7_zako.SetActive (false);
 		event9_yajirushi.SetActive (false);
 
         EventManager.eventCount = 10;
@@ -70,7 +67,7 @@ public class EventManager2 : MonoBehaviour {
 			break;
 		case 2:
 			event2_yajirushi.SetActive (true);
-			event2_zako.SetActive (true);
+
 
 			break;
 
@@ -85,20 +82,19 @@ public class EventManager2 : MonoBehaviour {
 			event4_bikkuri.SetActive (true);
 			break;
 
-	    case 5:
+		case 5:
 			event4_bikkuri.SetActive (false);
 			
 			break;
 
 		case 6:
 			event6_yajirushi.SetActive (true);
-
+			EventCount2 ();
 			break;
 
 		case 7:
 			event6_yajirushi.SetActive (false);
 			event7_bikkuri.SetActive (true);
-			event7_zako.SetActive (true);
 			break;
 
 		case 8:
@@ -106,12 +102,18 @@ public class EventManager2 : MonoBehaviour {
 			break;
 
 		case 9:
-			event9_yajirushi.SetActive (true);
+                StartCoroutine(event9Coroutine());
 			break;
 		}
 	}
 
-	public void BossSwitch(){
+    IEnumerator event9Coroutine()
+    {
+        yield return StartCoroutine(CameraChanger.Instance.ChangeTemporary_raw(event9_camera, 5));
+		event9_yajirushi.SetActive (true);
+    }
+
+    public void BossSwitch(){
 		bossSwitchCount++;
 		switch (bossSwitchCount) {
 

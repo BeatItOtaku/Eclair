@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour {
 
 	public GameObject event2_bolt;
 	public GameObject event2_sita;
+	public GameObject event2_camera;
 	public GameObject event3_zako;
 	public GameObject event3_bolt;
 	public GameObject event4_bolt;
@@ -65,8 +66,6 @@ public class EventManager : MonoBehaviour {
 		event7_EclairGun = GameObject.Find ("Gun");
 		event7_EclairGun.SetActive (false);
 		event7_yajirushi.SetActive (false);
-
-		event7_gunParticle.SetActive (false);
 		event8_zako.SetActive (false);
 
 	}
@@ -75,6 +74,9 @@ public class EventManager : MonoBehaviour {
 	void Update () {
 		if (event7_EclairGun == null) {
 			event7_EclairGun = GameObject.Find ("Gun");
+			if (eventCount < 7) {
+				event7_EclairGun.SetActive (false);
+			}
 		}
 		if (tutorialMove == null) {
 			tutorialMove = GameObject.Find ("Tutorial_Move");
@@ -107,6 +109,7 @@ public class EventManager : MonoBehaviour {
 			break;
 		case 2:
 			GameObject.Find ("Tutorial_LockOn").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			StartCoroutine (lockOnDelay ());
 			break;
 		case 3:
 			event2_sita.SetActive (false);
@@ -131,12 +134,13 @@ public class EventManager : MonoBehaviour {
 		case 5:
 			//SBTスイッチのチュートリアル
 			GameObject.Find ("Tutorial_Etoile").GetComponent<AnimationQueue_Tutorial> ().Queue ();
-
+			GameObject.Find ("Tutorial_SBTSwitch").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event5_bolt.SetActive (true);
 			break;
 
 		case 6:
 			//金網すりぬけチュートリアル
+			GameObject.Find ("Tutorial_SBTSwitch").GetComponent<AnimationQueue_Tutorial> ().Queue ();
 			event6_yajirushi.SetActive (true);
 			event6_bolt.SetActive (true);
 			event5_bolt.SetActive (false);
@@ -144,10 +148,12 @@ public class EventManager : MonoBehaviour {
 		case 7:
 			//銃ゲット
 			GameObject.Find ("Tutorial_Bolt").GetComponent<AnimationQueue_Tutorial> ().Queue ();
+			event6_bolt.SetActive (false);
 			event7_EclairGun.SetActive (true);
 			event7_gun.SetActive (false);
 			event7_yajirushi.SetActive (true);
-			event7_gunParticle.SetActive (true);
+			GameObject Pa = (GameObject)Instantiate (event7_gunParticle, event7_gun.transform.position, transform.rotation);
+			Pa.transform.Rotate (-90, 0, 0);
 			EventCount();
 			break;
 		case 8:
@@ -161,6 +167,17 @@ public class EventManager : MonoBehaviour {
 			StartCoroutine (hideTutorialUIs());
 			break;
 		}
+	}
+
+	IEnumerator lockOnDelay(){
+        Camera beforeCamera = Camera.main;
+        beforeCamera.enabled = false;
+        event2_camera.GetComponent<Camera>().enabled = true;
+		yield return new WaitForSecondsRealtime (1.2f);
+		event2_camera.GetComponent<Camera>().enabled = false;
+        beforeCamera.enabled = true;
+        //CameraChanger.Instance.ChangeTemporary(event2_camera, 1.2f);
+		EventCount ();
 	}
 
 	private IEnumerator hideTutorialUIs(){
