@@ -11,7 +11,15 @@ public class BossSceneManager : AnimationQueueManager {
     public AudioClip resultBGMIntro;
     public AudioClip resultBGMLoop;
 
+    public Vector3 playerPositionOnResult;
+    public Vector3 playerRotationOnResult;
+
     private AsyncOperation result;
+
+    public BossMoveManager moveManager;
+
+    private GameObject canvas;
+    private GameObject player;
 
 	// Use this for initialization
 	protected override void Start () {
@@ -31,20 +39,40 @@ public class BossSceneManager : AnimationQueueManager {
         Debug.Log("BossSceneManager:" + after);
         switch (after)
         {
-            case 2:
+            case 1://カメラアニメーションスタート
+                canvas = GameObject.Find("Canvas");
+                player = GameObject.FindGameObjectWithTag("Player");
+                canvas.SetActive(false);
+                break;
+            case 2://尻尾ランプつく
+                moveManager.SBTSwitchPopOnAwake();
+                break;
+            case 3://BGMとボスAwake
+                moveManager.BossAwake();
                 bgm = GameObject.Find("Main Camera").GetComponent<BGMController>();
                 bgm.Play(bossBGMIntro, bossBGMLoop, 1);
                 break;
-            case 3:
+            case 4://戦いが始まる
                 CameraChanger.CurrentCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+                canvas.SetActive(true);
+                moveManager.BossAwaken();
                 break;
-            case 4:
+            case 5://倒された直後
+                canvas.SetActive(false);
+                player.GetComponent<Rigidbody>().isKinematic = true;
+                player.GetComponent<Animator>().applyRootMotion = false;
+                PlayerControl.EclairImmobile = true;
+                player.transform.position = playerPositionOnResult;
+                player.transform.rotation = Quaternion.Euler(playerRotationOnResult);
                 bgm.Stop();
                 break;
-            case 5:
+            case 6:
                 OnBossDied();
                 break;
-            case 6:
+            case 7:
+                RenderSettings.ambientIntensity = 1.0f;
+                player.transform.position = playerPositionOnResult;
+                player.transform.rotation = Quaternion.Euler(playerRotationOnResult);
                 result.allowSceneActivation = true;
                 break;
         }
