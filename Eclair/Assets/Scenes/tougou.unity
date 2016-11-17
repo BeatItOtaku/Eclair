@@ -1300,7 +1300,7 @@ MonoBehaviour:
   intro: {fileID: 8300000, guid: 4f79fb72c4b51274bbae03f4bcadeb93, type: 3}
   loop: {fileID: 8300000, guid: 715630ce52d6ff049a3c50ccc2140d17, type: 3}
   PlayOnAwake: 1
-  defaultVolume: 0.7
+  defaultVolume: 0.9
   volumeSmoothFactor: 0.5
 --- !u!114 &446296778
 MonoBehaviour:

@@ -15,9 +15,15 @@ public class EnemyNormal : EnemyBase {
     public GameObject effectWhenDied;
 
 	public GameObject player;
+
+    public AudioClip damaged;
+    public AudioClip death;
+
     private Animator anim;
 
     private bool isMuteki;
+
+    private AudioSource audio;
 
 	private GameObject em;
 	/// <summary>
@@ -31,6 +37,7 @@ public class EnemyNormal : EnemyBase {
 		HP = maxHp;
 		player = GameObject.FindGameObjectWithTag ("Player");
         anim = GetComponent<Animator>();
+        audio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -56,6 +63,7 @@ public class EnemyNormal : EnemyBase {
 	}
 
 	public override void Damage(int damage,Vector3 direction){
+        if (isMuteki) return;
 		HP -= damage;
 		GetComponent<Rigidbody>().velocity = (-transform.forward * damageReaction);
         if (HP <= 0)
@@ -76,16 +84,21 @@ public class EnemyNormal : EnemyBase {
             lookRotation = Quaternion.Euler(0, lookRotation.eulerAngles.y + 180, 0);
             transform.rotation = lookRotation;
             if (damage < 6) anim.SetTrigger("Defend");
-            else anim.SetTrigger("Damaged");
-            startMuteki();
+            else
+            {
+                anim.SetTrigger("Damaged");
+                audio.PlayOneShot(damaged);
+            }
 
         }
         //Debug.Log ("ZakoHP:" + HP);
+        StartCoroutine(startMuteki());
 
-	}
+    }
 
     private IEnumerator Death()
     {
+        audio.PlayOneShot(death);
         yield return new WaitForSecondsRealtime(1.2f);
         Instantiate(effectWhenDied, transform.position, new Quaternion(0, 0, 0, 0));
         Destroy(gameObject);
@@ -107,6 +120,7 @@ public class EnemyNormal : EnemyBase {
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
 			col.gameObject.GetComponent<PlayerControl> ().Damage (2);
+            audio.PlayOneShot(damaged);
 			GetComponent<Rigidbody>().velocity = (-transform.forward * attackReaction);
 		}
 	}
