@@ -11,6 +11,8 @@ public class BossSceneManager : AnimationQueueManager {
     public AudioClip resultBGMIntro;
     public AudioClip resultBGMLoop;
 
+    public GameObject pointLight;
+
     public Vector3 playerPositionOnResult;
     public Vector3 playerRotationOnResult;
 
@@ -73,6 +75,7 @@ public class BossSceneManager : AnimationQueueManager {
                 RenderSettings.ambientIntensity = 1.0f;
                 player.transform.position = playerPositionOnResult;
                 player.transform.rotation = Quaternion.Euler(playerRotationOnResult);
+                pointLight.SetActive(true);
                 result.allowSceneActivation = true;
                 break;
         }

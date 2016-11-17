@@ -93,17 +93,17 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 6
+      - time: 5.3666663
         value: 0.69
         inSlope: -2.0727632
         outSlope: -2.0727632
         tangentMode: 0
-      - time: 6.016667
+      - time: 5.383333
         value: 0.65602547
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 7.05
+      - time: 6.4166665
         value: 0
         inSlope: 0
         outSlope: 0
@@ -176,17 +176,17 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 6
+      - time: 5.3666663
         value: 0.69
         inSlope: -2.0727632
         outSlope: -2.0727632
         tangentMode: 0
-      - time: 6.016667
+      - time: 5.383333
         value: 0.65602547
         inSlope: 0
         outSlope: 0
         tangentMode: 0
-      - time: 7.05
+      - time: 6.4166665
         value: 0
         inSlope: 0
         outSlope: 0

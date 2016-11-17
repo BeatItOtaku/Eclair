@@ -48,7 +48,13 @@ public class BossMoveManager : MonoBehaviour {
 
     public bool isDying = false;
 
-	private Vector3 playerV;
+    public AudioClip soundRoaring;
+    public AudioClip soundShot;
+    public AudioClip soundWalk;
+    public AudioClip soundExplosion;
+    public AudioClip soundSBTSwitch;
+
+    private Vector3 playerV;
 	private Vector3 playerHeightV;
 	private Vector3 leftFootV;
 	private Vector3 rightFootV;
@@ -296,15 +302,17 @@ public class BossMoveManager : MonoBehaviour {
 				exp3 = true;
 			}
 
-			if(dethTime >= 6.0f){
-            //sceneManager.OnBossDied();
-            CameraController.cursorIsLocked = false;
-			Instantiate (bossKilled, boss.transform.position, boss.transform.rotation);
-			gameObject.SetActive (false);
-			//bossKilledCameraPosition.transform.position = bossCamera.position;
-			//bossKilledCameraPosition.transform.LookAt (bossCamera);
-			//PlayerControl.EclairImmobile = true;
-			}
+            if (dethTime >= 5.4f)
+            {
+                //sceneManager.OnBossDied();
+                CameraController.cursorIsLocked = false;
+                Instantiate(bossKilled, boss.transform.position, boss.transform.rotation);
+                Camera.current.GetComponent<AudioSource>().PlayOneShot(soundExplosion);
+                gameObject.SetActive(false);
+                //bossKilledCameraPosition.transform.position = bossCamera.position;
+                //bossKilledCameraPosition.transform.LookAt (bossCamera);
+                //PlayerControl.EclairImmobile = true;
+            }
 
             if(BossAttackedCount >= 4 && isDying == false)
             {
@@ -330,12 +338,22 @@ public class BossMoveManager : MonoBehaviour {
     public void SBTSwitchPopOnAwake()
     {
         haloGreen.SetActive(true);
+        audio.PlayOneShot(soundSBTSwitch);
     }
     public void BossAwaken()
     {
         bossAwaken = true;
     }
 
+    public void BossWalkSound()
+    {
+        audio.PlayOneShot(soundWalk);
+    }
+
+    public void Roar()
+    {
+        audio.PlayOneShot(soundRoaring);
+    }
     public void onBossStartDying()
     {
         transform.position = neutralPosition;
@@ -372,6 +390,7 @@ public class BossMoveManager : MonoBehaviour {
             {
                 LaunchShot(bossMuzzle.transform.position, bossMuzzle.transform.rotation);
                 bossAnim.SetFloat(phId, playerHeightF);
+                audio.PlayOneShot(soundShot);
                 yield return new WaitForSeconds(shotIntervalMax);
             }
             else if (stateInfo.IsName("BossShotEnd"))
