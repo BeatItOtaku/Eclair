@@ -350,7 +350,7 @@ public class PlayerControl : MonoBehaviour
 					targetRotation *= Quaternion.Euler (90, 0, 0);
 
 
-				Quaternion newRotation = Quaternion.Slerp (GetComponent<Rigidbody> ().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime);
+				Quaternion newRotation = Quaternion.Slerp (GetComponent<Rigidbody> ().rotation, targetRotation, finalTurnSmoothing * Time.deltaTime*20);
 				GetComponent<Rigidbody> ().MoveRotation (newRotation);
 			//lastDirection = targetDirection;
 			}
@@ -397,7 +397,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
-    /// ダメージを受けた繧ﾉ吹っ飛びます。その後無敵時間が始まります。
+    /// ダメージを受けたに吹っ飛びます。その後無敵時間が始まります。
     /// </summary>
     /// <param name="damage"></param>
 	public void Damage(int damage,Vector3 direction){
