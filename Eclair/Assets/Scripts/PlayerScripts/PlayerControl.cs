@@ -397,7 +397,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     /// <summary>
-    /// ダメージを受けた上に吹っ飛びます。その後無敵時間が始まります。
+    /// ダメージを受けた繧ﾉ吹っ飛びます。その後無敵時間が始まります。
     /// </summary>
     /// <param name="damage"></param>
 	public void Damage(int damage,Vector3 direction){
@@ -453,7 +453,7 @@ public class PlayerControl : MonoBehaviour
 
     void DeathManagement()
     {
-        if(HP <= 0 && died == false)
+		if(HP <= 0 && died == false && EclairImmobile == false)
         {
 			anim.SetTrigger ("EclairKilled");
             died = true;

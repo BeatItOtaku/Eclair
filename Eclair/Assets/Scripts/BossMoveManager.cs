@@ -236,6 +236,7 @@ public class BossMoveManager : MonoBehaviour {
         //ボスが倒されたとき
         if (BossAttackedCount >= 4)//BossAttackedCountの初期値は1、3回攻撃するとボス撃破
 		{
+			PlayerControl.EclairImmobile = true;
             Camera.main.GetComponent<BGMController>().Stop();
             setBossSpeed(1);
 			transform.Rotate (Vector3.up * 0);
