@@ -41,7 +41,9 @@ public class EnemyNormal : EnemyBase {
             //プレイヤーが近づいてる時
             anim.enabled = true;
             anim.SetBool("isAttacking", true);
-			transform.LookAt(player.transform.position);
+			Quaternion rot = Quaternion.LookRotation (player.transform.position - transform.position);
+			transform.rotation = Quaternion.Euler (0, rot.eulerAngles.y, 0);
+			//transform.LookAt(player.transform.position);
 			//transform.position += transform.forward * attackSpeed * Time.deltaTime;
 		} else if (distance < moveDistance){
             anim.enabled = true;
@@ -104,7 +106,7 @@ public class EnemyNormal : EnemyBase {
 		//Debug.Log ("kougeki");
 		if(col.gameObject.CompareTag("Player")){
             anim.SetTrigger("Attack");
-			col.gameObject.GetComponent<PlayerControl> ().Damage (5);
+			col.gameObject.GetComponent<PlayerControl> ().Damage (2);
 			GetComponent<Rigidbody>().velocity = (-transform.forward * attackReaction);
 		}
 	}

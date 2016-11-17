@@ -15,14 +15,9 @@ public class GameOverManager : AnimationQueueManager {
 	
 	}
 
-    public void Reset()
+    public void GoToTitie()
     {
-        StartCoroutine(coroutine());
-    }
-    IEnumerator coroutine()
-    {
-        yield return new WaitForSeconds(0.5f);
-        MapLoader.Reset();
+		MapLoader.Instance.GoToTitle ();
     }
 
 

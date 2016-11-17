@@ -138,4 +138,17 @@ public class MapLoader : MonoBehaviour
         SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Additive);
     }
 
+	public void GoToTitle(){
+		//Application.LoadLevel (0);
+		StartCoroutine(GoToTitie_raw());
+	}
+
+	IEnumerator GoToTitie_raw()
+	{
+		AsyncOperation async =  SceneManager.LoadSceneAsync("Credit");
+		async.allowSceneActivation = false;
+		yield return new WaitForSecondsRealtime(0.5f);
+		async.allowSceneActivation = true;
+	}
+
 }

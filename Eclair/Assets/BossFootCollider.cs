@@ -4,6 +4,7 @@ using System.Collections;
 public class BossFootCollider : MonoBehaviour {
 
 	public static bool bossFootAttack = false;
+    public GameObject player;
 
 	// Use this for initialization
 	void Start () {
@@ -12,15 +13,20 @@ public class BossFootCollider : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//footTime += Time.deltaTime;;
-	
-	}
+        //footTime += Time.deltaTime;;
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
 	private void OnTriggerEnter (Collider collider)
 	{
-		if (collider.gameObject.tag == "Player") {
+        if (collider.gameObject.tag == "Player")
+        {
 
-				bossFootAttack = true;
-	}
+            bossFootAttack = true;
+            player.GetComponent<PlayerControl>().Damage(10);
+        }
 			
 }
 }

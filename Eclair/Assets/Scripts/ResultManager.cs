@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -124,7 +125,7 @@ public class ResultManager : MonoBehaviour {
 
 		timeText.time = usedTime;
 		timeRank.rank = calicurateRankAscending (usedTime, timeRankThreshold);
-		timeScore.number = (usedTime - optiTime) * timeScoreFactor;
+		timeScore.number = (optiTime - usedTime) * timeScoreFactor;
 
 		enemyText.number = beatedEnemy;
 		enemyRank.rank = calicurateRankDescending (beatedEnemy, enemyRankThreshold);
@@ -176,6 +177,7 @@ public class ResultManager : MonoBehaviour {
 	}
 
 	public void GoToTitle(){
-		Application.LoadLevel (0);
+        //Application.LoadLevel (0);
+		MapLoader.Instance.GoToTitle();
 	}
 }

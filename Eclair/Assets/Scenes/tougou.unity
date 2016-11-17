@@ -37,12 +37,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.5447411, g: 0.5074841, b: 0.52375865, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -71,7 +71,7 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 112000001, guid: f9b6af37834764151af2086faea9ab4e,
+  m_LightingDataAsset: {fileID: 112000002, guid: 0ec2a1e4ed5123140a5bab9c301ae47f,
     type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -136,13 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2bc577f816f4626a3c26e5a4fceae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  mainCamera: {fileID: 446296771}
-  event2StartCameraPosition: {fileID: 0}
-  event2EndPosition: {fileID: 0}
-  uI: {fileID: 1529198007}
-  em: {fileID: 0}
-  bossKilledCamera: {fileID: 1199482914}
 --- !u!1001 &69981468
 Prefab:
   m_ObjectHideFlags: 0
@@ -7273,6 +7266,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2057756264}
   - 114: {fileID: 2057756263}
+  - 114: {fileID: 2057756265}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -7321,6 +7315,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 23
+--- !u!114 &2057756265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2057756262}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a2bc577f816f4626a3c26e5a4fceae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2067976071
 Prefab:
   m_ObjectHideFlags: 0
