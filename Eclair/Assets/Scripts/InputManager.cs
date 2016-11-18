@@ -136,6 +136,15 @@ public class InputManager : MonoBehaviour {
 	void Update ()
 	{
 
+		//カメラ感度
+		if (Input.GetButtonDown ("Plus")) {
+			Debug.Log ("Plus");
+			camSensitivityControl.Up ();
+		} else if (Input.GetButtonDown ("Minus")) {
+			Debug.Log ("Minus");
+			camSensitivityControl.Down ();
+		}
+
 		//右クリック
 		if (EventManager.eventCount >= 7 ) {
 			if (Input.GetButtonDown ("LaunchBolt")) {
@@ -259,14 +268,7 @@ public class InputManager : MonoBehaviour {
 			}
 		}
 
-		//カメラ感度
-		if (Input.GetButtonDown ("Plus")) {
-				Debug.Log ("Plus");
-			camSensitivityControl.Up ();
-		} else if (Input.GetButtonDown ("Minus")) {
-				Debug.Log ("Minus");
-			camSensitivityControl.Down ();
-		}
+
 
 		//TODO:キーボード/ゲームパッドの切り替え判定
 		//Loading時も判定が行われるよう、今のところは仮でMapLoaderに処理を入れています

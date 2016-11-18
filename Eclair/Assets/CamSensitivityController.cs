@@ -31,6 +31,9 @@ public class CamSensitivityController : MonoBehaviour {
 	private const int Min = 0;
 
 	private Color textColor;
+	private float textAlpha = 0;
+
+	private bool changed = false;
 
 	// Use this for initialization
 	void Start () {
@@ -39,9 +42,8 @@ public class CamSensitivityController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		textColor.a -= 0.01f;
-		text.color = textColor;
+	void LateUpdate () {
+
 	}
 
 	public void Up(){
@@ -56,6 +58,16 @@ public class CamSensitivityController : MonoBehaviour {
 	private void setSensitivity(int sensitivity){
 		cam.mouseSensitivity = sensitivityMap[sensitivity];
 		text.text = "カメラ感度:" + sensitivityString [sensitivity];
+		StartCoroutine (showText());
+		//textAlpha = 1;
+		//changed = true;
+	}
+
+	IEnumerator showText(){
 		textColor.a = 1;
+		text.color = textColor;
+		yield return new WaitForSecondsRealtime (2);
+		textColor.a = 0;
+		text.color = textColor;
 	}
 }
