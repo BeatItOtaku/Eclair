@@ -136,7 +136,7 @@ public class MapLoader : MonoBehaviour
 	    SceneManager.LoadSceneAsync ("tougou", LoadSceneMode.Additive);
     }
 
-    public void GameOver()
+    public static void GameOver()
     {
         SceneManager.LoadSceneAsync("GameOver", LoadSceneMode.Additive);
     }
