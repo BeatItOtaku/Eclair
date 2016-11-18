@@ -119,7 +119,7 @@ public class BossMoveManager : MonoBehaviour {
 
 		hintTime += Time.deltaTime;
 
-		if (hintTime >= 30f) {
+		if (hintTime >= 20f) {
 			hint.SetActive (true);
 		}
 		Debug.Log (hintTime);
