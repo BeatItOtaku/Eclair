@@ -1913,13 +1913,13 @@ MonoBehaviour:
   beatedEnemy: 0
   launchedBolt: 0
   optiTime: 600
-  timeScoreFactor: 100
+  timeScoreFactor: 30
   enemyScoreFactor: 100
-  boltScoreFactor: 10
-  timeRankThreshold: 2c010000e001000094020000
-  enemyRankThreshold: 280000001e00000014000000
+  boltScoreFactor: -10
+  timeRankThreshold: e001000058020000d0020000
+  enemyRankThreshold: 1e000000140000000a000000
   boltRankThreshold: 1e0000003c0000005a000000
-  totalRankThreshold: d0070000b80b0000a00f0000
+  totalRankThreshold: a00f0000d0070000e8030000
   canvas: {fileID: 1251208032}
   timeText: {fileID: 294952863}
   timeRank: {fileID: 832444412}
@@ -1933,6 +1933,7 @@ MonoBehaviour:
   totalScore: {fileID: 169288146}
   totalRank: {fileID: 331757662}
   nextButton: {fileID: 776779865}
+  debugMode: 0
 --- !u!111 &1251208038
 Animation:
   m_ObjectHideFlags: 0
