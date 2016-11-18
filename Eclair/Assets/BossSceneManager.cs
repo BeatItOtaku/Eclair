@@ -26,8 +26,7 @@ public class BossSceneManager : AnimationQueueManager {
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
-        result = SceneManager.LoadSceneAsync("Result", LoadSceneMode.Additive);
-        result.allowSceneActivation = false;
+
     }
 	
 	// Update is called once per frame
@@ -67,6 +66,8 @@ public class BossSceneManager : AnimationQueueManager {
                 player.transform.position = playerPositionOnResult;
                 player.transform.rotation = Quaternion.Euler(playerRotationOnResult);
                 bgm.Stop();
+				result = SceneManager.LoadSceneAsync("Result", LoadSceneMode.Additive);
+				result.allowSceneActivation = false;
                 break;
             case 6:
                 OnBossDied();

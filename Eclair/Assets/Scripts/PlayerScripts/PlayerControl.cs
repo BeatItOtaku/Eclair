@@ -145,7 +145,6 @@ public class PlayerControl : MonoBehaviour
         mutekiManagement();
         DeathManagement();
 
-
 	}
 
     void FixedUpdate()
@@ -441,7 +440,7 @@ public class PlayerControl : MonoBehaviour
 
     private void mutekiManagement()
     {
-        if (isMuteki) {
+        if (isMuteki && !died) {
             mutekiTimeCursor += Time.deltaTime;
             if(mutekiTimeCursor > mutekiTime)
             {
@@ -453,11 +452,13 @@ public class PlayerControl : MonoBehaviour
 
     void DeathManagement()
     {
+		//Debug.Log ("HP:" + HP + died + EclairImmobile);
 		if(HP <= 0 && died == false && EclairImmobile == false)
         {
+			isMuteki = true;
 			anim.SetTrigger ("EclairKilled");
             died = true;
-            MapLoader.Instance.GameOver();
+            MapLoader.GameOver();
         }
     }
 
