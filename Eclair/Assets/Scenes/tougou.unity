@@ -6550,7 +6550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1581712544}
   boltHeadName: pCylinder2
-  maxDistance: 64
+  maxDistance: 48
 --- !u!114 &1581712547
 MonoBehaviour:
   m_ObjectHideFlags: 0
