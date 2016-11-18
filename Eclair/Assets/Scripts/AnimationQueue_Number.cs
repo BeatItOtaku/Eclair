@@ -27,7 +27,7 @@ public class AnimationQueue_Number : AnimationQueueBase {
 			currentNumber += step;
 			setText (currentNumber);
 		} else if (currentNumber > numberAbs) {
-			setText (number);
+			setText (numberAbs);
 		}
 	}
 
