@@ -103,7 +103,7 @@ public class EventManager2 : MonoBehaviour {
 			break;
 
 		case 9:
-                StartCoroutine(event9Coroutine());
+            StartCoroutine(event9Coroutine());
 			break;
 		}
 	}

@@ -78250,7 +78250,7 @@ MonoBehaviour:
   event7_bikkuri: {fileID: 677911793}
   event9_yajirushi: {fileID: 1527842619}
   event9_camera: {fileID: 1921719182}
-  event10_way: {fileID: 0}
+  event10_way: {fileID: 749937408}
   bg: {fileID: 950442865}
 --- !u!4 &1707958268
 Transform:

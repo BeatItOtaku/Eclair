@@ -117,7 +117,11 @@ public class BossMoveManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (player == null)
+			player = GameObject.FindGameObjectWithTag ("Player");
+
         if (!bossAwaken) return;
+
 
 		//Debug.Log (playerHeightF);
 		playerV = player.transform.position;
